@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './styles/components/header';
-import Resume from './styles/components/resume';
+import Header from './styles/components/Header';
+import Resume from './styles/components/Resume';
 import GlobalStyle from './styles/global'
 
 const App = () => {
