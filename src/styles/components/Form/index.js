@@ -11,7 +11,7 @@ const Form = () => {
             alert("Informe a descrição e o valor!");
             return;
         }   else if (amount < 1) {
-            alert("O valor tem que ser positivo");         
+            alert("O valor tem que ser positivo");
             return;  
         }
     };
@@ -21,7 +21,9 @@ const Form = () => {
             <C.Container>
                 <C.InputContent>
                     <C.Label>Descrição</C.Label>
-                    <C.Input value={desc} onChange={(e) => setDesc(e.target.value)} />
+                    <C.Input
+                        value={desc}
+                        onChange={(e) => setDesc(e.target.value)} />
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>Valor</C.Label>
