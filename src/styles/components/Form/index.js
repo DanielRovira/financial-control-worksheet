@@ -66,13 +66,13 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                     <C.Input
                         type="radio"
                         id="rIncome"
-                        defaultChecked
                         name="group1"
                         onChange={() => setExpense(!isExpense)} />
                     <C.Label htmlFor="rIncome">Entrada</C.Label>
                     <C.Input
                         type="radio"
                         id="rExpense"
+                        defaultChecked
                         name="group1"
                         onChange={() => setExpense(!isExpense)} />
                     <C.Label htmlFor="rExpense">Saída</C.Label>

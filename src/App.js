@@ -24,11 +24,16 @@ const App = () => {
         
         const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
         const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2);
-        const total = Math.abs(income - expense).toFixed(2);
+        const total = (income - expense).toFixed(2);
 
-        setIncome(`R$ ${income}`);
-        setExpense(`R$ ${expense}`);
-        setTotal(`${Number(income) < Number(expense) ? "-" : ""}R$ ${total}`);
+        // setIncome(`R$ ${income}`);
+        // setExpense(`R$ ${expense}`);
+        // setTotal(`${Number(income) < Number(expense) ? "-" : ""}R$ ${total}`);
+        setIncome(Number(income).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+        setExpense(Number(expense).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+        setTotal(Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+
+        // console.log(Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
     }, [transactionsList]);
 
     const handleAdd = (transaction) => {
