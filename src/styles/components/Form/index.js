@@ -58,7 +58,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => setAmount(e.replace(",","."))}
+                        onValueChange={(e) => setAmount(e.replace(/,/g, '.'))}
                         // onChange={(e) => setAmount(e.target.value.slice(3))}
                         />
                 </C.InputContent>
