@@ -7,7 +7,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
     const [amount, setAmount] = useState("");
-    const [isExpense, setExpense] = useState(false);
+    const [isExpense, setExpense] = useState(true);
 
     const generateID = () => Math.round(Math.random() * 1000);
 
