@@ -24,14 +24,14 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
             id: generateID(),
             date: date,
             desc: desc,
-            amount: amount,
+            amount: amount.replace(/,/g, '.'),
             expense: isExpense,
         };
 
         handleAdd(transaction);
         
-        // setDesc("");
-        // setAmount("");
+        setDesc("");
+        setAmount("");
     };
 
     return ( 
@@ -53,13 +53,14 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                 <C.InputContent>
                     <C.Label>Valor</C.Label>
                     <C.Currency
+                        value={amount}
                         prefix="R$ "
                         placeholder="R$ 0,00"
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => setAmount(e.replace(/,/g, '.'))}
-                        // onChange={(e) => setAmount(e.target.value.slice(3))}
+                        onValueChange={(e) => setAmount(e)}
+                        // onChange={(e) => setAmount(e.target.value)}
                         />
                 </C.InputContent>
                 <C.RadioGroup>
