@@ -3,6 +3,8 @@ import Grid from '../Grid';
 import * as C from './styles';
 
 const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
+    const toDay = new Date().toISOString().substring(0, 10)
+    const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
     const [amount, setAmount] = useState("");
     const [isExpense, setExpense] = useState(false);
@@ -20,6 +22,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         
         const transaction = {
             id: generateID(),
+            date: date,
             desc: desc,
             amount: amount,
             expense: isExpense,
@@ -35,6 +38,13 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         <>
             <C.Container>
                 <C.InputContent>
+                    <C.Label>Data</C.Label>
+                    <C.Input
+                        value={date}
+                        type="date"
+                        onChange={(e) => setDate(e.target.value)} />
+                </C.InputContent>
+                <C.InputContent>
                     <C.Label>Descrição</C.Label>
                     <C.Input
                         value={desc}
@@ -45,6 +55,10 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                     <C.Input
                         value={amount}
                         type="number"
+                        step=".01"
+                        placeholder="0.00"
+                        min="0"
+                        required
                         onChange={(e) => setAmount(e.target.value)} />
                 </C.InputContent>
                 <C.RadioGroup>

@@ -5,9 +5,10 @@ import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash } from 'react-i
 const GridItem = ({ item, onDelete }) => {
     return (
         <C.Tr>
+            <C.Td>{item.date}</C.Td>
             <C.Td>{item.desc}</C.Td>
-            <C.Td>{item.amount}</C.Td>
-            <C.Td alightcenter>
+            <C.Td>R$ {item.amount}</C.Td>
+            <C.Td alignCenter>
                 {item.expense ? (
                     <FaRegArrowAltCircleDown color="red" />
                     ) : (
@@ -15,7 +16,7 @@ const GridItem = ({ item, onDelete }) => {
                     )
                 }
             </C.Td>
-            <C.Td alightcenter>
+            <C.Td alignCenter>
                 <FaTrash onClick={() => onDelete(item.id)} />
             </C.Td>
         </C.Tr>
