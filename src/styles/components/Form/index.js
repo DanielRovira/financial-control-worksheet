@@ -12,13 +12,13 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const generateID = () => Math.round(Math.random() * 1000);
 
     const handleSave = () => {
-        // if (!desc || !amount) {
-        //     alert("Informe a descrição e o valor!");
-        //     return;
-        // }   else if (amount < 1) {
-        //     alert("O valor tem que ser positivo");
-        //     return;  
-        // }
+        if (!desc || !amount || !date) {
+            alert("Informe todos os campos!");
+            return;
+        }   else if (amount.replace(/,/g, '.') < 0.01) {
+            alert("O valor tem que ser positivo");
+            return;  
+        }
         
         const transaction = {
             id: generateID(),
@@ -48,6 +48,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                     <C.Label>Descrição</C.Label>
                     <C.Input
                         value={desc}
+                        placeholder="Inserir descrição"
                         onChange={(e) => setDesc(e.target.value)} />
                 </C.InputContent>
                 <C.InputContent>
@@ -59,7 +60,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => setAmount(e)}
+                        onValueChange={(e) => {setAmount(e); console.log(amount)}}
                         // onChange={(e) => setAmount(e.target.value)}
                         />
                 </C.InputContent>
