@@ -12,13 +12,13 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const generateID = () => Math.round(Math.random() * 1000);
 
     const handleSave = () => {
-        if (!desc || !amount) {
-            alert("Informe a descrição e o valor!");
-            return;
-        }   else if (amount < 1) {
-            alert("O valor tem que ser positivo");
-            return;  
-        }
+        // if (!desc || !amount) {
+        //     alert("Informe a descrição e o valor!");
+        //     return;
+        // }   else if (amount < 1) {
+        //     alert("O valor tem que ser positivo");
+        //     return;  
+        // }
         
         const transaction = {
             id: generateID(),
@@ -30,8 +30,8 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
 
         handleAdd(transaction);
         
-        setDesc("");
-        setAmount("");
+        // setDesc("");
+        // setAmount("");
     };
 
     return ( 
@@ -52,14 +52,15 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>Valor</C.Label>
-                    <C.Input
-                        value={amount}
-                        type="number"
-                        step=".01"
-                        placeholder="0.00"
-                        min="0"
-                        required
-                        onChange={(e) => setAmount(e.target.value)} />
+                    <C.Currency
+                        prefix="R$ "
+                        placeholder="R$ 0,00"
+                        allowDecimals
+                        disableAbbreviations
+                        decimalScale="2"
+                        onValueChange={(e) => setAmount(e)}
+                        // onChange={(e) => setAmount(e.target.value.slice(3))}
+                        />
                 </C.InputContent>
                 <C.RadioGroup>
                     <C.Input

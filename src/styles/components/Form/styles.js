@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import CurrencyInput from "react-currency-input-field"
 
 export const Container = styled.div`
     max-width: 1120px;
@@ -24,7 +25,7 @@ export const InputContent = styled.div`
 
 export const Label = styled.label``;
 
-export const Input = styled.input`
+export const Inputs = css`
     outline: none;
     border-radius: 5px;
     padding: 5px 10px;
@@ -32,6 +33,9 @@ export const Input = styled.input`
     border: 1px solid #ccc;
     text-transform: capitalize;
 `;
+
+export const Input = styled.input`${Inputs}`
+export const Currency = styled(CurrencyInput)`${Inputs}`
 
 export const RadioGroup = styled.div`
     display: flex;
@@ -52,10 +56,3 @@ export const Button = styled.button`
     color: white;
     background-color: teal;
 `;
-
-
-
-
-
-
-
