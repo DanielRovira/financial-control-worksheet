@@ -5,7 +5,7 @@ import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash } from 'react-i
 const GridItem = ({ item, onDelete }) => {
     return (
         <C.Tr>
-            <C.Td>{item.date}</C.Td>
+            <C.Td>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
             <C.Td>{item.desc}</C.Td>
             <C.Td>R$ {item.amount}</C.Td>
             <C.Td alignCenter>
