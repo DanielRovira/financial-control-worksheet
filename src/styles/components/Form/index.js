@@ -50,6 +50,7 @@ const Form = ({ handleAdd }) => {
                     <C.Input
                         value={date}
                         type="date"
+                        width={110}
                         onChange={(e) => setDate(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />

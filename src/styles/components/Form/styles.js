@@ -33,6 +33,8 @@ export const Inputs = css`
     font-size: 15px;
     border: 1px solid #ccc;
     text-transform: capitalize;
+    max-width: 150px;
+    width: ${(props) => (props.width ? props.width + "px" : "auto")};
 `;
 
 export const Input = styled.input`${Inputs}`

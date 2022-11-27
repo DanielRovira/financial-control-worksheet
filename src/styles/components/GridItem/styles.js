@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const Tr = styled.tr``;
+export const Tr = styled.tr`
+    height: 50px;
+`;
 
 export const Td = styled.td`
     padding-top: 15px;
