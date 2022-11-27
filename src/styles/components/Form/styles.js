@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import CurrencyInput from "react-currency-input-field"
 
 export const Container = styled.div`
-    max-width: 1120px;
+    max-width: 90%;
     margin: 20px auto;
     width: 98%;
     background-color: #fff;

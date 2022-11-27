@@ -6,7 +6,7 @@ export const Td = styled.td`
     padding-top: 15px;
     text-align: ${(props) => (props.alignCenter ? "center" : "start")};
     word-break: break-all;
-    min-width: 11ch;
+    min-width: ${(props) => (props.width ? props.width + "ch" : "auto")};
     text-transform: capitalize;
 
     svg {

@@ -7,6 +7,8 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
+    const [prov, setProv]  = useState("");
+    const [forn, setForn]  = useState("");
     const [amount, setAmount] = useState("");
     const [isExpense, setExpense] = useState(true);
 
@@ -28,12 +30,16 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
             desc: desc,
             amount: amount.replace(/,/g, '.'),
             expense: isExpense,
+            prov: prov,
+            forn: forn,
         };
 
         handleAdd(transaction);
         
+        setProv("");
         setDesc("");
         setAmount("");
+        setForn("");
     };
 
     return ( 
@@ -45,6 +51,24 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                         value={date}
                         type="date"
                         onChange={(e) => setDate(e.target.value)}
+                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        />
+                </C.InputContent>
+                <C.InputContent>
+                    <C.Label>Proveniência</C.Label>
+                    <C.Input
+                        value={prov}
+                        placeholder="Inserir proveniência"
+                        onChange={(e) => setProv(e.target.value)}
+                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        />
+                </C.InputContent>
+                <C.InputContent>
+                    <C.Label>Fornecedor</C.Label>
+                    <C.Input
+                        value={forn}
+                        placeholder="Inserir fornecedor"
+                        onChange={(e) => setForn(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />
                 </C.InputContent>
