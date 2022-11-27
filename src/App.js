@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
-import GlobalStyle from './styles/global'
+import GlobalStyle from './styles/global';
 
 const App = () => {
     const data = localStorage.getItem("transactions");
@@ -29,11 +29,12 @@ const App = () => {
         // setIncome(`R$ ${income}`);
         // setExpense(`R$ ${expense}`);
         // setTotal(`${Number(income) < Number(expense) ? "-" : ""}R$ ${total}`);
+        // console.log(Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
         setIncome(Number(income).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
         setExpense(Number(expense).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
         setTotal(Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 
-        // console.log(Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
+
     }, [transactionsList]);
 
     const handleAdd = (transaction) => {
@@ -52,6 +53,6 @@ const App = () => {
             <GlobalStyle />
         </>
     );
-}
+};
  
 export default App;
