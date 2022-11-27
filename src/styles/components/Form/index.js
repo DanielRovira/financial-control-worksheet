@@ -54,6 +54,21 @@ const Form = ({ handleAdd }) => {
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />
                 </C.InputContent>
+                <C.RadioGroup>
+                    <C.Input
+                        type="radio"
+                        id="rIncome"
+                        name="group1"
+                        onChange={() => setExpense(!isExpense)} />
+                    <C.Label htmlFor="rIncome">Entrada</C.Label>
+                    <C.Input
+                        type="radio"
+                        id="rExpense"
+                        defaultChecked
+                        name="group1"
+                        onChange={() => setExpense(!isExpense)} />
+                    <C.Label htmlFor="rExpense">Saída</C.Label>
+                </C.RadioGroup>
                 <C.InputContent>
                     <C.Label>Proveniência</C.Label>
                     <C.Input
@@ -95,21 +110,6 @@ const Form = ({ handleAdd }) => {
                         // onChange={(e) => setAmount(e.target.value)}
                         />
                 </C.InputContent>
-                <C.RadioGroup>
-                    <C.Input
-                        type="radio"
-                        id="rIncome"
-                        name="group1"
-                        onChange={() => setExpense(!isExpense)} />
-                    <C.Label htmlFor="rIncome">Entrada</C.Label>
-                    <C.Input
-                        type="radio"
-                        id="rExpense"
-                        defaultChecked
-                        name="group1"
-                        onChange={() => setExpense(!isExpense)} />
-                    <C.Label htmlFor="rExpense">Saída</C.Label>
-                </C.RadioGroup>
                 <C.Button onClick={handleSave}>ADICIONAR</C.Button>
             </C.Container>
 

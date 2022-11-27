@@ -3,7 +3,7 @@ import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 
-const GridItem = ({ item, onDelete, onEdit }) => {
+const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amountEdit, expenseEdit, dateEdit }) => {
     
     if (item.edit == true) {
         return (
@@ -21,11 +21,33 @@ const GridItem = ({ item, onDelete, onEdit }) => {
                     <D.Input
                         value={item.prov}
                         placeholder="Inserir proveniência"
+                        onChange={(e) => provEdit(item.id, e.target.value)}
                     />
                 </C.Td>
-                <C.Td><D.Input value={item.forn} /></C.Td>
-                <C.Td><D.Input value={item.desc} /></C.Td>
-                <C.Td><D.Input value={Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} /></C.Td>
+                <C.Td>
+                    <D.Input
+                        value={item.forn}
+                        placeholder="Inserir fornecedor"
+                        onChange={(e) => fornEdit(item.id, e.target.value)}
+                    />
+                </C.Td>
+                <C.Td>
+                    <D.Input
+                        value={item.desc}
+                        onChange={(e) => descEdit(item.id, e.target.value)}
+                    />
+                </C.Td>
+                <C.Td>
+                    <D.Currency
+                        value={item.amount}
+                        prefix="R$ "
+                        placeholder="R$ 0,00"
+                        allowDecimals
+                        disableAbbreviations
+                        decimalScale="2"
+                        onValueChange={(e) => {amountEdit(item.id, e.replace(/,/g, '.'))}}
+                    />
+                </C.Td>
                 <C.Td alignCenter>
                     <FaRegEdit onClick={() => onEdit(item.id)} />
                 </C.Td>
@@ -34,7 +56,10 @@ const GridItem = ({ item, onDelete, onEdit }) => {
                 </C.Td>
             </C.Tr>
         )
-    } else {
+    } 
+    
+    else {
+
         return (
             <C.Tr>
                 <C.Td width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
