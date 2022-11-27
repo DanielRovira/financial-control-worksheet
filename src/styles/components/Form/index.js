@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import {v4 as uuidv4} from 'uuid'
-import Grid from '../Grid';
 import * as C from './styles';
 
-const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
+const Form = ({ handleAdd }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
@@ -26,6 +25,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         const transaction = {
             // id: generateID(),
             id: uuidv4(),
+            edit: false,
             date: date,
             desc: desc,
             amount: amount.replace(/,/g, '.'),
@@ -112,7 +112,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                 </C.RadioGroup>
                 <C.Button onClick={handleSave}>ADICIONAR</C.Button>
             </C.Container>
-            <Grid itens={transactionsList} setItens={setTransactionsList} />
+
         </>
      );
 }

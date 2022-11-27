@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
+import Grid from './styles/components/Grid';
 import GlobalStyle from './styles/global';
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
             <Header />
             <Resume income={income} expense={expense} total={total} />
             <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
+            <Grid itens={transactionsList} setItens={setTransactionsList} />
             <GlobalStyle />
         </>
     );

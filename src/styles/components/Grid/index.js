@@ -8,6 +8,15 @@ const Grid = ({ itens, setItens }) => {
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
+    const onEdit = (ID) => {
+        const newArray = itens.map(item => {
+            if (item.id === ID) return { ...item, edit: !item.edit };
+
+            return item;
+        })
+        setItens(newArray);
+        localStorage.setItem("transactions", JSON.stringify(newArray));
+    };
 
     return ( 
         <C.Table>
@@ -19,12 +28,13 @@ const Grid = ({ itens, setItens }) => {
                     <C.Th width={20}>Fornecedor</C.Th>
                     <C.Th width={30}>Descrição</C.Th>
                     <C.Th width={10}>Valor</C.Th>
-                    <C.Th width={10} alignCenter>Deletar</C.Th>
+                    <C.Th width={1} alignCenter>Editar</C.Th>
+                    <C.Th width={1} alignCenter>Deletar</C.Th>
                 </C.Tr>
             </C.Thead>
             <C.Tbody>
                 {itens?.map((item, index) => (
-                    <GridItem key={index} item={item} onDelete={onDelete} />
+                    <GridItem key={index} item={item} onDelete={onDelete} onEdit={onEdit} />
                 ))}
             </C.Tbody>
         </C.Table>
