@@ -11,20 +11,31 @@ const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amount
                 <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 <C.Td alignCenter>
                     {item.expense ? (
-                        <FaRegArrowAltCircleDown color="red" />
+                            <D.Select
+                            value={item.expense}
+                            onChange={() => expenseEdit(item.id, !item.expense)}
+                            >
+                                <option value="Saída">Saída</option>
+                                <option value="Entrada">Entrada</option>
+                            </D.Select>
                         ) : (
-                            <FaRegArrowAltCircleUp color="green" />
+                            <D.Select
+                            value={item.expense}
+                            onChange={() => expenseEdit(item.id, !item.expense)}
+                            >
+                                <option value="Entrada">Entrada</option>
+                                <option value="Saída">Saída</option>
+                            </D.Select>
                             )
                         }
                 </C.Td>
                 <C.Td>
                     <D.Select
                         value={item.prov}
-                        placeholder="Inserir proveniência"
                         onChange={(e) => provEdit(item.id, e.target.value)}
                     >
-                        <option value="Entrada">Entrada</option>
-                        <option value="Saída">Saída</option>
+                        <option value="3R">3R</option>
+                        <option value="CONSTEM">CONSTEM</option>
                     </D.Select>
                 </C.Td>
                 <C.Td>

@@ -55,26 +55,16 @@ const Form = ({ handleAdd }) => {
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />
                 </C.InputContent>
-                <C.RadioGroup>
+                <C.InputContent>
                     <C.Label>Tipo</C.Label>
-                    <C.RadioContent>
-                        <C.Input
-                            type="radio"
-                            id="rIncome"
-                            name="group1"
-                            onChange={() => setExpense(!isExpense)} />
-                        <C.Label htmlFor="rIncome">Entrada</C.Label>
-                    </C.RadioContent>
-                    <C.RadioContent>
-                        <C.Input
-                            type="radio"
-                            id="rExpense"
-                            defaultChecked
-                            name="group1"
-                            onChange={() => setExpense(!isExpense)} />
-                        <C.Label htmlFor="rExpense">Saída</C.Label>
-                    </C.RadioContent>
-                </C.RadioGroup>
+                    <C.Select
+                        // value="Saída"
+                        onChange={() => setExpense(!isExpense)}
+                    >
+                        <option value="Saída">Saída</option>
+                        <option value="Entrada">Entrada</option>
+                    </C.Select>
+                </C.InputContent>
                 <C.InputContent>
                     <C.Label>Proveniência</C.Label>
                     <C.Select
@@ -83,8 +73,8 @@ const Form = ({ handleAdd }) => {
                         onChange={(e) => setProv(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                     >
-                        <option value="Entrada">Entrada</option>
-                        <option value="Saída">Saída</option>
+                        <option value="3R">3R</option>
+                        <option value="CONSTEM">CONSTEM</option>
                     </C.Select>
                 </C.InputContent>
                 <C.InputContent>

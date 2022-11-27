@@ -48,6 +48,7 @@ const Grid = ({ itens, setItens }) => {
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
+
     const amountEdit = (ID, amountEdit) => {
         const newArray = itens.map(item => {
             if (item.id === ID) return { ...item, amount:amountEdit };
@@ -57,6 +58,10 @@ const Grid = ({ itens, setItens }) => {
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
+
+
+
+
     const expenseEdit = (ID, expenseEdit) => {
         const newArray = itens.map(item => {
             if (item.id === ID) return { ...item, expense:expenseEdit };
@@ -66,6 +71,7 @@ const Grid = ({ itens, setItens }) => {
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
+
     const dateEdit = (ID, dateEdit) => {
         const newArray = itens.map(item => {
             if (item.id === ID) return { ...item, date:dateEdit };
