@@ -80,13 +80,13 @@ const Grid = ({ itens, setItens }) => {
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th width={8}>Data</C.Th>
+                    <C.Th width={9}>Data</C.Th>
                     <C.Th width={12} alignCenter>Tipo</C.Th>
-                    <C.Th width={15}>Proveniência</C.Th>
-                    <C.Th width={15}>Fornecedor</C.Th>
-                    <C.Th width={20}>Descrição</C.Th>
+                    <C.Th width={18}>Proveniência</C.Th>
+                    <C.Th width={18}>Fornecedor</C.Th>
+                    <C.Th width={18}>Descrição</C.Th>
                     <C.Th width={15}>Valor</C.Th>
-                    <C.Th width={1} alignCenter>Editar</C.Th>
+                    <C.Th width={5} alignCenter>Editar</C.Th>
                     <C.Th width={1} alignCenter>Deletar</C.Th>
                 </C.Tr>
             </C.Thead>
