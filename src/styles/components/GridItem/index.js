@@ -18,11 +18,14 @@ const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amount
                         }
                 </C.Td>
                 <C.Td>
-                    <D.Input
+                    <D.Select
                         value={item.prov}
                         placeholder="Inserir proveniência"
                         onChange={(e) => provEdit(item.id, e.target.value)}
-                    />
+                    >
+                        <option value="Entrada">Entrada</option>
+                        <option value="Saída">Saída</option>
+                    </D.Select>
                 </C.Td>
                 <C.Td>
                     <D.Input
@@ -71,10 +74,10 @@ const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amount
                             )
                         }
                 </C.Td>
-                <C.Td>{item.prov}</C.Td>
-                <C.Td>{item.forn}</C.Td>
-                <C.Td>{item.desc}</C.Td>
-                <C.Td>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
+                <C.Td padding={8}>{item.prov}</C.Td>
+                <C.Td padding={8}>{item.forn}</C.Td>
+                <C.Td padding={8}>{item.desc}</C.Td>
+                <C.Td padding={8}>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
                 <C.Td alignCenter>
                     <FaRegEdit onClick={() => onEdit(item.id)} />
                 </C.Td>

@@ -77,12 +77,15 @@ const Form = ({ handleAdd }) => {
                 </C.RadioGroup>
                 <C.InputContent>
                     <C.Label>Proveniência</C.Label>
-                    <C.Input
+                    <C.Select
                         value={prov}
                         placeholder="Inserir proveniência"
                         onChange={(e) => setProv(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
-                        />
+                    >
+                        <option value="Entrada">Entrada</option>
+                        <option value="Saída">Saída</option>
+                    </C.Select>
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>Fornecedor</C.Label>

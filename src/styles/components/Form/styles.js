@@ -29,7 +29,7 @@ export const Inputs = css`
     outline: none;
     border-radius: 5px;
     margin-top: 5px;
-    padding: 5px 10px;
+    padding: 5px;
     font-size: 15px;
     border: 1px solid #ccc;
     text-transform: capitalize;
@@ -38,6 +38,7 @@ export const Inputs = css`
 `;
 
 export const Input = styled.input`${Inputs}`
+export const Select = styled.select`${Inputs}`
 export const Currency = styled(CurrencyInput)`${Inputs}`
 
 export const RadioGroup = styled.div`
