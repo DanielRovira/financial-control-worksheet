@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {v4 as uuidv4} from 'uuid'
 import Grid from '../Grid';
 import * as C from './styles';
 
@@ -9,7 +10,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
     const [amount, setAmount] = useState("");
     const [isExpense, setExpense] = useState(true);
 
-    const generateID = () => Math.round(Math.random() * 1000);
+    // const generateID = () => Math.round(Math.random() * 1000);
 
     const handleSave = () => {
         if (!desc || !amount || !date) {
@@ -21,7 +22,8 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
         }
         
         const transaction = {
-            id: generateID(),
+            // id: generateID(),
+            id: uuidv4(),
             date: date,
             desc: desc,
             amount: amount.replace(/,/g, '.'),
