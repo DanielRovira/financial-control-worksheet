@@ -44,14 +44,18 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                     <C.Input
                         value={date}
                         type="date"
-                        onChange={(e) => setDate(e.target.value)} />
+                        onChange={(e) => setDate(e.target.value)}
+                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        />
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>Descrição</C.Label>
                     <C.Input
                         value={desc}
                         placeholder="Inserir descrição"
-                        onChange={(e) => setDesc(e.target.value)} />
+                        onChange={(e) => setDesc(e.target.value)}
+                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        />
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>Valor</C.Label>
@@ -63,6 +67,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                         disableAbbreviations
                         decimalScale="2"
                         onValueChange={(e) => {setAmount(e); console.log(amount)}}
+                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         // onChange={(e) => setAmount(e.target.value)}
                         />
                 </C.InputContent>
