@@ -6,7 +6,7 @@ const Form = ({ handleAdd }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
-    const [prov, setProv]  = useState("");
+    const [prov, setProv]  = useState("3R");
     const [forn, setForn]  = useState("");
     const [amount, setAmount] = useState("");
     const [isExpense, setExpense] = useState(true);
@@ -36,7 +36,6 @@ const Form = ({ handleAdd }) => {
 
         handleAdd(transaction);
         
-        setProv("");
         setDesc("");
         setAmount("");
         setForn("");
@@ -58,7 +57,6 @@ const Form = ({ handleAdd }) => {
                 <C.InputContent>
                     <C.Label>Tipo</C.Label>
                     <C.Select
-                        // value="Saída"
                         onChange={() => setExpense(!isExpense)}
                     >
                         <option value="Saída">Saída</option>
@@ -69,7 +67,6 @@ const Form = ({ handleAdd }) => {
                     <C.Label>Proveniência</C.Label>
                     <C.Select
                         value={prov}
-                        placeholder="Inserir proveniência"
                         onChange={(e) => setProv(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                     >
