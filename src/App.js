@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
+import Grid from './styles/components/Grid';
+import ItemDetail from './styles/components/ItemDetail'
 import GlobalStyle from './styles/global';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 const App = () => {
     const data = localStorage.getItem("transactions");
@@ -44,14 +47,27 @@ const App = () => {
 
         localStorage.setItem("transactions", JSON.stringify(newArrayTransactions));
     };
-
-    return (
+    
+    const Main = () => {
+        return (
         <>
             <Header />
             <Resume income={income} expense={expense} total={total} />
             <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
+            <Grid itens={transactionsList} setItens={setTransactionsList} />
             <GlobalStyle />
         </>
+        )
+    };
+
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Main/>} />
+                <Route path="/financial-control-worksheet" element={<Main/>} />
+                <Route path="/:taskTitle" element={<ItemDetail income={income} expense={expense} total={total} />} />
+            </Routes>
+        </Router>
     );
 };
  

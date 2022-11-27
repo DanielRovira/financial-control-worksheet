@@ -112,7 +112,7 @@ const Form = ({ handleAdd, transactionsList, setTransactionsList }) => {
                 </C.RadioGroup>
                 <C.Button onClick={handleSave}>ADICIONAR</C.Button>
             </C.Container>
-            <Grid itens={transactionsList} setItens={setTransactionsList} />
+            {/* <Grid itens={transactionsList} setItens={setTransactionsList} /> */}
         </>
      );
 }
