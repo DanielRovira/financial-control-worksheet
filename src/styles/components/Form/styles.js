@@ -28,6 +28,7 @@ export const Label = styled.label``;
 export const Inputs = css`
     outline: none;
     border-radius: 5px;
+    margin-top: 5px;
     padding: 5px 10px;
     font-size: 15px;
     border: 1px solid #ccc;
@@ -39,12 +40,12 @@ export const Currency = styled(CurrencyInput)`${Inputs}`
 
 export const RadioGroup = styled.div`
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
 
     input {
-        margin: 0 5px 0 20px;
         accent-color: black;
-        margin-top: 0;
+        margin-right: 5px;
     }
 `;
 
@@ -56,3 +57,9 @@ export const Button = styled.button`
     color: white;
     background-color: teal;
 `;
+
+export const RadioContent = styled.div`
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+`

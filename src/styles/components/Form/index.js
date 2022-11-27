@@ -55,19 +55,24 @@ const Form = ({ handleAdd }) => {
                         />
                 </C.InputContent>
                 <C.RadioGroup>
-                    <C.Input
-                        type="radio"
-                        id="rIncome"
-                        name="group1"
-                        onChange={() => setExpense(!isExpense)} />
-                    <C.Label htmlFor="rIncome">Entrada</C.Label>
-                    <C.Input
-                        type="radio"
-                        id="rExpense"
-                        defaultChecked
-                        name="group1"
-                        onChange={() => setExpense(!isExpense)} />
-                    <C.Label htmlFor="rExpense">Saída</C.Label>
+                    <C.Label>Tipo</C.Label>
+                    <C.RadioContent>
+                        <C.Input
+                            type="radio"
+                            id="rIncome"
+                            name="group1"
+                            onChange={() => setExpense(!isExpense)} />
+                        <C.Label htmlFor="rIncome">Entrada</C.Label>
+                    </C.RadioContent>
+                    <C.RadioContent>
+                        <C.Input
+                            type="radio"
+                            id="rExpense"
+                            defaultChecked
+                            name="group1"
+                            onChange={() => setExpense(!isExpense)} />
+                        <C.Label htmlFor="rExpense">Saída</C.Label>
+                    </C.RadioContent>
                 </C.RadioGroup>
                 <C.InputContent>
                     <C.Label>Proveniência</C.Label>
