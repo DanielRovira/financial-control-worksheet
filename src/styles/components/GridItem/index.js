@@ -8,7 +8,7 @@ const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amount
     if (item.edit == true) {
         return (
             <C.Tr>
-                <C.Td width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
+                <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 <C.Td alignCenter>
                     {item.expense ? (
                         <FaRegArrowAltCircleDown color="red" />
