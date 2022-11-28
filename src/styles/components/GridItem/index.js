@@ -3,36 +3,25 @@ import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 
-const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amountEdit, expenseEdit, dateEdit }) => {
+const GridItem = ({ item, onDelete, onEdit, propEdit }) => {
     
     if (item.edit == true) {
         return (
             <C.Tr>
                 <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 <C.Td alignCenter>
-                    {item.expense ? (
-                            <D.Select
-                            value={item.expense}
-                            onChange={() => expenseEdit(item.id, !item.expense)}
-                            >
-                                <option value="Saída">Saída</option>
-                                <option value="Entrada">Entrada</option>
-                            </D.Select>
-                        ) : (
-                            <D.Select
-                            value={item.expense}
-                            onChange={() => expenseEdit(item.id, !item.expense)}
-                            >
-                                <option value="Entrada">Entrada</option>
-                                <option value="Saída">Saída</option>
-                            </D.Select>
-                            )
-                        }
+                    <D.Select
+                        value={item.expense ? "Saída" : "Entrada"}
+                        onChange={() => propEdit(item.id, !item.expense, "expense")}
+                    >
+                        <option value="Entrada">Entrada</option>
+                        <option value="Saída">Saída</option>
+                    </D.Select>
                 </C.Td>
                 <C.Td>
                     <D.Select
                         value={item.prov}
-                        onChange={(e) => provEdit(item.id, e.target.value)}
+                        onChange={(e) => propEdit(item.id, e.target.value, "prov")}
                     >
                         <option value="3R">3R</option>
                         <option value="CONSTEM">CONSTEM</option>
@@ -42,13 +31,13 @@ const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amount
                     <D.Input
                         value={item.forn}
                         placeholder="Inserir fornecedor"
-                        onChange={(e) => fornEdit(item.id, e.target.value)}
+                        onChange={(e) => propEdit(item.id, e.target.value, "forn")}
                     />
                 </C.Td>
                 <C.Td>
                     <D.Input
                         value={item.desc}
-                        onChange={(e) => descEdit(item.id, e.target.value)}
+                        onChange={(e) => propEdit(item.id, e.target.value, "desc")}
                     />
                 </C.Td>
                 <C.Td>
@@ -59,7 +48,7 @@ const GridItem = ({ item, onDelete, onEdit, provEdit, fornEdit, descEdit, amount
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => {amountEdit(item.id, e.replace(/,/g, '.'))}}
+                        onValueChange={(e) => {propEdit(item.id, e.replace(/,/g, '.'), "amount")}}
                     />
                 </C.Td>
                 <C.Td alignCenter>
