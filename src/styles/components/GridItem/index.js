@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
+import data from '../../../data.json'
 
 const GridItem = ({ item, onDelete, propEdit }) => {
     const [isActive, setActive] = useState(false);
@@ -21,7 +22,8 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 <C.Td alignCenter>
                     <D.Select
                         value={item.expense ? "Saída" : "Entrada"}
-                        onChange={() => propEdit(item.id, !item.expense, "expense")}>
+                        onChange={() => propEdit(item.id, !item.expense, "expense")}
+                    >
                         <option value="Entrada">Entrada</option>
                         <option value="Saída">Saída</option>
                     </D.Select>
@@ -29,9 +31,9 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 <C.Td>
                     <D.Select
                         value={item.prov}
-                        onChange={(e) => propEdit(item.id, e.target.value, "prov")}>
-                        <option value="3R">3R</option>
-                        <option value="CONSTEM">CONSTEM</option>
+                        onChange={(e) => propEdit(item.id, e.target.value, "prov")}
+                    >
+                        {Object.keys(data.provenience).map(element => <option value={element}>{element}</option>)}
                     </D.Select>
                 </C.Td>
                 <C.Td>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {v4 as uuidv4} from 'uuid'
 import * as C from './styles';
+import data from '../../../data.json'
 
 const Form = ({ handleAdd }) => {
     const toDay = new Date().toISOString().substring(0, 10)
@@ -69,8 +70,7 @@ const Form = ({ handleAdd }) => {
                         onChange={(e) => setProv(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                     >
-                        <option value="3R">3R</option>
-                        <option value="CONSTEM">CONSTEM</option>
+                        {Object.keys(data.provenience).map(element => <option value={element}>{element}</option>)}
                     </C.Select>
                 </C.InputContent>
                 <C.InputContent>
