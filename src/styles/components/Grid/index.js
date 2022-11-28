@@ -22,12 +22,13 @@ const Grid = ({ itens, setItens }) => {
     const propEdit = (ID, value, propr) => {
 
         const newArray = itens.map(item => {
-            if (item.id === ID && propr=="date") return { ...item, date: value  };
-            if (item.id === ID && propr=="desc") return { ...item, desc: value  };
-            if (item.id === ID && propr=="prov") return { ...item, prov: value  };
-            if (item.id === ID && propr=="forn") return { ...item, forn: value  };
-            if (item.id === ID && propr=="amount") return { ...item, amount: value  };
-            if (item.id === ID && propr=="expense") return { ...item, expense: value  };
+            if (item.id === ID && propr=="date") return { ...item, date: value };
+            if (item.id === ID && propr=="desc") return { ...item, desc: value };
+            if (item.id === ID && propr=="prov") return { ...item, prov: value };
+            if (item.id === ID && propr=="forn") return { ...item, forn: value };
+            if (item.id === ID && propr=="amount" && value != null) return { ...item, amount: value?.replace(/,/g, '.') };
+            if (item.id === ID && propr=="amount" && value == null) return { ...item, amount: "" };
+            if (item.id === ID && propr=="expense") return { ...item, expense: value };
 
             return item;
         })

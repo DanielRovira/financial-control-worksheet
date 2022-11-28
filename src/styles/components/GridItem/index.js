@@ -48,7 +48,7 @@ const GridItem = ({ item, onDelete, onEdit, propEdit }) => {
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => {propEdit(item.id, e.replace(/,/g, '.'), "amount")}}
+                        onValueChange={(e) => {propEdit(item.id, e, "amount")}}
                     />
                 </C.Td>
                 <C.Td alignCenter>
