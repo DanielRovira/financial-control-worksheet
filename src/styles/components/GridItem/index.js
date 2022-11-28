@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 import data from '../../../data.json'
+import {useClickAway} from 'react-use';
 
 const GridItem = ({ item, onDelete, propEdit }) => {
     const [isActive, setActive] = useState(false);
+    const ref = useRef(null);
 
     const toggleEdit = () => {
         setActive(!isActive);
-        document.removeEventListener("click", toggleEdit)
     };
 
-    if (isActive == true) {
+    useClickAway(ref, toggleEdit)
 
+    if (isActive == true) {
         return (
-            <C.Tr 
-            onMouseLeave={() => {document.addEventListener("click", toggleEdit)}}
-            >
+            <C.Tr ref={ref}>
                 <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 <C.Td alignCenter>
                     <D.Select
