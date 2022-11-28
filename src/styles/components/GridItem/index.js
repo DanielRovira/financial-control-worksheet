@@ -37,6 +37,7 @@ const GridItem = ({ item, onDelete, onEdit, propEdit }) => {
                 <C.Td>
                     <D.Input
                         value={item.desc}
+                        placeholder="Inserir descrição"
                         onChange={(e) => propEdit(item.id, e.target.value, "desc")}
                     />
                 </C.Td>
