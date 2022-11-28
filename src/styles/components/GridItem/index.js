@@ -8,17 +8,14 @@ const GridItem = ({ item, onDelete, propEdit }) => {
 
     const toggleEdit = () => {
         setActive(!isActive);
+        document.removeEventListener("click", toggleEdit)
     };
 
     if (isActive == true) {
-        const onClickOutsideListener = () => {
-            setActive(!isActive)
-            document.removeEventListener("click", onClickOutsideListener)
-        }
 
         return (
             <C.Tr 
-            onMouseLeave={() => {document.addEventListener("click", onClickOutsideListener)}}
+            onMouseLeave={() => {document.addEventListener("click", toggleEdit)}}
             >
                 <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 <C.Td alignCenter>
@@ -63,7 +60,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                     />
                 </C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>
-                <C.Td alignCenter><FaTrash onClick={() => onDelete(item.id)} style={{cursor: 'pointer'}}/></C.Td>
+                <C.Td alignCenter><FaTrash onClick={() => {onDelete(item.id); toggleEdit()}} style={{cursor: 'pointer'}}/></C.Td>
             </C.Tr>
     )}
     else {
