@@ -12,8 +12,6 @@ const Form = ({ handleAdd }) => {
     const [amount, setAmount] = useState("");
     const [isExpense, setExpense] = useState(true);
 
-    // const generateID = () => Math.round(Math.random() * 1000);
-
     const handleSave = () => {
         if (!desc || !amount || !date) {
             alert("Informe todos os campos!");
@@ -24,7 +22,6 @@ const Form = ({ handleAdd }) => {
         }
         
         const transaction = {
-            // id: generateID(),
             id: uuidv4(),
             date: date,
             desc: desc,
@@ -100,9 +97,8 @@ const Form = ({ handleAdd }) => {
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => {setAmount(e); console.log(amount)}}
+                        onValueChange={(e) => {setAmount(e)}}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
-                        // onChange={(e) => setAmount(e.target.value)}
                         />
                 </C.InputContent>
                 <C.Button onClick={handleSave}>ADICIONAR</C.Button>

@@ -4,7 +4,6 @@ import * as C from './styles'
 
 
 const Grid = ({ itens, setItens }) => {
-
     const onDelete = (ID) => {
         const newArray = itens.filter((transaction) => transaction.id !== ID);
         setItens(newArray);
@@ -12,7 +11,6 @@ const Grid = ({ itens, setItens }) => {
     };
 
     const propEdit = (ID, value, propr) => {
-
         const newArray = itens.map(item => {
             if (item.id === ID && propr=="date") return { ...item, date: value };
             if (item.id === ID && propr=="desc") return { ...item, desc: value };

@@ -10,6 +10,14 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     const ref = useRef(null);
 
     const toggleEdit = () => {
+        if (!item.desc || !item.amount || !item.date) {
+            alert("Informe todos os campos!");
+            return;
+        }   else if (item.amount.replace(/,/g, '.') < 0.01) {
+            alert("O valor tem que ser positivo");
+            return;  
+        }
+
         setActive(!isActive);
     };
 
