@@ -2,19 +2,11 @@ import React from 'react';
 import GridItem from '../GridItem'
 import * as C from './styles'
 
+
 const Grid = ({ itens, setItens }) => {
+
     const onDelete = (ID) => {
         const newArray = itens.filter((transaction) => transaction.id !== ID);
-        setItens(newArray);
-        localStorage.setItem("transactions", JSON.stringify(newArray));
-    };
-
-    const onEdit = (ID) => {
-        const newArray = itens.map(item => {
-            if (item.id === ID) return { ...item, edit: !item.edit };
-
-            return item;
-        })
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
@@ -52,7 +44,7 @@ const Grid = ({ itens, setItens }) => {
             </C.Thead>
             <C.Tbody>
                 {itens?.map((item, index) => (
-                    <GridItem key={index} item={item} onDelete={onDelete} onEdit={onEdit} propEdit={propEdit} />
+                    <GridItem key={index} item={item} onDelete={onDelete} propEdit={propEdit} />
                 ))}
             </C.Tbody>
         </C.Table>

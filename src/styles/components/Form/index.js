@@ -25,7 +25,6 @@ const Form = ({ handleAdd }) => {
         const transaction = {
             // id: generateID(),
             id: uuidv4(),
-            edit: false,
             date: date,
             desc: desc,
             amount: amount.replace(/,/g, '.'),

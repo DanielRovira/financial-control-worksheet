@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 
-const GridItem = ({ item, onDelete, onEdit, propEdit }) => {
-    
-    if (item.edit == true) {
+const GridItem = ({ item, onDelete, propEdit }) => {
+
+    const [isActive, setActive] = useState(false);
+
+    const toggleEdit = () => {
+        setActive(!isActive);
+    };
+
+    if (isActive == true) {
+
+        const onClickOutsideListener = () => {
+
+            setActive(!isActive)
+            document.removeEventListener("click", onClickOutsideListener)
+          }
+
         return (
-            <C.Tr>
+            <C.Tr 
+            onMouseLeave={() => {document.addEventListener("click", onClickOutsideListener)}}
+            >
                 <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 <C.Td alignCenter>
                     <D.Select
@@ -53,7 +68,7 @@ const GridItem = ({ item, onDelete, onEdit, propEdit }) => {
                     />
                 </C.Td>
                 <C.Td alignCenter>
-                    <FaRegEdit onClick={() => onEdit(item.id)} />
+                    <FaRegEdit onClick={toggleEdit} />
                 </C.Td>
                 <C.Td alignCenter>
                     <FaTrash onClick={() => onDelete(item.id)} />
@@ -80,7 +95,7 @@ const GridItem = ({ item, onDelete, onEdit, propEdit }) => {
                 <C.Td padding={8}>{item.desc}</C.Td>
                 <C.Td padding={8}>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
                 <C.Td alignCenter>
-                    <FaRegEdit onClick={() => onEdit(item.id)} />
+                    <FaRegEdit onClick={toggleEdit} />
                 </C.Td>
                 <C.Td alignCenter>
                     <FaTrash onClick={() => onDelete(item.id)} />
