@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/financial-control-worksheet/static/js/main.b2d33dfd.js",
+    "main.js": "/financial-control-worksheet/static/js/main.b294b766.js",
     "index.html": "/financial-control-worksheet/index.html",
-    "main.b2d33dfd.js.map": "/financial-control-worksheet/static/js/main.b2d33dfd.js.map"
+    "main.b294b766.js.map": "/financial-control-worksheet/static/js/main.b294b766.js.map"
   },
   "entrypoints": [
-    "static/js/main.b2d33dfd.js"
+    "static/js/main.b294b766.js"
   ]
 }
