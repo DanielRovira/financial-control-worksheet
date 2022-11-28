@@ -13,7 +13,7 @@ export const Td = styled.td`
     padding: ${(props) => (props.padding ? props.padding + "px" : "auto")};
 
     svg {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
     }
 `;

@@ -68,10 +68,10 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                     />
                 </C.Td>
                 <C.Td alignCenter>
-                    <FaRegEdit onClick={toggleEdit} />
+                    <FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/>
                 </C.Td>
                 <C.Td alignCenter>
-                    <FaTrash onClick={() => onDelete(item.id)} />
+                    <FaTrash onClick={() => onDelete(item.id)} style={{cursor: 'pointer'}}/>
                 </C.Td>
             </C.Tr>
         )
@@ -95,10 +95,10 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 <C.Td padding={8}>{item.desc}</C.Td>
                 <C.Td padding={8}>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
                 <C.Td alignCenter>
-                    <FaRegEdit onClick={toggleEdit} />
+                    <FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} />
                 </C.Td>
                 <C.Td alignCenter>
-                    <FaTrash onClick={() => onDelete(item.id)} />
+                    <FaTrash color="grey" style={{cursor: 'not-allowed'}} />
                 </C.Td>
             </C.Tr>
         )}
