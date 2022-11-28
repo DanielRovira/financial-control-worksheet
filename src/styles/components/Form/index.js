@@ -70,7 +70,7 @@ const Form = ({ handleAdd }) => {
                         onChange={(e) => setProv(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                     >
-                        {Object.keys(data.provenience).map(element => <option value={element}>{element}</option>)}
+                        {Object.keys(data.provenience).map(element => <option key={element} value={element}>{element}</option>)}
                     </C.Select>
                 </C.InputContent>
                 <C.InputContent>

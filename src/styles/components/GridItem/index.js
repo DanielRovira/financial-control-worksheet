@@ -33,7 +33,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                         value={item.prov}
                         onChange={(e) => propEdit(item.id, e.target.value, "prov")}
                     >
-                        {Object.keys(data.provenience).map(element => <option value={element}>{element}</option>)}
+                        {Object.keys(data.provenience).map(element => <option key={element} value={element}>{element}</option>)}
                     </D.Select>
                 </C.Td>
                 <C.Td>
