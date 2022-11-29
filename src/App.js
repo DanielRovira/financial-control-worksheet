@@ -32,7 +32,7 @@ const App = () => {
     }, [transactionsList]);
 
     const handleAdd = (transaction) => {
-        const newArrayTransactions = [transaction, ...transactionsList];
+        const newArrayTransactions = [...transactionsList, transaction];
 
         setTransactionsList(newArrayTransactions);
 
