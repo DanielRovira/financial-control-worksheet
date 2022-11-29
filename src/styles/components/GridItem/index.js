@@ -7,10 +7,13 @@ import {useClickAway} from 'react-use';
 
 const GridItem = ({ item, onDelete, propEdit }) => {
     const [isActive, setActive] = useState(false);
+    const [descTemp, setDescTemp] = useState(item.desc)
+    const [amountTemp, setAmountTemp] = useState(item.amount)
+    const [dateTemp, setDateTemp] = useState(item.date)
     const ref = useRef(null);
 
     const toggleEdit = () => {
-        if (!item.desc || !item.amount || !item.date) {
+        if (item.desc==="" || descTemp==="" || !item.amount || !item.date) {
             alert("Informe todos os campos!");
             return;
         }   else if (item.amount.replace(/,/g, '.') < 0.01) {
@@ -18,6 +21,10 @@ const GridItem = ({ item, onDelete, propEdit }) => {
             return;  
         }
 
+        if (descTemp !== item.desc || amountTemp !== item.amount) {
+            propEdit(item.id, {descTemp, amountTemp}, "edit")
+
+        }
         setActive(!isActive);
     };
 
@@ -53,24 +60,26 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 </C.Td>
                 <C.Td>
                     <D.Input
-                        value={item.desc}
+                        value={descTemp}
                         placeholder="Inserir descrição"
-                        onChange={(e) => propEdit(item.id, e.target.value, "desc")}
+                        onChange={(e) => setDescTemp(e.target.value)}
+                        // onChange={(e) => propEdit(item.id, e.target.value, "desc")}
                     />
                 </C.Td>
                 <C.Td>
                     <D.Currency
-                        value={item.amount}
+                        value={amountTemp}
                         prefix="R$ "
                         placeholder="R$ 0,00"
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => {propEdit(item.id, e, "amount")}}
+                        onValueChange={(e) => setAmountTemp(e)}
+                        // onValueChange={(e) => {propEdit(item.id, e, "amount")}}
                     />
                 </C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>
-                <C.Td alignCenter><FaTrash onClick={() => {onDelete(item.id); toggleEdit()}} style={{cursor: 'pointer'}}/></C.Td>
+                <C.Td alignCenter><FaTrash onClick={() => {onDelete(item.id); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.Td>
             </C.Tr>
     )}
     else {
