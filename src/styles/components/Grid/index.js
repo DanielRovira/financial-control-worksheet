@@ -44,7 +44,7 @@ const Grid = ({ itens, setItens }) => {
             </C.Thead>
             <C.Tbody>
                 {itens?.map((item, index) => (
-                    <GridItem key={index} item={item} onDelete={onDelete} propEdit={propEdit} />
+                    <GridItem key={item.id} item={item} onDelete={onDelete} propEdit={propEdit} />
                 ))}
             </C.Tbody>
         </C.Table>
