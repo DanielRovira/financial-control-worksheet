@@ -13,17 +13,16 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     const ref = useRef(null);
 
     const toggleEdit = () => {
-        if (item.desc==="" || descTemp==="" || !item.amount || !item.date) {
+        if (descTemp=="" || amountTemp=="") {
             alert("Informe todos os campos!");
             return;
-        }   else if (item.amount.replace(/,/g, '.') < 0.01) {
+        }   else if (amountTemp < 0.01) {
             alert("O valor tem que ser positivo");
             return;  
         }
 
-        if (descTemp !== item.desc || amountTemp !== item.amount) {
+        if (descTemp != item.desc || amountTemp != item.amount) {
             propEdit(item.id, {descTemp, amountTemp}, "edit")
-
         }
         setActive(!isActive);
     };
@@ -74,7 +73,8 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => setAmountTemp(e)}
+                        onValueChange={(e) => e ? (setAmountTemp(e.replace(/,/g, '.'))) : (setAmountTemp(""))}
+                        // onValueChange={(e) => handleAmountType(e)}
                         // onValueChange={(e) => {propEdit(item.id, e, "amount")}}
                     />
                 </C.Td>
