@@ -9,27 +9,36 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     const [isActive, setActive] = useState(false);
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
+    const [amountValue, setAmountValue] = useState()
     const [dateTemp, setDateTemp] = useState(item.date)
     const ref = useRef(null);
 
+    const handleAmountType = (value) => {
+        setAmountValue(value)
+        if (value != null) 
+        {setAmountTemp(value.replace(/,/g, '.'))}
+        else {setAmountTemp("0.00")}
+    };
+
     const toggleEdit = () => {
-        if (descTemp=="" || amountTemp=="") {
+        if (descTemp==="" || amountTemp==="") {
             alert("Informe todos os campos!");
             return;
-        }   else if (amountTemp < 0.01) {
+        }   else if (amountTemp.replace(/,/g, '.') < 0.01) {
             alert("O valor tem que ser positivo");
             return;  
         }
 
-        if (descTemp != item.desc || amountTemp != item.amount) {
+        if (descTemp !== item.desc || amountTemp !== item.amount) {
             propEdit(item.id, {descTemp, amountTemp}, "edit")
+
         }
         setActive(!isActive);
     };
 
     useClickAway(ref, toggleEdit)
 
-    if (isActive == true) {
+    if (isActive === true) {
         return (
             <C.Tr ref={ref}>
                 <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
@@ -67,14 +76,14 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 </C.Td>
                 <C.Td>
                     <D.Currency
-                        value={amountTemp}
+                        value={amountValue}
                         prefix="R$ "
                         placeholder="R$ 0,00"
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        onValueChange={(e) => e ? (setAmountTemp(e.replace(/,/g, '.'))) : (setAmountTemp(""))}
-                        // onValueChange={(e) => handleAmountType(e)}
+                        // onValueChange={(e) => e ? (setAmountTemp(e.replace(/,/g, '.'))) : (setAmountTemp(""))}
+                        onValueChange={(e) => handleAmountType(e)}
                         // onValueChange={(e) => {propEdit(item.id, e, "amount")}}
                     />
                 </C.Td>
