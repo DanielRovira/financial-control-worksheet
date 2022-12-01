@@ -78,7 +78,6 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                         value={descTemp}
                         placeholder="Inserir descrição"
                         onChange={(e) => setDescTemp(e.target.value)}
-                        // onChange={(e) => propEdit(item.id, e.target.value, "desc")}
                     />
                 </C.Td>
                 <C.Td>
@@ -89,9 +88,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"
-                        // onValueChange={(e) => e ? (setAmountTemp(e.replace(/,/g, '.'))) : (setAmountTemp(""))}
                         onValueChange={(e) => handleAmountType(e)}
-                        // onValueChange={(e) => {propEdit(item.id, e, "amount")}}
                     />
                 </C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>
