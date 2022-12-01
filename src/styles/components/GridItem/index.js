@@ -10,7 +10,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
-    const [dateTemp, setDateTemp] = useState(item.date)
+    const [dateTemp, setDateTemp] = useState([null,item.date])
     const ref = useRef(null);
 
     const handleAmountType = (value) => {
@@ -21,7 +21,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     };
 
     const toggleEdit = () => {
-        if (descTemp==="" || amountTemp==="") {
+        if (descTemp==="" || amountTemp==="" || dateTemp[1]=="") {
             alert("Informe todos os campos!");
             return;
         }   else if (amountTemp.replace(/,/g, '.') < 0.01) {
@@ -29,8 +29,8 @@ const GridItem = ({ item, onDelete, propEdit }) => {
             return;  
         }
 
-        if (descTemp !== item.desc || amountTemp !== item.amount) {
-            propEdit(item.id, {descTemp, amountTemp}, "edit")
+        if (descTemp !== item.desc || amountTemp !== item.amount || dateTemp[1] !== item.date) {
+            propEdit(item.id, {descTemp, amountTemp, dateTemp}, "edit")
 
         }
         setActive(!isActive);
@@ -41,11 +41,18 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     if (isActive === true) {
         return (
             <C.Tr ref={ref}>
-                <C.Td alignCenter width={9}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
+                <C.Td alignCenter width={9}>
+                    <D.Input
+                            value={dateTemp[1]}
+                            type="date"
+                            width={110}
+                            onChange={(e) => setDateTemp([item.id, e.target.value, "date"])}
+                            />
+                </C.Td>
                 <C.Td alignCenter>
                     <D.Select
                         value={item.expense ? "Saída" : "Entrada"}
-                        onChange={() => propEdit(item.id, !item.expense, "expense")}
+                        onChange={() => propEdit([item.id, !item.expense, "expense"])}
                     >
                         <option value="Entrada">Entrada</option>
                         <option value="Saída">Saída</option>
@@ -54,7 +61,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 <C.Td>
                     <D.Select
                         value={item.prov}
-                        onChange={(e) => propEdit(item.id, e.target.value, "prov")}
+                        onChange={(e) => propEdit([item.id, e.target.value, "prov"])}
                     >
                         {Object.keys(data.provenience).map(element => <option key={element} value={element}>{element}</option>)}
                     </D.Select>
@@ -63,7 +70,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                     <D.Input
                         value={item.forn}
                         placeholder="Inserir fornecedor"
-                        onChange={(e) => propEdit(item.id, e.target.value, "forn")}
+                        onChange={(e) => propEdit([item.id, e.target.value, "forn"])}
                     />
                 </C.Td>
                 <C.Td>

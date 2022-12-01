@@ -25,12 +25,13 @@ const Grid = ({ rawData, setItens }) => {
             if (item.id === ID && propr=="forn") return { ...item, forn: value };
             if (item.id === ID && propr=="amount" && value == null) return { ...item, amount: "" };
             if (item.id === ID && propr=="expense") return { ...item, expense: value };
-            if (item.id === ID && propr=="edit") return { ...item, desc: value.descTemp, amount: value.amountTemp };
+            if (item.id === ID && propr=="edit") return { ...item, desc: value.descTemp, amount: value.amountTemp, date: value.dateTemp[1] };
             // if (item.id === ID && propr=="desc") return { ...item, desc: value };
             // if (item.id === ID && propr=="amount" && value != null) return { ...item, amount: value?.replace(/,/g, '.') };
-
+            
             return item;
         })
+        console.log(propr)
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
