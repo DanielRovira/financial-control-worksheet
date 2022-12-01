@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
-import data from '../../../data.json'
+import data from '../../../config.json'
 import {useClickAway} from 'react-use';
 
 const GridItem = ({ item, onDelete, propEdit }) => {

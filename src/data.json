@@ -1,7 +1,38 @@
-{
-    "provenience":
-            {
-                "3R":"3R",
-                "CONSTEM":"CONSTEM"
-            }
-}
+[
+    {
+      "id": "72812f0f-2048-4983-9468-e3f6a988b8ff",
+      "date": "2022-10-30",
+      "desc": "Exemplo 1",
+      "amount": "154.50",
+      "expense": true,
+      "prov": "3R",
+      "forn": "Fornecedor 1"
+    },
+    {
+      "id": "68767822-524d-42b1-bab3-4ead832199a8",
+      "date": "2022-11-08",
+      "desc": "Exemplo 2",
+      "amount": "653.10",
+      "expense": true,
+      "prov": "3R",
+      "forn": "Fornecedor 1"
+    },
+    {
+      "id": "bfa4c56d-5412-4b36-ab50-d8575d2e27fa",
+      "date": "2022-11-17",
+      "desc": "Exemplo 3",
+      "amount": "100.00",
+      "expense": false,
+      "prov": "CONSTEM",
+      "forn": ""
+    },
+    {
+      "id": "74550d08-2db4-463f-806f-43688f5fa36c",
+      "date": "2022-12-01",
+      "desc": "Exemplo 4",
+      "amount": "56.00",
+      "expense": true,
+      "prov": "CONSTEM",
+      "forn": ""
+    }
+  ]

@@ -4,10 +4,12 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 import GlobalStyle from './styles/global';
+// import data from './data.json'
 
 const App = () => {
     const data = localStorage.getItem("transactions");
     const [transactionsList, setTransactionsList] = useState(data ? JSON.parse(data) : []);
+    // const [transactionsList, setTransactionsList] = useState(data);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
