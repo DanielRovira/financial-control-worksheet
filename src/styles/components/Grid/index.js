@@ -31,7 +31,6 @@ const Grid = ({ rawData, setItens }) => {
             
             return item;
         })
-        console.log(propr)
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
