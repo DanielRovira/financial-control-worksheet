@@ -32,7 +32,7 @@ const App = () => {
     }, [transactionsList]);
 
     const handleAdd = (transaction) => {
-        const newArrayTransactions = [transaction, ...transactionsList];
+        const newArrayTransactions = [...transactionsList, transaction];
 
         setTransactionsList(newArrayTransactions);
 
@@ -44,7 +44,7 @@ const App = () => {
             <Header />
             <Resume income={income} expense={expense} total={total} />
             <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
-            <Grid itens={transactionsList} setItens={setTransactionsList} />
+            <Grid rawData={transactionsList} setItens={setTransactionsList} />
             <GlobalStyle />
         </>
     );

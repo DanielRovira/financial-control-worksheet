@@ -9,7 +9,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     const [isActive, setActive] = useState(false);
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
-    const [amountValue, setAmountValue] = useState()
+    const [amountValue, setAmountValue] = useState(item.amount)
     const [dateTemp, setDateTemp] = useState(item.date)
     const ref = useRef(null);
 

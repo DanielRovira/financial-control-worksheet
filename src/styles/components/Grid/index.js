@@ -3,16 +3,23 @@ import GridItem from '../GridItem'
 import * as C from './styles'
 
 
-const Grid = ({ itens, setItens }) => {
+const Grid = ({ rawData, setItens }) => {
+
+    const itens = Array.from(rawData)
+    itens.sort(function(a, b) {
+        var c = new Date(a.date);
+        var d = new Date(b.date);
+        return c-d;
+    });
 
     const onDelete = (ID) => {
-        const newArray = itens.filter((transaction) => transaction.id !== ID);
+        const newArray = rawData.filter((transaction) => transaction.id !== ID);
         setItens(newArray);
         localStorage.setItem("transactions", JSON.stringify(newArray));
     };
 
     const propEdit = (ID, value, propr) => {
-        const newArray = itens.map(item => {
+        const newArray = rawData.map(item => {
             if (item.id === ID && propr=="date") return { ...item, date: value };
             if (item.id === ID && propr=="prov") return { ...item, prov: value };
             if (item.id === ID && propr=="forn") return { ...item, forn: value };
