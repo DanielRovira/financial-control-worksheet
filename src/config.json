@@ -1,4 +1,10 @@
 {
+    "dataBase":
+            {
+                "port":"3001",
+                "dataBase":"financial-control"
+
+            },
     "provenience":
             {
                 "3R":"3R",

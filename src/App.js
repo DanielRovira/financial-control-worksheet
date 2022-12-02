@@ -4,14 +4,57 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 import GlobalStyle from './styles/global';
-import dataExample from './data.json'
+import config from './config.json'
 
 const App = () => {
-    const data = localStorage.getItem("transactions");
-    const [transactionsList, setTransactionsList] = useState(data ? JSON.parse(data) : dataExample);
+    const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
+
+    function getData() {
+        fetch(`http://localhost:${config.dataBase.port}/${config.dataBase.dataBase}/list`, { method:"GET" })
+        .then(response => response.json())
+        .then(data => setTransactionsList(data))
+    };
+
+    useEffect(() => {
+        getData()
+    },[])
+
+    function insertDocument(transaction) {
+        fetch(`http://localhost:${config.dataBase.port}/${config.dataBase.dataBase}/add`,
+        {
+            method:"POST",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify(transaction)
+        })
+        .then(response => response.json())
+        .then(() => getData())
+    }
+
+    function updateDocument(item) {
+        fetch(`http://localhost:${config.dataBase.port}/${config.dataBase.dataBase}/update`,
+        {
+            method:"PATCH",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify(item)
+        })
+        .then(response => response.json())
+        .then(() => getData())
+    }
+
+    function deleteDocument(item) {
+        fetch(`http://localhost:${config.dataBase.port}/${config.dataBase.dataBase}/delete`,
+        {
+            method:"DELETE",
+            headers: { 'Content-Type': "application/json" },
+            body: JSON.stringify(item)
+        })
+        .then(response => response.json())
+        .then(() => getData())
+    }
+
 
     useEffect(() => {
         const amountExpense = transactionsList
@@ -32,20 +75,12 @@ const App = () => {
 
     }, [transactionsList]);
 
-    const handleAdd = (transaction) => {
-        const newArrayTransactions = [...transactionsList, transaction];
-
-        setTransactionsList(newArrayTransactions);
-
-        localStorage.setItem("transactions", JSON.stringify(newArrayTransactions));
-    };
-
     return (
         <>
             <Header />
             <Resume income={income} expense={expense} total={total} />
-            <Form handleAdd={handleAdd} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
-            <Grid rawData={transactionsList} setItens={setTransactionsList} />
+            <Form insertDocument={insertDocument} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
+            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />
             <GlobalStyle />
         </>
     );

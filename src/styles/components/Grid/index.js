@@ -3,7 +3,7 @@ import GridItem from '../GridItem'
 import * as C from './styles'
 
 
-const Grid = ({ rawData, setItens }) => {
+const Grid = ({ rawData, deleteDocument, updateDocument }) => {
 
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
@@ -11,27 +11,6 @@ const Grid = ({ rawData, setItens }) => {
         var d = new Date(b.date);
         return c-d;
     });
-
-    const onDelete = (ID) => {
-        const newArray = rawData.filter((transaction) => transaction.id !== ID);
-        setItens(newArray);
-        localStorage.setItem("transactions", JSON.stringify(newArray));
-    };
-
-    const propEdit = (ID, value, propr) => {
-        const newArray = rawData.map(item => {
-            if (item.id === ID && propr=="date") return { ...item, date: value };
-            if (item.id === ID && propr=="prov") return { ...item, prov: value };
-            if (item.id === ID && propr=="forn") return { ...item, forn: value };
-            if (item.id === ID && propr=="amount" && value == null) return { ...item, amount: "" };
-            if (item.id === ID && propr=="expense") return { ...item, expense: value };
-            if (item.id === ID && propr=="edit") return { ...item, desc: value.descTemp, amount: value.amountTemp, date: value.dateTemp[1] };
-
-            return item;
-        })
-        setItens(newArray);
-        localStorage.setItem("transactions", JSON.stringify(newArray));
-    };
 
     return ( 
         <C.Table>
@@ -49,7 +28,7 @@ const Grid = ({ rawData, setItens }) => {
             </C.Thead>
             <C.Tbody>
                 {itens?.map((item, index) => (
-                    <GridItem key={item.id} item={item} onDelete={onDelete} propEdit={propEdit} />
+                    <GridItem key={item._id} item={item} onDelete={deleteDocument} updateDocument={updateDocument} />
                 ))}
             </C.Tbody>
         </C.Table>
