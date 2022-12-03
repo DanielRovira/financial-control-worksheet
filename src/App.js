@@ -4,27 +4,25 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 import GlobalStyle from './styles/global';
-import config from './config.json'
 
 const App = () => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
-    
+
     function getData() {
-        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/list`, { method:"GET" })
+        fetch(`/${process.env.REACT_APP_DB}/list`, { method:"GET" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
     };
 
     useEffect(() => {
         getData()
-        console.log(window.location.hostname)
     },[])
 
     function insertDocument(transaction) {
-        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/add`,
+        fetch(`/${process.env.REACT_APP_DB}/add`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
@@ -35,7 +33,7 @@ const App = () => {
     }
 
     function updateDocument(item) {
-        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/update`,
+        fetch(`/${process.env.REACT_APP_DB}/update`,
         {
             method:"PATCH",
             headers: { 'Content-Type': "application/json" },
@@ -46,7 +44,7 @@ const App = () => {
     }
 
     function deleteDocument(item) {
-        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/delete`,
+        fetch(`/${process.env.REACT_APP_DB}/delete`,
         {
             method:"DELETE",
             headers: { 'Content-Type': "application/json" },
