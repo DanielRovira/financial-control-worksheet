@@ -11,19 +11,20 @@ const App = () => {
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
-
+    
     function getData() {
-        fetch(`http://${config.dataBase.ip}:${config.dataBase.port}/${config.dataBase.dataBase}/list`, { method:"GET" })
+        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/list`, { method:"GET" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
     };
 
     useEffect(() => {
         getData()
+        console.log(window.location.hostname)
     },[])
 
     function insertDocument(transaction) {
-        fetch(`http://${config.dataBase.ip}:${config.dataBase.port}/${config.dataBase.dataBase}/add`,
+        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/add`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
@@ -34,7 +35,7 @@ const App = () => {
     }
 
     function updateDocument(item) {
-        fetch(`http://${config.dataBase.ip}:${config.dataBase.port}/${config.dataBase.dataBase}/update`,
+        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/update`,
         {
             method:"PATCH",
             headers: { 'Content-Type': "application/json" },
@@ -45,7 +46,7 @@ const App = () => {
     }
 
     function deleteDocument(item) {
-        fetch(`http://${config.dataBase.ip}:${config.dataBase.port}/${config.dataBase.dataBase}/delete`,
+        fetch(`http://${window.location.hostname}:${config.dataBase.port}/${config.dataBase.dataBase}/delete`,
         {
             method:"DELETE",
             headers: { 'Content-Type': "application/json" },
