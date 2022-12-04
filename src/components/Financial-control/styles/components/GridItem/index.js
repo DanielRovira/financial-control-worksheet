@@ -2,15 +2,18 @@ import React, { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
-import data from '../../../config.json'
+import data from '../../../../../config.json'
 import {useClickAway} from 'react-use';
 
-const GridItem = ({ item, onDelete, propEdit }) => {
+const GridItem = ({ item, onDelete, updateDocument }) => {
     const [isActive, setActive] = useState(false);
+    const [dateTemp, setDateTemp] = useState(item.date)
+    const [expenseTemp, setExpenseTemp] = useState(item.expense)
+    const [provTemp, setProvTemp] = useState(item.prov)
+    const [fornTemp, setFornTemp] = useState(item.forn)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
-    const [dateTemp, setDateTemp] = useState([null,item.date])
     const ref = useRef(null);
 
     const handleAmountType = (value) => {
@@ -21,7 +24,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
     };
 
     const toggleEdit = () => {
-        if (descTemp==="" || amountTemp==="" || dateTemp[1]=="") {
+        if (descTemp === "" || amountTemp === "" || dateTemp === "") {
             alert("Informe todos os campos!");
             return;
         }   else if (amountTemp.replace(/,/g, '.') < 0.01) {
@@ -29,10 +32,16 @@ const GridItem = ({ item, onDelete, propEdit }) => {
             return;  
         }
 
-        if (descTemp !== item.desc || amountTemp !== item.amount || dateTemp[1] !== item.date) {
-            propEdit(item.id, {descTemp, amountTemp, dateTemp}, "edit")
-
-        }
+        // if (
+        //     dateTemp !== item.date||
+        //     expenseTemp !== item.expense ||
+        //     provTemp !== item.prov ||
+        //     fornTemp !== item.forn ||
+        //     descTemp !== item.desc ||
+        //     amountTemp !== item.amount
+        //     ) {
+            updateDocument({ ...item, date: dateTemp, expense: expenseTemp, prov: provTemp, forn: fornTemp, desc:descTemp, amount: amountTemp });
+            // }
         setActive(!isActive);
     };
 
@@ -43,16 +52,16 @@ const GridItem = ({ item, onDelete, propEdit }) => {
             <C.Tr ref={ref}>
                 <C.Td alignCenter width={9}>
                     <D.Input
-                            value={dateTemp[1]}
+                            value={dateTemp}
                             type="date"
                             width={110}
-                            onChange={(e) => setDateTemp([item.id, e.target.value, "date"])}
+                            onChange={(e) => setDateTemp(e.target.value)}
                             />
                 </C.Td>
                 <C.Td alignCenter>
                     <D.Select
-                        value={item.expense ? "Saída" : "Entrada"}
-                        onChange={() => propEdit([item.id, !item.expense, "expense"])}
+                        value={expenseTemp ? "Saída" : "Entrada"}
+                        onChange={() => setExpenseTemp(!item.expense)}
                     >
                         <option value="Entrada">Entrada</option>
                         <option value="Saída">Saída</option>
@@ -60,17 +69,17 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                 </C.Td>
                 <C.Td>
                     <D.Select
-                        value={item.prov}
-                        onChange={(e) => propEdit([item.id, e.target.value, "prov"])}
+                        value={provTemp}
+                        onChange={(e) => setProvTemp(e.target.value)}
                     >
                         {Object.keys(data.provenience).map(element => <option key={element} value={element}>{element}</option>)}
                     </D.Select>
                 </C.Td>
                 <C.Td>
                     <D.Input
-                        value={item.forn}
+                        value={fornTemp}
                         placeholder="Inserir fornecedor"
-                        onChange={(e) => propEdit([item.id, e.target.value, "forn"])}
+                        onChange={(e) => setFornTemp(e.target.value)}
                     />
                 </C.Td>
                 <C.Td>
@@ -92,7 +101,7 @@ const GridItem = ({ item, onDelete, propEdit }) => {
                     />
                 </C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>
-                <C.Td alignCenter><FaTrash onClick={() => {onDelete(item.id); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.Td>
+                <C.Td alignCenter><FaTrash onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.Td>
             </C.Tr>
     )}
     else {

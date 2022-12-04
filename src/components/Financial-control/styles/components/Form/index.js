@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import {v4 as uuidv4} from 'uuid'
 import * as C from './styles';
-import data from '../../../config.json'
+import data from '../../../../../config.json'
 
-const Form = ({ handleAdd }) => {
+const Form = ({ insertDocument }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
@@ -22,7 +21,6 @@ const Form = ({ handleAdd }) => {
         }
         
         const transaction = {
-            id: uuidv4(),
             date: date,
             desc: desc,
             amount: amount.replace(/,/g, '.'),
@@ -31,7 +29,7 @@ const Form = ({ handleAdd }) => {
             forn: forn,
         };
 
-        handleAdd(transaction);
+        insertDocument(transaction);
         
         setDesc("");
         setAmount("");
