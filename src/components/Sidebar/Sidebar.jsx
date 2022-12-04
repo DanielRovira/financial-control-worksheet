@@ -10,14 +10,20 @@ const Sidebarr = () => {
     const sidebar = useRef(null);
     const { collapseSidebar } = useProSidebar();
 
-    const tasks = [
+    const sections = [
 
         {
-            title: "Obra 1",
+            title: "SES SJM",
         },
         {
-            title: "Obra 2",
+            title: "PARNAMIRIM",
         },
+        {
+            title: "BREJO",
+        },
+        {
+            title: "CAICÓ",
+        }
     ]
     useClickAway(sidebar, collapseSidebar)
     return (
@@ -37,9 +43,9 @@ const Sidebarr = () => {
                 </IconButton>
                 <h1>Obras</h1>
                 <Menu>
-                {tasks.map((task) => (
+                {sections.map((task) => (
                     <SubMenu label={task.title}>
-                        <MenuItem routerLink={<Link to="/financial-control-worksheet" />}>Controle Financeiro</MenuItem>
+                        <MenuItem onClick={collapseSidebar} routerLink={<Link to="/financial-control-worksheet" />}>Controle Financeiro</MenuItem>
                         <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>
                     </SubMenu>
                      ))}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as C from './styles';
-import data from '../../../config.json'
+import data from '../../../../../config.json'
 
 const Form = ({ insertDocument }) => {
     const toDay = new Date().toISOString().substring(0, 10)

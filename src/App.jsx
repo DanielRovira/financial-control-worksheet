@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import FinancialWorksheet from './FinancialWorksheet'
-import Sidebarr from './components/Sidebar'
+import FinancialWorksheet from './components/Financial-control/FinancialWorksheet'
+import Sidebarr from './components/Sidebar/Sidebar'
 import { ProSidebarProvider } from "react-pro-sidebar";
 
 const App = () => {
