@@ -5,7 +5,7 @@ import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 import GlobalStyle from './styles/global';
 
-const App = () => {
+const FinancialWorksheet = () => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -85,4 +85,4 @@ const App = () => {
     );
 };
  
-export default App;
+export default FinancialWorksheet;
