@@ -15,7 +15,8 @@
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack-dev-middleware": "^6.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",
