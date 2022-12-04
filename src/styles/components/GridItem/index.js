@@ -24,7 +24,7 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
     };
 
     const toggleEdit = () => {
-        if (descTemp === "" || amountTemp === "" || dateTemp == "") {
+        if (descTemp === "" || amountTemp === "" || dateTemp === "") {
             alert("Informe todos os campos!");
             return;
         }   else if (amountTemp.replace(/,/g, '.') < 0.01) {
@@ -32,16 +32,16 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
             return;  
         }
 
-        if (
-            dateTemp !== item.date||
-            expenseTemp !== item.expense ||
-            provTemp !== item.prov ||
-            fornTemp !== item.forn ||
-            descTemp !== item.desc ||
-            amountTemp !== item.amount
-            ) {
+        // if (
+        //     dateTemp !== item.date||
+        //     expenseTemp !== item.expense ||
+        //     provTemp !== item.prov ||
+        //     fornTemp !== item.forn ||
+        //     descTemp !== item.desc ||
+        //     amountTemp !== item.amount
+        //     ) {
             updateDocument({ ...item, date: dateTemp, expense: expenseTemp, prov: provTemp, forn: fornTemp, desc:descTemp, amount: amountTemp });
-            }
+            // }
         setActive(!isActive);
     };
 
