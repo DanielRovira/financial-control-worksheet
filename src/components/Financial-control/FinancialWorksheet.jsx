@@ -12,7 +12,7 @@ const FinancialWorksheet = () => {
     const [total, setTotal] = useState(0);
 
     function getData() {
-        fetch(`/${process.env.REACT_APP_DB}/list`, { method:"GET" })
+        fetch(`/api/${process.env.REACT_APP_DB}/list`, { method:"GET" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
     };
@@ -22,7 +22,7 @@ const FinancialWorksheet = () => {
     },[])
 
     function insertDocument(transaction) {
-        fetch(`/${process.env.REACT_APP_DB}/add`,
+        fetch(`/api/${process.env.REACT_APP_DB}/add`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
@@ -33,7 +33,7 @@ const FinancialWorksheet = () => {
     }
 
     function updateDocument(item) {
-        fetch(`/${process.env.REACT_APP_DB}/update`,
+        fetch(`/api/${process.env.REACT_APP_DB}/update`,
         {
             method:"PATCH",
             headers: { 'Content-Type': "application/json" },
@@ -44,7 +44,7 @@ const FinancialWorksheet = () => {
     }
 
     function deleteDocument(item) {
-        fetch(`/${process.env.REACT_APP_DB}/delete`,
+        fetch(`/api/${process.env.REACT_APP_DB}/delete`,
         {
             method:"DELETE",
             headers: { 'Content-Type': "application/json" },

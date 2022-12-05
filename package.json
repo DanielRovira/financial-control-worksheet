@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "homepage": "https://danielrovira.github.io/financial-control-worksheet",
   "private": false,
-  "proxy": "http://localhost:3001",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
