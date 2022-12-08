@@ -38,13 +38,14 @@ const Sidebarr = () => {
                     onClick={() => collapseSidebar()}
                     size="large"
                     color="inherit"
+                    style={{ marginTop: '60px' }}
                 >
                     <MenuIcon />
                 </IconButton>
                 <h1>Obras</h1>
                 <Menu>
                 {sections.map((task) => (
-                    <SubMenu label={task.title}>
+                    <SubMenu label={task.title} key={task.title}>
                         <MenuItem onClick={collapseSidebar} routerLink={<Link to="/financial-control-worksheet" />}>Controle Financeiro</MenuItem>
                         <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>
                     </SubMenu>

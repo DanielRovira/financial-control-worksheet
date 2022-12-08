@@ -3,7 +3,7 @@ import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
-import GlobalStyle from './styles/global';
+// import GlobalStyle from './styles/global';
 
 const FinancialWorksheet = () => {
     const [transactionsList, setTransactionsList] = useState([]);
@@ -50,7 +50,7 @@ const FinancialWorksheet = () => {
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify(item)
         })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(() => getData())
     }
 
@@ -80,7 +80,7 @@ const FinancialWorksheet = () => {
             <Resume income={income} expense={expense} total={total} />
             <Form insertDocument={insertDocument} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />
-            <GlobalStyle />
+            {/* <GlobalStyle /> */}
         </>
     );
 };

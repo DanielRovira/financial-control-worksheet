@@ -27,7 +27,7 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
         if (descTemp === "" || amountTemp === "" || dateTemp === "") {
             alert("Informe todos os campos!");
             return;
-        }   else if (amountTemp.replace(/,/g, '.') < 0.01) {
+        }   else if (amountTemp.toString().replace(/,/g, '.') < 0.01) {
             alert("O valor tem que ser positivo");
             return;  
         }
