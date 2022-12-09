@@ -11,11 +11,7 @@ import { useState } from 'react';
 const App = () => {
     // const isLoggedIn = localStorage.getItem("isLoggedIn");
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
-    console.log(isLoggedIn)
-
-    const handleLogin = (value) => {
-        setIsLoggedIn(value)
-    }
+    const [accName, setAccName] = useState(localStorage.getItem("userName"))
 
     const refreshToken = async () => {
         const res = await axios
@@ -29,6 +25,7 @@ const App = () => {
         const setLogin = () => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true))
             localStorage.setItem("userName", res.data.user.name)
+            setAccName(res.data.user.name)
         }
         data.user ? setLogin() : localStorage.clear()
         // console.log(isLoggedIn)
@@ -41,10 +38,10 @@ const App = () => {
         <ProSidebarProvider>
             <Router>
                 <Sidebarr />
-                <Header isLoggedIn={isLoggedIn} handleLogin={handleLogin} />
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
                     <Routes>
                         <Route path="/" element={<Login />} />
-                        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+                        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
                         <Route path="/user" element={<FinancialWorksheet />} />
                     </Routes>
             </Router>    

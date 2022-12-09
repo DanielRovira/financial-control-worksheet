@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const Header = ({ isLoggedIn, handleLogin }) => {
-  const sendLogoutReq = async () => {
+const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
+
+    const sendLogoutReq = async () => {
     const res = await axios.post("/api/logout", null, {
       withCredentials: true,
     });
@@ -16,18 +17,17 @@ const Header = ({ isLoggedIn, handleLogin }) => {
   const handleLogout = () => {
     sendLogoutReq()
     .then(() => localStorage.clear())
-    .then(() => handleLogin(false));
+    .then(() => setAccName(null))
+    .then(() => setIsLoggedIn(false));
   };
 
   return (
     <div>
       <AppBar position="sticky" style={{ background: "teal" , filter:"grayscale(50%)" }}>
         <Toolbar>
-        {isLoggedIn ? (
-        <h1>{localStorage.getItem("userName")}</h1>)
-        : (<h1></h1>)}
-          <Typography variant="h3"></Typography>
-          <Box sx={{ marginLeft: "auto" }}>
+        <h1>{accName}</h1>
+            <Typography variant="h3"></Typography>
+            <Box sx={{ marginLeft: "auto" }}>
                 {isLoggedIn ? (
                 <Tab
                 onClick={handleLogout}
@@ -41,8 +41,8 @@ const Header = ({ isLoggedIn, handleLogin }) => {
                 <Tab to="/login" LinkComponent={Link} label="Login" />
                 <Tab to="/signup" LinkComponent={Link} label="Signup" />
                 </>
-            )}
-          </Box>
+              )}
+            </Box>
         </Toolbar>
       </AppBar>
     </div>

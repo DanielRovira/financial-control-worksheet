@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ handleLogin }) => {
+const Login = ({ setIsLoggedIn }) => {
   const history = useNavigate();
   const [inputs, setInputs] = useState({
     email: "",
@@ -30,7 +30,7 @@ const Login = ({ handleLogin }) => {
     e.preventDefault();
     // send http request
     sendRequest()
-    .then(() => handleLogin(true))
+    .then(() => setIsLoggedIn(true))
     .then(() => history("/user"));
   };
 
