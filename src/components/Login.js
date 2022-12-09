@@ -34,7 +34,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // send http request
     sendRequest()
     .then(() => setIsLoggedIn(true))
     .then(() => history("/user"));
@@ -62,6 +61,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
             variant="outlined"
             placeholder="Email"
             margin="normal"
+            autoComplete="username"
           />
           <TextField
             name="password"
@@ -71,6 +71,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
             variant="outlined"
             placeholder="Password"
             margin="normal"
+            autoComplete="current-password"
           />
           <Button variant="contained" type="submit">
             Login
