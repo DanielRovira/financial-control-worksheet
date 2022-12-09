@@ -1,15 +1,21 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const Login = ({ setIsLoggedIn }) => {
-  const history = useNavigate();
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-  const handleChange = (e) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
+    const history = useNavigate();
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: "",
+    });
+
+    
+    useEffect(() => {
+    isLoggedIn ? history("/user") : refreshToken()
+    }, []);
+
+    const handleChange = (e) => {
     setInputs((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,

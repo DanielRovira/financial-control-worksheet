@@ -1,10 +1,11 @@
 import { AppBar, Box, Tab, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
-
+    const history = useNavigate();
     const sendLogoutReq = async () => {
     const res = await axios.post("/api/logout", null, {
         withCredentials: true,
@@ -20,7 +21,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
         sendLogoutReq()
             .then(() => localStorage.clear())
             .then(() => setAccName(null))
-            .then(() => setIsLoggedIn(false));
+            .then(() => setIsLoggedIn(false))
+            .then(() => history("/"));
     };
 
     return (
@@ -33,14 +35,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
                         {isLoggedIn ? (
                         <Tab
                         onClick={handleLogout}
-                        to="/login"
+                        to="/"
                         LinkComponent={Link}
                         label="Logout"
                     />
                     ) : (
                         <>
                         {" "}
-                        <Tab to="/login" LinkComponent={Link} label="Login" />
+                        <Tab to="/" LinkComponent={Link} label="Login" />
                         <Tab to="/signup" LinkComponent={Link} label="Signup" />
                         </>
                     )}

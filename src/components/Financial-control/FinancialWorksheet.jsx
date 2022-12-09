@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 // import GlobalStyle from './styles/global';
 
-const FinancialWorksheet = () => {
+const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
+    const history = useNavigate();
+
+    useEffect(() => {
+        isLoggedIn ? refreshToken() : history("/")
+    }, []);
 
     function getData() {
         fetch(`/api/${process.env.REACT_APP_DB}/list`, { method:"GET" })
