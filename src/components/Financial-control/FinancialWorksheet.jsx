@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
@@ -12,7 +12,8 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
     const history = useNavigate();
-
+    const params = useParams();
+    console.log(params.taskTitle)
     useEffect(() => {
         isLoggedIn ? refreshToken() : history("/")
     }, []);

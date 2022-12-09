@@ -44,6 +44,7 @@ const App = () => {
                         <Route path="/" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         {/* <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} /> */}
                         <Route path="/user" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

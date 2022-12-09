@@ -3,5 +3,20 @@
             {
                 "3R":"3R",
                 "CONSTEM":"CONSTEM"
-            }
+            },
+    "obras":
+            [    
+                {
+                    "title": "SES-SJM"
+                },
+                {
+                    "title": "PARNAMIRIM"
+                },
+                {
+                    "title": "BREJO"
+                },
+                {
+                    "title": "CAICÓ"
+                }
+            ]
 }
