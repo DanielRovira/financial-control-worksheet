@@ -6,7 +6,7 @@ import Sidebarr from './components/Sidebar/Sidebar'
 import Header from "./components/Header";
 import Login from "./components/Login";
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const App = () => {
     // const isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -18,15 +18,16 @@ const App = () => {
           .get("http://localhost:3001/api/refresh", {
             withCredentials: true,
           })
+          .then(localStorage.clear())
           .catch((err) => console.log(err));
     
         const data = await res.data;
-
         const setLogin = () => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true))
             localStorage.setItem("userName", res.data.user.name)
             setAccName(res.data.user.name)
         }
+
         data.user ? setLogin() : localStorage.clear()
         // console.log(isLoggedIn)
         return data;
@@ -40,8 +41,8 @@ const App = () => {
                 <Sidebarr />
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
                     <Routes>
-                        <Route path="/" element={<Login />} />
-                        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+                        <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
+                        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/user" element={<FinancialWorksheet />} />
                     </Routes>
             </Router>    
