@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const Header = () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+const Header = ({ isLoggedIn, handleLogin }) => {
   const sendLogoutReq = async () => {
     const res = await axios.post("/api/logout", null, {
       withCredentials: true,
@@ -15,30 +14,34 @@ const Header = () => {
     return new Error("Unable TO Logout. Please try again");
   };
   const handleLogout = () => {
-    sendLogoutReq().then(() => localStorage.setItem("isLoggedIn", JSON.stringify(false)));
+    sendLogoutReq()
+    .then(() => localStorage.clear())
+    .then(() => handleLogin(false));
   };
 
   return (
     <div>
       <AppBar position="sticky" style={{ background: "teal" , filter:"grayscale(50%)" }}>
         <Toolbar>
+        {isLoggedIn ? (
+        <h1>{localStorage.getItem("userName")}</h1>)
+        : (<h1></h1>)}
           <Typography variant="h3"></Typography>
           <Box sx={{ marginLeft: "auto" }}>
-              {!isLoggedIn && (
-                <>
-                  {" "}
-                  <Tab to="/login" LinkComponent={Link} label="Login" />
-                  <Tab to="/signup" LinkComponent={Link} label="Signup" />
-                </>
-              )}
-              {isLoggedIn && (
+                {isLoggedIn ? (
                 <Tab
-                  onClick={handleLogout}
-                  to="/"
-                  LinkComponent={Link}
-                  label="Logout"
-                />
-              )}
+                onClick={handleLogout}
+                to="/login"
+                LinkComponent={Link}
+                label="Logout"
+            />
+            ) : (
+                <>
+                {" "}
+                <Tab to="/login" LinkComponent={Link} label="Login" />
+                <Tab to="/signup" LinkComponent={Link} label="Signup" />
+                </>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const history = useNavigate();
   const [inputs, setInputs] = useState({
     email: "",
@@ -25,13 +25,15 @@ const Login = () => {
     const data = await res.data;
     return data;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // send http request
     sendRequest()
-      .then(() => localStorage.setItem("isLoggedIn", JSON.stringify(true)))
-      .then(() => history("/user"));
+    .then(() => handleLogin(true))
+    .then(() => history("/user"));
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>

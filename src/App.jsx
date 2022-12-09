@@ -6,9 +6,16 @@ import Sidebarr from './components/Sidebar/Sidebar'
 import Header from "./components/Header";
 import Login from "./components/Login";
 import axios from 'axios';
+import { useState } from 'react';
 
 const App = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    // const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
+    console.log(isLoggedIn)
+
+    const handleLogin = (value) => {
+        setIsLoggedIn(value)
+    }
 
     const refreshToken = async () => {
         const res = await axios
@@ -18,8 +25,13 @@ const App = () => {
           .catch((err) => console.log(err));
     
         const data = await res.data;
-        data.user ? localStorage.setItem("isLoggedIn", JSON.stringify(true)) : localStorage.setItem("isLoggedIn", JSON.stringify(false))
-        console.log(isLoggedIn)
+
+        const setLogin = () => {
+            localStorage.setItem("isLoggedIn", JSON.stringify(true))
+            localStorage.setItem("userName", res.data.user.name)
+        }
+        data.user ? setLogin() : localStorage.clear()
+        // console.log(isLoggedIn)
         return data;
     };
 
@@ -29,10 +41,11 @@ const App = () => {
         <ProSidebarProvider>
             <Router>
                 <Sidebarr />
-                <Header />
+                <Header isLoggedIn={isLoggedIn} handleLogin={handleLogin} />
                     <Routes>
                         <Route path="/" element={<Login />} />
-                        {isLoggedIn && <Route path="/user" element={<FinancialWorksheet />} />}{<Route path="/" element={<Login/>} />}
+                        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+                        <Route path="/user" element={<FinancialWorksheet />} />
                     </Routes>
             </Router>    
             <GlobalStyle />
