@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { useState } from 'react';
-import GlobalStyle from './components/Financial-control/styles/global';
+import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet'
 import Sidebarr from './components/Main/Sidebar'
 import Header from "./components/Main/Header";
 import Login from "./components/Main/Login";
+import Main from "./components/Main/Main";
 import axios from 'axios';
+
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
@@ -40,7 +42,7 @@ const App = () => {
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
-                        <Route path="/user" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
+                        <Route path="/main" element={<Main />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
                     </Routes>
             </Router>    

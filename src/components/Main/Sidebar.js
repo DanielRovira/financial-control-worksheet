@@ -6,18 +6,17 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import data from '../../config.json'
 
-const Sidebarr = () => {
+function Sidebarr() {
     const sidebar = useRef(null);
     const { collapseSidebar } = useProSidebar();
 
-    const sections = data.sections
-    useClickAway(sidebar, collapseSidebar)
+    useClickAway(sidebar, collapseSidebar);
     return (
         <div style={{ display: 'flex', height: '100%', position: 'absolute' }}>
             <Sidebar
-            ref={sidebar}
+                ref={sidebar}
                 defaultCollapsed
-                collapsedWidth="50px"
+                collapsedWidth="80px"
                 backgroundColor="white"
             >
                 <IconButton
@@ -30,16 +29,16 @@ const Sidebarr = () => {
                 </IconButton>
                 <h1>Obras</h1>
                 <Menu>
-                {sections.map((task) => (
-                    <SubMenu label={task.title} key={task.title}>
-                        <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${task.title}`} />}>Controle Financeiro</MenuItem>
-                        <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>
-                    </SubMenu>
-                     ))}
+                    {data.sections.map((task) => (
+                        <SubMenu label={task.title} key={task.title}>
+                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${task.title}`} />}>Controle Financeiro</MenuItem>
+                            <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>
+                        </SubMenu>
+                    ))}
                 </Menu>
             </Sidebar>
         </div>
     );
-  };
+}
 
 export default Sidebarr;

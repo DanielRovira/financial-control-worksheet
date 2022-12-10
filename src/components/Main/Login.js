@@ -9,21 +9,21 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
         email: "",
         password: "",
     });
-
     
     useEffect(() => {
-    isLoggedIn ? history("/user") : refreshToken()
-    }, []);
+    isLoggedIn ? history("/main") : refreshToken()
+    }, [isLoggedIn, history, refreshToken]);
 
-    const handleChange = (e) => {
-    setInputs((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+    function handleChange(e) {
+        setInputs((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
   const sendRequest = async () => {
     const res = await axios
-      .post("http://localhost:3001/api/login", {
+      .post("/api/login", {
         email: inputs.email,
         password: inputs.password,
       })
@@ -32,12 +32,12 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     return data;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    sendRequest()
-    .then(() => setIsLoggedIn(true))
-    .then(() => history("/user"));
-  };
+  function handleSubmit(e) {
+        e.preventDefault();
+        sendRequest()
+            .then(() => setIsLoggedIn(true))
+            .then(() => history("/user"));
+    }
 
   return (
     <div>
