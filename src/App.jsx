@@ -41,7 +41,7 @@ const App = () => {
                 <Sidebarr />
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
                     <Routes>
-                        <Route path="/" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
+                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         {/* <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} /> */}
                         <Route path="/user" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />

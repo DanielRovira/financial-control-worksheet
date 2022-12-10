@@ -19,17 +19,17 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     }, []);
 
     function getData() {
-        fetch(`/api/${process.env.REACT_APP_DB}/list`, { method:"GET" })
+        fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
     };
 
     useEffect(() => {
         getData()
-    },[])
+    },[params.taskTitle])
 
     function insertDocument(transaction) {
-        fetch(`/api/${process.env.REACT_APP_DB}/add`,
+        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
@@ -40,7 +40,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     }
 
     function updateDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/update`,
+        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}`,
         {
             method:"PATCH",
             headers: { 'Content-Type': "application/json" },
@@ -51,7 +51,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     }
 
     function deleteDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/delete`,
+        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}`,
         {
             method:"DELETE",
             headers: { 'Content-Type': "application/json" },
