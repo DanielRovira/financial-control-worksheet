@@ -14,7 +14,7 @@ const App = () => {
 
     const refreshToken = async () => {
         const res = await axios
-          .get("http://localhost:3001/api/refresh", {
+          .get("/api/refresh", {
             withCredentials: true,
           })
           .then(localStorage.clear())
