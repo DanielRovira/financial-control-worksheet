@@ -1,15 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ProSidebarProvider } from "react-pro-sidebar";
+import { useEffect, useState } from 'react';
 import GlobalStyle from './components/Financial-control/styles/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet'
 import Sidebarr from './components/Sidebar/Sidebar'
 import Header from "./components/Header";
 import Login from "./components/Login";
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 const App = () => {
-    // const isLoggedIn = localStorage.getItem("isLoggedIn");
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
     const [accName, setAccName] = useState(localStorage.getItem("userName"))
 
@@ -29,7 +28,6 @@ const App = () => {
         }
 
         data.user ? setLogin() : localStorage.clear()
-        // console.log(isLoggedIn)
         return data;
     };
 
@@ -42,7 +40,6 @@ const App = () => {
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
-                        {/* <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} /> */}
                         <Route path="/user" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
                     </Routes>

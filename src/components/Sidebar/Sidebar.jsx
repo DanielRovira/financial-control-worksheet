@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, MenuItem, Sidebar, SubMenu, useProSidebar } from "react-pro-sidebar";
+import { useClickAway } from 'react-use';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {useClickAway} from 'react-use';
 import data from '../../config.json'
 
 
