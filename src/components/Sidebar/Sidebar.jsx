@@ -11,7 +11,7 @@ const Sidebarr = () => {
     const sidebar = useRef(null);
     const { collapseSidebar } = useProSidebar();
 
-    const sections = data.obras
+    const sections = data.sections
     useClickAway(sidebar, collapseSidebar)
     return (
         <div style={{ display: 'flex', height: '100%', position: 'absolute' }}>
