@@ -1,7 +1,7 @@
 import React from 'react';
 import data from '../../config.json'
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 
 function Main() {
     const history = useNavigate();
