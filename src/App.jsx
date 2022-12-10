@@ -3,9 +3,9 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import { useState } from 'react';
 import GlobalStyle from './components/Financial-control/styles/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet'
-import Sidebarr from './components/Sidebar/Sidebar'
-import Header from "./components/Header";
-import Login from "./components/Login";
+import Sidebarr from './components/Main/Sidebar'
+import Header from "./components/Main/Header";
+import Login from "./components/Main/Login";
 import axios from 'axios';
 
 const App = () => {
