@@ -7,7 +7,7 @@ function Main() {
     const history = useNavigate();
     return (
 
-        <div style={{ display: 'grid', justifyContent: 'center', columnGap: '50px', rowGap: '10px' }}>
+        <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '100px' }}>
             {data.sections.map((task) => (
                 <Container key={task.title}>
                     <Button
