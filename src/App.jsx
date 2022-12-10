@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ProSidebarProvider } from "react-pro-sidebar";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import GlobalStyle from './components/Financial-control/styles/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet'
 import Sidebarr from './components/Sidebar/Sidebar'

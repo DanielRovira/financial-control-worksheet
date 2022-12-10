@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import data from '../../config.json'
 
-
 const Sidebarr = () => {
     const sidebar = useRef(null);
     const { collapseSidebar } = useProSidebar();
