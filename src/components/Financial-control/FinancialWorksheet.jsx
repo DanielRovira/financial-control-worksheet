@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
+const FinancialWorksheet = ({ isLoggedIn, refreshToken, sections }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -13,8 +13,14 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     const history = useNavigate();
     const params = useParams();
 
+    const section = sections.some( (section) => {
+        if(section.title === params.taskTitle){
+            return true
+        } } )
+        console.log(section)
+
     useEffect(() => {
-        isLoggedIn ? refreshToken() : history("/")
+        (isLoggedIn && section) ? refreshToken() : history("/")
     }, []);
 
     function getData() {
