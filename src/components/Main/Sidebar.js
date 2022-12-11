@@ -22,11 +22,10 @@ function Sidebarr({ sections }) {
                     onClick={() => collapseSidebar()}
                     size="large"
                     color="inherit"
-                    style={{ marginTop: '60px' }}
+                    style={{ margin: '70px 0 0 15px' }}
                 >
                     <MenuIcon />
                 </IconButton>
-                <h1>Obras</h1>
                 <Menu>
                     {sections.map((section) => (
                         <SubMenu label={section.title} key={section.title}>

@@ -3,7 +3,7 @@ import { ProSidebarProvider } from "react-pro-sidebar";
 import { useEffect, useState } from 'react';
 import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet';
-import Sidebarr from './components/Main/Sidebar';
+import Sidebar from './components/Main/Sidebar';
 import Header from "./components/Main/Header";
 import Login from "./components/Main/Login";
 import Main from "./components/Main/Main";
@@ -50,7 +50,8 @@ const App = () => {
     return (
         <ProSidebarProvider>
             <Router>
-                <Sidebarr sections={sections} />
+                {isLoggedIn ? <Sidebar sections={sections} /> : ""}
+                
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
