@@ -13,12 +13,6 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     const history = useNavigate();
     const params = useParams();
 
-    function getSections() {
-        fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
-        .then(response => response.json())
-        .then((data) => { data.filter((aew) => aew.title === params.taskTitle)[0] ? void(0) : history("/") })
-    }
-
     function getData() {
         fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
         .then(response => response.json())
@@ -26,10 +20,22 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     }
 
     useEffect(() => {
+        function getSections() {
+            fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
+            .then(response => response.json())
+            .then((data) => { data.filter((aew) => aew.title === params.taskTitle)[0] ? void(0) : history("/") })
+        }
+
+        function getData() {
+            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
+            .then(response => response.json())
+            .then(data => setTransactionsList(data))
+        }
+
         isLoggedIn ? refreshToken() : history("/")
         getSections()
         getData()
-    },[params.taskTitle])
+    },[params.taskTitle, isLoggedIn, refreshToken, history]) 
 
     function insertDocument(transaction) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
