@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, refreshToken, sections }) => {
+const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -13,23 +13,21 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, sections }) => {
     const history = useNavigate();
     const params = useParams();
 
-    const section = sections.some( (section) => {
-        if(section.title === params.taskTitle){
-            return true
-        } } )
-        console.log(section)
-
-    useEffect(() => {
-        (isLoggedIn && section) ? refreshToken() : history("/")
-    }, []);
+    function getSections() {
+        fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
+        .then(response => response.json())
+        .then((data) => { data.filter((aew) => aew.title === params.taskTitle)[0] ? void(0) : history("/") })
+    }
 
     function getData() {
         fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
-    };
+    }
 
     useEffect(() => {
+        isLoggedIn ? refreshToken() : history("/")
+        getSections()
         getData()
     },[params.taskTitle])
 
