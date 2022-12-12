@@ -14,7 +14,6 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "http-proxy-middleware": "^2.0.6",
-    "mongoose": "^6.8.0",
     "react": "^18.2.0",
     "react-currency-input-field": "^3.6.9",
     "react-dom": "^18.2.0",
