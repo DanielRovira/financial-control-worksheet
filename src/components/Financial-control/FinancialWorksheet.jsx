@@ -5,11 +5,12 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
+const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
+    const [sectionName, setSectionName] = useState([]);
     const history = useNavigate();
     const params = useParams();
 
@@ -19,20 +20,15 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
         .then(data => setTransactionsList(data))
     }
 
+    function getSections() {
+        fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
+        .then(response => response.json())
+        .then((data) => { data.filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/") })
+    }
+
     useEffect(() => {
-        function getSections() {
-            fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
-            .then(response => response.json())
-            .then((data) => { data.filter((aew) => aew.title === params.taskTitle)[0] ? void(0) : history("/") })
-        }
-
-        function getData() {
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
-            .then(response => response.json())
-            .then(data => setTransactionsList(data))
-        }
-
         isLoggedIn ? refreshToken() : history("/")
+        setType("Controle Financeiro")
         getSections()
         getData()
     },[params.taskTitle, isLoggedIn, refreshToken, history]) 
@@ -91,7 +87,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken }) => {
 
     return (
         <>
-            <Header />
+            <Header sectionName={sectionName} />
             <Resume income={income} expense={expense} total={total} />
             <Form insertDocument={insertDocument} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />

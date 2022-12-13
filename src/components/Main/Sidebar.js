@@ -5,7 +5,7 @@ import { useClickAway } from 'react-use';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-function Sidebarr({ sections }) {
+function Sidebarr({ sections, accName }) {
     const sidebar = useRef(null);
     const { collapseSidebar } = useProSidebar();
 
@@ -14,7 +14,7 @@ function Sidebarr({ sections }) {
         <div style={{ display: 'flex', height: '100%', position: 'absolute' }}>
             <Sidebar
                 ref={sidebar}
-                defaultCollapsed
+                // defaultCollapsed
                 collapsedWidth="80px"
                 backgroundColor="white"
             >
@@ -28,12 +28,15 @@ function Sidebarr({ sections }) {
                 </IconButton>
                 <Menu>
                     {sections.map((section) => (
-                        <SubMenu label={section.title} key={section.title}>
+                        <SubMenu label={section.name} key={section.title} title={section.name}>
                             <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>Controle Financeiro</MenuItem>
                             <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>
                         </SubMenu>
                     ))}
                 </Menu>
+                <div style={{height: '100%', maxHeight: '50vh', display: 'flex', alignItems: 'flex-end', paddingLeft: '10px' }}>
+                    <h3>{accName}</h3>
+                </div>
             </Sidebar>
         </div>
     );

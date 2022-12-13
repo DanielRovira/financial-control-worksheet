@@ -14,6 +14,7 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
     const [accName, setAccName] = useState(localStorage.getItem("userName"));
     const [sections, setSections] = useState([]);
+    const [type, setType] = useState();
 
     function getData() {
         fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
@@ -50,12 +51,12 @@ const App = () => {
     return (
         <ProSidebarProvider>
             <Router>
-                {isLoggedIn ? <Sidebar sections={sections} /> : ""}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} />
+                {isLoggedIn ? <Sidebar sections={sections} accName={accName} /> : ""}
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} type={type} setType={setType} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/main" element={<Main sections={sections} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} setType={setType} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

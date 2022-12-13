@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName, type, setType }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
     const res = await axios.post("/api/logout", null, {
@@ -22,6 +22,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
             .then(() => localStorage.clear())
             .then(() => setAccName(null))
             .then(() => setIsLoggedIn(false))
+            .then(() => setType(""))
             .then(() => history("/"));
     };
 
@@ -29,7 +30,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName }) => {
         <div>
             <AppBar position="sticky" style={{ background: "teal" , filter:"grayscale(50%)" }}>
                 <Toolbar>
-                <h1>{accName}</h1>
+                {/* <h1>{accName}</h1> */}
+                <h1 style={{textAlign: 'center'}} >{type}</h1>
                     <Typography variant="h3"></Typography>
                     <Box sx={{ marginLeft: "auto" }}>
                         {isLoggedIn ? (
