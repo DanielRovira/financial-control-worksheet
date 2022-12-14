@@ -15,13 +15,13 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     const params = useParams();
 
     function getData() {
-        fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
     }
 
     function getSections() {
-        fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
         .then(response => response.json())
         .then((data) => { data.filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/") })
     }
@@ -34,7 +34,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     },[params.taskTitle, isLoggedIn, refreshToken, history]) 
 
     function insertDocument(transaction) {
-        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
@@ -45,7 +45,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     }
 
     function updateDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}`,
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}`,
         {
             method:"PATCH",
             headers: { 'Content-Type': "application/json" },
@@ -56,7 +56,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     }
 
     function deleteDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}`,
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}`,
         {
             method:"DELETE",
             headers: { 'Content-Type': "application/json" },

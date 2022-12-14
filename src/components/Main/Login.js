@@ -23,7 +23,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
 
   const sendRequest = async () => {
     const res = await axios
-      .post("/api/login", {
+      .post(`${process.env.REACT_APP_BACKEND}/api/login`, {
         email: inputs.email,
         password: inputs.password,
       })

@@ -17,7 +17,7 @@ const App = () => {
     const [type, setType] = useState();
 
     function getData() {
-        fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
         .then(response => response.json())
         .then(data => setSections(data))
     }
@@ -29,7 +29,7 @@ const App = () => {
 
     const refreshToken = async () => {
         const res = await axios
-          .get("/api/refresh", {
+          .get(`${process.env.REACT_APP_BACKEND}/api/refresh`, {
             withCredentials: false,
           })
           .then(localStorage.clear())
