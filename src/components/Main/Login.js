@@ -25,8 +25,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     const res = await axios
       .post(`${process.env.REACT_APP_BACKEND}/api/login`, {
         withCredentials: false,
+        data: {
         email: inputs.email,
-        password: inputs.password,
+        password: inputs.password,}
       })
       .catch((err) => console.log(err));
     const data = await res.data;
