@@ -27,10 +27,8 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     }
 
     useEffect(() => {
-        isLoggedIn ? refreshToken() : history("/")
-        setType("Controle Financeiro")
-        getSections()
-        getData()
+        const loggedIn = () => {setType("Controle Financeiro"); getSections(); getData()}
+        isLoggedIn ? loggedIn() : history("/")
     },[params.taskTitle, isLoggedIn, refreshToken, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
