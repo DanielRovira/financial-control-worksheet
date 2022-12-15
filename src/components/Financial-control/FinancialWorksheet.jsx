@@ -15,13 +15,13 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     const params = useParams();
 
     function getData() {
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET" })
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
         .then(response => response.json())
         .then(data => setTransactionsList(data))
     }
 
     function getSections() {
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
         .then(response => response.json())
         .then((data) => { data.filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/") })
     }
@@ -31,13 +31,14 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
         setType("Controle Financeiro")
         getSections()
         getData()
-    },[params.taskTitle, isLoggedIn, refreshToken, history]) 
+    },[params.taskTitle, isLoggedIn, refreshToken, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
+            credentials: "include",
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
@@ -49,6 +50,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
         {
             method:"PATCH",
             headers: { 'Content-Type': "application/json" },
+            credentials: "include",
             body: JSON.stringify(item)
         })
         .then(response => response.json())
@@ -60,6 +62,7 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
         {
             method:"DELETE",
             headers: { 'Content-Type': "application/json" },
+            credentials: "include",
             body: JSON.stringify(item)
         })
         .then(() => getData())

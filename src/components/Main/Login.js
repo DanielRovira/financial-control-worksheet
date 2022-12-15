@@ -11,7 +11,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     });
     
     useEffect(() => {
-    isLoggedIn ? history("/main") : refreshToken()
+    isLoggedIn ? history("/main") : void(0)
     }, [isLoggedIn, history, refreshToken]);
 
     function handleChange(e) {
@@ -24,10 +24,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
   const sendRequest = async () => {
     const res = await axios
       .post(`${process.env.REACT_APP_BACKEND}/api/login`, {
-        data: {
         email: inputs.email,
-        password: inputs.password,},
-        withCredentials: false,
+        password: inputs.password,
       })
       .catch((err) => console.log(err));
     const data = await res.data;

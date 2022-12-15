@@ -1,7 +1,7 @@
 {
   "name": "financial-control-worksheet",
   "version": "0.1.0",
-  "homepage": "https://financial-control.onrender.com",
+  "homepage": "https://danielrovira.github.io/financial-control-worksheet",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -13,7 +13,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
-    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-currency-input-field": "^3.6.9",
     "react-dom": "^18.2.0",

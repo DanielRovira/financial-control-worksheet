@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName, type, setType }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
-    const res = await axios.post("/api/logout", null, {
+    const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/logout`, null, {
         withCredentials: true,
     });
     if (res.status === 200) {

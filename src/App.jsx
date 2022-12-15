@@ -16,21 +16,21 @@ const App = () => {
     const [sections, setSections] = useState([]);
     const [type, setType] = useState();
 
-    function getData() {
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET" })
-        .then(response => response.json())
-        .then(data => setSections(data))
-    }
-
     useEffect(() => {
         setSections([])
-        getData()
+        isLoggedIn ? refreshToken() : void(0)
     },[isLoggedIn])
 
     const refreshToken = async () => {
+        function getData() {
+            fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`, { method:"GET", credentials: "include" })
+            .then(response => response.json())
+            .then(data => setSections(data))
+        }
+        getData()
         const res = await axios
           .get(`${process.env.REACT_APP_BACKEND}/api/refresh`, {
-            withCredentials: false,
+            withCredentials: true,
           })
           .then(localStorage.clear())
           .catch((err) => console.log(err));
@@ -45,8 +45,6 @@ const App = () => {
         data.user ? setLogin() : localStorage.clear()
         return data;
     };
-
-    refreshToken()
 
     return (
         <ProSidebarProvider>
