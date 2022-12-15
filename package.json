@@ -1,7 +1,7 @@
 {
   "name": "financial-control-worksheet",
   "version": "0.1.0",
-  "homepage": "https://danielrovira.github.io/financial-control-worksheet",
+  "homepage": "http://www.constem.net",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -29,7 +29,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "start": "set PORT=80 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
