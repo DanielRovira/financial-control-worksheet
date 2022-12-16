@@ -23,27 +23,31 @@ const App = () => {
 
     const refreshToken = async () => {
         function getData() {
-            fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`, { method:"GET", credentials: "include" })
+            fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`,
+            {
+                method:"GET",
+                credentials: "include"
+            })
             .then(response => response.json())
             .then(data => setSections(data))
         }
         getData()
-        const res = await axios
-          .get(`${process.env.REACT_APP_BACKEND}/api/refresh`, {
-            withCredentials: true,
-          })
-          .then(localStorage.clear())
-          .catch((err) => console.log(err));
-    
-        const data = await res.data;
+        const res = await
+          fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
+          {
+            method:"GET",
+            credentials: "include",
+        })
+        .then(response => response.json())
+        .then(localStorage.clear())
+        
         const setLogin = () => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true))
-            localStorage.setItem("userName", res.data.user.name)
-            setAccName(res.data.user.name)
+            localStorage.setItem("userName", res.user.name)
+            setAccName(res.user.name)
         }
 
-        data.user ? setLogin() : localStorage.clear()
-        return data;
+        res.user ? setLogin() : localStorage.clear()
     };
 
     return (

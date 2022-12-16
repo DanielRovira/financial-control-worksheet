@@ -22,14 +22,17 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     }
 
   const sendRequest = async () => {
-    const res = await axios
-      .post(`${process.env.REACT_APP_BACKEND}/api/login`, {
-        email: inputs.email,
-        password: inputs.password,
-      })
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
+    await fetch(`${process.env.REACT_APP_BACKEND}/api/login`,
+    {
+        method:"POST",
+        headers: { 'Content-Type': "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+            email: inputs.email,
+            password: inputs.password,
+          })
+    })
+    .then(response => response.json())
   };
 
   function handleSubmit(e) {
