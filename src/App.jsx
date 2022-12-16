@@ -7,8 +7,6 @@ import Sidebar from './components/Main/Sidebar';
 import Header from "./components/Main/Header";
 import Login from "./components/Main/Login";
 import Main from "./components/Main/Main";
-import axios from 'axios';
-
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));

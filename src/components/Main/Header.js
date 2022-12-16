@@ -1,15 +1,17 @@
 import { AppBar, Box, Tab, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-axios.defaults.withCredentials = true;
 
 const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName, type, setType }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
-    const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/logout`, null, {
-        withCredentials: true,
-    });
+        const res = await fetch(`${process.env.REACT_APP_BACKEND}/api/logout`,
+        {
+            method:"POST",
+            headers: { 'Content-Type': "application/json" },
+            credentials: "include"
+        })
+        .then(response => response.json())
     if (res.status === 200) {
         return res;
     }

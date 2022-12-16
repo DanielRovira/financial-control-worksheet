@@ -1,6 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
