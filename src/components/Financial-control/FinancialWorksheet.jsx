@@ -21,7 +21,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
             localStorage.clear()
             setIsLoggedIn(null)
             setAccName(null)
-            history("/login")
+            history("/")
         }
     }
 
