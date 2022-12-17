@@ -8,6 +8,7 @@ import Header from "./components/Main/Header";
 import Login from "./components/Main/Login";
 import Main from "./components/Main/Main";
 
+
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
     const [accName, setAccName] = useState(localStorage.getItem("userName"));
@@ -31,11 +32,11 @@ const App = () => {
         }
         getData()
         const res = await
-          fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
-          {
-            method:"GET",
-            credentials: "include",
-        })
+            fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
+            {
+                method:"GET",
+                credentials: "include",
+            })
         .then(response => response.json())
         .then(localStorage.clear())
         
@@ -55,7 +56,7 @@ const App = () => {
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} type={type} setType={setType} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
-                        <Route path="/main" element={<Main sections={sections} />} />
+                        <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} setType={setType} />} />
                     </Routes>
             </Router>    

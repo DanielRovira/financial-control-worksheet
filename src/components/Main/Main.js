@@ -1,13 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container } from "@mui/material";
+import { useEffect } from 'react';
 
-function Main({ sections }) {
+function Main({ sections, isLoggedIn }) {
     const history = useNavigate();
-    return (
+    useEffect(() => {
+        isLoggedIn ? void(0) : history("/")
+    }, [isLoggedIn])
 
+    return (
         <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '100px' }}>
-            {sections.map((section) => (
+            {Array.from(sections).map((section) => (
                 <Container key={section.title}>
                     <Button
                     variant="contained"

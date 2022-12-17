@@ -27,7 +27,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
                 </C.Tr>
             </C.Thead>
             <C.Tbody>
-                {itens?.map((item, index) => (
+                {Array.from(itens)?.map((item, index) => (
                     <GridItem key={item._id} item={item} onDelete={deleteDocument} updateDocument={updateDocument} />
                 ))}
             </C.Tbody>

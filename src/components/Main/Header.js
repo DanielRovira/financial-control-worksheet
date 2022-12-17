@@ -20,8 +20,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName, type, setType 
     };
 
     const handleLogout = () => {
+        localStorage.clear();
         sendLogoutReq()
-            .then(() => localStorage.clear())
             .then(() => setAccName(null))
             .then(() => setIsLoggedIn(false))
             .then(() => setType(""))

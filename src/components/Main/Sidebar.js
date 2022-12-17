@@ -27,7 +27,7 @@ function Sidebarr({ sections, accName }) {
                     <MenuIcon />
                 </IconButton>
                 <Menu>
-                    {sections.map((section) => (
+                    {Array.from(sections).map((section) => (
                         <SubMenu label={section.name} key={section.title} title={section.name}>
                             <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>Controle Financeiro</MenuItem>
                             <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>

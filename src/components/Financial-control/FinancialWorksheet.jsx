@@ -23,13 +23,13 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     function getSections() {
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
         .then(response => response.json())
-        .then((data) => { data.filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/") })
+        .then((data) => data ? (Array.from(data).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/")) : null(0))
     }
 
     useEffect(() => {
         const loggedIn = () => {setType("Controle Financeiro"); getSections(); getData()}
         isLoggedIn ? loggedIn() : history("/")
-    },[params.taskTitle, isLoggedIn, refreshToken, history]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
@@ -68,11 +68,11 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
 
 
     useEffect(() => {
-        const amountExpense = transactionsList
+        const amountExpense = Array.from(transactionsList)
             .filter((item) => item.expense)
             .map((transaction) => Number(transaction.amount));
 
-        const amountIncome = transactionsList
+        const amountIncome = Array.from(transactionsList)
             .filter((item) => !item.expense)
             .map((transaction) => Number(transaction.amount));
         
