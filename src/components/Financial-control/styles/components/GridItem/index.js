@@ -2,10 +2,9 @@ import React, { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
-import data from '../../../../../config.json'
 import {useClickAway} from 'react-use';
 
-const GridItem = ({ item, onDelete, updateDocument }) => {
+const GridItem = ({ item, onDelete, updateDocument, categories }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -15,6 +14,7 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
     const ref = useRef(null);
+    let provenience = Array.from(categories || []).filter(item => item.type === "provenience")
 
     const handleAmountType = (value) => {
         setAmountValue(value)
@@ -72,7 +72,7 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
                         value={provTemp}
                         onChange={(e) => setProvTemp(e.target.value)}
                     >
-                        {Object.keys(data.provenience).map(element => <option key={element} value={element}>{element}</option>)}
+                        {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 </C.Td>
                 <C.Td>

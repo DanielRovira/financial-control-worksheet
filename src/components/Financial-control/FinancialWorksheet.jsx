@@ -11,6 +11,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
     const [sectionName, setSectionName] = useState([]);
+    const [categories, setCategories] = useState([]);
     const history = useNavigate();
     const params = useParams();
 
@@ -34,18 +35,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
         !res.status ? localStorage.clear() : void(0)
     }
 
-    // function getSections() {
-    //     fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
-    //     .then(response => response.json())
-    //     .then((data) => data ? (Array.from(data).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/")) : null(0))
-    // }
-
-//    function getData() {
-//         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
-//         .then(response => response.json())
-//         .then(data => setTransactionsList(data))}
-
-    const getSections = async () => {
+    const getSectionName = async () => {
         pingAPI()
         const res = await
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
@@ -55,10 +45,15 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
         res ? (Array.from(res.post || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res.post) : history("/")) : null(0)
     }
 
-
+    const getCategories = async () => {
+        const res = await
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/categories`, { method:"GET", credentials: "include" })
+        .then(response => response.json())
+        setCategories(res.post)
+    }
 
     useEffect(() => {
-        const loggedIn = () => {setType("Controle Financeiro"); getSections(); getData()}
+        const loggedIn = () => {setType("Controle Financeiro"); getSectionName(); getCategories(); getData()}
         isLoggedIn ? loggedIn() : history("/")
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -97,7 +92,6 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
         .then(() => getData())
     }
 
-
     useEffect(() => {
         const amountExpense = Array.from(transactionsList)
             .filter((item) => item.expense)
@@ -121,8 +115,8 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
         <>
             <Header sectionName={sectionName} />
             <Resume income={income} expense={expense} total={total} />
-            <Form insertDocument={insertDocument} transactionsList={transactionsList} setTransactionsList={setTransactionsList} />
-            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />
+            <Form insertDocument={insertDocument} categories={categories} />
+            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} categories={categories} />
         </>
     );
 };

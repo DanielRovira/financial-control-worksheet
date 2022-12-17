@@ -3,7 +3,7 @@ import GridItem from '../GridItem'
 import * as C from './styles'
 
 
-const Grid = ({ rawData, deleteDocument, updateDocument }) => {
+const Grid = ({ rawData, deleteDocument, updateDocument, categories }) => {
 
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
@@ -28,7 +28,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
             </C.Thead>
             <C.Tbody>
                 {Array.from(itens)?.map((item, index) => (
-                    <GridItem key={item._id} item={item} onDelete={deleteDocument} updateDocument={updateDocument} />
+                    <GridItem key={item._id} item={item} onDelete={deleteDocument} updateDocument={updateDocument} categories={categories}  />
                 ))}
             </C.Tbody>
         </C.Table>
