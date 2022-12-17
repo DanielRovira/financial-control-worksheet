@@ -51,11 +51,12 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
                 getCategories(); 
             }
         }
+        setType("Controle Financeiro")
         pingAPI();
     }
 
     useEffect(() => {
-        const loggedIn = () => {setType("Controle Financeiro"); getData()}
+        const loggedIn = () => {getData()}
         isLoggedIn ? loggedIn() : history("/")
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 

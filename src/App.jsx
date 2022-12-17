@@ -17,8 +17,7 @@ const App = () => {
 
     useEffect(() => {
         setSections([])
-        setType()
-        isLoggedIn ? refreshToken() : void(0)
+        isLoggedIn ? refreshToken() : setType()
     },[isLoggedIn])
 
     const refreshToken = async () => {
