@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType }) => {
+const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, setAccName }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -13,6 +13,17 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType }
     const [sectionName, setSectionName] = useState([]);
     const history = useNavigate();
     const params = useParams();
+
+    const pingAPI = async () => {
+        const res = await
+        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
+        if (res.status === 504) {
+            localStorage.clear()
+            setIsLoggedIn(null)
+            setAccName(null)
+            history("/login")
+        }
+    }
 
     const getData = async () => {
         const res = await
@@ -35,10 +46,11 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType }
 //         .then(data => setTransactionsList(data))}
 
     const getSections = async () => {
+        pingAPI()
         const res = await
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
         .then(response => response.json())
-        setIsLoggedIn(res.status)
+        setIsLoggedIn(res.status || false)
         !res.status ? localStorage.clear() : void(0)
         res ? (Array.from(res.post || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res.post) : history("/")) : null(0)
     }
