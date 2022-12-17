@@ -20,7 +20,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType }
         .then(response => response.json())
         setTransactionsList(res.post || [])
         setIsLoggedIn(res.status || false)
-        !res.status ? localStorage.setItem("isLoggedIn", JSON.stringify(false)) : void(0)
+        !res.status ? localStorage.clear() : void(0)
     }
 
     // function getSections() {
@@ -39,8 +39,8 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType }
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
         .then(response => response.json())
         setIsLoggedIn(res.status)
-        !res.status ? localStorage.setItem("isLoggedIn", JSON.stringify(false)) : void(0)
-        res ? (Array.from(res.post).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res.post) : history("/")) : null(0)
+        !res.status ? localStorage.clear() : void(0)
+        res ? (Array.from(res.post || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res.post) : history("/")) : null(0)
     }
 
 

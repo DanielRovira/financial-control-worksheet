@@ -17,6 +17,7 @@ const App = () => {
 
     useEffect(() => {
         setSections([])
+        setType()
         isLoggedIn ? refreshToken() : void(0)
     },[isLoggedIn])
 
@@ -39,7 +40,7 @@ const App = () => {
             })
         .then(response => response.json())
         .then(localStorage.clear())
-        setIsLoggedIn(res.status)
+        setIsLoggedIn(res.status || false)
         const setLogin = () => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true))
             localStorage.setItem("userName", res.user.name)
