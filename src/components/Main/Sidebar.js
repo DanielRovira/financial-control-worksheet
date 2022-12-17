@@ -8,7 +8,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 function Sidebarr({ sections, accName }) {
     const sidebar = useRef(null);
     const { collapseSidebar } = useProSidebar();
-
     useClickAway(sidebar, collapseSidebar);
     return (
         <div style={{ display: 'flex', height: '100%', position: 'absolute' }}>

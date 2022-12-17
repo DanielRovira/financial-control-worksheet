@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
+const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -14,17 +14,36 @@ const FinancialWorksheet = ({ isLoggedIn, refreshToken, setType }) => {
     const history = useNavigate();
     const params = useParams();
 
-    function getData() {
+    const getData = async () => {
+        const res = await
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
         .then(response => response.json())
-        .then(data => setTransactionsList(data))
+        setTransactionsList(res.post || [])
+        setIsLoggedIn(res.status || false)
+        !res.status ? localStorage.setItem("isLoggedIn", JSON.stringify(false)) : void(0)
     }
 
-    function getSections() {
+    // function getSections() {
+    //     fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
+    //     .then(response => response.json())
+    //     .then((data) => data ? (Array.from(data).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/")) : null(0))
+    // }
+
+//    function getData() {
+//         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
+//         .then(response => response.json())
+//         .then(data => setTransactionsList(data))}
+
+    const getSections = async () => {
+        const res = await
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
         .then(response => response.json())
-        .then((data) => data ? (Array.from(data).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(data) : history("/")) : null(0))
+        setIsLoggedIn(res.status)
+        !res.status ? localStorage.setItem("isLoggedIn", JSON.stringify(false)) : void(0)
+        res ? (Array.from(res.post).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res.post) : history("/")) : null(0)
     }
+
+
 
     useEffect(() => {
         const loggedIn = () => {setType("Controle Financeiro"); getSections(); getData()}

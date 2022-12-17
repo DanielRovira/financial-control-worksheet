@@ -28,7 +28,7 @@ const App = () => {
                 credentials: "include"
             })
             .then(response => response.json())
-            .then(data => setSections(data))
+            .then(data => setSections(data.post || []))
         }
         getData()
         const res = await
@@ -39,7 +39,7 @@ const App = () => {
             })
         .then(response => response.json())
         .then(localStorage.clear())
-        
+        setIsLoggedIn(res.status)
         const setLogin = () => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true))
             localStorage.setItem("userName", res.user.name)
@@ -57,7 +57,7 @@ const App = () => {
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} refreshToken={refreshToken} setType={setType} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} setType={setType} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />
