@@ -65,10 +65,7 @@ const Form = ({ insertDocument, categories }) => {
                         onChange={(e) => setProv(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                     >
-                        {/* {Object.keys(data.provenience).map(element => <option key={element} value={element}>{element}</option>)} */}
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
-
-                        {/* {Object.keys(cat.name).map(element => <option key={element._id} value={element}>{element}</option>)} */}
                     </C.Select>
                 </C.InputContent>
                 <C.InputContent>
