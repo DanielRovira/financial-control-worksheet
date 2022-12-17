@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, setAccName }) => {
+const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -15,45 +15,47 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, refreshToken, setType, 
     const history = useNavigate();
     const params = useParams();
 
-    const pingAPI = async () => {
-        const res = await
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
-        if (res.status === 504) {
-            localStorage.clear()
-            setIsLoggedIn(null)
-            setAccName(null)
-            history("/")
+    const getData = () => {
+        const getSheetData = async () => {
+            const res = await
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
+            .then(response => response.json())
+            setTransactionsList(res || [])
         }
-    }
 
-    const getData = async () => {
-        const res = await
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
-        .then(response => response.json())
-        setTransactionsList(res.post || [])
-        setIsLoggedIn(res.status || false)
-        !res.status ? localStorage.clear() : void(0)
-    }
+        const getSectionName = async () => {
+            const res = await
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
+            .then(response => response.json())
+            res ? (Array.from(res || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res) : history("/")) : null(0)
+        }
 
-    const getSectionName = async () => {
-        pingAPI()
-        const res = await
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
-        .then(response => response.json())
-        setIsLoggedIn(res.status || false)
-        !res.status ? localStorage.clear() : void(0)
-        res ? (Array.from(res.post || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res.post) : history("/")) : null(0)
-    }
+        const getCategories = async () => {
+            const res = await
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/categories`, { method:"GET", credentials: "include" })
+            .then(response => response.json())
+            setCategories(res)
+        }
 
-    const getCategories = async () => {
-        const res = await
-        fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/categories`, { method:"GET", credentials: "include" })
-        .then(response => response.json())
-        setCategories(res.post)
+        const pingAPI = async () => {
+            const res = await
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
+            if (res.status !== 200) {
+                localStorage.clear()
+                setIsLoggedIn(false)
+                setAccName(null)
+                history("/")
+            } else {
+                getSheetData();
+                getSectionName();
+                getCategories(); 
+            }
+        }
+        pingAPI();
     }
 
     useEffect(() => {
-        const loggedIn = () => {setType("Controle Financeiro"); getSectionName(); getCategories(); getData()}
+        const loggedIn = () => {setType("Controle Financeiro"); getData()}
         isLoggedIn ? loggedIn() : history("/")
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 

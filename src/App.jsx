@@ -22,16 +22,16 @@ const App = () => {
     },[isLoggedIn])
 
     const refreshToken = async () => {
-        function getData() {
+        function getSections() {
             fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`,
             {
                 method:"GET",
                 credentials: "include"
             })
             .then(response => response.json())
-            .then(data => setSections(data.post || []))
+            .then(data => setSections(data || []))
         }
-        getData()
+
         const res = await
             fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
             {
@@ -40,13 +40,15 @@ const App = () => {
             })
         .then(response => response.json())
         .then(localStorage.clear())
-        setIsLoggedIn(res.status || false)
+
         const setLogin = () => {
             localStorage.setItem("isLoggedIn", JSON.stringify(true))
             localStorage.setItem("userName", res.user.name)
             setAccName(res.user.name)
         }
-
+        
+        getSections()
+        setIsLoggedIn(res.status || false)
         res.user ? setLogin() : localStorage.clear()
     };
 
@@ -58,7 +60,7 @@ const App = () => {
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} setType={setType} setAccName={setAccName} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />
