@@ -1,10 +1,9 @@
 import React from 'react';
-import GridItem from '../GridItem'
-import * as C from './styles'
-
+import GridItem from '../GridItem';
+import * as C from './styles';
+const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Grid = ({ rawData, deleteDocument, updateDocument, categories }) => {
-
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
         var c = new Date(a.date);
@@ -16,14 +15,14 @@ const Grid = ({ rawData, deleteDocument, updateDocument, categories }) => {
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th width={9}>Data</C.Th>
-                    <C.Th width={15} alignCenter>Tipo</C.Th>
-                    <C.Th width={15}>Proveniência</C.Th>
-                    <C.Th width={15}>Fornecedor</C.Th>
-                    <C.Th width={15}>Descrição</C.Th>
-                    <C.Th width={15}>Valor</C.Th>
-                    <C.Th width={5} alignCenter>Editar</C.Th>
-                    <C.Th width={1} alignCenter>Deletar</C.Th>
+                    <C.Th width={9}>{lang.date}</C.Th>
+                    <C.Th width={15} alignCenter>{lang.type}</C.Th>
+                    <C.Th width={15}>{lang.source}</C.Th>
+                    <C.Th width={15}>{lang.supplier}</C.Th>
+                    <C.Th width={15}>{lang.description}</C.Th>
+                    <C.Th width={15}>{lang.value}</C.Th>
+                    <C.Th width={5} alignCenter>{lang.edit}</C.Th>
+                    <C.Th width={1} alignCenter>{lang.delete}</C.Th>
                 </C.Tr>
             </C.Thead>
             <C.Tbody>

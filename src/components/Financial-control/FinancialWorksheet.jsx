@@ -4,6 +4,7 @@ import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
     const [transactionsList, setTransactionsList] = useState([]);
@@ -51,7 +52,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
                 getCategories(); 
             }
         }
-        setType("Controle Financeiro")
+        setType(lang.financialControl)
         pingAPI();
     }
 

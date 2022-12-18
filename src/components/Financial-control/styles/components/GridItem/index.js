@@ -3,6 +3,7 @@ import * as C from './styles'
 import * as D from '../Form/styles'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
+const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const GridItem = ({ item, onDelete, updateDocument, categories }) => {
     const [isActive, setActive] = useState(false);
@@ -25,10 +26,10 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
 
     const toggleEdit = () => {
         if (descTemp === "" || amountTemp === "" || dateTemp === "") {
-            alert("Informe todos os campos!");
+            alert(lang.alert01);
             return;
         }   else if (amountTemp.toString().replace(/,/g, '.') < 0.01) {
-            alert("O valor tem que ser positivo");
+            alert(lang.alert02);
             return;  
         }
 
@@ -60,11 +61,11 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                 </C.Td>
                 <C.Td alignCenter>
                     <D.Select
-                        value={expenseTemp ? "Saída" : "Entrada"}
-                        onChange={() => setExpenseTemp(!item.expense)}
+                        value={expenseTemp ? lang.expense : lang.entry}
+                        onChange={() => setExpenseTemp(!expenseTemp)}
                     >
-                        <option value="Entrada">Entrada</option>
-                        <option value="Saída">Saída</option>
+                        <option value={lang.entry}>{lang.entry}</option>
+                        <option value={lang.expense}>{lang.expense}</option>
                     </D.Select>
                 </C.Td>
                 <C.Td>
@@ -78,22 +79,22 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                 <C.Td>
                     <D.Input
                         value={fornTemp}
-                        placeholder="Inserir fornecedor"
+                        placeholder={`${lang.placeholder} ${lang.supplier}`}
                         onChange={(e) => setFornTemp(e.target.value)}
                     />
                 </C.Td>
                 <C.Td>
                     <D.Input
                         value={descTemp}
-                        placeholder="Inserir descrição"
+                        placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDescTemp(e.target.value)}
                     />
                 </C.Td>
                 <C.Td>
                     <D.Currency
                         value={amountValue}
-                        prefix="R$ "
-                        placeholder="R$ 0,00"
+                        prefix={lang.valuePrefix}
+                        placeholder={lang.valuePlaceholder}
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"

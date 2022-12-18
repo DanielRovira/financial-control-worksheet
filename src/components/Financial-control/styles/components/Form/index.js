@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import * as C from './styles';
-// import lang from '../../../../Language/pt_BR.json'
+const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ insertDocument, categories }) => {
-    const lang = require(`../../../../Language/${process.env.REACT_APP_LANG}.json`)
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
@@ -15,10 +14,10 @@ const Form = ({ insertDocument, categories }) => {
 
     const handleSave = () => {
         if (!desc || !amount || !date) {
-            alert("Informe todos os campos!");
+            alert(lang.alert01);
             return;
         }   else if (amount.replace(/,/g, '.') < 0.01) {
-            alert("O valor tem que ser positivo");
+            alert(lang.alert02);
             return;  
         }
         
@@ -74,7 +73,7 @@ const Form = ({ insertDocument, categories }) => {
                     <C.Label>{lang.supplier}</C.Label>
                     <C.Input
                         value={forn}
-                        placeholder="Inserir fornecedor"
+                        placeholder={`${lang.placeholder} ${lang.supplier}`}
                         onChange={(e) => setForn(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />
@@ -83,7 +82,7 @@ const Form = ({ insertDocument, categories }) => {
                     <C.Label>{lang.description}</C.Label>
                     <C.Input
                         value={desc}
-                        placeholder="Inserir descrição"
+                        placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDesc(e.target.value)}
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />
@@ -92,8 +91,8 @@ const Form = ({ insertDocument, categories }) => {
                     <C.Label>{lang.value}</C.Label>
                     <C.Currency
                         value={amount}
-                        prefix="R$ "
-                        placeholder="R$ 0,00"
+                        prefix={lang.valuePrefix}
+                        placeholder={lang.valuePlaceholder}
                         allowDecimals
                         disableAbbreviations
                         decimalScale="2"

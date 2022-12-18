@@ -4,6 +4,7 @@ import { Menu, MenuItem, Sidebar, SubMenu, useProSidebar } from "react-pro-sideb
 import { useClickAway } from 'react-use';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 function Sidebarr({ sections, accName }) {
     const sidebar = useRef(null);
@@ -28,8 +29,8 @@ function Sidebarr({ sections, accName }) {
                 <Menu>
                     {Array.from(sections).map((section) => (
                         <SubMenu label={section.name} key={section.title} title={section.name}>
-                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>Controle Financeiro</MenuItem>
-                            <MenuItem routerLink={<Link to="/" />}>Pagamentos a fazer</MenuItem>
+                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
+                            <MenuItem routerLink={<Link to="/" />}>{lang.todoPayments}</MenuItem>
                         </SubMenu>
                     ))}
                 </Menu>
