@@ -2,21 +2,16 @@ import { AppBar, Box, Tab, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ isLoggedIn, setIsLoggedIn, accName, setAccName, type, setType }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, type, setType }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
-        const res = await fetch(`${process.env.REACT_APP_BACKEND}/api/logout`,
+        await fetch(`${process.env.REACT_APP_BACKEND}/api/logout`,
         {
             method:"POST",
             headers: { 'Content-Type': "application/json" },
             credentials: "include"
         })
         .then(response => response.json())
-    if (res.status === 200) {
-        return res;
-    }
-
-    return new Error("Unable TO Logout. Please try again");
     };
 
     const handleLogout = () => {

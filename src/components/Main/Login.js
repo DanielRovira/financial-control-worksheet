@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     const history = useNavigate();
@@ -20,25 +21,29 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
         }));
     }
 
-  const sendRequest = async () => {
-    await fetch(`${process.env.REACT_APP_BACKEND}/api/login`,
-    {
-        method:"POST",
-        headers: { 'Content-Type': "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-            email: inputs.email,
-            password: inputs.password,
-          })
-    })
-    .then(response => response.json())
-  };
+    const sendRequest = async () => {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND}/api/login`,
+        {
+            method:"POST",
+            headers: { 'Content-Type': "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
+                email: inputs.email,
+                password: inputs.password,
+              })
+        })
+        .then(response => response.json())
+        if (res.status !== 200) {
+            return alert(lang.alert03);
+        }
+        setIsLoggedIn(true)
+        // return res;
+};
 
   function handleSubmit(e) {
         e.preventDefault();
         sendRequest()
-            .then(() => setIsLoggedIn(true))
-            .then(() => history("/user"));
+            // .then(() => setIsLoggedIn(true))
     }
 
   return (
@@ -53,7 +58,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
           justifyContent="center"
           alignItems="center"
         >
-          <Typography variant="h2">Login</Typography>
+          <Typography variant="h2">{lang.login}</Typography>
 
           <TextField
             name="email"
@@ -61,7 +66,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
             type={"email"}
             value={inputs.email}
             variant="outlined"
-            placeholder="Email"
+            placeholder={lang.email}
             margin="normal"
             autoComplete="username"
           />
@@ -71,7 +76,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
             type="password"
             value={inputs.password}
             variant="outlined"
-            placeholder="Password"
+            placeholder={lang.password}
             margin="normal"
             autoComplete="current-password"
           />

@@ -55,7 +55,7 @@ const App = () => {
         <ProSidebarProvider>
             <Router>
                 {isLoggedIn ? <Sidebar sections={sections} accName={accName} /> : ""}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} type={type} setType={setType} />
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} type={type} setType={setType} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
