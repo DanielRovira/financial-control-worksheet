@@ -7,7 +7,7 @@ function Main({ sections, isLoggedIn }) {
     const history = useNavigate();
     useEffect(() => {
         isLoggedIn ? void(0) : history("/")
-    }, [isLoggedIn])
+    }, [isLoggedIn])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '100px' }}>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import * as C from './styles';
+// import lang from '../../../../Language/pt_BR.json'
 
 const Form = ({ insertDocument, categories }) => {
+    const lang = require(`../../../../Language/${process.env.REACT_APP_LANG}.json`)
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState("");
@@ -40,7 +42,7 @@ const Form = ({ insertDocument, categories }) => {
         <>
             <C.Container>
                 <C.InputContent>
-                    <C.Label>Data</C.Label>
+                    <C.Label>{lang.date}</C.Label>
                     <C.Input
                         value={date}
                         type="date"
@@ -50,16 +52,16 @@ const Form = ({ insertDocument, categories }) => {
                         />
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>Tipo</C.Label>
+                    <C.Label>{lang.type}</C.Label>
                     <C.Select
                         onChange={() => setExpense(!isExpense)}
                     >
-                        <option value="Saída">Saída</option>
-                        <option value="Entrada">Entrada</option>
+                        <option value={lang.expenses}>{lang.expenses}</option>
+                        <option value={lang.entry}>{lang.entry}</option>
                     </C.Select>
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>Proveniência</C.Label>
+                    <C.Label>{lang.source}</C.Label>
                     <C.Select
                         value={prov}
                         onChange={(e) => setProv(e.target.value)}
@@ -69,7 +71,7 @@ const Form = ({ insertDocument, categories }) => {
                     </C.Select>
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>Fornecedor</C.Label>
+                    <C.Label>{lang.supplier}</C.Label>
                     <C.Input
                         value={forn}
                         placeholder="Inserir fornecedor"
@@ -78,7 +80,7 @@ const Form = ({ insertDocument, categories }) => {
                         />
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>Descrição</C.Label>
+                    <C.Label>{lang.description}</C.Label>
                     <C.Input
                         value={desc}
                         placeholder="Inserir descrição"
@@ -87,7 +89,7 @@ const Form = ({ insertDocument, categories }) => {
                         />
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>Valor</C.Label>
+                    <C.Label>{lang.value}</C.Label>
                     <C.Currency
                         value={amount}
                         prefix="R$ "
@@ -99,7 +101,7 @@ const Form = ({ insertDocument, categories }) => {
                         onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
                         />
                 </C.InputContent>
-                <C.Button onClick={handleSave}>ADICIONAR</C.Button>
+                <C.Button onClick={handleSave} style={{textTransform: 'uppercase'}} >{lang.add}</C.Button>
             </C.Container>
 
         </>
