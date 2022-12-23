@@ -1,17 +1,17 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     const history = useNavigate();
     const [inputs, setInputs] = useState({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     });
     
     useEffect(() => {
-    isLoggedIn ? history("/main") : void(0)
+    isLoggedIn ? history('/main') : void(0)
     }, [isLoggedIn, history, refreshToken]);
 
     function handleChange(e) {
@@ -24,9 +24,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     const sendRequest = async () => {
         const res = await fetch(`${process.env.REACT_APP_BACKEND}/api/login`,
         {
-            method:"POST",
-            headers: { 'Content-Type': "application/json" },
-            credentials: "include",
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify({
                 email: inputs.email,
                 password: inputs.password,
@@ -50,37 +50,37 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <Box
-          marginLeft="auto"
-          marginRight="auto"
+          marginLeft='auto'
+          marginRight='auto'
           width={300}
-          display="flex"
-          flexDirection={"column"}
-          justifyContent="center"
-          alignItems="center"
+          display='flex'
+          flexDirection={'column'}
+          justifyContent='center'
+          alignItems='center'
         >
-          <Typography variant="h2">{lang.login}</Typography>
+          <Typography variant='h2'>{lang.login}</Typography>
 
           <TextField
-            name="email"
+            name='email'
             onChange={handleChange}
-            type={"email"}
+            type={'email'}
             value={inputs.email}
-            variant="outlined"
+            variant='outlined'
             placeholder={lang.email}
-            margin="normal"
-            autoComplete="username"
+            margin='normal'
+            autoComplete='username'
           />
           <TextField
-            name="password"
+            name='password'
             onChange={handleChange}
-            type="password"
+            type='password'
             value={inputs.password}
-            variant="outlined"
+            variant='outlined'
             placeholder={lang.password}
-            margin="normal"
-            autoComplete="current-password"
+            margin='normal'
+            autoComplete='current-password'
           />
-          <Button variant="contained" type="submit">
+          <Button variant='contained' type='submit'>
             Login
           </Button>
         </Box>

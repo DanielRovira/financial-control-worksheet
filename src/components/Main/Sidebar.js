@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem, Sidebar, SubMenu, useProSidebar } from "react-pro-sidebar";
+import { Menu, MenuItem, Sidebar, SubMenu, useProSidebar } from 'react-pro-sidebar';
 import { useClickAway } from 'react-use';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -15,13 +15,13 @@ function Sidebarr({ sections, accName }) {
             <Sidebar
                 ref={sidebar}
                 // defaultCollapsed
-                collapsedWidth="80px"
-                backgroundColor="white"
+                collapsedWidth='80px'
+                backgroundColor='white'
             >
                 <IconButton
                     onClick={() => collapseSidebar()}
-                    size="large"
-                    color="inherit"
+                    size='large'
+                    color='inherit'
                     style={{ margin: '70px 0 0 15px' }}
                 >
                     <MenuIcon />
@@ -30,7 +30,7 @@ function Sidebarr({ sections, accName }) {
                     {Array.from(sections).map((section) => (
                         <SubMenu label={section.name} key={section.title} title={section.name}>
                             <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
-                            <MenuItem routerLink={<Link to="/" />}>{lang.todoPayments}</MenuItem>
+                            <MenuItem routerLink={<Link to='/' />}>{lang.todoPayments}</MenuItem>
                         </SubMenu>
                     ))}
                 </Menu>

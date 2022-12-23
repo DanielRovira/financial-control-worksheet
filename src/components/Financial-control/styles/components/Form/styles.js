@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import CurrencyInput from "react-currency-input-field"
+import styled, { css } from 'styled-components';
+import CurrencyInput from 'react-currency-input-field'
 
 export const Container = styled.div`
     max-width: 90%;
@@ -34,7 +34,7 @@ export const Inputs = css`
     border: 1px solid #ccc;
     text-transform: capitalize;
     max-width: 150px;
-    width: ${(props) => (props.width ? props.width + "px" : "auto")};
+    width: ${(props) => (props.width ? props.width + 'px' : 'auto')};
 `;
 
 export const Input = styled.input`${Inputs}`

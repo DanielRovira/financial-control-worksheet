@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container } from "@mui/material";
+import { Button, Container } from '@mui/material';
 import { useEffect } from 'react';
 
 function Main({ sections, isLoggedIn }) {
     const history = useNavigate();
     useEffect(() => {
-        isLoggedIn ? void(0) : history("/")
+        isLoggedIn ? void(0) : history('/')
     }, [isLoggedIn])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -14,7 +14,7 @@ function Main({ sections, isLoggedIn }) {
             {Array.from(sections).map((section) => (
                 <Container key={section.title}>
                     <Button
-                    variant="contained"
+                    variant='contained'
                     onClick={() => history(`/financial-control/${section.title}`)}
                     >
                     {section.title}

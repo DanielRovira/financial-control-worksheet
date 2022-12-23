@@ -5,12 +5,12 @@ const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 const Form = ({ insertDocument, categories }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
-    const [desc, setDesc]  = useState("");
-    const [prov, setProv]  = useState("3R");
-    const [forn, setForn]  = useState("");
-    const [amount, setAmount] = useState("");
+    const [desc, setDesc]  = useState('');
+    const [prov, setProv]  = useState('3R');
+    const [forn, setForn]  = useState('');
+    const [amount, setAmount] = useState('');
     const [isExpense, setExpense] = useState(true);
-    let provenience = Array.from(categories || []).filter(item => item.type === "provenience")
+    let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
 
     const handleSave = () => {
         if (!desc || !amount || !date) {
@@ -32,9 +32,9 @@ const Form = ({ insertDocument, categories }) => {
 
         insertDocument(transaction);
         
-        setDesc("");
-        setAmount("");
-        setForn("");
+        setDesc('');
+        setAmount('');
+        setForn('');
     };
 
     return ( 
@@ -44,10 +44,10 @@ const Form = ({ insertDocument, categories }) => {
                     <C.Label>{lang.date}</C.Label>
                     <C.Input
                         value={date}
-                        type="date"
+                        type='date'
                         width={110}
                         onChange={(e) => setDate(e.target.value)}
-                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         />
                 </C.InputContent>
                 <C.InputContent>
@@ -64,7 +64,7 @@ const Form = ({ insertDocument, categories }) => {
                     <C.Select
                         value={prov}
                         onChange={(e) => setProv(e.target.value)}
-                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                     >
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </C.Select>
@@ -75,7 +75,7 @@ const Form = ({ insertDocument, categories }) => {
                         value={forn}
                         placeholder={`${lang.placeholder} ${lang.supplier}`}
                         onChange={(e) => setForn(e.target.value)}
-                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         />
                 </C.InputContent>
                 <C.InputContent>
@@ -84,7 +84,7 @@ const Form = ({ insertDocument, categories }) => {
                         value={desc}
                         placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDesc(e.target.value)}
-                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         />
                 </C.InputContent>
                 <C.InputContent>
@@ -95,9 +95,9 @@ const Form = ({ insertDocument, categories }) => {
                         placeholder={lang.valuePlaceholder}
                         allowDecimals
                         disableAbbreviations
-                        decimalScale="2"
+                        decimalScale='2'
                         onValueChange={(e) => {setAmount(e)}}
-                        onKeyDown={event => { if (event.key === "Enter") {handleSave()}}}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         />
                 </C.InputContent>
                 <C.Button onClick={handleSave} style={{textTransform: 'uppercase'}} >{lang.add}</C.Button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
@@ -19,33 +19,33 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
     const getData = () => {
         const getSheetData = async () => {
             const res = await
-            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:"GET", credentials: "include" })
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             setTransactionsList(res || [])
         }
 
         const getSectionName = async () => {
             const res = await
-            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
-            res ? (Array.from(res || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res) : history("/")) : null(0)
+            res ? (Array.from(res || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res) : history('/')) : null(0)
         }
 
         const getCategories = async () => {
             const res = await
-            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/categories`, { method:"GET", credentials: "include" })
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             setCategories(res)
         }
 
         const pingAPI = async () => {
             const res = await
-            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:"GET", credentials: "include" })
+            fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/sections`, { method:'GET', credentials: 'include' })
             if (res.status !== 200) {
                 localStorage.clear()
                 setIsLoggedIn(false)
                 setAccName(null)
-                history("/")
+                history('/')
             } else {
                 getSheetData();
                 getSectionName();
@@ -58,15 +58,15 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
 
     useEffect(() => {
         const loggedIn = () => {getData()}
-        isLoggedIn ? loggedIn() : history("/")
+        isLoggedIn ? loggedIn() : history('/')
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
         {
-            method:"POST",
-            headers: { 'Content-Type': "application/json" },
-            credentials: "include",
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
@@ -76,9 +76,9 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
     function updateDocument(item) {
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}`,
         {
-            method:"PATCH",
-            headers: { 'Content-Type': "application/json" },
-            credentials: "include",
+            method:'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(item)
         })
         .then(response => response.json())
@@ -88,9 +88,9 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
     function deleteDocument(item) {
         fetch(`${process.env.REACT_APP_BACKEND}/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}`,
         {
-            method:"DELETE",
-            headers: { 'Content-Type': "application/json" },
-            credentials: "include",
+            method:'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(item)
         })
         .then(() => getData())

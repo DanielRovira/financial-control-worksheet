@@ -15,17 +15,17 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
     const ref = useRef(null);
-    let provenience = Array.from(categories || []).filter(item => item.type === "provenience")
+    let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
 
     const handleAmountType = (value) => {
         setAmountValue(value)
         if (value != null) 
         {setAmountTemp(value.replace(/,/g, '.'))}
-        else {setAmountTemp("0.00")}
+        else {setAmountTemp('0.00')}
     };
 
     const toggleEdit = () => {
-        if (descTemp === "" || amountTemp === "" || dateTemp === "") {
+        if (descTemp === '' || amountTemp === '' || dateTemp === '') {
             alert(lang.alert01);
             return;
         }   else if (amountTemp.toString().replace(/,/g, '.') < 0.01) {
@@ -54,7 +54,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                 <C.Td alignCenter width={9}>
                     <D.Input
                             value={dateTemp}
-                            type="date"
+                            type='date'
                             width={110}
                             onChange={(e) => setDateTemp(e.target.value)}
                             />
@@ -97,7 +97,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                         placeholder={lang.valuePlaceholder}
                         allowDecimals
                         disableAbbreviations
-                        decimalScale="2"
+                        decimalScale='2'
                         onValueChange={(e) => handleAmountType(e)}
                     />
                 </C.Td>
@@ -109,13 +109,13 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
         return (
             <C.Tr>
                 <C.Td alignCenter width={10}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
-                <C.Td alignCenter>{item.expense ? (<FaRegArrowAltCircleDown color="red" />) : (<FaRegArrowAltCircleUp color="green" />)}</C.Td>
+                <C.Td alignCenter>{item.expense ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
                 <C.Td padding={8}>{item.prov}</C.Td>
                 <C.Td padding={8}>{item.forn}</C.Td>
                 <C.Td padding={8}>{item.desc}</C.Td>
                 <C.Td padding={8}>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.Td>
-                <C.Td alignCenter><FaTrash color="grey" style={{cursor: 'not-allowed'}} /></C.Td>
+                <C.Td alignCenter><FaTrash color='grey' style={{cursor: 'not-allowed'}} /></C.Td>
             </C.Tr>
         )}
 };
