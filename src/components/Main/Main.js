@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 function Main({ sections, isLoggedIn }) {
     const history = useNavigate();
     useEffect(() => {
-        isLoggedIn ? void(0) : history('/')
+        isLoggedIn ? void(0) : history(`${process.env.REACT_APP_FRONTEND}/`)
     }, [isLoggedIn])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -15,7 +15,7 @@ function Main({ sections, isLoggedIn }) {
                 <Container key={section.title}>
                     <Button
                     variant='contained'
-                    onClick={() => history(`/financial-control/${section.title}`)}
+                    onClick={() => history(`/${process.env.REACT_APP_FRONTEND}/financial-control/${section.title}`)}
                     >
                     {section.title}
                     </Button>

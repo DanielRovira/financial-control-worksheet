@@ -1,7 +1,7 @@
 {
   "name": "financial-control-worksheet",
   "version": "0.1.0",
-  "homepage": "http://www.constem.net",
+  "homepage": "https://danielrovira.github.io/financial-control-worksheet/",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",

@@ -58,8 +58,8 @@ const App = () => {
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} type={type} setType={setType} />
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
-                        <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
+                        <Route path={`/${process.env.REACT_APP_FRONTEND}/main`} element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
+                        <Route path={`/${process.env.REACT_APP_FRONTEND}/financial-control/:taskTitle`} element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

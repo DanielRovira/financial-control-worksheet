@@ -11,7 +11,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     });
     
     useEffect(() => {
-    isLoggedIn ? history('/main') : void(0)
+    isLoggedIn ? history(`/${process.env.REACT_APP_FRONTEND}/main`) : void(0)
     }, [isLoggedIn, history, refreshToken]);
 
     function handleChange(e) {
