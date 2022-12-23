@@ -20,7 +20,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, type, setType }) => {
             .then(() => setAccName(null))
             .then(() => setIsLoggedIn(false))
             .then(() => setType(''))
-            .then(() => history(`${process.env.REACT_APP_FRONTEND}/`));
+            .then(() => history('/'));
     };
 
     return (

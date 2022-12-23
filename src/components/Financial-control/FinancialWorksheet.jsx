@@ -58,7 +58,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
 
     useEffect(() => {
         const loggedIn = () => {getData()}
-        isLoggedIn ? loggedIn() : history(`${process.env.REACT_APP_FRONTEND}/`)
+        isLoggedIn ? loggedIn() : history('/')
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
