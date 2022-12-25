@@ -36,6 +36,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
         if (res.status !== 200) {
             return alert(lang.alert03);
         }
+        // document.cookie = `${res.user._id}=${res.token}; SameSite=None; Secure`    // If need to store cookie on clientside
         setIsLoggedIn(true)
         // return res;
 };
