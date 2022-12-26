@@ -25,7 +25,7 @@ const App = () => {
             fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`,
             {
                 method: 'GET',
-                redicrect: 'follow',
+                redirect: 'follow',
                 credentials: 'include'
             })
             .then(response => response.json())
@@ -36,7 +36,7 @@ const App = () => {
             fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
             {
                 method: 'GET',
-                redicrect: 'follow',
+                redirect: 'follow',
                 credentials: 'include',
             })
         .then(response => response.json())
