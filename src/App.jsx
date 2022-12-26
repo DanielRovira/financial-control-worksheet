@@ -23,7 +23,7 @@ const App = () => {
 
     const refreshToken = async () => {
         function getSections() {
-            fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`,
+            fetch(`/api/${process.env.REACT_APP_DB}/sections`,
             {
                 method: 'GET',
                 credentials: 'include'
@@ -33,7 +33,7 @@ const App = () => {
         }
 
         const res = await
-            fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
+            fetch(`/api/refresh`,
             {
                 method: 'GET',
                 credentials: 'include',

@@ -22,7 +22,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     }
 
     const sendRequest = async () => {
-        const res = await fetch(`${process.env.REACT_APP_BACKEND}/api/login`,
+        const res = await fetch(`/api/login`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },

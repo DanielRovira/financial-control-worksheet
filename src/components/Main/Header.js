@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, type, setType }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
-        await fetch(`${process.env.REACT_APP_BACKEND}/api/logout`,
+        await fetch(`/api/logout`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
