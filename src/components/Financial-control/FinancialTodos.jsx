@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Form from './styles/components/Form/index';
-import Header from './styles/components/Header';
-import Resume from './styles/components/Resume';
-import Grid from './styles/components/Grid';
+import Form from './styles/components-todos/Form/index';
+import Header from './styles/components-todos/Header';
+import Resume from './styles/components-todos/Resume';
+import Grid from './styles/components-todos/Grid';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const FinancialTodos = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
@@ -119,7 +119,7 @@ const FinancialTodos = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
         <>
             <Header sectionName={sectionName} />
             <Resume income={income} expense={expense} total={total} />
-            <Form insertDocument={insertDocument} categories={categories} />
+            <Form insertDocument={insertDocument} />
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} categories={categories} />
         </>
     );
