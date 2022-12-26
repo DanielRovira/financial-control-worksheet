@@ -57,6 +57,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                             type='date'
                             width={110}
                             onChange={(e) => setDateTemp(e.target.value)}
+                            onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                             />
                 </C.Td>
                 <C.Td alignCenter>
@@ -72,6 +73,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                     <D.Select
                         value={provTemp}
                         onChange={(e) => setProvTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     >
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
@@ -81,6 +83,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                         value={fornTemp}
                         placeholder={`${lang.placeholder} ${lang.supplier}`}
                         onChange={(e) => setFornTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />
                 </C.Td>
                 <C.Td>
@@ -88,6 +91,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                         value={descTemp}
                         placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDescTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />
                 </C.Td>
                 <C.Td>
@@ -99,6 +103,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
                         disableAbbreviations
                         decimalScale='2'
                         onValueChange={(e) => handleAmountType(e)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />
                 </C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>
