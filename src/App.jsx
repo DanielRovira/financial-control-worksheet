@@ -53,7 +53,8 @@ const App = () => {
 
     return (
         <ProSidebarProvider>
-            <Router basename='/financial-control-worksheet'>
+            {/* <Router basename='/financial-control-worksheet'> */}
+            <Router>
                 {isLoggedIn ? <Sidebar sections={sections} accName={accName} /> : ""}
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} type={type} setType={setType} />
                     <Routes>
