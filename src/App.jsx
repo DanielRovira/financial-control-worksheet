@@ -47,7 +47,7 @@ const App = () => {
             localStorage.setItem('userName', res.user.name)
             setAccName(res.user.name)
         }
-        
+        console.log(res.user)
         getSections()
         setIsLoggedIn(res.status || false)
         res.user ? setLogin() : localStorage.clear()
