@@ -29,8 +29,8 @@ function Sidebarr({ sections, accName }) {
                 <Menu>
                     {Array.from(sections).map((section) => (
                         <SubMenu label={section.name} key={section.title} title={section.name}>
-                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/${process.env.REACT_APP_DB}/${section.title}`} />}>{lang.financialControl}</MenuItem>
-                            <MenuItem routerLink={<Link to='/' />}>{lang.todoPayments}</MenuItem>
+                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
+                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
                         </SubMenu>
                     ))}
                 </Menu>

@@ -3,6 +3,7 @@ import { ProSidebarProvider } from 'react-pro-sidebar';
 import { useEffect, useState } from 'react';
 import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet';
+import FinancialTodos from './components/Financial-control/FinancialTodos';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
@@ -61,6 +62,7 @@ const App = () => {
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
                         <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
+                        <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />
