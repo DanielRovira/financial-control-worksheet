@@ -1,7 +1,7 @@
 {
   "name": "financial-control-worksheet",
   "version": "0.1.0",
-  "homepage": "https://financial-control-worksheet.onrender.com",
+  "homepage": "https://financial-control-worksheet.netlify.app",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",
