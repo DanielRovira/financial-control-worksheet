@@ -24,7 +24,8 @@ const App = () => {
         function getSections() {
             fetch(`${process.env.REACT_APP_BACKEND}/api/financial-control/sections`,
             {
-                method:'GET',
+                method: 'GET',
+                redicrect: 'follow',
                 credentials: 'include'
             })
             .then(response => response.json())
@@ -34,7 +35,8 @@ const App = () => {
         const res = await
             fetch(`${process.env.REACT_APP_BACKEND}/api/refresh`,
             {
-                method:'GET',
+                method: 'GET',
+                redicrect: 'follow',
                 credentials: 'include',
             })
         .then(response => response.json())
