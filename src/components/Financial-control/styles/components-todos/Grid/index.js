@@ -15,7 +15,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th width={5}>{lang.date}</C.Th>
+                    <C.Th width={5} alignCenter>{lang.date}</C.Th>
                     <C.Th width={5} alignCenter>{lang.number}</C.Th>
                     <C.Th width={10} alignCenter>{lang.link}</C.Th>
                     <C.Th width={10}>{lang.bank}</C.Th>
@@ -29,7 +29,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
             </C.Thead>
             <C.Tbody>
                 {Array.from(itens)?.map((item, index) => (
-                    <GridItem key={item._id} item={item} onDelete={deleteDocument} updateDocument={updateDocument} />
+                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} />
                 ))}
             </C.Tbody>
         </C.Table>

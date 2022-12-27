@@ -5,7 +5,6 @@ const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 const Form = ({ insertDocument }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
-    const [number, setNumber]  = useState('');
     const [link, setLink]  = useState('');
     const [bank, setBank]  = useState('');
     const [idnumber, setIdnumber]  = useState('');
@@ -24,7 +23,6 @@ const Form = ({ insertDocument }) => {
         
         const transaction = {
             date: date,
-            number: number,
             link: link,
             bank: bank,
             idnumber: idnumber,
@@ -37,7 +35,6 @@ const Form = ({ insertDocument }) => {
         
         setDesc('');
         setAmount('');
-        setNumber('');
     };
 
     return ( 

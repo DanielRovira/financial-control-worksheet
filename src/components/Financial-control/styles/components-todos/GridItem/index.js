@@ -5,10 +5,9 @@ import { FaTrash, FaRegEdit } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, onDelete, updateDocument }) => {
+const GridItem = ({ item, index, onDelete, updateDocument }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
-    const [numberTemp, setNumberTemp] = useState(item.number)
     const [linkTemp, setLinkTemp] = useState(item.link)
     const [bankTemp, setBankTemp] = useState(item.bank)
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
@@ -36,7 +35,6 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
 
         updateDocument({ ...item, 
             date: dateTemp,
-            number: numberTemp,
             link: linkTemp,
             bank: bankTemp,
             idnumber: idnumberTemp,
@@ -61,7 +59,7 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />
                 </C.Td>
-                <C.Td padding={8}>{item.number}</C.Td>
+                <C.Td alignCenter padding={8}>{++index}</C.Td>
                 <C.Td>
                     <D.Input
                         value={linkTemp}
@@ -122,7 +120,7 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
         return (
             <C.Tr>
                 <C.Td width={10} alignCenter>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
-                <C.Td padding={8}>{item.number}</C.Td>
+                <C.Td padding={8} alignCenter>{++index}</C.Td>
                 <C.Td padding={8} alignCenter>{item.link}</C.Td>
                 <C.Td padding={8}>{item.bank}</C.Td>
                 <C.Td padding={8}>{item.idnumber}</C.Td>
