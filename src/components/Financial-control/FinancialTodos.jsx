@@ -4,9 +4,8 @@ import Form from './styles/components-todos/Form/index';
 import Header from './styles/components-todos/Header';
 import Resume from './styles/components-todos/Resume';
 import Grid from './styles/components-todos/Grid';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const FinancialTodos = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
+const FinancialTodos = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -52,7 +51,7 @@ const FinancialTodos = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
                 getCategories(); 
             }
         }
-        setType(lang.todoPayments)
+
         pingAPI();
     }
 

@@ -13,25 +13,27 @@ import Main from './components/Main/Main';
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [accName, setAccName] = useState(localStorage.getItem('userName'));
-    const [sections, setSections] = useState([]);
-    const [type, setType] = useState();
+    const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-        setSections([])
-        isLoggedIn ? refreshToken() : setType()
-    },[isLoggedIn])
-
-    const refreshToken = async () => {
-        function getSections() {
+    const getSections = async () => {
+        const res = await 
             fetch(`/api/${process.env.REACT_APP_DB}/sections`,
             {
                 method: 'GET',
                 credentials: 'include'
             })
-            .then(response => response.json())
-            .then(data => setSections(data || []))
-        }
+        .then(response => response.json())
+        localStorage.setItem('sections', JSON.stringify(res))
+    }
 
+    const getCategories = async () => {
+        const res = await
+        fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
+        .then(response => response.json())
+        setCategories(res)
+    }
+
+    const refreshToken = async () => {
         const res = await
             fetch(`/api/refresh`,
             {
@@ -39,7 +41,6 @@ const App = () => {
                 credentials: 'include',
             })
         .then(response => response.json())
-        .then(localStorage.clear())
 
         const setLogin = () => {
             localStorage.setItem('isLoggedIn', JSON.stringify(true))
@@ -47,22 +48,26 @@ const App = () => {
             setAccName(res.user.name)
         }
 
-        getSections()
         setIsLoggedIn(res.status || false)
         res.user ? setLogin() : localStorage.clear()
     };
+
+    useEffect(() => {
+        // setSections([])
+        isLoggedIn ? refreshToken() : localStorage.clear()
+    },[isLoggedIn])
 
     return (
         <ProSidebarProvider>
             {/* <Router basename='/financial-control-worksheet'> */}
             <Router>
-                {isLoggedIn ? <Sidebar sections={sections} accName={accName} /> : ""}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} type={type} setType={setType} />
+                {isLoggedIn ? <Sidebar accName={accName} /> : ""}
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />
                     <Routes>
-                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} />} />
-                        <Route path="/main" element={<Main sections={sections} isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
-                        <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setType={setType} setAccName={setAccName} />} />
+                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} getSections={getSections} getCategories={getCategories} />} />
+                        <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} categories={categories} />} />
+                        <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

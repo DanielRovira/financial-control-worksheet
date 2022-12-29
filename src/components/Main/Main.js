@@ -2,11 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { useEffect } from 'react';
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-function Main({ sections, isLoggedIn }) {
+function Main({ isLoggedIn }) {
     const history = useNavigate();
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
     useEffect(() => {
-        isLoggedIn ? void(0) : history('/')
+        !isLoggedIn && history('/')
     }, [isLoggedIn])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -15,7 +17,7 @@ function Main({ sections, isLoggedIn }) {
                 <Container key={section.title}>
                     <Button
                     variant='contained'
-                    onClick={() => history(`/financial-control/${section.title}`)}
+                    onClick={() => {history(`/financial-control/${section.title}`); localStorage.setItem('sheetType', lang.financialControl)}}
                     >
                     {section.title}
                     </Button>

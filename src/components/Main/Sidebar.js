@@ -6,9 +6,10 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-function Sidebarr({ sections, accName }) {
+function Sidebarr({ accName }) {
     const sidebar = useRef(null);
-    const { collapseSidebar } = useProSidebar();
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const { collapseSidebar, collapsed } = useProSidebar();
     useClickAway(sidebar, collapseSidebar);
     return (
         <div style={{ display: 'flex', height: '100%', position: 'absolute' }}>
@@ -29,8 +30,8 @@ function Sidebarr({ sections, accName }) {
                 <Menu>
                     {Array.from(sections).map((section) => (
                         <SubMenu label={section.name} key={section.title} title={section.name}>
-                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
-                            <MenuItem onClick={collapseSidebar} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
+                            <MenuItem onClick={() => {localStorage.setItem('sheetType', lang.financialControl); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
+                            <MenuItem onClick={() => {localStorage.setItem('sheetType', lang.todoPayments); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
                         </SubMenu>
                     ))}
                 </Menu>

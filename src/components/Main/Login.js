@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, getSections, getCategories }) => {
     const history = useNavigate();
     const [inputs, setInputs] = useState({
         email: '',
@@ -11,8 +11,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
     });
     
     useEffect(() => {
-    isLoggedIn ? history('/main') : void(0)
-    }, [isLoggedIn, history, refreshToken]);
+    isLoggedIn && history('/main')
+    }, [isLoggedIn, history]);
 
     function handleChange(e) {
         setInputs((prev) => ({
@@ -38,6 +38,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, refreshToken }) => {
         }
         // document.cookie = `${res.user._id}=${res.token}; SameSite=None; Secure`    // If need to store cookie on clientside
         setIsLoggedIn(true)
+        getSections()
+        getCategories()
         // return res;
 };
 

@@ -4,61 +4,25 @@ import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) => {
+const FinancialWorksheet = ({ isLoggedIn, categories }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
-    const [sectionName, setSectionName] = useState([]);
-    const [categories, setCategories] = useState([]);
     const history = useNavigate();
     const params = useParams();
 
-    const getData = () => {
-        const getSheetData = async () => {
+    const getData = async () => {
             const res = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             setTransactionsList(res || [])
         }
 
-        const getSectionName = async () => {
-            const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:'GET', credentials: 'include' })
-            .then(response => response.json())
-            res ? (Array.from(res || []).filter((sec) => sec.title === params.taskTitle)[0] ? setSectionName(res) : history('/')) : null(0)
-        }
-
-        const getCategories = async () => {
-            const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
-            .then(response => response.json())
-            setCategories(res)
-        }
-
-        const pingAPI = async () => {
-            const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method:'GET', credentials: 'include' })
-            if (res.status !== 200) {
-                localStorage.clear()
-                setIsLoggedIn(false)
-                setAccName(null)
-                history('/')
-            } else {
-                getSheetData();
-                getSectionName();
-                getCategories(); 
-            }
-        }
-        setType(lang.financialControl)
-        pingAPI();
-    }
-
     useEffect(() => {
-        const loggedIn = () => {getData()}
-        isLoggedIn ? loggedIn() : history('/')
+        isLoggedIn ? getData() : history('/')
+        // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
@@ -117,7 +81,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, setType, setAccName }) 
 
     return (
         <>
-            <Header sectionName={sectionName} />
+            <Header />
             <Resume income={income} expense={expense} total={total} />
             <Form insertDocument={insertDocument} categories={categories} />
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} categories={categories} />

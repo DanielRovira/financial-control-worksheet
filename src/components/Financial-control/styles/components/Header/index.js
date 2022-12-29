@@ -2,9 +2,10 @@ import React from 'react';
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
 
-const Header = ({ sectionName }) => {
+const Header = () => {
     const params = useParams();
-    let section = sectionName.filter((sec) => sec.title === params.taskTitle)[0]
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     return (
         <C.Container>
             <C.Header>

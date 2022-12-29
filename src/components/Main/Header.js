@@ -2,7 +2,7 @@ import { AppBar, Box, Tab, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, type, setType }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
         await fetch(`/api/logout`,
@@ -19,7 +19,6 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, type, setType }) => {
         sendLogoutReq()
             .then(() => setAccName(null))
             .then(() => setIsLoggedIn(false))
-            .then(() => setType(''))
             .then(() => history('/'));
     };
 
@@ -28,7 +27,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, type, setType }) => {
             <AppBar position='sticky' style={{ background: 'teal' , filter:'grayscale(50%)' }}>
                 <Toolbar>
                 {/* <h1>{accName}</h1> */}
-                <h1 style={{textAlign: 'center'}} >{type}</h1>
+                <h1 style={{textAlign: 'center'}} >{localStorage.getItem("sheetType")}</h1>
                     <Typography variant='h3'></Typography>
                     <Box sx={{ marginLeft: 'auto' }}>
                         {isLoggedIn ? (
