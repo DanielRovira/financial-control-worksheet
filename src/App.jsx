@@ -15,24 +15,6 @@ const App = () => {
     const [accName, setAccName] = useState(localStorage.getItem('userName'));
     const [categories, setCategories] = useState([]);
 
-    const getSections = async () => {
-        const res = await 
-            fetch(`/api/${process.env.REACT_APP_DB}/sections`,
-            {
-                method: 'GET',
-                credentials: 'include'
-            })
-        .then(response => response.json())
-        localStorage.setItem('sections', JSON.stringify(res))
-    }
-
-    const getCategories = async () => {
-        const res = await
-        fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
-        .then(response => response.json())
-        setCategories(res)
-    }
-
     // const refreshToken = async () => {
     //     const res = await
     //         fetch(`/api/refresh`,
@@ -64,7 +46,7 @@ const App = () => {
                 {isLoggedIn ? <Sidebar accName={accName} /> : ""}
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />
                     <Routes>
-                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} getSections={getSections} getCategories={getCategories} setAccName={setAccName} />} />
+                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} setCategories={setCategories} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} categories={categories} />} />
                         <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />

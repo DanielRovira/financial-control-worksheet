@@ -3,22 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Login = ({ isLoggedIn, setIsLoggedIn, getSections, getCategories, setAccName }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, setAccName, setCategories }) => {
     const history = useNavigate();
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
     });
-    
-    useEffect(() => {
-    isLoggedIn && history('/main')
-    }, [isLoggedIn, history]);
 
-    function handleChange(e) {
-        setInputs((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }));
+    const getSections = async () => {
+        const res = await 
+            fetch(`/api/${process.env.REACT_APP_DB}/sections`,
+            {
+                method: 'GET',
+                credentials: 'include'
+            })
+        .then(response => response.json())
+        localStorage.setItem('sections', JSON.stringify(res))
+    }
+
+    const getCategories = async () => {
+        const res = await
+        fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
+        .then(response => response.json())
+        setCategories(res)
     }
 
     const sendRequest = async () => {
@@ -36,20 +43,28 @@ const Login = ({ isLoggedIn, setIsLoggedIn, getSections, getCategories, setAccNa
         if (res.status !== 200) {
             return alert(lang.alert03);
         }
-        // document.cookie = `${res.user._id}=${res.token}; SameSite=None; Secure`    // If need to store cookie on clientside
         setIsLoggedIn(true)
         getSections()
         getCategories()
         localStorage.setItem('isLoggedIn', JSON.stringify(true))
         localStorage.setItem('userName', res.user.name)
         setAccName(res.user.name)
-        // return res;
-};
+    };
 
-  function handleSubmit(e) {
+    useEffect(() => {
+        isLoggedIn && history('/main')
+    }, [isLoggedIn, history]);
+
+    function handleChange(e) {
+        setInputs((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
+    function handleSubmit(e) {
         e.preventDefault();
         sendRequest()
-            // .then(() => setIsLoggedIn(true))
     }
 
   return (
