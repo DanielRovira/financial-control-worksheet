@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Login = ({ isLoggedIn, setIsLoggedIn, getSections, getCategories }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, getSections, getCategories, setAccName }) => {
     const history = useNavigate();
     const [inputs, setInputs] = useState({
         email: '',
@@ -40,6 +40,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn, getSections, getCategories }) => {
         setIsLoggedIn(true)
         getSections()
         getCategories()
+        localStorage.setItem('isLoggedIn', JSON.stringify(true))
+        localStorage.setItem('userName', res.user.name)
+        setAccName(res.user.name)
         // return res;
 };
 

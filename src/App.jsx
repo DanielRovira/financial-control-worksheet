@@ -33,28 +33,28 @@ const App = () => {
         setCategories(res)
     }
 
-    const refreshToken = async () => {
-        const res = await
-            fetch(`/api/refresh`,
-            {
-                method: 'GET',
-                credentials: 'include',
-            })
-        .then(response => response.json())
+    // const refreshToken = async () => {
+    //     const res = await
+    //         fetch(`/api/refresh`,
+    //         {
+    //             method: 'GET',
+    //             credentials: 'include',
+    //         })
+    //     .then(response => response.json())
 
-        const setLogin = () => {
-            localStorage.setItem('isLoggedIn', JSON.stringify(true))
-            localStorage.setItem('userName', res.user.name)
-            setAccName(res.user.name)
-        }
+    //     const setLogin = () => {
+    //         localStorage.setItem('isLoggedIn', JSON.stringify(true))
+    //         localStorage.setItem('userName', res.user.name)
+    //         setAccName(res.user.name)
+    //     }
 
-        setIsLoggedIn(res.status || false)
-        res.user ? setLogin() : localStorage.clear()
-    };
+    //     setIsLoggedIn(res.status || false)
+    //     res.user ? setLogin() : localStorage.clear()
+    // };
 
     useEffect(() => {
         // setSections([])
-        isLoggedIn ? refreshToken() : localStorage.clear()
+        !isLoggedIn && localStorage.clear()
     },[isLoggedIn])
 
     return (
@@ -64,7 +64,7 @@ const App = () => {
                 {isLoggedIn ? <Sidebar accName={accName} /> : ""}
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />
                     <Routes>
-                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} getSections={getSections} getCategories={getCategories} />} />
+                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} getSections={getSections} getCategories={getCategories} setAccName={setAccName} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} categories={categories} />} />
                         <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
