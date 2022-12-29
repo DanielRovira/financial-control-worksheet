@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as C from './styles';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, categories }) => {
+const Form = ({ insertDocument }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState('');
@@ -10,6 +10,7 @@ const Form = ({ insertDocument, categories }) => {
     const [forn, setForn]  = useState('');
     const [amount, setAmount] = useState('');
     const [isExpense, setExpense] = useState(true);
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
     let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
 
     const handleSave = () => {

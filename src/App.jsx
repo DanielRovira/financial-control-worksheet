@@ -13,42 +13,21 @@ import Main from './components/Main/Main';
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [accName, setAccName] = useState(localStorage.getItem('userName'));
-    const [categories, setCategories] = useState([]);
-
-    // const refreshToken = async () => {
-    //     const res = await
-    //         fetch(`/api/refresh`,
-    //         {
-    //             method: 'GET',
-    //             credentials: 'include',
-    //         })
-    //     .then(response => response.json())
-
-    //     const setLogin = () => {
-    //         localStorage.setItem('isLoggedIn', JSON.stringify(true))
-    //         localStorage.setItem('userName', res.user.name)
-    //         setAccName(res.user.name)
-    //     }
-
-    //     setIsLoggedIn(res.status || false)
-    //     res.user ? setLogin() : localStorage.clear()
-    // };
 
     useEffect(() => {
-        // setSections([])
         !isLoggedIn && localStorage.clear()
     },[isLoggedIn])
 
     return (
         <ProSidebarProvider>
-            {/* <Router basename='/financial-control-worksheet'> */}
+            {/* <Router basename='/financial-control-worksheet'>  // For using on GitHub Pages */} 
             <Router>
                 {isLoggedIn ? <Sidebar accName={accName} /> : ""}
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />
                     <Routes>
-                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} setCategories={setCategories} />} />
+                        <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} categories={categories} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} />} />
                         <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                     </Routes>
             </Router>    

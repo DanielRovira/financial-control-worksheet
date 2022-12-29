@@ -5,7 +5,7 @@ import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } fr
 import {useClickAway} from 'react-use';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, onDelete, updateDocument, categories }) => {
+const GridItem = ({ item, onDelete, updateDocument }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -15,6 +15,7 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
     const ref = useRef(null);
+    const categories = JSON.parse(localStorage.getItem("categories")) || [];
     let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
 
     const handleAmountType = (value) => {
@@ -33,16 +34,16 @@ const GridItem = ({ item, onDelete, updateDocument, categories }) => {
             return;  
         }
 
-        // if (
-        //     dateTemp !== item.date||
-        //     expenseTemp !== item.expense ||
-        //     provTemp !== item.prov ||
-        //     fornTemp !== item.forn ||
-        //     descTemp !== item.desc ||
-        //     amountTemp !== item.amount
-        //     ) {
+        if (
+            dateTemp !== item.date||
+            expenseTemp !== item.expense ||
+            provTemp !== item.prov ||
+            fornTemp !== item.forn ||
+            descTemp !== item.desc ||
+            amountTemp !== item.amount
+            ) {
             updateDocument({ ...item, date: dateTemp, expense: expenseTemp, prov: provTemp, forn: fornTemp, desc:descTemp, amount: amountTemp });
-            // }
+            }
         setActive(!isActive);
     };
 

@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, categories }) => {
+const FinancialWorksheet = ({ isLoggedIn }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -83,8 +83,8 @@ const FinancialWorksheet = ({ isLoggedIn, categories }) => {
         <>
             <Header />
             <Resume income={income} expense={expense} total={total} />
-            <Form insertDocument={insertDocument} categories={categories} />
-            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} categories={categories} />
+            <Form insertDocument={insertDocument} />
+            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />
         </>
     );
 };

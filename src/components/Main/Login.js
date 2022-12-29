@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Login = ({ isLoggedIn, setIsLoggedIn, setAccName, setCategories }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     const history = useNavigate();
     const [inputs, setInputs] = useState({
         email: '',
@@ -11,21 +11,16 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName, setCategories }) => {
     });
 
     const getSections = async () => {
-        const res = await 
-            fetch(`/api/${process.env.REACT_APP_DB}/sections`,
-            {
-                method: 'GET',
-                credentials: 'include'
-            })
+        await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
-        localStorage.setItem('sections', JSON.stringify(res))
+        .then(response => localStorage.setItem('sections', JSON.stringify(response)))
+        setIsLoggedIn(true)
     }
 
     const getCategories = async () => {
-        const res = await
-        fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
+        await fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
-        setCategories(res)
+        .then(response => localStorage.setItem('categories', JSON.stringify(response)))
     }
 
     const sendRequest = async () => {
@@ -43,12 +38,12 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName, setCategories }) => {
         if (res.status !== 200) {
             return alert(lang.alert03);
         }
-        setIsLoggedIn(true)
         getSections()
         getCategories()
         localStorage.setItem('isLoggedIn', JSON.stringify(true))
         localStorage.setItem('userName', res.user.name)
         setAccName(res.user.name)
+        // setIsLoggedIn(true)
     };
 
     useEffect(() => {
