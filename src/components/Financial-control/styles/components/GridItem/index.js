@@ -13,13 +13,17 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
     const [fornTemp, setFornTemp] = useState(item.forn)
     const [linkTemp, setLinkTemp] = useState(item.link)
     const [bankTemp, setBankTemp] = useState(item.bank)
+    const [categoryTemp, setCategoryTemp] = useState(item.category)
+    const [subCategoryTemp, setSubCategoryTemp] = useState(item.subCategory)
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
     const ref = useRef(null);
-    const categories = JSON.parse(localStorage.getItem("categories")) || [];
-    let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
+    const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
+    let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
+    let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
 
     const handleAmountType = (value) => {
         setAmountValue(value)
@@ -42,17 +46,21 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 dateTemp !== item.date||
                 expenseTemp !== item.expense ||
                 provTemp !== item.prov ||
+                categoryTemp !== item.category ||
+                subCategoryTemp !== item.subCategory ||
                 fornTemp !== item.forn ||
                 descTemp !== item.desc ||
                 amountTemp !== item.amount
                 )   { updateDocument({ ...item,
-                        date: dateTemp,
-                        expense: expenseTemp,
-                        prov: provTemp,
-                        forn: fornTemp,
-                        desc:descTemp,
-                        amount: amountTemp });
-                    }}
+                date: dateTemp,
+                expense: expenseTemp,
+                prov: provTemp,
+                category: categoryTemp,
+                subCategory: subCategoryTemp,
+                forn: fornTemp,
+                desc:descTemp,
+                amount: amountTemp });
+            }}
 
         if (localStorage.getItem('sheetType') === 'todoPayments') {
             if (
@@ -108,6 +116,24 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     >
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
+                    </D.Select>
+                </C.Td>
+                <C.Td>
+                    <D.Select
+                        value={categoryTemp}
+                        onChange={(e) => setCategoryTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    >
+                        {categories.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
+                    </D.Select>
+                </C.Td>
+                <C.Td>
+                    <D.Select
+                        value={subCategoryTemp}
+                        onChange={(e) => setSubCategoryTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    >
+                        {subCategories.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 </C.Td>
                 </>}
@@ -178,6 +204,8 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 {localStorage.getItem('sheetType') === 'financialControl' && <>
                 <C.Td alignCenter>{item.expense ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
                 <C.Td padding={8}>{item.prov}</C.Td>
+                <C.Td padding={8}>{item.category}</C.Td>
+                <C.Td padding={8}>{item.subCategory}</C.Td>
                 </>}
                 {localStorage.getItem('sheetType') === 'todoPayments' && <>
                 <C.Td padding={8} alignCenter>{++index}</C.Td>

@@ -15,17 +15,19 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th width={9}>{lang.date}</C.Th>
+                    <C.Th width={9} alignCenter>{lang.date}</C.Th>
                     {localStorage.getItem('sheetType') === 'financialControl' && 
                     <>
-                    <C.Th width={15} alignCenter>{lang.type}</C.Th>
-                    <C.Th width={15}>{lang.source}</C.Th>
+                    <C.Th width={5} alignCenter>{lang.type}</C.Th>
+                    <C.Th width={10}>{lang.source}</C.Th>
+                    <C.Th width={10}>{lang.category}</C.Th>
+                    <C.Th width={10}>{lang.subCategory}</C.Th>
                     </>}
                     {localStorage.getItem('sheetType') === 'todoPayments' && 
                     <>
                     <C.Th width={5} alignCenter>{lang.number}</C.Th>
                     <C.Th width={10} alignCenter>{lang.link}</C.Th>
-                    <C.Th width={10}>{lang.bank}</C.Th>
+                    <C.Th width={10} >{lang.bank}</C.Th>
                     <C.Th width={10}>{lang.idnumber}</C.Th>
                     </>}
                     <C.Th width={15}>{lang.supplier}</C.Th>

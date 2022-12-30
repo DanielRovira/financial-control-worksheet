@@ -4,8 +4,10 @@ const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Form = ({ insertDocument }) => {
     const toDay = new Date().toISOString().substring(0, 10)
-    const categories = JSON.parse(localStorage.getItem("categories")) || [];
-    let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
+    const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
+    let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
+    let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
 
     // Both
     const [date, setDate]  = useState(toDay);
@@ -14,8 +16,10 @@ const Form = ({ insertDocument }) => {
     const [forn, setForn]  = useState('');
     
     // Paid payments
-    const [prov, setProv]  = useState('3R');
+    const [prov, setProv]  = useState(provenience[0].name);
     const [isExpense, setExpense] = useState(true);
+    const [category, setCategory]  = useState(lang.select);
+    const [subCategory, setSubCategory]  = useState(lang.select);
 
     // To pay payments
     const [link, setLink]  = useState('');
@@ -34,11 +38,13 @@ const Form = ({ insertDocument }) => {
         const transaction = {
             financialControl: {
                 date: date,
-                desc: desc,
-                amount: amount.replace(/,/g, '.'),
                 expense: isExpense,
                 prov: prov,
+                category: category === lang.select ? "" : category,
+                subCategory: subCategory === lang.select ? "" : subCategory,
                 forn: forn,
+                desc: desc,
+                amount: amount.replace(/,/g, '.'),
             },
             todoPayments: {
                 date: date,
@@ -59,6 +65,8 @@ const Form = ({ insertDocument }) => {
         setLink('');
         setBank('');
         setIdnumber('');
+        setCategory(lang.select);
+        setSubCategory(lang.select);
     };
 
     return ( 
@@ -93,6 +101,30 @@ const Form = ({ insertDocument }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                     >
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
+                    </C.Select>
+                </C.InputContent>
+                <C.InputContent>
+                    <C.Label>{lang.category}</C.Label>
+                    <C.Select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        style={category === lang.select ? {color: 'gray'} : {color: 'black'}}
+                    >
+                        <option defaultValue disabled hidden>{lang.select}</option>
+                        {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
+                    </C.Select>
+                </C.InputContent>
+                <C.InputContent>
+                    <C.Label>{lang.subCategory}</C.Label>
+                    <C.Select
+                        value={subCategory}
+                        onChange={(e) => setSubCategory(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        style={subCategory === lang.select ? {color: 'gray'} : {color: 'black'}}
+                    >
+                        <option defaultValue disabled hidden>{lang.select}</option>
+                        {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </C.Select>
                 </C.InputContent>
                 </>}
