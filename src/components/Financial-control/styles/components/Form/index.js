@@ -112,10 +112,11 @@ const Form = ({ insertDocument }) => {
                     {category === lang.other ? 
                     <C.Input
                         autoFocus
-                        onBlur={() => otherCategory === '' && setCategory('')}
+                        onBlur={() => otherCategory === '' && setCategory(lang.select)}
                         value={otherCategory}
                         onChange={(e) => setOtherCategory(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        width={98}
                     />
                     :
                     <C.Select
@@ -123,6 +124,7 @@ const Form = ({ insertDocument }) => {
                         onChange={(e) => setCategory(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         style={category === lang.select ? {color: 'gray'} : {color: 'black'}}
+                        width={110}
                     >
                         <option defaultValue disabled hidden>{lang.select}</option>
                         {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
@@ -135,10 +137,11 @@ const Form = ({ insertDocument }) => {
                     {subCategory === lang.other ? 
                     <C.Input
                         autoFocus
-                        onBlur={() => otherSubCategory === '' && setSubCategory('')}
+                        onBlur={() => otherSubCategory === '' && setSubCategory(lang.select)}
                         value={otherSubCategory}
                         onChange={(e) => setOtherSubCategory(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        width={98}
                     />
                     :
                     <C.Select
@@ -146,6 +149,7 @@ const Form = ({ insertDocument }) => {
                         onChange={(e) => setSubCategory(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         style={subCategory === lang.select ? {color: 'gray'} : {color: 'black'}}
+                        width={110}
                     >
                         <option defaultValue disabled hidden>{lang.select}</option>
                         {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
@@ -212,6 +216,7 @@ const Form = ({ insertDocument }) => {
                         decimalScale='2'
                         onValueChange={(e) => {setAmount(e)}}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        width={100}
                         />
                 </C.InputContent>
                 <C.Button onClick={handleSave} style={{textTransform: 'uppercase'}} >{lang.add}</C.Button>

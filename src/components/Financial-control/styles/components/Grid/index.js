@@ -19,7 +19,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
                     {localStorage.getItem('sheetType') === 'financialControl' && 
                     <>
                     <C.Th width={5} alignCenter>{lang.type}</C.Th>
-                    <C.Th width={10}>{lang.source}</C.Th>
+                    <C.Th width={10} alignCenter>{lang.source}</C.Th>
                     <C.Th width={10}>{lang.category}</C.Th>
                     <C.Th width={10}>{lang.subCategory}</C.Th>
                     </>}

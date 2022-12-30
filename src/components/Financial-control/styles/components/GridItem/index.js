@@ -203,7 +203,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 <C.Td alignCenter width={10}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
                 {localStorage.getItem('sheetType') === 'financialControl' && <>
                 <C.Td alignCenter>{item.expense ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
-                <C.Td padding={8}>{item.prov}</C.Td>
+                <C.Td padding={8} alignCenter>{item.prov}</C.Td>
                 <C.Td padding={8}>{item.category}</C.Td>
                 <C.Td padding={8}>{item.subCategory}</C.Td>
                 </>}
