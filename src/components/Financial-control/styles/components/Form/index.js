@@ -20,6 +20,8 @@ const Form = ({ insertDocument }) => {
     const [isExpense, setExpense] = useState(true);
     const [category, setCategory]  = useState(lang.select);
     const [subCategory, setSubCategory]  = useState(lang.select);
+    const [otherCategory, setOtherCategory]  = useState('');
+    const [otherSubCategory, setOtherSubCategory]  = useState('');
 
     // To pay payments
     const [link, setLink]  = useState('');
@@ -40,8 +42,8 @@ const Form = ({ insertDocument }) => {
                 date: date,
                 expense: isExpense,
                 prov: prov,
-                category: category === lang.select ? "" : category,
-                subCategory: subCategory === lang.select ? "" : subCategory,
+                category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
+                subCategory: subCategory === lang.select ? "" : otherSubCategory !== '' ? otherSubCategory : subCategory,
                 forn: forn,
                 desc: desc,
                 amount: amount.replace(/,/g, '.'),
@@ -65,6 +67,8 @@ const Form = ({ insertDocument }) => {
         setLink('');
         setBank('');
         setIdnumber('');
+        setOtherCategory('');
+        setOtherSubCategory('');
         setCategory(lang.select);
         setSubCategory(lang.select);
     };
@@ -105,6 +109,15 @@ const Form = ({ insertDocument }) => {
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>{lang.category}</C.Label>
+                    {category === lang.other ? 
+                    <C.Input
+                        autoFocus
+                        onBlur={() => otherCategory === '' && setCategory('')}
+                        value={otherCategory}
+                        onChange={(e) => setOtherCategory(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                    />
+                    :
                     <C.Select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
@@ -114,9 +127,20 @@ const Form = ({ insertDocument }) => {
                         <option defaultValue disabled hidden>{lang.select}</option>
                         {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </C.Select>
+
+                }
                 </C.InputContent>
                 <C.InputContent>
                     <C.Label>{lang.subCategory}</C.Label>
+                    {subCategory === lang.other ? 
+                    <C.Input
+                        autoFocus
+                        onBlur={() => otherSubCategory === '' && setSubCategory('')}
+                        value={otherSubCategory}
+                        onChange={(e) => setOtherSubCategory(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                    />
+                    :
                     <C.Select
                         value={subCategory}
                         onChange={(e) => setSubCategory(e.target.value)}
@@ -126,6 +150,7 @@ const Form = ({ insertDocument }) => {
                         <option defaultValue disabled hidden>{lang.select}</option>
                         {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </C.Select>
+                    }
                 </C.InputContent>
                 </>}
                 {localStorage.getItem('sheetType') === 'todoPayments' && 
