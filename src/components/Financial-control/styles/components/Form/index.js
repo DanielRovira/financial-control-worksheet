@@ -56,6 +56,9 @@ const Form = ({ insertDocument }) => {
         setDesc('');
         setAmount('');
         setForn('');
+        setLink('');
+        setBank('');
+        setIdnumber('');
     };
 
     return ( 

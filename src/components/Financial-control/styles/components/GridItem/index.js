@@ -125,7 +125,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 <C.Td>
                     <D.Input
                         value={bankTemp}
-                        placeholder={`${lang.placeholder} ${lang.supplier}`}
+                        placeholder={`${lang.placeholder} ${lang.bank}`}
                         onChange={(e) => setBankTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />
@@ -133,7 +133,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 <C.Td>
                     <D.Input
                         value={idnumberTemp}
-                        placeholder={`${lang.placeholder} ${lang.supplier}`}
+                        placeholder={`${lang.placeholder} ${lang.idnumber}`}
                         onChange={(e) => setIdnumberTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />
