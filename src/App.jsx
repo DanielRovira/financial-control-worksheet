@@ -3,12 +3,10 @@ import { ProSidebarProvider } from 'react-pro-sidebar';
 import { useEffect, useState } from 'react';
 import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet';
-import FinancialTodos from './components/Financial-control/FinancialTodos';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Main from './components/Main/Main';
-
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -28,7 +26,7 @@ const App = () => {
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-todos/:taskTitle" element={<FinancialTodos isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
+                        <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

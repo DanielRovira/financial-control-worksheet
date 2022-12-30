@@ -17,7 +17,7 @@ function Main({ isLoggedIn }) {
                 <Container key={section.title}>
                     <Button
                     variant='contained'
-                    onClick={() => {history(`/financial-control/${section.title}`); localStorage.setItem('sheetType', lang.financialControl)}}
+                    onClick={() => {history(`/financial-control/${section.title}`); localStorage.setItem('sheetType', 'financialControl')}}
                     >
                     {section.title}
                     </Button>

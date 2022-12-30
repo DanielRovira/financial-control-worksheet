@@ -15,7 +15,7 @@ const FinancialWorksheet = ({ isLoggedIn }) => {
 
     const getData = async () => {
             const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}`, { method:'GET', credentials: 'include' })
+            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${localStorage.getItem('sheetType')}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             setTransactionsList(res || [])
         }
@@ -26,7 +26,7 @@ const FinancialWorksheet = ({ isLoggedIn }) => {
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
-        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${localStorage.getItem('sheetType')}`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -38,7 +38,7 @@ const FinancialWorksheet = ({ isLoggedIn }) => {
     }
 
     function updateDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${localStorage.getItem('sheetType')}`,
         {
             method:'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -50,7 +50,7 @@ const FinancialWorksheet = ({ isLoggedIn }) => {
     }
 
     function deleteDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${localStorage.getItem('sheetType')}`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },

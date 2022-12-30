@@ -5,12 +5,15 @@ import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } fr
 import {useClickAway} from 'react-use';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, onDelete, updateDocument }) => {
+const GridItem = ({ item, index, onDelete, updateDocument }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
     const [provTemp, setProvTemp] = useState(item.prov)
     const [fornTemp, setFornTemp] = useState(item.forn)
+    const [linkTemp, setLinkTemp] = useState(item.link)
+    const [bankTemp, setBankTemp] = useState(item.bank)
+    const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
@@ -34,16 +37,42 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
             return;  
         }
 
-        if (
-            dateTemp !== item.date||
-            expenseTemp !== item.expense ||
-            provTemp !== item.prov ||
-            fornTemp !== item.forn ||
-            descTemp !== item.desc ||
-            amountTemp !== item.amount
-            ) {
-            updateDocument({ ...item, date: dateTemp, expense: expenseTemp, prov: provTemp, forn: fornTemp, desc:descTemp, amount: amountTemp });
-            }
+        if (localStorage.getItem('sheetType') === 'financialControl') {
+            if (
+                dateTemp !== item.date||
+                expenseTemp !== item.expense ||
+                provTemp !== item.prov ||
+                fornTemp !== item.forn ||
+                descTemp !== item.desc ||
+                amountTemp !== item.amount
+                )   { updateDocument({ ...item,
+                        date: dateTemp,
+                        expense: expenseTemp,
+                        prov: provTemp,
+                        forn: fornTemp,
+                        desc:descTemp,
+                        amount: amountTemp });
+                    }}
+
+        if (localStorage.getItem('sheetType') === 'todoPayments') {
+            if (
+                dateTemp !== item.date||
+                linkTemp !== item.link ||
+                bankTemp !== item.bank ||
+                idnumberTemp !== item.idnumber ||
+                fornTemp !== item.forn ||
+                descTemp !== item.desc ||
+                amountTemp !== item.amount
+                )   { updateDocument({ ...item, 
+                date: dateTemp,
+                link: linkTemp,
+                bank: bankTemp,
+                idnumber: idnumberTemp,
+                forn: fornTemp,
+                desc: descTemp,
+                amount: amountTemp });
+        }}
+        
         setActive(!isActive);
     };
 
@@ -61,6 +90,8 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
                             onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                             />
                 </C.Td>
+                {localStorage.getItem('sheetType') === 'financialControl' && 
+                <>
                 <C.Td alignCenter>
                     <D.Select
                         value={expenseTemp ? lang.expense : lang.entry}
@@ -79,6 +110,35 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 </C.Td>
+                </>}
+                {localStorage.getItem('sheetType') === 'todoPayments' && 
+                <>
+                <C.Td alignCenter padding={8}>{++index}</C.Td>
+                <C.Td>
+                    <D.Input
+                        value={linkTemp}
+                        placeholder={`${lang.placeholder} ${lang.link}`}
+                        onChange={(e) => setLinkTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    />
+                </C.Td>
+                <C.Td>
+                    <D.Input
+                        value={bankTemp}
+                        placeholder={`${lang.placeholder} ${lang.supplier}`}
+                        onChange={(e) => setBankTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    />
+                </C.Td>
+                <C.Td>
+                    <D.Input
+                        value={idnumberTemp}
+                        placeholder={`${lang.placeholder} ${lang.supplier}`}
+                        onChange={(e) => setIdnumberTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    />
+                </C.Td>
+                </>}
                 <C.Td>
                     <D.Input
                         value={fornTemp}
@@ -115,8 +175,16 @@ const GridItem = ({ item, onDelete, updateDocument }) => {
         return (
             <C.Tr>
                 <C.Td alignCenter width={10}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
+                {localStorage.getItem('sheetType') === 'financialControl' && <>
                 <C.Td alignCenter>{item.expense ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
                 <C.Td padding={8}>{item.prov}</C.Td>
+                </>}
+                {localStorage.getItem('sheetType') === 'todoPayments' && <>
+                <C.Td padding={8} alignCenter>{++index}</C.Td>
+                <C.Td padding={8} alignCenter>{item.link}</C.Td>
+                <C.Td padding={8}>{item.bank}</C.Td>
+                <C.Td padding={8}>{item.idnumber}</C.Td>
+                </>}
                 <C.Td padding={8}>{item.forn}</C.Td>
                 <C.Td padding={8}>{item.desc}</C.Td>
                 <C.Td padding={8}>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>

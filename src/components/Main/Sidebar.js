@@ -30,8 +30,8 @@ function Sidebarr({ accName }) {
                 <Menu>
                     {Array.from(sections).map((section) => (
                         <SubMenu label={section.name} key={section.title} title={section.name}>
-                            <MenuItem onClick={() => {localStorage.setItem('sheetType', lang.financialControl); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
-                            <MenuItem onClick={() => {localStorage.setItem('sheetType', lang.todoPayments); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
+                            <MenuItem onClick={() => {localStorage.setItem('sheetType', 'financialControl'); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
+                            <MenuItem onClick={() => {localStorage.setItem('sheetType', 'todoPayments'); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
                         </SubMenu>
                     ))}
                 </Menu>

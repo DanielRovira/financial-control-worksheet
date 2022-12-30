@@ -4,14 +4,23 @@ const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Form = ({ insertDocument }) => {
     const toDay = new Date().toISOString().substring(0, 10)
-    const [date, setDate]  = useState(toDay);
-    const [desc, setDesc]  = useState('');
-    const [prov, setProv]  = useState('3R');
-    const [forn, setForn]  = useState('');
-    const [amount, setAmount] = useState('');
-    const [isExpense, setExpense] = useState(true);
     const categories = JSON.parse(localStorage.getItem("categories")) || [];
     let provenience = Array.from(categories || []).filter(item => item.type === 'provenience')
+
+    // Both
+    const [date, setDate]  = useState(toDay);
+    const [desc, setDesc]  = useState('');
+    const [amount, setAmount] = useState('');
+    const [forn, setForn]  = useState('');
+    
+    // Paid payments
+    const [prov, setProv]  = useState('3R');
+    const [isExpense, setExpense] = useState(true);
+
+    // To pay payments
+    const [link, setLink]  = useState('');
+    const [bank, setBank]  = useState('');
+    const [idnumber, setIdnumber]  = useState('');
 
     const handleSave = () => {
         if (!desc || !amount || !date) {
@@ -21,17 +30,28 @@ const Form = ({ insertDocument }) => {
             alert(lang.alert02);
             return;  
         }
-        
-        const transaction = {
-            date: date,
-            desc: desc,
-            amount: amount.replace(/,/g, '.'),
-            expense: isExpense,
-            prov: prov,
-            forn: forn,
-        };
 
-        insertDocument(transaction);
+        const transaction = {
+            financialControl: {
+                date: date,
+                desc: desc,
+                amount: amount.replace(/,/g, '.'),
+                expense: isExpense,
+                prov: prov,
+                forn: forn,
+            },
+            todoPayments: {
+                date: date,
+                link: link,
+                bank: bank,
+                idnumber: idnumber,
+                forn: forn,
+                desc: desc,
+                amount: amount.replace(/,/g, '.'),
+            }
+        }
+
+        insertDocument(transaction[localStorage.getItem('sheetType')]);
         
         setDesc('');
         setAmount('');
@@ -51,6 +71,8 @@ const Form = ({ insertDocument }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         />
                 </C.InputContent>
+                {localStorage.getItem('sheetType') === 'financialControl' && 
+                <>
                 <C.InputContent>
                     <C.Label>{lang.type}</C.Label>
                     <C.Select
@@ -70,6 +92,37 @@ const Form = ({ insertDocument }) => {
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </C.Select>
                 </C.InputContent>
+                </>}
+                {localStorage.getItem('sheetType') === 'todoPayments' && 
+                <>
+                <C.InputContent>
+                    <C.Label>{lang.link}</C.Label>
+                    <C.Input
+                        value={link}
+                        placeholder={`${lang.placeholder} ${lang.link}`}
+                        onChange={(e) => setLink(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                    />
+                </C.InputContent>
+                <C.InputContent>
+                    <C.Label>{lang.bank}</C.Label>
+                    <C.Input
+                        value={bank}
+                        placeholder={`${lang.placeholder} ${lang.bank}`}
+                        onChange={(e) => setBank(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        />
+                </C.InputContent>
+                <C.InputContent>
+                    <C.Label>{lang.idnumber}</C.Label>
+                    <C.Input
+                        value={idnumber}
+                        placeholder={`${lang.placeholder} ${lang.idnumber}`}
+                        onChange={(e) => setIdnumber(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        />
+                </C.InputContent>
+                </>}
                 <C.InputContent>
                     <C.Label>{lang.supplier}</C.Label>
                     <C.Input
