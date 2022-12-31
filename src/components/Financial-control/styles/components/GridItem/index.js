@@ -191,6 +191,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         decimalScale='2'
                         onValueChange={(e) => handleAmountType(e)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={100}
                     />
                 </C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>

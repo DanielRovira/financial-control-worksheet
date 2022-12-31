@@ -19,7 +19,7 @@ function Main({ isLoggedIn }) {
                     variant='contained'
                     onClick={() => {history(`/financial-control/${section.title}`); localStorage.setItem('sheetType', 'financialControl')}}
                     >
-                    {section.title}
+                    {section.name}
                     </Button>
                 </Container>
             ))}

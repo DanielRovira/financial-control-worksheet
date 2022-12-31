@@ -35,7 +35,7 @@ function Sidebarr({ accName }) {
                         </SubMenu>
                     ))}
                 </Menu>
-                <div style={{height: '100%', maxHeight: '50vh', display: 'flex', alignItems: 'flex-end', paddingLeft: '10px' }}>
+                <div style={{position: 'fixed', bottom: '20px', paddingLeft: '10px' }}>
                     <h3>{accName}</h3>
                 </div>
             </Sidebar>
