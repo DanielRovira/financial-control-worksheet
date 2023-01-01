@@ -140,7 +140,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         width={110}
                     >
                         <option defaultValue disabled hidden>{lang.select}</option>
-                        <option disabled hidden>{categoryTemp}</option>
+                        {!categories.some(cat => cat.name === categoryTemp) && <option disabled hidden>{categoryTemp}</option>}
                         {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                     }
@@ -163,7 +163,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         width={110}
                     >
                         <option defaultValue disabled hidden>{lang.select}</option>
-                        <option disabled hidden>{subCategoryTemp}</option>
+                        {!subCategories.some(cat => cat.name === subCategoryTemp) && <option disabled hidden>{subCategoryTemp}</option>}
                         {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 }
