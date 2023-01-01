@@ -15,8 +15,8 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
     const [bankTemp, setBankTemp] = useState(item.bank)
     const [categoryTemp, setCategoryTemp] = useState(item.category)
     const [subCategoryTemp, setSubCategoryTemp] = useState(item.subCategory)
-    const [otherCategoryTemp, setOtherCategoryTemp] = useState('')
-    const [otherSubCategoryTemp, setOtherSubCategoryTemp] = useState('')
+    const [otherCategoryTemp, setOtherCategoryTemp] = useState(categoryTemp)
+    const [otherSubCategoryTemp, setOtherSubCategoryTemp] = useState(subCategoryTemp)
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
@@ -57,8 +57,8 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 date: dateTemp,
                 expense: expenseTemp,
                 prov: provTemp,
-                category: categoryTemp,
-                subCategory: subCategoryTemp,
+                category: categoryTemp === lang.other || "" ? otherCategoryTemp : categoryTemp,
+                subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
                 forn: fornTemp,
                 desc:descTemp,
                 amount: amountTemp });
