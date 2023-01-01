@@ -16,7 +16,7 @@ const Form = ({ insertDocument }) => {
     const [forn, setForn]  = useState('');
     
     // Paid payments
-    const [prov, setProv]  = useState(provenience[0].name);
+    const [prov, setProv]  = useState(provenience[0]?.name);
     const [isExpense, setExpense] = useState(true);
     const [category, setCategory]  = useState(lang.select);
     const [subCategory, setSubCategory]  = useState(lang.select);

@@ -13,6 +13,9 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
             credentials: 'include'
         })
         .then(response => response.json())
+        .catch(error => {
+            setIsLoggedIn(false); history('/');
+        })
     };
 
     const handleLogout = () => {

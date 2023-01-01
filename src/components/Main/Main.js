@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { useEffect } from 'react';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 function Main({ isLoggedIn }) {
     const history = useNavigate();

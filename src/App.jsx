@@ -25,8 +25,8 @@ const App = () => {
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+                        <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

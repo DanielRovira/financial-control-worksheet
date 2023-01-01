@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn }) => {
+const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -17,10 +17,14 @@ const FinancialWorksheet = ({ isLoggedIn }) => {
             const res = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${localStorage.getItem('sheetType')}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
-            setTransactionsList(res || [])
+            .catch(error => {
+                setIsLoggedIn(false); history('/');
+            })
+            if (res.status === 200) {setTransactionsList(res.post || [])} else {setIsLoggedIn(false); history('/')} 
         }
 
     useEffect(() => {
+        setTransactionsList([])
         isLoggedIn ? getData() : history('/')
         // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
