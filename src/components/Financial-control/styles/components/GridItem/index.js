@@ -15,6 +15,8 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
     const [bankTemp, setBankTemp] = useState(item.bank)
     const [categoryTemp, setCategoryTemp] = useState(item.category)
     const [subCategoryTemp, setSubCategoryTemp] = useState(item.subCategory)
+    const [otherCategoryTemp, setOtherCategoryTemp] = useState('')
+    const [otherSubCategoryTemp, setOtherSubCategoryTemp] = useState('')
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
@@ -80,7 +82,9 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 desc: descTemp,
                 amount: amountTemp });
         }}
-        
+        setCategoryTemp(otherCategoryTemp)
+        setSubCategoryTemp(otherSubCategoryTemp)
+        console.log(categoryTemp)
         setActive(!isActive);
     };
 
@@ -119,22 +123,50 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                     </D.Select>
                 </C.Td>
                 <C.Td>
-                    <D.Select
-                        value={categoryTemp}
-                        onChange={(e) => setCategoryTemp(e.target.value)}
+                    {categoryTemp === lang.other ?
+                    <D.Input
+                        autoFocus
+                        value={otherCategoryTemp}
+                        onChange={(e) => setOtherCategoryTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={98}
+                    />
+                    :
+                    <D.Select
+                        value={categoryTemp === '' ? lang.select : categoryTemp}
+                        onChange={(e) => {setCategoryTemp(e.target.value); e.target.value === lang.other ? categories.some(cat => cat.name === categoryTemp) ? setOtherCategoryTemp('') : setOtherCategoryTemp(categoryTemp) : setOtherCategoryTemp(e.target.value)}}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        style={categoryTemp === '' ? {color: 'gray'} : {color: 'black'}}
+                        width={110}
                     >
-                        {categories.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
+                        <option defaultValue disabled hidden>{lang.select}</option>
+                        <option disabled hidden>{categoryTemp}</option>
+                        {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
+                    }
                 </C.Td>
                 <C.Td>
-                    <D.Select
-                        value={subCategoryTemp}
-                        onChange={(e) => setSubCategoryTemp(e.target.value)}
+                    {subCategoryTemp === lang.other ?
+                    <D.Input
+                        autoFocus
+                        value={otherSubCategoryTemp}
+                        onChange={(e) => setOtherSubCategoryTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={98}
+                    />
+                    :
+                    <D.Select
+                        value={subCategoryTemp === '' ? lang.select : subCategoryTemp}
+                        onChange={(e) => {setSubCategoryTemp(e.target.value); e.target.value === lang.other ? subCategories.some(cat => cat.name === subCategoryTemp) ? setOtherSubCategoryTemp('') : setOtherSubCategoryTemp(subCategoryTemp) : setOtherSubCategoryTemp(e.target.value)}}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        style={subCategoryTemp === '' ? {color: 'gray'} : {color: 'black'}}
+                        width={110}
                     >
-                        {subCategories.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
+                        <option defaultValue disabled hidden>{lang.select}</option>
+                        <option disabled hidden>{subCategoryTemp}</option>
+                        {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
+                }
                 </C.Td>
                 </>}
                 {localStorage.getItem('sheetType') === 'todoPayments' && 
