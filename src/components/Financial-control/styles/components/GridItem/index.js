@@ -201,22 +201,22 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
     else {
         return (
             <C.Tr>
-                <C.Td alignCenter width={10}>{item.date.slice(-2)}-{item.date.slice(5,-3)}-{item.date.slice(0,-6)}</C.Td>
+                <C.Td alignCenter width={10}>{dateTemp.slice(-2)}-{dateTemp.slice(5,-3)}-{dateTemp.slice(0,-6)}</C.Td>
                 {localStorage.getItem('sheetType') === 'financialControl' && <>
-                <C.Td alignCenter>{item.expense ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
-                <C.Td padding={8} alignCenter>{item.prov}</C.Td>
-                <C.Td padding={8}>{item.category}</C.Td>
-                <C.Td padding={8}>{item.subCategory}</C.Td>
+                <C.Td alignCenter>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
+                <C.Td padding={8} alignCenter>{provTemp}</C.Td>
+                <C.Td padding={8}>{categoryTemp}</C.Td>
+                <C.Td padding={8}>{subCategoryTemp}</C.Td>
                 </>}
                 {localStorage.getItem('sheetType') === 'todoPayments' && <>
                 <C.Td padding={8} alignCenter>{++index}</C.Td>
-                <C.Td padding={8} alignCenter>{item.link}</C.Td>
-                <C.Td padding={8}>{item.bank}</C.Td>
-                <C.Td padding={8}>{item.idnumber}</C.Td>
+                <C.Td padding={8} alignCenter>{linkTemp}</C.Td>
+                <C.Td padding={8}>{bankTemp}</C.Td>
+                <C.Td padding={8}>{idnumberTemp}</C.Td>
                 </>}
-                <C.Td padding={8}>{item.forn}</C.Td>
-                <C.Td padding={8}>{item.desc}</C.Td>
-                <C.Td padding={8}>{Number(item.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
+                <C.Td padding={8}>{fornTemp}</C.Td>
+                <C.Td padding={8}>{descTemp}</C.Td>
+                <C.Td padding={8}>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.Td>
                 <C.Td alignCenter><FaTrash color='grey' style={{cursor: 'not-allowed'}} /></C.Td>
             </C.Tr>
