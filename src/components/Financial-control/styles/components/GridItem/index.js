@@ -178,6 +178,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         placeholder={`${lang.placeholder} ${lang.link}`}
                         onChange={(e) => setLinkTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={100}
                     />
                 </C.Td>
                 <C.Td>
@@ -186,6 +187,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         placeholder={`${lang.placeholder} ${lang.bank}`}
                         onChange={(e) => setBankTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={100}
                     />
                 </C.Td>
                 <C.Td>
@@ -194,6 +196,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         placeholder={`${lang.placeholder} ${lang.idnumber}`}
                         onChange={(e) => setIdnumberTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={100}
                     />
                 </C.Td>
                 </>}
@@ -203,6 +206,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         placeholder={`${lang.placeholder} ${lang.supplier}`}
                         onChange={(e) => setFornTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={100}
                     />
                 </C.Td>
                 <C.Td>
@@ -211,6 +215,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                         placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDescTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        width={100}
                     />
                 </C.Td>
                 <C.Td>
