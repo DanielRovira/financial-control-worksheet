@@ -1,9 +1,11 @@
-import { AppBar, Box, Tab, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Tab, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Header = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
         await fetch(`/api/logout`,
@@ -27,31 +29,27 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     };
 
     return (
-        <div>
-            <AppBar position='sticky' style={{ background: 'teal' , filter:'grayscale(50%)' }}>
+        <>
+            {isLoggedIn && (
+            <AppBar position='sticky' style={{ background: 'teal' , filter:'grayscale(50%)' }} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                 <Toolbar>
-                {/* <h1>{accName}</h1> */}
-                <h1 style={{textAlign: 'center'}} >{lang[localStorage.getItem("sheetType")]}</h1>
-                    <Typography variant='h3'></Typography>
+                    <IconButton color="inherit" edge="start" onClick={() => setOpen(!open)} >
+                        <MenuIcon />
+                    </IconButton>
+                    <h1 style={{paddingLeft: '20px'}} >{lang[localStorage.getItem("sheetType")]}</h1>
                     <Box sx={{ marginLeft: 'auto' }}>
-                        {isLoggedIn ? (
-                        <Tab
-                        onClick={handleLogout}
-                        to='/'
-                        LinkComponent={Link}
-                        label='Logout'
-                    />
-                    ) : (
-                        <>
-                        {' '}
-                        <Tab to='/' LinkComponent={Link} label='Login' />
-                        <Tab to='/signup' LinkComponent={Link} label='Signup' />
-                        </>
-                    )}
+                        
+                            <Tab
+                            onClick={handleLogout}
+                            to='/'
+                            LinkComponent={Link}
+                            label='Logout'
+                            />
                     </Box>
                 </Toolbar>
             </AppBar>
-        </div>
+            )}
+        </>
     )
 };
 

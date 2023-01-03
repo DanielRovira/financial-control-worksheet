@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ProSidebarProvider } from 'react-pro-sidebar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useClickAway } from 'react-use';
 import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet';
-import Sidebar from './components/Main/Sidebar';
+import Sidebar from './components/Main/Sidebar2';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Main from './components/Main/Main';
@@ -11,17 +11,23 @@ import Main from './components/Main/Main';
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [accName, setAccName] = useState(localStorage.getItem('userName'));
+    const [open, setOpen] = useState(false);
+    const sidebar = useRef(null);
+    const collapseSidebar = () => { open && setOpen(false) }
+    useClickAway(sidebar, collapseSidebar);
 
     useEffect(() => {
         !isLoggedIn && localStorage.clear()
     },[isLoggedIn])
 
     return (
-        <ProSidebarProvider>
+        <>
             {/* <Router basename='/financial-control-worksheet'>  // For using on GitHub Pages */} 
             <Router>
-                {isLoggedIn ? <Sidebar accName={accName} /> : ""}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />
+                <div ref={sidebar}>
+                {isLoggedIn ? <Sidebar open={open} /> : ""}
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} />
+                </div>
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
@@ -30,7 +36,7 @@ const App = () => {
                     </Routes>
             </Router>    
             <GlobalStyle />
-        </ProSidebarProvider>
+        </>
     )
 };
 

@@ -63,7 +63,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     }
 
   return (
-    <div>
+    <div style={{ paddingTop: '100px' }}>
       <form onSubmit={handleSubmit}>
         <Box
           marginLeft='auto'
