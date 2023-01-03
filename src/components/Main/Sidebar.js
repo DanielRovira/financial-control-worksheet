@@ -29,7 +29,7 @@ function Sidebarr({ accName }) {
                 </IconButton>
                 <Menu>
                     {Array.from(sections).map((section) => (
-                        <SubMenu label={section.name} key={section.title} title={section.name}>
+                        <SubMenu label={collapsed ? section.title.slice(0, 3) : section.name } key={section.title} title={section.name}>
                             <MenuItem onClick={() => {localStorage.setItem('sheetType', 'todoPayments'); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
                             <MenuItem onClick={() => {localStorage.setItem('sheetType', 'financialControl'); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
                         </SubMenu>
