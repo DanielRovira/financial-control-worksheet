@@ -63,42 +63,42 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     }
 
   return (
-    <div style={{ paddingTop: '100px' }}>
-      <form onSubmit={handleSubmit}>
-        <Box
-          marginLeft='auto'
-          marginRight='auto'
-          width={300}
-          display='flex'
-          flexDirection={'column'}
-          justifyContent='center'
-          alignItems='center'
-        >
-          <Typography variant='h2'>{lang.login}</Typography>
-
-          <TextField
-            name='email'
-            onChange={handleChange}
-            type={'email'}
-            value={inputs.email}
-            variant='outlined'
-            placeholder={lang.email}
-            margin='normal'
-            autoComplete='username'
-          />
-          <TextField
-            name='password'
-            onChange={handleChange}
-            type='password'
-            value={inputs.password}
-            variant='outlined'
-            placeholder={lang.password}
-            margin='normal'
-            autoComplete='current-password'
-          />
-          <Button variant='contained' type='submit'>
-            Login
-          </Button>
+    <div>
+        <Typography style={{ paddingTop: '20px' }} align='center' variant='h3'>{lang.financialControl} {process.env.REACT_APP_NAME}</Typography>
+        <form style={{ paddingTop: '20px' }} onSubmit={handleSubmit}>
+            <Box
+              marginLeft='auto'
+              marginRight='auto'
+              width={300}
+              display='flex'
+              flexDirection={'column'}
+              justifyContent='center'
+              alignItems='center'
+            >
+            <Typography variant='h3'>{lang.login}</Typography>
+            <TextField
+              name='email'
+              onChange={handleChange}
+              type={'email'}
+              value={inputs.email}
+              variant='outlined'
+              placeholder={lang.email}
+              margin='normal'
+              autoComplete='username'
+            />
+            <TextField
+              name='password'
+              onChange={handleChange}
+              type='password'
+              value={inputs.password}
+              variant='outlined'
+              placeholder={lang.password}
+              margin='normal'
+              autoComplete='current-password'
+            />
+            <Button variant='contained' type='submit'>
+              Login
+            </Button>
         </Box>
       </form>
     </div>
