@@ -63,8 +63,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     }
 
   return (
-    <div>
-        <Typography style={{ paddingTop: '20px' }} align='center' variant='h3'>{lang.financialControl} {process.env.REACT_APP_NAME}</Typography>
+    <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column'}} >
+        <Typography style={{ padding: '20px' }} align='center' variant='h3'>{lang.financialControl}</Typography>
+        <img src="/Logo.jpg" alt="image" style={{ maxWidth: '200px' }} />
         <form style={{ paddingTop: '20px' }} onSubmit={handleSubmit}>
             <Box
               marginLeft='auto'

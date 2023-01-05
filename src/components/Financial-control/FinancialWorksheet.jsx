@@ -84,12 +84,12 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
     }, [transactionsList]);
 
     return (
-        <>
+        <div>
             <Header />
             <Resume income={income} expense={expense} total={total} />
             <Form insertDocument={insertDocument} />
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />
-        </>
+        </div>
     );
 };
  
