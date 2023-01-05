@@ -34,7 +34,7 @@ export default function NestedList({ section, setOpen, hideTitle }) {
       </ClickAwayListener>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); localStorage.setItem('sheetType', 'financialControl')}}>
+          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); localStorage.setItem('sheetType', 'todoPayments')}}>
             <ListItemIcon sx={{ color: 'black' }} >
               <CalendarMonthIcon/>
             </ListItemIcon>

@@ -63,6 +63,9 @@ export default function MiniDrawer({ open, setOpen }) {
                     <NestedList key={index} section={section} setOpen={setOpen}/>
                 ))}
         </List>
+        <div style={{position: 'absolute', bottom: '20px', paddingLeft: '60px' }}>
+            <img src="/Logo.jpg" alt="image" style={{ maxWidth: '150px' }} />
+        </div>
       </Drawer>
   );
 }
