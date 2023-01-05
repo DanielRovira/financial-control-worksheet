@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetType }) => {
     const history = useNavigate();
     const sendLogoutReq = async () => {
         await fetch(`/api/logout`,
@@ -36,7 +36,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen }) => {
                     <IconButton color="inherit" edge="start" onClick={() => setOpen(!open)} >
                         <MenuIcon />
                     </IconButton>
-                    <h1 style={{paddingLeft: '20px'}} >{lang[localStorage.getItem("sheetType")]}</h1>
+                    <h1 style={{paddingLeft: '20px'}} >{lang[sheetType]}</h1>
                     <Box sx={{ marginLeft: 'auto' }}>
                         
                             <Tab

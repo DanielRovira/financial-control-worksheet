@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as C from './styles';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument }) => {
+const Form = ({ insertDocument, sheetType }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
@@ -59,7 +59,7 @@ const Form = ({ insertDocument }) => {
             }
         }
 
-        insertDocument(transaction[localStorage.getItem('sheetType')]);
+        insertDocument(transaction[sheetType]);
         
         setDesc('');
         setAmount('');
@@ -86,7 +86,7 @@ const Form = ({ insertDocument }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         />
                 </C.InputContent>
-                {localStorage.getItem('sheetType') === 'financialControl' && 
+                {sheetType === 'financialControl' && 
                 <>
                 <C.InputContent>
                     <C.Label>{lang.type}</C.Label>
@@ -157,7 +157,7 @@ const Form = ({ insertDocument }) => {
                     }
                 </C.InputContent>
                 </>}
-                {localStorage.getItem('sheetType') === 'todoPayments' && 
+                {sheetType === 'todoPayments' && 
                 <>
                 <C.InputContent>
                     <C.Label>{lang.link}</C.Label>

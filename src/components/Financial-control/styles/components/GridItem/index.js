@@ -5,7 +5,7 @@ import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } fr
 import {useClickAway} from 'react-use';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, index, onDelete, updateDocument }) => {
+const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -43,7 +43,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
             return;  
         }
 
-        if (localStorage.getItem('sheetType') === 'financialControl') {
+        if (sheetType === 'financialControl') {
             if (
                 dateTemp !== item.date||
                 expenseTemp !== item.expense ||
@@ -64,7 +64,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 amount: amountTemp });
             }}
 
-        if (localStorage.getItem('sheetType') === 'todoPayments') {
+        if (sheetType === 'todoPayments') {
             if (
                 dateTemp !== item.date||
                 linkTemp !== item.link ||
@@ -102,7 +102,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                             onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                             />
                 </C.Td>
-                {localStorage.getItem('sheetType') === 'financialControl' && 
+                {sheetType === 'financialControl' && 
                 <>
                 <C.Td alignCenter>
                     <D.Select
@@ -169,7 +169,7 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
                 }
                 </C.Td>
                 </>}
-                {localStorage.getItem('sheetType') === 'todoPayments' && 
+                {sheetType === 'todoPayments' && 
                 <>
                 <C.Td alignCenter padding={8}>{++index}</C.Td>
                 <C.Td>
@@ -239,13 +239,13 @@ const GridItem = ({ item, index, onDelete, updateDocument }) => {
         return (
             <C.Tr>
                 <C.Td alignCenter width={10}>{dateTemp.slice(-2)}-{dateTemp.slice(5,-3)}-{dateTemp.slice(0,-6)}</C.Td>
-                {localStorage.getItem('sheetType') === 'financialControl' && <>
+                {sheetType === 'financialControl' && <>
                 <C.Td alignCenter>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
                 <C.Td padding={8} alignCenter>{provTemp}</C.Td>
                 <C.Td padding={8}>{categoryTemp}</C.Td>
                 <C.Td padding={8}>{subCategoryTemp}</C.Td>
                 </>}
-                {localStorage.getItem('sheetType') === 'todoPayments' && <>
+                {sheetType === 'todoPayments' && <>
                 <C.Td padding={8} alignCenter>{++index}</C.Td>
                 <C.Td padding={8} alignCenter>{linkTemp}</C.Td>
                 <C.Td padding={8}>{bankTemp}</C.Td>

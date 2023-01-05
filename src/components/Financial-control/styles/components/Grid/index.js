@@ -3,7 +3,7 @@ import GridItem from '../GridItem';
 import * as C from './styles';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Grid = ({ rawData, deleteDocument, updateDocument }) => {
+const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
         var c = new Date(a.date);
@@ -16,14 +16,14 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
             <C.Thead>
                 <C.Tr>
                     <C.Th width={10} alignCenter>{lang.date}</C.Th>
-                    {localStorage.getItem('sheetType') === 'financialControl' && 
+                    {sheetType === 'financialControl' && 
                     <>
                     <C.Th width={8} alignCenter>{lang.type}</C.Th>
                     <C.Th width={10} alignCenter>{lang.source}</C.Th>
                     <C.Th width={10}>{lang.category}</C.Th>
                     <C.Th width={10}>{lang.subCategory}</C.Th>
                     </>}
-                    {localStorage.getItem('sheetType') === 'todoPayments' && 
+                    {sheetType === 'todoPayments' && 
                     <>
                     <C.Th width={5} alignCenter>{lang.number}</C.Th>
                     <C.Th width={10} alignCenter>{lang.link}</C.Th>
@@ -39,7 +39,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument }) => {
             </C.Thead>
             <C.Tbody>
                 {Array.from(itens)?.map((item, index) => (
-                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} />
+                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} />
                 ))}
             </C.Tbody>
         </C.Table>

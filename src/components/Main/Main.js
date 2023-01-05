@@ -6,11 +6,12 @@ import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-function Main({ isLoggedIn }) {
+function Main({ isLoggedIn, setSheetType }) {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     
     useEffect(() => {
+        setSheetType('')
         !isLoggedIn && history('/')
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 

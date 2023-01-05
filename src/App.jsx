@@ -12,6 +12,7 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [accName, setAccName] = useState(localStorage.getItem('userName'));
     const [open, setOpen] = useState(false);
+    const [sheetType, setSheetType] = useState();
     const sidebar = useRef(null);
     const collapseSidebar = () => { open && setOpen(false) }
     useClickAway(sidebar, collapseSidebar);
@@ -26,13 +27,13 @@ const App = () => {
             <Router>
                 <div ref={sidebar}>
                 {isLoggedIn ? <Sidebar open={open} setOpen={setOpen} /> : ""}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} />
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
                 </div>
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
-                        <Route path="/main" element={<Main isLoggedIn={isLoggedIn} />} />
-                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-                        <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+                        <Route path="/main" element={<Main isLoggedIn={isLoggedIn} setSheetType={setSheetType} />} />
+                        <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
+                        <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
                     </Routes>
             </Router>    
             <GlobalStyle />

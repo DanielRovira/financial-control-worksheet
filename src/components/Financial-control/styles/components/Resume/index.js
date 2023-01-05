@@ -4,10 +4,10 @@ import * as C from './styles';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaDollarSign } from 'react-icons/fa';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Resume = ({ income, expense, total }) => {
+const Resume = ({ income, expense, total, sheetType }) => {
     return ( 
         <C.Container>
-            {localStorage.getItem('sheetType') === 'financialControl' && <>
+            {sheetType === 'financialControl' && <>
             <ResumeItem title={lang.entries} Icon={FaRegArrowAltCircleUp} value={income} />
             <ResumeItem title={lang.expenses} Icon={FaRegArrowAltCircleDown} value={expense} />
             </>}

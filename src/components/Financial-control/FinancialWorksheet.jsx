@@ -5,7 +5,7 @@ import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 
-const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
+const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
@@ -15,7 +15,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
 
     const getData = async () => {
             const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${localStorage.getItem('sheetType')}`, { method:'GET', credentials: 'include' })
+            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${sheetType}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             .catch(error => {
                 setIsLoggedIn(false); history('/');
@@ -24,13 +24,14 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
         }
 
     useEffect(() => {
+        setSheetType(sheetType)
         setTransactionsList([])
         isLoggedIn ? getData() : history('/')
         // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
-        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${localStorage.getItem('sheetType')}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${sheetType}`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -42,7 +43,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     function updateDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${localStorage.getItem('sheetType')}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
             method:'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -54,7 +55,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     function deleteDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${localStorage.getItem('sheetType')}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },
@@ -86,9 +87,9 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn }) => {
     return (
         <div>
             <Header />
-            <Resume income={income} expense={expense} total={total} />
-            <Form insertDocument={insertDocument} />
-            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} />
+            <Resume income={income} expense={expense} total={total} sheetType={sheetType} />
+            <Form insertDocument={insertDocument} sheetType={sheetType}/>
+            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
         </div>
     );
 };
