@@ -9,14 +9,15 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 function Main({ isLoggedIn }) {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    
     useEffect(() => {
         !isLoggedIn && history('/')
-    }, [isLoggedIn])  // eslint-disable-line react-hooks/exhaustive-deps
+    }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '50px' }}>
+        <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '100px' }}>
             <List
-                  sx={{ width: '300px', maxWidth: 360, bgcolor: 'background.paper' }}
+                  sx={{ width: '300px', bgcolor: 'white' }}
                   component="nav"
                   aria-labelledby="nested-list-subheader"
                   subheader={
@@ -26,7 +27,7 @@ function Main({ isLoggedIn }) {
                   }
                 >
                 {Array.from(sections).map((section, index) => (
-                    <NestedList key={index} section={section} hideTitle={true} />
+                    <NestedList key={index} section={section} hideTitle={true} arrow={true} />
                 ))}
             </List>
         </div>

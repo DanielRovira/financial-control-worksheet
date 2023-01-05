@@ -12,7 +12,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function NestedList({ section, setOpen, hideTitle }) {
+export default function NestedList({ section, setOpen, hideTitle, arrow }) {
     const history = useNavigate();
     const [open, setOpenSection] = React.useState(false);
 
@@ -29,18 +29,18 @@ export default function NestedList({ section, setOpen, hideTitle }) {
           {section.title.slice(0, 3)}
         </ListItemIcon>
         <ListItemText primary={section.name} />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        {arrow && (open ? <ExpandLess /> : <ExpandMore />)}
       </ListItemButton>
       </ClickAwayListener>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}  onClick={() => {setOpen(false); history(`/financial-todos/${section.title}`); localStorage.setItem('sheetType', 'todoPayments')}}>
+          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); localStorage.setItem('sheetType', 'todoPayments'); setOpen && setOpen(false)}}>
             <ListItemIcon sx={{ color: 'black' }} >
               <CalendarMonthIcon/>
             </ListItemIcon>
             <ListItemText primary={lang.todoPayments} />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {setOpen(false); history(`/financial-control/${section.title}`); localStorage.setItem('sheetType', 'financialControl')}}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => {history(`/financial-control/${section.title}`); localStorage.setItem('sheetType', 'financialControl'); setOpen && setOpen(false)}}>
             <ListItemIcon sx={{ color: 'black' }} >
               <ListAltIcon />
             </ListItemIcon>
