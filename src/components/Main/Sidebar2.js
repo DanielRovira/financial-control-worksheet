@@ -11,7 +11,7 @@ export default function MiniDrawer({ open, setOpen }) {
 
     return (
       <Drawer variant="permanent" open={open} >
-        <List sx={{ height: '100%', overflow: 'hidden', paddingTop: '70px', width: open ? '250px':'60px', whiteSpace:'nowrap', transition: '.3s' }}
+        <List sx={{ height: '100%', overflow: 'hidden', paddingTop: '70px', width: open ? '250px' : '65px', whiteSpace:'nowrap', transition: '.3s' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
@@ -23,7 +23,7 @@ export default function MiniDrawer({ open, setOpen }) {
             {Array.from(sections).map((section, index) => (
                 <NestedList key={index} section={section} setOpen={setOpen}/>
             ))}
-        <div style={{ position: 'absolute', bottom: '20px', paddingLeft: '55px' }}>
+        <div style={{ position: 'absolute', bottom: '20px', paddingLeft: '58px' }}>
             <img src="/Logo.jpg" alt="Logo" style={{ maxWidth: '150px'}} />
         </div>
         </List>

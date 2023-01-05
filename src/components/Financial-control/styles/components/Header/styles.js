@@ -9,6 +9,6 @@ export const Container = styled.div`
 export const Header = styled.h1``;
 
 export const Title = styled.div`
-    padding-top: 70px;
+    padding-top: 75px;
     color: #fff;
 `;
