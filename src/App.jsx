@@ -25,7 +25,7 @@ const App = () => {
             {/* <Router basename='/financial-control-worksheet'>  // For using on GitHub Pages */} 
             <Router>
                 <div ref={sidebar}>
-                {isLoggedIn ? <Sidebar open={open} /> : ""}
+                {isLoggedIn ? <Sidebar open={open} setOpen={setOpen} /> : ""}
                 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} />
                 </div>
                     <Routes>

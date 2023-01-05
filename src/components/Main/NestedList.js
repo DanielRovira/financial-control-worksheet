@@ -12,18 +12,19 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function NestedList({ section }) {
+export default function NestedList({ section, setOpen, hideTitle }) {
     const history = useNavigate();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpenSection] = React.useState(false);
 
     const handleClick = () => {
-    setOpen(!open);
+        setOpen && setOpen(true);
+        setOpenSection(!open);
     };
 
   return (
         <>
-      <ClickAwayListener onClickAway={() => setOpen(false)}>
-      <ListItemButton onClick={handleClick}>
+      <ClickAwayListener onClickAway={() => setOpenSection(false)}>
+      <ListItemButton onClick={handleClick} title={hideTitle ? '' : section.name}>
         <ListItemIcon>
           {section.title.slice(0, 3)}
         </ListItemIcon>

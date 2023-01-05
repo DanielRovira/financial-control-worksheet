@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
-import NestedList from './List';
+import NestedList from './NestedList';
 
 const drawerWidth = 240;
 
@@ -45,7 +45,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({ open }) {
+export default function MiniDrawer({ open, setOpen }) {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     return (
@@ -60,7 +60,7 @@ export default function MiniDrawer({ open }) {
                   }
                 >
                 {Array.from(sections).map((section, index) => (
-                    <NestedList key={index} section={section} />
+                    <NestedList key={index} section={section} setOpen={setOpen}/>
                 ))}
         </List>
       </Drawer>

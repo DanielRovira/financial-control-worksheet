@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import NestedList from './List';
+import NestedList from './NestedList';
 
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
@@ -17,7 +17,7 @@ function Main({ isLoggedIn }) {
     return (
         <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '100px' }}>
             <List
-                  sx={{ width: '400px', maxWidth: 360, bgcolor: 'background.paper' }}
+                  sx={{ width: '300px', maxWidth: 360, bgcolor: 'background.paper' }}
                   component="nav"
                   aria-labelledby="nested-list-subheader"
                   subheader={
@@ -27,7 +27,7 @@ function Main({ isLoggedIn }) {
                   }
                 >
                 {Array.from(sections).map((section, index) => (
-                    <NestedList key={index} section={section} />
+                    <NestedList key={index} section={section} hideTitle={true} />
                 ))}
             </List>
         </div>
