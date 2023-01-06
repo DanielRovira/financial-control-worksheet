@@ -64,8 +64,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
 
   return (
     <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column'}} >
-        <Typography style={{ padding: '20px' }} align='center' variant='h3'>{lang.financialControl}</Typography>
-        <img src="/Logo.jpg" alt="image" style={{ maxWidth: '200px' }} />
+        {/* <Typography style={{ padding: '20px' }} align='center' variant='h3'>{lang.financialControl}</Typography> */}
+        <img src="/Logo.jpg" alt="logo" style={{ maxWidth: '200px', boxShadow: '1px 2px 3px rgba(0,0,0,.5)' }} />
         <form style={{ paddingTop: '20px' }} onSubmit={handleSubmit}>
             <Box
               marginLeft='auto'
@@ -83,9 +83,10 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
               type={'email'}
               value={inputs.email}
               variant='outlined'
-              placeholder={lang.email}
+            //   placeholder={lang.email}
               margin='normal'
               autoComplete='username'
+              label={lang.email}
             />
             <TextField
               name='password'
@@ -93,12 +94,13 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
               type='password'
               value={inputs.password}
               variant='outlined'
-              placeholder={lang.password}
+            //   placeholder={lang.password}
               margin='normal'
               autoComplete='current-password'
+              label={lang.password}
             />
             <Button variant='contained' type='submit'>
-              Login
+              {lang.login}
             </Button>
         </Box>
       </form>

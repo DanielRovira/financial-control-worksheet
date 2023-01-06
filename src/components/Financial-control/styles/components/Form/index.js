@@ -1,5 +1,8 @@
+import './index.css'
 import React, { useState } from 'react';
 import * as C from './styles';
+import { TextField } from '@mui/material';
+import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ insertDocument, sheetType }) => {
@@ -8,6 +11,7 @@ const Form = ({ insertDocument, sheetType }) => {
     let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
+    let inputWidth = 150
 
     // Both
     const [date, setDate]  = useState(toDay);
@@ -77,7 +81,7 @@ const Form = ({ insertDocument, sheetType }) => {
         <>
             <C.Container>
                 <C.InputContent>
-                    <C.Label>{lang.date}</C.Label>
+                    {/* <C.Label>{lang.date}</C.Label> */}
                     <C.Input
                         value={date}
                         type='date'
@@ -160,64 +164,80 @@ const Form = ({ insertDocument, sheetType }) => {
                 {sheetType === 'todoPayments' && 
                 <>
                 <C.InputContent>
-                    <C.Label>{lang.link}</C.Label>
-                    <C.Input
+                    {/* <C.Label>{lang.link}</C.Label> */}
+                    <TextField
                         value={link}
-                        placeholder={`${lang.placeholder} ${lang.link}`}
+                        label={`${lang.link}`}
                         onChange={(e) => setLink(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        size="small"
+                        sx={{ width: inputWidth }}
                     />
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>{lang.bank}</C.Label>
-                    <C.Input
+                    {/* <C.Label>{lang.bank}</C.Label> */}
+                    <TextField
                         value={bank}
-                        placeholder={`${lang.placeholder} ${lang.bank}`}
+                        label={`${lang.bank}`}
                         onChange={(e) => setBank(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        size="small"
+                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>{lang.idnumber}</C.Label>
-                    <C.Input
+                    {/* <C.Label>{lang.idnumber}</C.Label> */}
+                    <TextField
                         value={idnumber}
-                        placeholder={`${lang.placeholder} ${lang.idnumber}`}
+                        label={`${lang.idnumber}`}
                         onChange={(e) => setIdnumber(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        size="small"
+                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 </>}
                 <C.InputContent>
-                    <C.Label>{lang.supplier}</C.Label>
-                    <C.Input
+                    {/* <C.Label>{lang.supplier}</C.Label> */}
+                    <TextField
                         value={forn}
-                        placeholder={`${lang.placeholder} ${lang.supplier}`}
+                        label={`${lang.supplier}`}
                         onChange={(e) => setForn(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        size="small"
+                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>{lang.description}</C.Label>
-                    <C.Input
+                    {/* <C.Label>{lang.description}</C.Label> */}
+                    <TextField
                         value={desc}
-                        placeholder={`${lang.placeholder} ${lang.description}`}
+                        label={`${lang.description}`}
                         onChange={(e) => setDesc(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        size="small"
+                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
-                <C.InputContent>
-                    <C.Label>{lang.value}</C.Label>
-                    <C.Currency
+                <C.InputContent className='input-contain'>
+                    {/* <C.Label>{lang.value}</C.Label> */}
+                    <CurrencyInput
+                        className='input'
                         value={amount}
                         prefix={lang.valuePrefix}
-                        placeholder={lang.valuePlaceholder}
                         allowDecimals
                         disableAbbreviations
                         decimalScale='2'
                         onValueChange={(e) => {setAmount(e)}}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                        width={100}
+                        label={lang.value}
+                        // placeholder={lang.valuePlaceholder}
                         />
+                        <label className="placeholder-text">
+                            <span className='text'>
+                                {lang.value}
+                            </span>
+                        </label>
                 </C.InputContent>
                 <C.Button onClick={handleSave} style={{textTransform: 'uppercase'}} >{lang.add}</C.Button>
             </C.Container>
