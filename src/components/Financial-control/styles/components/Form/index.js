@@ -1,7 +1,7 @@
 import './index.css'
 import React, { useState } from 'react';
 import * as C from './styles';
-import { TextField } from '@mui/material';
+import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -11,7 +11,7 @@ const Form = ({ insertDocument, sheetType }) => {
     let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
-    let inputWidth = 150
+    let inputWidth = 140
 
     // Both
     const [date, setDate]  = useState(toDay);
@@ -20,10 +20,10 @@ const Form = ({ insertDocument, sheetType }) => {
     const [forn, setForn]  = useState('');
     
     // Paid payments
-    const [prov, setProv]  = useState(provenience[0]?.name);
-    const [isExpense, setExpense] = useState(true);
-    const [category, setCategory]  = useState(lang.select);
-    const [subCategory, setSubCategory]  = useState(lang.select);
+    const [prov, setProv]  = useState('');
+    const [isExpense, setExpense] = useState(null);
+    const [category, setCategory]  = useState('');
+    const [subCategory, setSubCategory]  = useState('');
     const [otherCategory, setOtherCategory]  = useState('');
     const [otherSubCategory, setOtherSubCategory]  = useState('');
 
@@ -44,10 +44,11 @@ const Form = ({ insertDocument, sheetType }) => {
         const transaction = {
             financialControl: {
                 date: date,
-                expense: isExpense,
-                prov: prov,
-                category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
-                subCategory: subCategory === lang.select ? "" : otherSubCategory !== '' ? otherSubCategory : subCategory,
+                expense: isExpense === null ? true : isExpense,
+                prov: prov ? prov : provenience[0]?.name,
+             // category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
+                category: category === '' ? '' : otherCategory !== '' ? otherCategory : category ,
+                subCategory: subCategory === '' ? '' : otherSubCategory !== '' ? otherSubCategory : subCategory,
                 forn: forn,
                 desc: desc,
                 amount: amount.replace(/,/g, '.'),
@@ -73,8 +74,8 @@ const Form = ({ insertDocument, sheetType }) => {
         setIdnumber('');
         setOtherCategory('');
         setOtherSubCategory('');
-        setCategory(lang.select);
-        setSubCategory(lang.select);
+        setCategory('');
+        setSubCategory('');
     };
 
     return ( 
@@ -82,82 +83,110 @@ const Form = ({ insertDocument, sheetType }) => {
             <C.Container>
                 <C.InputContent>
                     {/* <C.Label>{lang.date}</C.Label> */}
-                    <C.Input
+                    <TextField
                         value={date}
                         type='date'
                         width={110}
                         onChange={(e) => setDate(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        size="small"
+                        sx={{ width: inputWidth }}
+                        label={lang.date}
                         />
                 </C.InputContent>
                 {sheetType === 'financialControl' && 
                 <>
                 <C.InputContent>
-                    <C.Label>{lang.type}</C.Label>
-                    <C.Select
-                        onChange={() => setExpense(!isExpense)}
-                    >
-                        <option value={lang.expenses}>{lang.expenses}</option>
-                        <option value={lang.entry}>{lang.entry}</option>
-                    </C.Select>
+                    {/* <C.Label>{lang.type}</C.Label> */}
+                    <FormControl>
+                        <InputLabel size="small" >{lang.type}</InputLabel>
+                        <Select
+                            onChange={(e) => setExpense(e.target.value)}
+                            size="small"
+                            sx={{ width: inputWidth-30 }}
+                            label={lang.type}
+                        >
+                            <MenuItem value={true}>{lang.expense}</MenuItem>
+                            <MenuItem value={false}>{lang.entry}</MenuItem>
+                        </Select>
+                        {isExpense === null && <FormHelperText sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{lang.expense}</FormHelperText>}
+                    </FormControl>
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>{lang.source}</C.Label>
-                    <C.Select
-                        value={prov}
-                        onChange={(e) => setProv(e.target.value)}
-                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                    >
-                        {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
-                    </C.Select>
+                    {/* <C.Label>{lang.source}</C.Label> */}
+                    <FormControl>
+                        <InputLabel size="small" >{lang.source}</InputLabel>
+                        <Select
+                            value={prov}
+                            onChange={(e) => setProv(e.target.value)}
+                            onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                            size="small"
+                            sx={{ width: inputWidth }}
+                            label={lang.source}
+                        >
+                            {provenience.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
+                    </Select>
+                    {!prov && <FormHelperText sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{provenience[0]?.name}</FormHelperText>}
+                    </FormControl>
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>{lang.category}</C.Label>
+                    {/* <C.Label>{lang.category}</C.Label> */}
                     {category === lang.other ? 
-                    <C.Input
+                    <TextField
+                        focused 
                         autoFocus
-                        onBlur={() => otherCategory === '' && setCategory(lang.select)}
+                        onBlur={() => otherCategory === '' && setCategory('')}
                         value={otherCategory}
                         onChange={(e) => setOtherCategory(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                        width={98}
+                        label={lang.category}
+                        size="small"
+                        sx={{ width: inputWidth }}
                     />
                     :
-                    <C.Select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                        style={category === lang.select ? {color: 'gray'} : {color: 'black'}}
-                        width={110}
-                    >
-                        <option defaultValue disabled hidden>{lang.select}</option>
-                        {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
-                    </C.Select>
-
+                    <FormControl>
+                        <InputLabel size="small" >{lang.category}</InputLabel>
+                        <Select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                            size="small"
+                            sx={{ width: inputWidth }}
+                            label={lang.category}
+                        >
+                            {categories.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
+                        </Select>
+                    </FormControl>
                 }
                 </C.InputContent>
                 <C.InputContent>
-                    <C.Label>{lang.subCategory}</C.Label>
+                    {/* <C.Label>{lang.subCategory}</C.Label> */}
                     {subCategory === lang.other ? 
-                    <C.Input
+                    <TextField
+                        focused
                         autoFocus
-                        onBlur={() => otherSubCategory === '' && setSubCategory(lang.select)}
+                        onBlur={() => otherSubCategory === '' && setSubCategory('')}
                         value={otherSubCategory}
                         onChange={(e) => setOtherSubCategory(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                        width={98}
+                        label={lang.subCategory}
+                        size="small"
+                        sx={{ width: inputWidth }}
                     />
                     :
-                    <C.Select
-                        value={subCategory}
-                        onChange={(e) => setSubCategory(e.target.value)}
-                        onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                        style={subCategory === lang.select ? {color: 'gray'} : {color: 'black'}}
-                        width={110}
-                    >
-                        <option defaultValue disabled hidden>{lang.select}</option>
-                        {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
-                    </C.Select>
+                    <FormControl>
+                        <InputLabel size="small" >{lang.subCategory}</InputLabel>
+                        <Select
+                            value={subCategory}
+                            onChange={(e) => setSubCategory(e.target.value)}
+                            onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                            size="small"
+                            sx={{ width: inputWidth }}
+                            label={lang.subCategory}
+>
+                            {subCategories.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
+                        </Select>
+                    </FormControl>
                     }
                 </C.InputContent>
                 </>}
@@ -167,7 +196,7 @@ const Form = ({ insertDocument, sheetType }) => {
                     {/* <C.Label>{lang.link}</C.Label> */}
                     <TextField
                         value={link}
-                        label={`${lang.link}`}
+                        label={lang.link}
                         onChange={(e) => setLink(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"

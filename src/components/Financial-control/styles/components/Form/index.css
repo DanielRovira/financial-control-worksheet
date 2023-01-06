@@ -3,7 +3,7 @@
 }
 .input{
     height: 37px;
-    width: 138px;
+    width: 128px;
     border: 1px solid #C4C4C4;
     border-radius: 4px;
 }
@@ -14,7 +14,7 @@
 .input:focus{
     outline: none;
     height: 35px;
-    width: 137px;
+    width: 127px;
     border: 2px solid #1976D2;
     padding: 0 0 0 9px;
 }
@@ -22,7 +22,7 @@
     background-color: white;
     font-size: 12px;
     color: #666666;
-    transform: translate(0, -135%);
+    transform: translate(0, -140%);
 }
 .input:focus + .placeholder-text .text{
     /* border-color: #1976D2; */
