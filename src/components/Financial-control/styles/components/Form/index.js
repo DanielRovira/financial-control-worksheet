@@ -105,6 +105,7 @@ const Form = ({ insertDocument, sheetType }) => {
                             size="small"
                             sx={{ width: inputWidth-30 }}
                             label={lang.type}
+                            MenuProps={{disableScrollLock: true,}}
                         >
                             <MenuItem value={true}>{lang.expense}</MenuItem>
                             <MenuItem value={false}>{lang.entry}</MenuItem>
@@ -123,6 +124,7 @@ const Form = ({ insertDocument, sheetType }) => {
                             size="small"
                             sx={{ width: inputWidth }}
                             label={lang.source}
+                            MenuProps={{disableScrollLock: true,}}
                         >
                             {provenience.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                     </Select>
@@ -153,6 +155,7 @@ const Form = ({ insertDocument, sheetType }) => {
                             size="small"
                             sx={{ width: inputWidth }}
                             label={lang.category}
+                            MenuProps={{disableScrollLock: true,}}
                         >
                             {categories.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                         </Select>
@@ -183,6 +186,7 @@ const Form = ({ insertDocument, sheetType }) => {
                             size="small"
                             sx={{ width: inputWidth }}
                             label={lang.subCategory}
+                            MenuProps={{disableScrollLock: true,}}
 >
                             {subCategories.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                         </Select>
