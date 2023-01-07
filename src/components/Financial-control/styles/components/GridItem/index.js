@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
+import Form from '../Form'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
@@ -21,6 +22,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
+    const [bgColor, setBgColor] = useState('inherit')
     const ref = useRef(null);
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
@@ -35,6 +37,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     };
 
     const toggleEdit = () => {
+        setBgColor('inherit');
         if (descTemp === '' || amountTemp === '' || dateTemp === '') {
             alert(lang.alert01);
             return;
@@ -238,7 +241,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     )}
     else {
         return (
-            <C.Tr>
+            <C.Tr onMouseOver={() => setBgColor('#FAFAFA')} onMouseLeave={() => setBgColor('inherit')} style={{ backgroundColor: bgColor}}>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{dateTemp.slice(-2)}-{dateTemp.slice(5,-3)}-{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.TdCont></C.Td>
