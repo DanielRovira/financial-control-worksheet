@@ -12,29 +12,30 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
     });
 
     return ( 
+        <C.TableContent>
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th alignCenter>{lang.date}</C.Th>
+                    <C.Th alignCenter width={100}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
-                    <C.Th alignCenter>{lang.type}</C.Th>
-                    <C.Th alignCenter>{lang.source}</C.Th>
-                    <C.Th alignCenter>{lang.category}</C.Th>
+                    <C.Th width={90} alignCenter>{lang.type}</C.Th>
+                    <C.Th alignCenter><div style={{overflow: 'hidden'}}>{lang.source}</div></C.Th>
+                    <C.Th width={120} alignCenter>{lang.category}</C.Th>
                     <C.Th alignCenter>{lang.subCategory}</C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
-                    <C.Th width={5} alignCenter>{lang.number}</C.Th>
-                    <C.Th width={10} alignCenter>{lang.link}</C.Th>
-                    <C.Th width={10} >{lang.bank}</C.Th>
-                    <C.Th width={10}>{lang.idnumber}</C.Th>
+                    <C.Th width={50} alignCenter>{lang.number}</C.Th>
+                    <C.Th width={50} alignCenter>{lang.link}</C.Th>
+                    <C.Th width={50} >{lang.bank}</C.Th>
+                    <C.Th width={50}>{lang.idnumber}</C.Th>
                     </>}
-                    <C.Th alignCenter>{lang.supplier}</C.Th>
-                    <C.Th width={150}>{lang.description}</C.Th>
-                    <C.Th width={50}>{lang.value}</C.Th>
-                    <C.Th alignCenter>{lang.edit}</C.Th>
-                    <C.Th alignCenter>{lang.delete}</C.Th>
+                    <C.Th width={200} alignCenter>{lang.supplier}</C.Th>
+                    <C.Th width={250}>{lang.description}</C.Th>
+                    <C.Th width={80}>{lang.value}</C.Th>
+                    <C.Th width={50} alignCenter>{lang.edit}</C.Th>
+                    <C.Th width={60} alignCenter>{lang.delete}</C.Th>
                 </C.Tr>
             </C.Thead>
             <C.Tbody>
@@ -43,6 +44,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                 ))}
             </C.Tbody>
         </C.Table>
+        </C.TableContent>
      );
 };
  

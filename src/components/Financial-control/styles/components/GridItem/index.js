@@ -93,18 +93,19 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     if (isActive === true) {
         return (
             <C.Tr ref={ref}>
-                <C.Td alignCenter width={9}>
+                <C.Td alignCenter width={9}><C.TdCont>
+                
                     <D.Input
                             value={dateTemp}
                             type='date'
-                            width={110}
+                            // width={110}
                             onChange={(e) => setDateTemp(e.target.value)}
                             onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                             />
-                </C.Td>
+                </C.TdCont></C.Td>
                 {sheetType === 'financialControl' && 
                 <>
-                <C.Td alignCenter>
+                <C.Td alignCenter><C.TdCont>
                     <D.Select
                         value={expenseTemp ? lang.expense : lang.entry}
                         onChange={() => setExpenseTemp(!expenseTemp)}
@@ -112,8 +113,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         <option value={lang.entry}>{lang.entry}</option>
                         <option value={lang.expense}>{lang.expense}</option>
                     </D.Select>
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     <D.Select
                         value={provTemp}
                         onChange={(e) => setProvTemp(e.target.value)}
@@ -121,8 +122,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                     >
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     {categoryTemp === lang.other ?
                     <D.Input
                         autoFocus
@@ -144,8 +145,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                     }
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     {subCategoryTemp === lang.other ?
                     <D.Input
                         autoFocus
@@ -167,12 +168,12 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 }
-                </C.Td>
+                </C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && 
                 <>
-                <C.Td alignCenter padding={8}>{++index}</C.Td>
-                <C.Td>
+                <C.Td alignCenter><C.TdCont>{++index}</C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     <D.Input
                         value={linkTemp}
                         placeholder={`${lang.placeholder} ${lang.link}`}
@@ -180,8 +181,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     <D.Input
                         value={bankTemp}
                         placeholder={`${lang.placeholder} ${lang.bank}`}
@@ -189,8 +190,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     <D.Input
                         value={idnumberTemp}
                         placeholder={`${lang.placeholder} ${lang.idnumber}`}
@@ -198,9 +199,9 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
-                </C.Td>
+                </C.TdCont></C.Td>
                 </>}
-                <C.Td>
+                <C.Td><C.TdCont>
                     <D.Input
                         value={fornTemp}
                         placeholder={`${lang.placeholder} ${lang.supplier}`}
@@ -208,8 +209,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     <D.Input
                         value={descTemp}
                         placeholder={`${lang.placeholder} ${lang.description}`}
@@ -217,8 +218,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
-                </C.Td>
-                <C.Td>
+                </C.TdCont></C.Td>
+                <C.Td><C.TdCont>
                     <D.Currency
                         value={amountValue}
                         prefix={lang.valuePrefix}
@@ -230,32 +231,32 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
-                </C.Td>
-                <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.Td>
-                <C.Td alignCenter><FaTrash onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.Td>
+                </C.TdCont></C.Td>
+                <C.Td alignCenter><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
+                <C.Td alignCenter><C.TdCont><FaTrash onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
             </C.Tr>
     )}
     else {
         return (
             <C.Tr>
-                <C.Td alignCenter width={10}>{dateTemp.slice(-2)}-{dateTemp.slice(5,-3)}-{dateTemp.slice(0,-6)}</C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{dateTemp.slice(-2)}-{dateTemp.slice(5,-3)}-{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
-                <C.Td alignCenter>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.Td>
-                <C.Td padding={8} alignCenter>{provTemp}</C.Td>
-                <C.Td padding={8}>{categoryTemp}</C.Td>
-                <C.Td padding={8}>{subCategoryTemp}</C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{provTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{categoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{subCategoryTemp}</C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && <>
-                <C.Td padding={8} alignCenter>{++index}</C.Td>
-                <C.Td padding={8} alignCenter>{linkTemp}</C.Td>
-                <C.Td padding={8}>{bankTemp}</C.Td>
-                <C.Td padding={8}>{idnumberTemp}</C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{++index}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{linkTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{bankTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{idnumberTemp}</C.TdCont></C.Td>
                 </>}
-                <C.Td padding={8} alignCenter>{fornTemp}</C.Td>
-                <C.Td padding={8}>{descTemp}</C.Td>
-                <C.Td padding={8}>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
-                <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.Td>
-                <C.Td alignCenter><FaTrash color='grey' style={{cursor: 'not-allowed'}} /></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{fornTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} ><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
+                <C.Td alignCenter><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
+                <C.Td alignCenter><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed'}} /></C.TdCont></C.Td>
             </C.Tr>
         )}
 };
