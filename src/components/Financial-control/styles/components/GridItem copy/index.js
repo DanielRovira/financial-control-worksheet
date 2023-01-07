@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
+import Form from '../Form'
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
@@ -86,6 +87,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
         }}
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)
+        console.log(categoryTemp)
         setActive(!isActive);
     };
 
@@ -93,22 +95,21 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
 
     if (isActive === true) {
         return (
-            <C.Tr ref={ref} style={{backgroundColor: '#F0F0F0'}}>
+            <C.Tr ref={ref}>
                 <C.Td alignCenter width={9}><C.TdCont>
+                
                     <D.Input
-                        style={{textAlign: 'center', padding: '1px 0 0 3.5px', height: '25px'}}
-                        value={dateTemp}
-                        type='date'
-                        // width={110}
-                        onChange={(e) => setDateTemp(e.target.value)}
-                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                    />
+                            value={dateTemp}
+                            type='date'
+                            // width={110}
+                            onChange={(e) => setDateTemp(e.target.value)}
+                            onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                            />
                 </C.TdCont></C.Td>
                 {sheetType === 'financialControl' && 
                 <>
                 <C.Td alignCenter><C.TdCont>
                     <D.Select
-                        style={{textAlign: 'center'}}
                         value={expenseTemp ? lang.expense : lang.entry}
                         onChange={() => setExpenseTemp(!expenseTemp)}
                     >
@@ -118,7 +119,6 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
                     <D.Select
-                        style={{textAlign: 'center'}}
                         value={provTemp}
                         onChange={(e) => setProvTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
@@ -140,7 +140,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         value={categoryTemp === '' ? lang.select : categoryTemp}
                         onChange={(e) => {setCategoryTemp(e.target.value); e.target.value === lang.other ? categories.some(cat => cat.name === categoryTemp) ? setOtherCategoryTemp('') : setOtherCategoryTemp(categoryTemp) : setOtherCategoryTemp(e.target.value)}}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        style={categoryTemp === '' ? {color: 'gray', textAlign: 'center'} : {color: 'black', textAlign: 'center'}}
+                        style={categoryTemp === '' ? {color: 'gray'} : {color: 'black'}}
                         width={110}
                     >
                         <option defaultValue disabled hidden>{lang.select}</option>
@@ -163,7 +163,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         value={subCategoryTemp === '' ? lang.select : subCategoryTemp}
                         onChange={(e) => {setSubCategoryTemp(e.target.value); e.target.value === lang.other ? subCategories.some(cat => cat.name === subCategoryTemp) ? setOtherSubCategoryTemp('') : setOtherSubCategoryTemp(subCategoryTemp) : setOtherSubCategoryTemp(e.target.value)}}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        style={subCategoryTemp === '' ? {color: 'gray', textAlign: 'center'} : {color: 'black', textAlign: 'center'}}
+                        style={subCategoryTemp === '' ? {color: 'gray'} : {color: 'black'}}
                         width={110}
                     >
                         <option defaultValue disabled hidden>{lang.select}</option>
@@ -236,7 +236,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                     />
                 </C.TdCont></C.Td>
                 <C.Td alignCenter><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
-                <C.Td alignCenter><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
+                <C.Td alignCenter><C.TdCont><FaTrash onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
             </C.Tr>
     )}
     else {
@@ -245,9 +245,9 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{dateTemp.slice(-2)}-{dateTemp.slice(5,-3)}-{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{provTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{categoryTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{provTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{categoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{subCategoryTemp}</C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{++index}</C.TdCont></C.Td>

@@ -16,8 +16,7 @@ export const Td = styled.td`
     max-width: 0;
     overflow: hidden;
     text-transform: capitalize;
-    /* height: inherit; */
-    padding: 5px 5px;
+    height: inherit;
     
     svg {
         width: 20px;

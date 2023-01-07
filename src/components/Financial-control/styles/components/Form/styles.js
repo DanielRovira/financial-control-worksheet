@@ -36,14 +36,17 @@ export const Label = styled.label``;
 
 export const Inputs = css`
     outline: none;
-    border-radius: 5px;
-    margin-top: 5px;
-    padding: 5px;
-    font-size: 15px;
-    border: 1px solid #ccc;
+    /* border-radius: 5px; */
+    /* margin-top: 5px; */
+    /* padding: 5px; */
+    font-size: 16px;
+    /* border: 1px solid #ccc; */
     text-transform: capitalize;
-    max-width: 150px;
-    width: ${(props) => (props.width ? props.width + 'px' : 'auto')};
+    /* max-width: 150px; */
+    /* width: ${(props) => (props.width ? props.width + 'px' : 'auto')}; */
+    border: none;
+    width: 100%;
+    height: 100%;
 `;
 
 export const Input = styled.input`${Inputs}`
