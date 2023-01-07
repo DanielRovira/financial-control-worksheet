@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const TableContent = styled.div`
-    width: 95%;
+    /* display: flex; */
+    /* max-width: 95%; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin: auto auto auto 50px;
 `;
 
 export const Table = styled.table`
@@ -11,7 +15,7 @@ export const Table = styled.table`
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 5px;
     max-width: 94%;
-    margin: 20px auto auto 100px;
+    margin: 20px auto;
     table-layout:fixed;
 `;
 
