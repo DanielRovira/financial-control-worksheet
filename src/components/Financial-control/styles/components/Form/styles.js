@@ -13,8 +13,17 @@ export const Container = styled.div`
     padding: 15px 0;
     gap: 10px;
 
-    @media (max-width: 750px) {
+    @media (max-width: 1400px) {
         display: grid;
+        grid: repeat(2, auto) / auto-flow;
+    }
+    @media (max-width: 850px) {
+        display: grid;
+        grid: repeat(3, auto) / auto-flow;
+    }
+    @media (max-width: 650px) {
+        display: grid;
+        grid: none
     }
 `;
 

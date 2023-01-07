@@ -251,7 +251,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 <C.Td padding={8}>{bankTemp}</C.Td>
                 <C.Td padding={8}>{idnumberTemp}</C.Td>
                 </>}
-                <C.Td padding={8}>{fornTemp}</C.Td>
+                <C.Td padding={8} alignCenter>{fornTemp}</C.Td>
                 <C.Td padding={8}>{descTemp}</C.Td>
                 <C.Td padding={8}>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.Td>
                 <C.Td alignCenter><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.Td>

@@ -15,13 +15,13 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th width={10} alignCenter>{lang.date}</C.Th>
+                    <C.Th alignCenter>{lang.date}</C.Th>
                     {sheetType === 'financialControl' && 
                     <>
-                    <C.Th width={8} alignCenter>{lang.type}</C.Th>
-                    <C.Th width={10} alignCenter>{lang.source}</C.Th>
-                    <C.Th width={10}>{lang.category}</C.Th>
-                    <C.Th width={10}>{lang.subCategory}</C.Th>
+                    <C.Th alignCenter>{lang.type}</C.Th>
+                    <C.Th alignCenter>{lang.source}</C.Th>
+                    <C.Th alignCenter>{lang.category}</C.Th>
+                    <C.Th alignCenter>{lang.subCategory}</C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
@@ -30,11 +30,11 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                     <C.Th width={10} >{lang.bank}</C.Th>
                     <C.Th width={10}>{lang.idnumber}</C.Th>
                     </>}
-                    <C.Th width={10}>{lang.supplier}</C.Th>
-                    <C.Th width={10}>{lang.description}</C.Th>
-                    <C.Th width={10}>{lang.value}</C.Th>
-                    <C.Th width={5} alignCenter>{lang.edit}</C.Th>
-                    <C.Th width={1} alignCenter>{lang.delete}</C.Th>
+                    <C.Th alignCenter>{lang.supplier}</C.Th>
+                    <C.Th width={150}>{lang.description}</C.Th>
+                    <C.Th width={50}>{lang.value}</C.Th>
+                    <C.Th alignCenter>{lang.edit}</C.Th>
+                    <C.Th alignCenter>{lang.delete}</C.Th>
                 </C.Tr>
             </C.Thead>
             <C.Tbody>

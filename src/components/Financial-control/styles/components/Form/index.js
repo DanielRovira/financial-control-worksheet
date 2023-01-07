@@ -103,14 +103,14 @@ const Form = ({ insertDocument, sheetType }) => {
                         <Select
                             onChange={(e) => setExpense(e.target.value)}
                             size="small"
-                            sx={{ width: inputWidth-30 }}
+                            sx={{ width: [inputWidth] }}
                             label={lang.type}
                             MenuProps={{disableScrollLock: true,}}
                         >
                             <MenuItem value={true}>{lang.expense}</MenuItem>
                             <MenuItem value={false}>{lang.entry}</MenuItem>
                         </Select>
-                        {isExpense === null && <FormHelperText sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{lang.expense}</FormHelperText>}
+                        {isExpense === null && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{lang.expense}</FormHelperText>}
                     </FormControl>
                 </C.InputContent>
                 <C.InputContent>
@@ -128,7 +128,7 @@ const Form = ({ insertDocument, sheetType }) => {
                         >
                             {provenience.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                     </Select>
-                    {!prov && <FormHelperText sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{provenience[0]?.name}</FormHelperText>}
+                    {!prov && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{provenience[0]?.name}</FormHelperText>}
                     </FormControl>
                 </C.InputContent>
                 <C.InputContent>

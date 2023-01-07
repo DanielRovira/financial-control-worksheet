@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Tr = styled.tr`
-    height: 50px;
+    /* height: 50px; */
 `;
 
 export const Td = styled.td`
