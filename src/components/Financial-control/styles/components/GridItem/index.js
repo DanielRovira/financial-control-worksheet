@@ -35,7 +35,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
         else {setAmountTemp('0.00')}
     };
 
-    const toggleEdit = () => {
+    const toggleEdit = (element) => {
         setBgColor('inherit');
         if (descTemp === '' || amountTemp === '' || dateTemp === '') {
             alert(lang.alert01);
@@ -87,6 +87,11 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)
         setActive(!isActive);
+
+        setTimeout(() => {  
+            element.target.querySelector('input')?.focus()
+        }, 5);
+
     };
 
     useClickAway(ref, toggleEdit)
