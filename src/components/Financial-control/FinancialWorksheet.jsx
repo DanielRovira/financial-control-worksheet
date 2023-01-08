@@ -12,8 +12,11 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const [total, setTotal] = useState(0);
     const history = useNavigate();
     const params = useParams();
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
 
     const getData = async () => {
+            if (sectionExists) {
             const res = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${sheetType}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
@@ -21,6 +24,8 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
                 setIsLoggedIn(false); history('/');
             })
             if (res.status === 200) {setTransactionsList(res.post || [])} else {setIsLoggedIn(false); history('/')} 
+            }
+            else {history('/')}
         }
 
     useEffect(() => {
