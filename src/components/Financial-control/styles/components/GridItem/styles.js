@@ -6,6 +6,12 @@ export const Tr = styled.tr`
 
 export const TdCont = styled.div`
     height: inherit;
+    padding-left: 5px;
+
+    input {
+        margin-left: -5px;
+        padding-left: 5px;
+    }
 `
 
 export const Td = styled.td`
