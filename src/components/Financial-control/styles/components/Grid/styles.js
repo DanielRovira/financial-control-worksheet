@@ -6,6 +6,7 @@ export const TableContent = styled.div`
     /* align-items: center; */
     /* justify-content: center; */
     margin: auto auto auto 50px;
+
 `;
 
 export const Table = styled.table`
@@ -17,6 +18,7 @@ export const Table = styled.table`
     max-width: 94%;
     margin: 20px auto;
     table-layout:fixed;
+    border-spacing: 0;
 `;
 
 export const Thead = styled.thead``;

@@ -36,7 +36,7 @@ export const Label = styled.label``;
 
 export const Inputs = css`
     outline: none;
-    /* border-radius: 5px; */
+    border-radius: 5px;
     /* margin-top: 5px; */
     /* padding: 5px; */
     font-size: 16px;

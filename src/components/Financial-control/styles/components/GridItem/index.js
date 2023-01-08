@@ -257,7 +257,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 </>}
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{fornTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} ><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
                 <C.Td alignCenter><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 <C.Td alignCenter><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed'}} /></C.TdCont></C.Td>
             </C.Tr>
