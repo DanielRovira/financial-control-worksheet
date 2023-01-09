@@ -86,7 +86,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
         setSubCategoryTemp(otherSubCategoryTemp)
         setActive(!isActive);
 
-        setTimeout(() => {  
+        !isActive && setTimeout(() => {  
             element.target.querySelector('input')?.focus()
         }, 5);
 
