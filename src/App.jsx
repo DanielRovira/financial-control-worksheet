@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useClickAway } from 'react-use';
 import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/FinancialWorksheet';
-import Sidebar from './components/Main/Sidebar2';
+import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Main from './components/Main/Main';

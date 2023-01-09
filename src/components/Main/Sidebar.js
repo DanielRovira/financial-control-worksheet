@@ -1,46 +1,31 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, MenuItem, Sidebar, SubMenu, useProSidebar } from 'react-pro-sidebar';
-import { useClickAway } from 'react-use';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import * as React from 'react';
+import Drawer from '@mui/material/Drawer';
+import ListSubheader from '@mui/material/ListSubheader';
+import List from '@mui/material/List';
+import NestedList from './NestedList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-function Sidebarr({ accName }) {
-    const sidebar = useRef(null);
+export default function MiniDrawer({ open, setOpen }) {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    const { collapseSidebar, collapsed } = useProSidebar();
-    useClickAway(sidebar, collapseSidebar);
-    return (
-        <div style={{ display: 'flex', height: '100%', position: 'absolute' }}>
-            <Sidebar
-                ref={sidebar}
-                // defaultCollapsed
-                collapsedWidth='80px'
-                backgroundColor='white'
-            >
-                <IconButton
-                    onClick={() => collapseSidebar()}
-                    size='large'
-                    color='inherit'
-                    style={{ margin: '70px 0 0 15px' }}
-                >
-                    <MenuIcon />
-                </IconButton>
-                <Menu>
-                    {Array.from(sections).map((section) => (
-                        <SubMenu label={collapsed ? section.title.slice(0, 3) : section.name } key={section.title} title={section.name}>
-                            <MenuItem onClick={() => {localStorage.setItem('sheetType', 'todoPayments'); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-todos/${section.title}`} />}>{lang.todoPayments}</MenuItem>
-                            <MenuItem onClick={() => {localStorage.setItem('sheetType', 'financialControl'); !collapsed && collapseSidebar() }} routerLink={<Link to={`/financial-control/${section.title}`} />}>{lang.financialControl}</MenuItem>
-                        </SubMenu>
-                    ))}
-                </Menu>
-                <div style={{position: 'fixed', bottom: '20px', paddingLeft: '10px' }}>
-                    <h3>{accName}</h3>
-                </div>
-            </Sidebar>
-        </div>
-    );
-}
 
-export default Sidebarr;
+    return (
+      <Drawer variant="permanent" open={open} >
+        <List sx={{ height: '100%', overflow: 'hidden', paddingTop: '70px', width: open ? '250px' : '65px', whiteSpace:'nowrap', transition: '.3s' }}
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+                subheader={
+                    <ListSubheader component="div" id="nested-list-subheader" style={{ color: 'black', marginLeft: '-12px', fontSize: '20px', fontWeight: 'bold' }}>
+                        {lang.costCenter}
+                    </ListSubheader>
+                }
+        >
+            {Array.from(sections).map((section, index) => (
+                <NestedList key={index} section={section} setOpen={setOpen}/>
+            ))}
+        <div style={{ position: 'absolute', bottom: '20px', paddingLeft: '58px' }}>
+            <img src="/Logo.jpg" alt="Logo" style={{ maxWidth: '150px'}} />
+        </div>
+        </List>
+      </Drawer>
+  );
+}
