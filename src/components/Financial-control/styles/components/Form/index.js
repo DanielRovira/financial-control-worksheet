@@ -17,7 +17,7 @@ const Form = ({ insertDocument, sheetType }) => {
     const [date, setDate]  = useState(toDay);
     const [desc, setDesc]  = useState('');
     const [amount, setAmount] = useState('');
-    const [forn, setForn]  = useState('');
+    const [provider, setProvider]  = useState('');
     
     // Paid payments
     const [prov, setProv]  = useState('');
@@ -49,7 +49,7 @@ const Form = ({ insertDocument, sheetType }) => {
              // category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
                 category: category === '' ? '' : otherCategory !== '' ? otherCategory : category ,
                 subCategory: subCategory === '' ? '' : otherSubCategory !== '' ? otherSubCategory : subCategory,
-                forn: forn,
+                provider: provider,
                 desc: desc,
                 amount: amount.replace(/,/g, '.'),
             },
@@ -58,7 +58,7 @@ const Form = ({ insertDocument, sheetType }) => {
                 link: link,
                 bank: bank,
                 idnumber: idnumber,
-                forn: forn,
+                provider: provider,
                 desc: desc,
                 amount: amount.replace(/,/g, '.'),
             }
@@ -68,7 +68,7 @@ const Form = ({ insertDocument, sheetType }) => {
         
         setDesc('');
         setAmount('');
-        setForn('');
+        setProvider('');
         setLink('');
         setBank('');
         setIdnumber('');
@@ -231,11 +231,11 @@ const Form = ({ insertDocument, sheetType }) => {
                 </C.InputContent>
                 </>}
                 <C.InputContent>
-                    {/* <C.Label>{lang.supplier}</C.Label> */}
+                    {/* <C.Label>{lang.provider}</C.Label> */}
                     <TextField
-                        value={forn}
-                        label={`${lang.supplier}`}
-                        onChange={(e) => setForn(e.target.value)}
+                        value={provider}
+                        label={`${lang.provider}`}
+                        onChange={(e) => setProvider(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
                         sx={{ width: inputWidth }}

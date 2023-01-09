@@ -31,7 +31,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                     <C.Th width={140} >{lang.bank}</C.Th>
                     <C.Th width={140}>{lang.idnumber}</C.Th>
                     </>}
-                    <C.Th width={200}>{lang.supplier}</C.Th>
+                    <C.Th width={200}>{lang.provider}</C.Th>
                     <C.Th width={250}>{lang.description}</C.Th>
                     <C.Th width={130}>{lang.value}</C.Th>
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>

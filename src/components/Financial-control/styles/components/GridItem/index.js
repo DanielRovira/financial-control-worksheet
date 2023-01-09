@@ -10,7 +10,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
     const [provTemp, setProvTemp] = useState(item.prov)
-    const [fornTemp, setFornTemp] = useState(item.forn)
+    const [providerTemp, setProviderTemp] = useState(item.provider)
     const [linkTemp, setLinkTemp] = useState(item.link)
     const [bankTemp, setBankTemp] = useState(item.bank)
     const [categoryTemp, setCategoryTemp] = useState(item.category)
@@ -50,7 +50,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 provTemp !== item.prov ||
                 categoryTemp !== item.category ||
                 subCategoryTemp !== item.subCategory ||
-                fornTemp !== item.forn ||
+                providerTemp !== item.provider ||
                 descTemp !== item.desc ||
                 Number(amountTemp) !== item.amount
                 )   { updateDocument({ ...item,
@@ -59,7 +59,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 prov: provTemp,
                 category: categoryTemp === lang.other || "" ? otherCategoryTemp : categoryTemp,
                 subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
-                forn: fornTemp,
+                provider: providerTemp,
                 desc:descTemp,
                 amount: amountTemp });
             }}
@@ -70,7 +70,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 linkTemp !== item.link ||
                 bankTemp !== item.bank ||
                 idnumberTemp !== item.idnumber ||
-                fornTemp !== item.forn ||
+                providerTemp !== item.provider ||
                 descTemp !== item.desc ||
                 Number(amountTemp) !== item.amount
                 )   { updateDocument({ ...item, 
@@ -78,7 +78,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 link: linkTemp,
                 bank: bankTemp,
                 idnumber: idnumberTemp,
-                forn: fornTemp,
+                provider: providerTemp,
                 desc: descTemp,
                 amount: amountTemp });
         }}
@@ -209,9 +209,9 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 </>}
                 <C.Td><C.TdCont>
                     <D.Input
-                        value={fornTemp}
-                        placeholder={`${lang.placeholder} ${lang.supplier}`}
-                        onChange={(e) => setFornTemp(e.target.value)}
+                        value={providerTemp}
+                        placeholder={`${lang.placeholder} ${lang.provider}`}
+                        onChange={(e) => setProviderTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
                     />
@@ -258,7 +258,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{bankTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{idnumberTemp}</C.TdCont></C.Td>
                 </>}
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{fornTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{providerTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
                 <C.Td alignCenter><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
