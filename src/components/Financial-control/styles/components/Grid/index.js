@@ -26,10 +26,10 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
-                    <C.Th width={50} alignCenter>{lang.number}</C.Th>
-                    <C.Th width={50} alignCenter>{lang.link}</C.Th>
-                    <C.Th width={50} >{lang.bank}</C.Th>
-                    <C.Th width={50}>{lang.idnumber}</C.Th>
+                    <C.Th width={100} alignCenter>{lang.number}</C.Th>
+                    <C.Th width={100} alignCenter>{lang.link}</C.Th>
+                    <C.Th width={140} >{lang.bank}</C.Th>
+                    <C.Th width={140}>{lang.idnumber}</C.Th>
                     </>}
                     <C.Th width={200}>{lang.supplier}</C.Th>
                     <C.Th width={250}>{lang.description}</C.Th>
