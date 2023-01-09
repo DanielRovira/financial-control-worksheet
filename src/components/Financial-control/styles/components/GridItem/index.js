@@ -9,7 +9,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
-    const [provTemp, setProvTemp] = useState(item.prov)
+    const [sourceTemp, setSourceTemp] = useState(item.source)
     const [providerTemp, setProviderTemp] = useState(item.provider)
     const [linkTemp, setLinkTemp] = useState(item.link)
     const [bankTemp, setBankTemp] = useState(item.bank)
@@ -47,7 +47,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
             if (
                 dateTemp !== item.date||
                 expenseTemp !== item.expense ||
-                provTemp !== item.prov ||
+                sourceTemp !== item.source ||
                 categoryTemp !== item.category ||
                 subCategoryTemp !== item.subCategory ||
                 providerTemp !== item.provider ||
@@ -56,7 +56,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 )   { updateDocument({ ...item,
                 date: dateTemp,
                 expense: expenseTemp,
-                prov: provTemp,
+                source: sourceTemp,
                 category: categoryTemp === lang.other || "" ? otherCategoryTemp : categoryTemp,
                 subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
                 provider: providerTemp,
@@ -122,8 +122,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 <C.Td><C.TdCont>
                     <D.Select
                         style={{textAlign: 'center'}}
-                        value={provTemp}
-                        onChange={(e) => setProvTemp(e.target.value)}
+                        value={sourceTemp}
+                        onChange={(e) => setSourceTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     >
                         {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
@@ -248,7 +248,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{provTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{sourceTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{categoryTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
                 </>}

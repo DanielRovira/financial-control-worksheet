@@ -20,7 +20,7 @@ const Form = ({ insertDocument, sheetType }) => {
     const [provider, setProvider]  = useState('');
     
     // Paid payments
-    const [prov, setProv]  = useState('');
+    const [source, setSource]  = useState('');
     const [isExpense, setExpense] = useState(null);
     const [category, setCategory]  = useState('');
     const [subCategory, setSubCategory]  = useState('');
@@ -45,7 +45,7 @@ const Form = ({ insertDocument, sheetType }) => {
             financialControl: {
                 date: date,
                 expense: isExpense === null ? true : isExpense,
-                prov: prov ? prov : provenience[0]?.name,
+                source: source ? source : provenience[0]?.name,
              // category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
                 category: category === '' ? '' : otherCategory !== '' ? otherCategory : category ,
                 subCategory: subCategory === '' ? '' : otherSubCategory !== '' ? otherSubCategory : subCategory,
@@ -118,8 +118,8 @@ const Form = ({ insertDocument, sheetType }) => {
                     <FormControl>
                         <InputLabel size="small" >{lang.source}</InputLabel>
                         <Select
-                            value={prov}
-                            onChange={(e) => setProv(e.target.value)}
+                            value={source}
+                            onChange={(e) => setSource(e.target.value)}
                             onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                             size="small"
                             sx={{ width: inputWidth }}
@@ -128,7 +128,7 @@ const Form = ({ insertDocument, sheetType }) => {
                         >
                             {provenience.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                     </Select>
-                    {!prov && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{provenience[0]?.name}</FormHelperText>}
+                    {!source && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{provenience[0]?.name}</FormHelperText>}
                     </FormControl>
                 </C.InputContent>
                 <C.InputContent>
