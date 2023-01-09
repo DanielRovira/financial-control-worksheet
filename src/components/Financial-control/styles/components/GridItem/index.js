@@ -30,7 +30,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
 
     const handleAmountType = (value) => {
         setAmountValue(value)
-        if (value != null) 
+        if (value !== null) 
         {setAmountTemp(value.replace(/,/g, '.'))}
         else {setAmountTemp('0.00')}
     };
@@ -54,7 +54,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 subCategoryTemp !== item.subCategory ||
                 fornTemp !== item.forn ||
                 descTemp !== item.desc ||
-                amountTemp !== item.amount
+                Number(amountTemp) !== item.amount
                 )   { updateDocument({ ...item,
                 date: dateTemp,
                 expense: expenseTemp,
@@ -74,7 +74,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 idnumberTemp !== item.idnumber ||
                 fornTemp !== item.forn ||
                 descTemp !== item.desc ||
-                amountTemp !== item.amount
+                Number(amountTemp) !== item.amount
                 )   { updateDocument({ ...item, 
                 date: dateTemp,
                 link: linkTemp,

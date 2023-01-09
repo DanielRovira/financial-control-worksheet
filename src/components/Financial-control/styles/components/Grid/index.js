@@ -33,7 +33,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                     </>}
                     <C.Th width={200} alignCenter>{lang.supplier}</C.Th>
                     <C.Th width={250}>{lang.description}</C.Th>
-                    <C.Th width={80}>{lang.value}</C.Th>
+                    <C.Th width={130}>{lang.value}</C.Th>
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
                     <C.Th width={60} alignCenter>{lang.delete}</C.Th>
                 </C.Tr>
