@@ -16,13 +16,13 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th alignCenter width={100}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
+                    <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
                     <C.Th width={90} alignCenter>{lang.type}</C.Th>
                     <C.Th alignCenter><div style={{overflow: 'hidden'}}>{lang.source}</div></C.Th>
                     <C.Th width={120} alignCenter>{lang.category}</C.Th>
-                    <C.Th alignCenter>{lang.subCategory}</C.Th>
+                    <C.Th >{lang.subCategory}</C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
@@ -31,7 +31,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                     <C.Th width={50} >{lang.bank}</C.Th>
                     <C.Th width={50}>{lang.idnumber}</C.Th>
                     </>}
-                    <C.Th width={200} alignCenter>{lang.supplier}</C.Th>
+                    <C.Th width={200}>{lang.supplier}</C.Th>
                     <C.Th width={250}>{lang.description}</C.Th>
                     <C.Th width={130}>{lang.value}</C.Th>
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
