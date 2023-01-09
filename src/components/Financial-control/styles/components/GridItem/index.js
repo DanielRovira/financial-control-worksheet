@@ -96,7 +96,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
 
     if (isActive === true) {
         return (
-            <C.Tr ref={ref} style={{backgroundColor: '#F0F0F0'}}>
+            <C.Tr ref={ref} style={{backgroundColor: '#FAFAFA'}}>
                 <C.Td alignCenter width={9}><C.TdCont>
                     <D.Input
                         style={{textAlign: 'center', padding: '1px 0 0 3.5px', height: '25px'}}

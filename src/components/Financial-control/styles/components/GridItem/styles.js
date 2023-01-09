@@ -29,10 +29,14 @@ export const Td = styled.td`
     overflow: hidden;
     text-transform: capitalize;
     /* height: inherit; */
-    padding: 5px 5px;
+    padding: 0 5px;
 
     &:hover {
         background-color: #F0F0F0;
+    }
+
+    &:focus-within  {
+        background-color: #DEDEDE;
     }
     
     svg {

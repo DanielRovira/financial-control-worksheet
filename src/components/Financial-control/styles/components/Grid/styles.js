@@ -12,7 +12,7 @@ export const TableContent = styled.div`
 export const Table = styled.table`
     /* width: 100%; */
     background-color: #fff;
-    padding: 10px 0;
+    padding: 10px 5px;
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 5px;
     max-width: 94%;
