@@ -101,6 +101,7 @@ const Form = ({ insertDocument, sheetType }) => {
                     <FormControl>
                         <InputLabel size="small" >{lang.type}</InputLabel>
                         <Select
+                            defaultValue={""}
                             onChange={(e) => setExpense(e.target.value)}
                             size="small"
                             sx={{ width: [inputWidth] }}
