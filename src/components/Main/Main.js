@@ -6,11 +6,22 @@ import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-function Main({ isLoggedIn, setSheetType }) {
+function Main({ isLoggedIn, setIsLoggedIn, setSheetType }) {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     
+    const refreshToken = async () => {
+        await fetch(`/api/refresh`, { method: 'GET', credentials: 'include' })
+        .then(response => response.json())
+        .then(response => response.message && (setIsLoggedIn(false), history('/')))
+        .catch(error => {
+            setIsLoggedIn(false); history('/');
+        })
+        
+    }
+
     useEffect(() => {
+        refreshToken()
         setSheetType('')
         !isLoggedIn && history('/')
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
