@@ -238,8 +238,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         width={100}
                     />
                 </C.TdCont></C.Td>
-                <C.Td alignCenter><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
-                <C.Td alignCenter><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
+                <C.Td alignCenter className='nohover'><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
+                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
             </C.Tr>
     )}
     else {
