@@ -247,7 +247,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
             <C.Tr>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown color='red' />) : (<FaRegArrowAltCircleUp color='green' />)}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{sourceTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{categoryTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
@@ -261,8 +261,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{providerTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
-                <C.Td alignCenter><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
-                <C.Td alignCenter><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td>
+                <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
+                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td>
             </C.Tr>
         )}
 };

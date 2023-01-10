@@ -47,4 +47,8 @@ export const Td = styled.td`
     svg:hover {
         transform: scale(1.1);
     }
+
+    & + .nohover:hover {
+        background-color: inherit;
+    }
 `;
