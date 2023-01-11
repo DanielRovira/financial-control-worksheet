@@ -90,9 +90,9 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     }, [transactionsList]);
 
     return (
-        <div>
+        <div className='page'>
             <Header />
-            <Resume income={income} expense={expense} total={total} sheetType={sheetType} />
+            {/* <Resume income={income} expense={expense} total={total} sheetType={sheetType} /> */}
             <Form insertDocument={insertDocument} sheetType={sheetType}/>
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
         </div>
