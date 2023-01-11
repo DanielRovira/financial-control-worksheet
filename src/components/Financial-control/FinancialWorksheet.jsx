@@ -10,6 +10,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const [income, setIncome] = useState(0);
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
+    const [add, setAdd] = useState();
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -90,10 +91,10 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     }, [transactionsList]);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh'}}>
-            <Header />
+        <div className='FinancialWorksheet'>
+            <Header add={add} setAdd={setAdd} />
             {/* <Resume income={income} expense={expense} total={total} sheetType={sheetType} /> */}
-            <Form insertDocument={insertDocument} sheetType={sheetType}/>
+            {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
         </div>
     );

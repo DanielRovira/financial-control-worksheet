@@ -19,6 +19,26 @@ const GlobalStyle = createGlobalStyle`
 
     }
 
+    @keyframes scaleAnimationIn {
+        0% {
+            transform: translate(0, -100%);
+        }
+        100% {
+            transform: translate(0, 0);
+        }
+    }
+
+    .FinancialWorksheet {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .Form {
+        z-index: 1;
+        animation: scaleAnimationIn .1s;
+    }
+
 `;
 
 export default  GlobalStyle;

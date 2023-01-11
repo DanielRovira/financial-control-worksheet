@@ -79,7 +79,7 @@ const Form = ({ insertDocument, sheetType }) => {
     };
 
     return ( 
-        <>
+        <div className='Form'>
             <C.Container>
                 <C.InputContent>
                     {/* <C.Label>{lang.date}</C.Label> */}
@@ -276,7 +276,7 @@ const Form = ({ insertDocument, sheetType }) => {
                 <C.Button onClick={handleSave} style={{textTransform: 'uppercase'}} >{lang.add}</C.Button>
             </C.Container>
 
-        </>
+        </div>
      );
 }
  
