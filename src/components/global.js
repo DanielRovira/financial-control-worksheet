@@ -13,10 +13,6 @@ const GlobalStyle = createGlobalStyle`
         background-color: #f2f2f2;
     }
 
-    .page {
-        height: 98vh;
-    }
-
     :root {
     --color1: #DEDEDE;
     --color2: #C9C9C9;
