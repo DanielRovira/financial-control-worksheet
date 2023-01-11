@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-    height: 180px;
+
+    position: absolute;
+    /* display: flex; */
+    width: 100%;
+    height: 170px;
     text-align: center;
     background: teal;
 `;

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const TableContent = styled.div`
+    /* flex: content; */
+
     /* display: flex; */
     /* max-width: 95%; */
     /* align-items: center; */
@@ -8,7 +10,7 @@ export const TableContent = styled.div`
     margin: 2vh 2vw 2vh 5vw;
 
     overflow: auto;
-    height: 60vh;
+    /* height: 60vh; */
     background-color: white;
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 5px;

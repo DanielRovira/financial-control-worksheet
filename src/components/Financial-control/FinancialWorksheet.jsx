@@ -90,7 +90,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     }, [transactionsList]);
 
     return (
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh'}}>
             <Header />
             {/* <Resume income={income} expense={expense} total={total} sheetType={sheetType} /> */}
             <Form insertDocument={insertDocument} sheetType={sheetType}/>

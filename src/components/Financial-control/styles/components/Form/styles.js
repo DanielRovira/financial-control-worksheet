@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components';
 import CurrencyInput from 'react-currency-input-field'
 
 export const Container = styled.div`
+    z-index: 1;
     max-width: 90%;
-    margin: -40px auto auto 100px;
+    margin: 130px auto 0 100px;
     width: 98%;
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
