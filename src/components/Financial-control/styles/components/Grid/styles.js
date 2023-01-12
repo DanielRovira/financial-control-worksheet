@@ -7,7 +7,7 @@ export const TableContent = styled.div`
     /* max-width: 95%; */
     /* align-items: center; */
     /* justify-content: center; */
-    margin: 2vh 2vw 2vh 5vw;
+    margin: 2vh 1vw 2vh calc(65px + 1vw);
 
     overflow: auto;
     /* height: 60vh; */

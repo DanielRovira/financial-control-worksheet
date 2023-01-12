@@ -87,6 +87,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
               margin='normal'
               autoComplete='username'
               label={lang.email}
+              required
             />
             <TextField
               name='password'
@@ -98,6 +99,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
               margin='normal'
               autoComplete='current-password'
               label={lang.password}
+              required
             />
             <Button variant='contained' type='submit'>
               {lang.login}

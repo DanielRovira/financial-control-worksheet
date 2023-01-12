@@ -3,9 +3,10 @@ import CurrencyInput from 'react-currency-input-field'
 
 export const Container = styled.div`
     z-index: 1;
-    max-width: 90%;
-    margin: 10px auto 0 100px;
-    width: 98%;
+    /* max-width: 90%; */
+    /* margin: 10px auto 0 100px; */
+    margin: 10px 1vw 0 calc(65px + 1vw);
+    /* width: 98%; */
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
     border-radius: 5px;

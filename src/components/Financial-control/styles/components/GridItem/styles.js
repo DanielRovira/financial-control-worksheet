@@ -4,7 +4,7 @@ export const Tr = styled.tr`
     height: 30px;
     
     &:hover {
-        background-color: #FAFAFA;
+        background-color: var(--color0);
     }
 `;
 
@@ -32,11 +32,11 @@ export const Td = styled.td`
     padding: 0 5px;
 
     &:hover {
-        background-color: #F0F0F0;
+        background-color: var(--color1);
     }
 
     &:focus-within  {
-        background-color: #DEDEDE;
+        background-color: var(--color2);
     }
     
     svg {

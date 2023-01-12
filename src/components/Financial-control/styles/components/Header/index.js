@@ -2,9 +2,11 @@ import React from 'react';
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd }) => {
     const params = useParams();
@@ -16,13 +18,17 @@ const Header = ({ add, setAdd }) => {
                 <C.Title>{section ? section.name : ''}</C.Title>
             </C.Header>
             <C.Buttons>
-            <IconButton>
-                {!add ? <AddCircleIcon fontSize='large' onClick={() => setAdd(!add)} />
-                     : <RemoveCircleIcon fontSize='large' onClick={() => setAdd(!add)} />}
-            </IconButton>
-            <IconButton>
-                <InfoOutlinedIcon fontSize='large'/>
-            </IconButton>
+            <Tooltip title={<h3>{lang.add}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
+                <IconButton  onClick={() => setAdd(!add)} >
+                    {!add ? <AddCircleIcon fontSize='large'/>
+                         : <RemoveCircleIcon fontSize='large'/>}
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={<h3>{lang.details}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
+                <IconButton>
+                    <InfoOutlinedIcon fontSize='large'/>
+                </IconButton>
+            </Tooltip>
             </C.Buttons>
         </C.Container>
     );

@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     :root {
+    --color0: #F0F0F0;
     --color1: #DEDEDE;
     --color2: #C9C9C9;
 

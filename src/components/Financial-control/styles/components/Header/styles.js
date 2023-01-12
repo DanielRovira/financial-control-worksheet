@@ -24,6 +24,7 @@ export const Buttons = styled.div`
     button:hover {
         background-color: rgba(0, 0, 0, 0.08);
     }
+
 `
 
 export const Header = styled.h1``;
