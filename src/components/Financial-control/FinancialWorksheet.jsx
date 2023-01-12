@@ -4,6 +4,7 @@ import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
+import Drawer from '@mui/material/Drawer';
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
@@ -11,6 +12,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const [expense, setExpense] = useState(0);
     const [total, setTotal] = useState(0);
     const [add, setAdd] = useState();
+    const [drawer, setDrawer] = useState(false);
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -92,10 +94,17 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} />
-            {/* <Resume income={income} expense={expense} total={total} sheetType={sheetType} /> */}
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
+            <Drawer
+            anchor='right'
+            open={drawer}
+            onClose={() => setDrawer(false)}
+            sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
+            >
+              <Resume income={income} expense={expense} total={total} sheetType={sheetType} setDrawer={setDrawer} />
+          </Drawer>
         </div>
     );
 };

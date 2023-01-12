@@ -8,7 +8,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd }) => {
+const Header = ({ add, setAdd, setDrawer }) => {
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
@@ -25,7 +25,7 @@ const Header = ({ add, setAdd }) => {
                 </IconButton>
             </Tooltip>
             <Tooltip title={<h3>{lang.details}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
-                <IconButton>
+                <IconButton onClick={() => setDrawer(true)}>
                     <InfoOutlinedIcon fontSize='large'/>
                 </IconButton>
             </Tooltip>
