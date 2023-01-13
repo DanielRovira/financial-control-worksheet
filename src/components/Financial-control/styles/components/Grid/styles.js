@@ -1,45 +1,22 @@
 import styled from 'styled-components';
 
 export const TableContent = styled.div`
-    /* flex: content; */
-
-    /* display: flex; */
-    /* max-width: 95%; */
-    /* align-items: center; */
-    /* justify-content: center; */
     margin: 2vh 1vw 2vh calc(65px + 1vw);
-
     overflow: auto;
-    /* height: 60vh; */
     background-color: white;
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 5px;
     padding: 0 5px;
 
-    &::-webkit-scrollbar {
-        width: 12px;
-        margin-top: 20px;
-    }
     &::-webkit-scrollbar-track {
-        margin-top: 40px;
+        margin-top: 35px;
     }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: var(--color1);
-        border-radius: 5px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background-color: var(--color2);
-    }
-
 `;
 
 export const Table = styled.table`
     width: 100%;
     table-layout:fixed;
     border-spacing: 0;
-    
 `;
 
 export const Thead = styled.thead``;
@@ -57,7 +34,6 @@ export const Th = styled.th`
     max-width: ${(props) => (props.width ? props.width + 'px' : 'auto')};
     min-width: ${(props) => (props.width ? props.width + 'px' : 'auto')};
     width: ${(props) => (props.width ? props.width + 'px' : 'auto')};
-
     position: sticky;
     top: 0;
     z-index: 1;

@@ -13,6 +13,19 @@ const GlobalStyle = createGlobalStyle`
         background-color: #f2f2f2;
     }
 
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--color1);
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color2);
+    }
+
     :root {
     --color0: #F0F0F0;
     --color1: #DEDEDE;

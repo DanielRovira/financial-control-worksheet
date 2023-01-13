@@ -8,15 +8,15 @@ import Drawer from '@mui/material/Drawer';
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
-    const [income, setIncome] = useState(0);
-    const [expense, setExpense] = useState(0);
-    const [total, setTotal] = useState(0);
+    const [result, setResult] = useState([]);
     const [add, setAdd] = useState();
     const [drawer, setDrawer] = useState(false);
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
+    const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
 
     const getData = async () => {
             if (sectionExists) {
@@ -74,22 +74,31 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     }
 
     useEffect(() => {
-        const amountExpense = Array.from(transactionsList)
-            .filter((item) => item.expense)
-            .map((transaction) => Number(transaction.amount));
+        const calc = (list) => {
+            const amountExpense = Array.from(list)
+                .filter((item) => item.expense)
+                .map((transaction) => Number(transaction.amount));
+            
+            const amountIncome = Array.from(list)
+                .filter((item) => !item.expense)
+                .map((transaction) => Number(transaction.amount));
+            
+            const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
+            const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2);
+            const total = (income - expense).toFixed(2);
+            
+            return {expense, income, total}
+        }
 
-        const amountIncome = Array.from(transactionsList)
-            .filter((item) => !item.expense)
-            .map((transaction) => Number(transaction.amount));
-        
-        const expense = amountExpense.reduce((acc, cur) => acc + cur, 0).toFixed(2);
-        const income = amountIncome.reduce((acc, cur) => acc + cur, 0).toFixed(2);
-        const total = (income - expense).toFixed(2);
+        setResult((prev) => ({... prev, overall:
+            calc(transactionsList)
+        }))
 
-        setIncome(Number(income).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-        setExpense(Number(expense).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-        setTotal(Number(total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-
+        Array.from(provenience)?.map((prov) => (
+            setResult((prev) => ({... prev, [prov.name]:
+                calc(transactionsList.filter((item) => (item.source === prov.name)))
+            }))
+         ))
     }, [transactionsList]);
 
     return (
@@ -103,7 +112,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             onClose={() => setDrawer(false)}
             sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
             >
-              <Resume income={income} expense={expense} total={total} sheetType={sheetType} setDrawer={setDrawer} />
+              <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
           </Drawer>
         </div>
     );
