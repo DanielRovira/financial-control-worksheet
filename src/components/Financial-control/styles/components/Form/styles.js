@@ -3,10 +3,7 @@ import CurrencyInput from 'react-currency-input-field'
 
 export const Container = styled.div`
     z-index: 1;
-    /* max-width: 90%; */
-    /* margin: 10px auto 0 100px; */
-    margin: 10px 1vw 0 calc(65px + 1vw);
-    /* width: 98%; */
+    margin: 10px 20px 0 80px;
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
     border-radius: 5px;
@@ -39,13 +36,8 @@ export const Label = styled.label``;
 export const Inputs = css`
     outline: none;
     border-radius: 5px;
-    /* margin-top: 5px; */
-    /* padding: 5px; */
     font-size: 16px;
-    /* border: 1px solid #ccc; */
     text-transform: capitalize;
-    /* max-width: 150px; */
-    /* width: ${(props) => (props.width ? props.width + 'px' : 'auto')}; */
     border: none;
     width: 100%;
     height: 100%;
@@ -54,17 +46,6 @@ export const Inputs = css`
 export const Input = styled.input`${Inputs}`
 export const Select = styled.select`${Inputs}`
 export const Currency = styled(CurrencyInput)`${Inputs}`
-
-export const RadioGroup = styled.div`
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-
-    input {
-        accent-color: black;
-        margin-right: 5px;
-    }
-`;
 
 export const Button = styled.button`
     padding: 5px 10px;
@@ -75,8 +56,3 @@ export const Button = styled.button`
     background-color: teal;
 `;
 
-export const RadioContent = styled.div`
-    display: flex;
-    flex-direction: row;
-    font-size: 13px;
-`

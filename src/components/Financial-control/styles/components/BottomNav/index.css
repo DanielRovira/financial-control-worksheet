@@ -1,0 +1,13 @@
+.BottomNav {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    justify-content: center;
+}
+
+.BottomNav .MuiBottomNavigation-root {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 500px;
+}

@@ -4,6 +4,7 @@ import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
+import BottomNavigation from './styles/components/BottomNav';
 import Drawer from '@mui/material/Drawer';
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
@@ -106,6 +107,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
             <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
+            <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
             <Drawer
             anchor='right'
             open={drawer}

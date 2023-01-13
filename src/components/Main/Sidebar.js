@@ -10,7 +10,7 @@ export default function MiniDrawer({ open, setOpen }) {
 
     return (
       <Drawer variant="permanent" open={open} >
-        <List sx={{ height: '100%', overflow: 'hidden', paddingTop: '70px', width: open ? '250px' : '65px', whiteSpace:'nowrap', transition: '.3s' }}
+        <List sx={{ height: '100vh', overflow: 'hidden', paddingTop: '70px', width: open ? '250px' : '65px', whiteSpace:'nowrap', transition: '.3s' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
