@@ -14,10 +14,10 @@ const Resume = ({ result, sheetType, setDrawer }) => {
             <C.Container>
                 <ResumeItem title={lang.total} Icon={FaDollarSign} value={result.overall.total} />
                 {sheetType === 'financialControl' && <>
-                <ResumeItem title={lang.entries} Icon={FaRegArrowAltCircleUp} value={result.overall.income} />
-                <ResumeItem title={lang.expenses} Icon={FaRegArrowAltCircleDown} value={result.overall.expense} />
+                <ResumeItem title={lang.entries} Icon={FaRegArrowAltCircleUp} color={'green'} value={result.overall.income} />
+                <ResumeItem title={lang.expenses} Icon={FaRegArrowAltCircleDown} color={'red'} value={result.overall.expense} />
                 {Array.from(provenience)?.map((item, index) => (
-                   <ResumeItem key={index} title={item.name} value={result[item.name].total} /> 
+                   <ResumeItem key={index} title={item.name} Icon={FaDollarSign} value={result[item.name].total} /> 
                 ))}
                 </>}
             </C.Container>
