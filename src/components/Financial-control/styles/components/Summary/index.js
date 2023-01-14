@@ -72,6 +72,7 @@ const options = {
     },
     layout: {
         padding: {
+            top: 20,
             left: 80,
             bottom: 60
         }
