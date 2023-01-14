@@ -106,10 +106,10 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
             {sheetType !== 'summary' && <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>}
-            {sheetType === 'summary' && <Summary rawData={transactionsList} />}
+            {sheetType === 'summary' && <Summary rawData={transactionsList} setAdd={setAdd} />}
             <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
             <Drawer
             anchor='right'

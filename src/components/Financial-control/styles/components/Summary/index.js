@@ -4,9 +4,8 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 import { Bar } from 'react-chartjs-2';
 ChartJS.register( CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend );
 
-const Summary = ({ rawData }) => {
+const Summary = ({ rawData, setAdd }) => {
     const itens = Array.from(rawData)
-
     const [byMonth, setByMonth] = useState([]);
 
     const calc = (list) => {
@@ -35,7 +34,7 @@ const Summary = ({ rawData }) => {
                 }
             }))
          ))
-         
+         setAdd(false)
     }, [rawData]);
 
     function getMonthName(monthNumber) {
