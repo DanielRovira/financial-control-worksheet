@@ -32,6 +32,7 @@ const App = () => {
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setSheetType={setSheetType} />} />
+                        <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
                         <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
                     </Routes>

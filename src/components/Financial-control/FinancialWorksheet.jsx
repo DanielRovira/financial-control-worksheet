@@ -4,8 +4,10 @@ import Form from './styles/components/Form/index';
 import Header from './styles/components/Header';
 import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
+import Summary from './styles/components/Summary';
 import BottomNavigation from './styles/components/BottomNav';
 import Drawer from '@mui/material/Drawer';
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
@@ -22,7 +24,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const getData = async () => {
             if (sectionExists) {
             const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${sheetType}`, { method:'GET', credentials: 'include' })
+            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${sheetType === 'summary' ? 'financialControl' : sheetType}`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             .catch(error => {
                 setIsLoggedIn(false); history('/');
@@ -106,7 +108,8 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
-            <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
+            {sheetType !== 'summary' && <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>}
+            {sheetType === 'summary' && <Summary rawData={transactionsList} />}
             <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
             <Drawer
             anchor='right'
