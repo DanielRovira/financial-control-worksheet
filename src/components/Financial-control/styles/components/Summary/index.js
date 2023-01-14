@@ -52,11 +52,24 @@ const labels = Array.from(months).map((month) => (
 const data = {
   labels: labels,
   datasets: [{
-    data: Array.from(months).map((month) => (byMonth[month]?.amount))
+    data: Array.from(months).map((month) => (byMonth[month]?.amount)),
+    backgroundColor: 'grey'
   }],
 };
 
 const options = {
+    plugins: {
+        legend: {
+            display: false
+        },
+        tooltip: {
+            callbacks: {
+                label: function(context) {
+                    return Intl.NumberFormat(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY }).format(context.parsed.y)
+                }
+            }
+        },
+    },
     layout: {
         padding: {
             left: 80,
@@ -65,14 +78,22 @@ const options = {
     },
     scales: {
         x: {
-          ticks: {
-            color: 'black',
-            font: {
-              size: 15,
-            },
-            
+            ticks: {
+                color: 'black',
+                font: {
+                    size: 15,
+                },
+            }
+        },
+        y: {
+            ticks: {
+                callback: function(value, index, values) {
+                    return value.toLocaleString(process.env.REACT_APP_LANG,{ style:"currency", currency:process.env.REACT_APP_CURRENCY });
+                }
+            }
         }
-    }}}
+    }
+}
 
     return (
         <div className='chartContent'>
