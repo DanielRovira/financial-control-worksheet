@@ -101,18 +101,18 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             return {expense, income, total}
         }
 
-        setResult((prev) => ({... prev,
+        setResult((prev) => ({ ...prev,
             summary: calc(transactionsList),
             financialControl: calc(transactionsList),
             todoPayments: calc(transactionsList2),
         }))
 
         Array.from(provenience)?.map((prov) => (
-            setResult((prev) => ({... prev, [prov.name]:
+            setResult((prev) => ({ ...prev, [prov.name]:
                 calc(transactionsList.filter((item) => (item.source === prov.name)))
             }))
          ))
-    }, [transactionsList, transactionsList2]);
+    }, [transactionsList, transactionsList2, provenience]);
 
     return (
         <div className='FinancialWorksheet'>

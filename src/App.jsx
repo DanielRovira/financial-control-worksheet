@@ -27,7 +27,7 @@ const App = () => {
             <Router>
                 <div ref={sidebar}>
                 {isLoggedIn ? <Sidebar open={open} setOpen={setOpen} style={{ overflow: 'hidden' }} /> : ""}
-                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
+                <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
                 </div>
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />

@@ -17,7 +17,6 @@ function Main({ isLoggedIn, setIsLoggedIn, setSheetType }) {
         .catch(error => {
             setIsLoggedIn(false); history('/');
         })
-        
     }
 
     useEffect(() => {

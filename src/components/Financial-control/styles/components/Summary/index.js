@@ -27,7 +27,7 @@ const Summary = ({ rawData, setAdd }) => {
     const months = Array.from({length: 12}, (v, k) => k+1)
     useEffect(() => {
         Array.from(months).map((month) => (
-            setByMonth((prev) => ({... prev,
+            setByMonth((prev) => ({ ...prev,
                 [month]: {
                     amount: calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month))).expense,
                     month: month
@@ -35,7 +35,7 @@ const Summary = ({ rawData, setAdd }) => {
             }))
          ))
          setAdd(false)
-    }, [rawData]);
+    }, [rawData]); // eslint-disable-line react-hooks/exhaustive-deps
 
     function getMonthName(monthNumber) {
         const date = new Date();

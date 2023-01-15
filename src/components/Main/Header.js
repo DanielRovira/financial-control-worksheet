@@ -7,6 +7,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetType }) => {
     const history = useNavigate();
+
     const sendLogoutReq = async () => {
         await fetch(`/api/logout`,
         {
@@ -21,11 +22,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetTyp
     };
 
     const handleLogout = () => {
+        setIsLoggedIn(false);
+        setAccName(null)
         localStorage.clear();
+        history('/');
         sendLogoutReq()
-            .then(() => setAccName(null))
-            .then(() => setIsLoggedIn(false))
-            .then(() => history('/'));
+            // .then(() => setAccName(null))
+            // .then(() => setIsLoggedIn(false))
+            // .then(() => history('/'));
     };
 
     return (
