@@ -7,10 +7,11 @@ import Grid from './styles/components/Grid';
 import Summary from './styles/components/Summary';
 import BottomNavigation from './styles/components/BottomNav';
 import Drawer from '@mui/material/Drawer';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
+// const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
+    const [transactionsList2, setTransactionsList2] = useState([]);
     const [result, setResult] = useState([]);
     const [add, setAdd] = useState();
     const [drawer, setDrawer] = useState(false);
@@ -24,12 +25,18 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const getData = async () => {
             if (sectionExists) {
             const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-${sheetType === 'summary' ? 'financialControl' : sheetType}`, { method:'GET', credentials: 'include' })
-            .then(response => response.json())
-            .catch(error => {
-                setIsLoggedIn(false); history('/');
-            })
-            if (res.status === 200) {setTransactionsList(res.post || [])} else {setIsLoggedIn(false); history('/')} 
+            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
+                .then(response => response.json())
+                .catch(error => {
+                    setIsLoggedIn(false); history('/');
+                })
+            const res2 = await
+            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
+                .then(response => response.json())
+                .catch(error => {
+                    setIsLoggedIn(false); history('/');
+                })
+            if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || [])} else {setIsLoggedIn(false); history('/')} 
             }
             else {history('/')}
         }
@@ -39,7 +46,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
         setTransactionsList([])
         isLoggedIn ? getData() : history('/')
         // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
-    },[params.taskTitle, isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${sheetType}`,
@@ -93,8 +100,10 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             return {expense, income, total}
         }
 
-        setResult((prev) => ({... prev, overall:
-            calc(transactionsList)
+        setResult((prev) => ({... prev,
+            summary: calc(transactionsList),
+            financialControl: calc(transactionsList),
+            todoPayments: calc(transactionsList2),
         }))
 
         Array.from(provenience)?.map((prov) => (
@@ -102,13 +111,13 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
                 calc(transactionsList.filter((item) => (item.source === prov.name)))
             }))
          ))
-    }, [transactionsList]);
+    }, [transactionsList, transactionsList2]);
 
     return (
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
-            {sheetType !== 'summary' && <Grid rawData={transactionsList} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>}
+            {sheetType !== 'summary' && <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>}
             {sheetType === 'summary' && <Summary rawData={transactionsList} setAdd={setAdd} />}
             <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
             <Drawer

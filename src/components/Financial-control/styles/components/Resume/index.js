@@ -12,10 +12,10 @@ const Resume = ({ result, sheetType, setDrawer }) => {
     return ( 
         <ClickAwayListener onClickAway={() => setDrawer(false)}>
             <C.Container>
-                <ResumeItem title={lang.total} Icon={FaDollarSign} value={result.overall.total} />
+                <ResumeItem title={lang.total} Icon={FaDollarSign} value={result[sheetType].total} />
                 {sheetType === 'financialControl' && <>
-                <ResumeItem title={lang.entries} Icon={FaRegArrowAltCircleUp} color={'green'} value={result.overall.income} />
-                <ResumeItem title={lang.expenses} Icon={FaRegArrowAltCircleDown} color={'red'} value={result.overall.expense} />
+                <ResumeItem title={lang.entries} Icon={FaRegArrowAltCircleUp} color={'green'} value={result[sheetType].income} />
+                <ResumeItem title={lang.expenses} Icon={FaRegArrowAltCircleDown} color={'red'} value={result[sheetType].expense} />
                 {Array.from(provenience)?.map((item, index) => (
                    <ResumeItem key={index} title={item.name} Icon={FaDollarSign} value={result[item.name].total} /> 
                 ))}
