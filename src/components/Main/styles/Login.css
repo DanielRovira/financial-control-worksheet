@@ -1,0 +1,43 @@
+
+.LoginContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.LoginContainer img {
+    margin-bottom: 20px;
+    max-width: 250px;
+    /* box-shadow: 1px 2px 3px rgba(0, 0, 0, .3); */
+}
+
+.LoginContainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    padding: 10px 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.15);
+}
+
+.LoginContainer .MuiCircularProgress-root {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -12px;
+    width: 24px;
+    height: 24px;
+}
+
+.LoginContainer .buttonBox {
+    position: relative;
+    margin: 10px;
+}
+
+.LoginContainer.LoginContainer button {
+    width: 120px;
+    height: 40px;
+}

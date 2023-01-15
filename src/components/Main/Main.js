@@ -1,3 +1,4 @@
+import './styles/Main.css'
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -26,13 +27,10 @@ function Main({ isLoggedIn, setIsLoggedIn, setSheetType }) {
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div style={{ display: 'grid', justifyContent: 'center', rowGap: '30px', paddingTop: '100px' }}>
+        <div className='MainContainer'>
             <List
-                  sx={{ width: '300px', bgcolor: 'white' }}
-                  component="nav"
-                  aria-labelledby="nested-list-subheader"
-                  subheader={
-                    <ListSubheader component="div" id="nested-list-subheader" style={{ color: 'black', textAlign: 'center', fontSize: '30px', fontWeight: 'bold' }}>
+                subheader={
+                    <ListSubheader>
                         {lang.costCenter}
                     </ListSubheader>
                   }

@@ -46,13 +46,7 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
         height: 100vh;
-        /* align-items: center; */
         overflow: hidden;
-    }
-
-    .Form {
-        z-index: 1;
-        animation: scaleAnimationIn .1s;
     }
 
 `;

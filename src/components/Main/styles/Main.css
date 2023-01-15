@@ -1,0 +1,21 @@
+.MainContainer {
+    display: grid;
+    justify-content: center;
+    row-gap: 30px;
+    padding-top: 150px;
+}
+
+.MainContainer ul {
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    background-color: white;
+}
+
+.MainContainer .MuiListSubheader-root {
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 20px;
+}

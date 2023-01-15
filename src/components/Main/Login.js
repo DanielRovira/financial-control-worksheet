@@ -1,10 +1,12 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import './styles/Login.css'
+import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     const history = useNavigate();
+    const [loading, setLoading] = React.useState(false);
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
@@ -58,15 +60,16 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     }
 
     function handleSubmit(e) {
+        setLoading(true)
         e.preventDefault();
         sendRequest()
     }
 
   return (
-    <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column'}} >
+    <div className='LoginContainer' >
         {/* <Typography style={{ padding: '20px' }} align='center' variant='h3'>{lang.financialControl}</Typography> */}
-        <img src="/Logo.jpg" alt="logo" style={{ maxWidth: '200px', boxShadow: '1px 2px 3px rgba(0,0,0,.5)' }} />
-        <form style={{ paddingTop: '20px' }} onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <img src="/Logo.jpg" alt="logo" />
             <Box
               marginLeft='auto'
               marginRight='auto'
@@ -76,7 +79,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
               justifyContent='center'
               alignItems='center'
             >
-            <Typography variant='h3'>{lang.login}</Typography>
+            <Typography variant='h4'>{lang.login}</Typography>
             <TextField
               name='email'
               onChange={handleChange}
@@ -101,9 +104,16 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
               label={lang.password}
               required
             />
-            <Button variant='contained' type='submit'>
-              {lang.login}
-            </Button>
+            <Box className='buttonBox'>
+                <Button
+                    variant='contained'
+                    type='submit'
+                    disabled={loading}
+                >
+                  {lang.login}
+                </Button>
+                {loading && <CircularProgress size={null} />}
+          </Box>
         </Box>
       </form>
     </div>

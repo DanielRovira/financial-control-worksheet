@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 import CurrencyInput from 'react-currency-input-field'
 
+export const Form = styled.div`
+    z-index: 1;
+    animation: scaleAnimationIn .1s;
+`
+
 export const Container = styled.div`
     z-index: 1;
     margin: 10px 20px 0 80px;

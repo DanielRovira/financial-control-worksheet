@@ -7,6 +7,7 @@ import Grid from './styles/components/Grid';
 import Summary from './styles/components/Summary';
 import BottomNavigation from './styles/components/BottomNav';
 import Drawer from '@mui/material/Drawer';
+import LinearProgress from '@mui/material/LinearProgress';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
@@ -118,8 +119,13 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
-            {sheetType !== 'summary' && <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>}
-            {sheetType === 'summary' && <Summary rawData={transactionsList} setAdd={setAdd} />}
+            {transactionsList.length === 0 ? <LinearProgress /> :
+            <div>{sheetType === 'summary' ?
+            <Summary rawData={transactionsList} setAdd={setAdd} /> :
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
+            }</div>
+            }
+
             <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
             <Drawer
             anchor='right'

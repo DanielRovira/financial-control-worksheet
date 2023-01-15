@@ -9,7 +9,7 @@ export const Container = styled.div`
     /* height: 170px; */
     text-align: center;
     background: teal;
-
+    animation: scaleAnimationIn .1s;
 `;
 
 export const Buttons = styled.div`
