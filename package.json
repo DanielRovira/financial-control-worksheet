@@ -1,7 +1,7 @@
 {
   "name": "financial-control-worksheet",
   "version": "1.0",
-  "homepage": "/",
+  "homepage": "https://financial-control-worksheet.onrender.com",
   "private": false,
   "dependencies": {
     "@emotion/react": "^11.10.5",
