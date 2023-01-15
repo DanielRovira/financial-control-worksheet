@@ -112,7 +112,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
                 calc(transactionsList.filter((item) => (item.source === prov.name)))
             }))
          ))
-    }, [transactionsList, transactionsList2, provenience]);
+    }, [transactionsList, transactionsList2]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='FinancialWorksheet'>
