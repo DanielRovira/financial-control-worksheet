@@ -44,6 +44,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     useEffect(() => {
         setSheetType(sheetType)
         setTransactionsList([])
+        setTransactionsList2([])
         isLoggedIn ? getData() : history('/')
         // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
