@@ -11,7 +11,7 @@ function Main({ isLoggedIn, setIsLoggedIn, setSheetType }) {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     
     const refreshToken = async () => {
-        await fetch(`/api/refresh`, { method: 'GET', credentials: 'include' })
+        await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
         .then(response => response.message && (setIsLoggedIn(false), history('/')))
         .catch(error => {
