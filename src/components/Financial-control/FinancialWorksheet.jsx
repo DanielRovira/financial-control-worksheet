@@ -6,6 +6,7 @@ import Resume from './styles/components/Resume';
 import Grid from './styles/components/Grid';
 import Summary from './styles/components/Summary';
 import BottomNavigation from './styles/components/BottomNav';
+import Calendar from './styles/components/Calendar';
 import Drawer from '@mui/material/Drawer';
 import LinearProgress from '@mui/material/LinearProgress';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
@@ -16,6 +17,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const [result, setResult] = useState([]);
     const [add, setAdd] = useState();
     const [drawer, setDrawer] = useState(false);
+    const [showCalendar, setShowCalendar] = useState(false);
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -49,6 +51,10 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
         isLoggedIn ? getData() : history('/')
         // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        setSheetType(sheetType)
+    },[history])
 
     function insertDocument(transaction) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${sheetType}`,
@@ -117,7 +123,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar}  />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
             {transactionsList.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
@@ -134,7 +140,8 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
             >
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
-          </Drawer>
+            </Drawer>
+            {showCalendar && <Calendar rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} setShowCalendar={setShowCalendar} />}
         </div>
     );
 };
