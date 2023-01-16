@@ -120,10 +120,10 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
             {transactionsList.length === 0 ? <LinearProgress /> :
-            <div>{sheetType === 'summary' ?
+            <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
             <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
-            }</div>
+            }</>
             }
 
             <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
