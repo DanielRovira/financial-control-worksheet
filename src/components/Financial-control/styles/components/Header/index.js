@@ -6,6 +6,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType }) => {
@@ -25,6 +26,11 @@ const Header = ({ add, setAdd, setDrawer, sheetType }) => {
                              : <RemoveCircleIcon fontSize='large'/>}
                     </IconButton>
                 </Tooltip>}
+                <Tooltip title={<h3>{lang.calendar}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
+                    <IconButton>
+                        <CalendarMonthIcon fontSize='large'/>
+                    </IconButton>
+                </Tooltip>
                 <Tooltip title={<h3>{lang.details}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
                     <IconButton onClick={() => setDrawer(true)}>
                         <InfoOutlinedIcon fontSize='large'/>
