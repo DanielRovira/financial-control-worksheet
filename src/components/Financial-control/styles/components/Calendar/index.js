@@ -44,8 +44,9 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
     function tileContent({ activeStartDate, date, view }) {
         if (view === 'month') {
             const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY })
+            // const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG)
             const day = byMonth[date.getDate()]
-            return <> {handleValue(day?.amount)} </>;
+            return <div className='amount'> {day?.amount > 0 ? handleValue(day?.amount):'-'} </div>;
         }
       }
       console.log(byMonth)
