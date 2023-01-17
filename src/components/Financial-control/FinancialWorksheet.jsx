@@ -54,7 +54,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
 
     useEffect(() => {
         setSheetType(sheetType)
-    },[history])
+    },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     function insertDocument(transaction) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${sheetType}`,
@@ -141,7 +141,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             >
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
-            {showCalendar && <Calendar rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} setShowCalendar={setShowCalendar} />}
+            {showCalendar && <Calendar rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
         </div>
     );
 };
