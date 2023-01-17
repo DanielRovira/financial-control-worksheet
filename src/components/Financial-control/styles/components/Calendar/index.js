@@ -39,7 +39,7 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
          ))
 
     }, [rawData]); // eslint-disable-line react-hooks/exhaustive-deps
-
+    console.log(byDay)
     function tileContent({ activeStartDate, date, view }) {
         if (view === 'month') {
             const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY })

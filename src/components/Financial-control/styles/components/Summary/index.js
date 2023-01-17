@@ -5,8 +5,9 @@ import { Bar } from 'react-chartjs-2';
 ChartJS.register( CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend );
 
 const Summary = ({ rawData, setAdd }) => {
-    const itens = Array.from(rawData)
     const [byMonth, setByMonth] = useState([]);
+    const itens = Array.from(rawData)
+    const months = Array.from({length: 12}, (v, k) => k+1);
 
     const calc = (list) => {
         const amountExpense = Array.from(list)
@@ -24,7 +25,6 @@ const Summary = ({ rawData, setAdd }) => {
         return {expense, income, total}
     }
 
-    const months = Array.from({length: 12}, (v, k) => k+1)
     useEffect(() => {
         Array.from(months).map((month) => (
             setByMonth((prev) => ({ ...prev,
