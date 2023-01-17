@@ -10,9 +10,11 @@ export const Container = styled.div`
 `;
 
 export const Buttons = styled.div`
+    display: flex;
     position: fixed;
-    right: 50px;
-    top: 80px;
+    right: 30px;
+    top: 75px;
+    gap: 5px;
 
     button {
         color: #767676;

@@ -141,7 +141,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             >
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
-            {showCalendar && <Calendar rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
+            {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
         </div>
     );
 };

@@ -31,9 +31,9 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
         Array.from(months).map((month) => (
             setByMonth((prev) => ({ ...prev,
                 [month]: {
-                    amount: sheetType === 'financialControl'
-                    ? calc(itens.filter((item) => (Number(item.date.split('-')[2]) === month))).expense
-                    : calc(itens.filter((item) => (Number(item.date.split('-')[2]) === month))).total,
+                    amount: sheetType === 'todoPayments'
+                    ? calc(itens.filter((item) => (Number(item.date.split('-')[2]) === month))).total
+                    : calc(itens.filter((item) => (Number(item.date.split('-')[2]) === month))).expense,
                     month: month
                 }
             }))
