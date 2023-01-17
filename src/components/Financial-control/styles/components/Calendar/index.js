@@ -8,8 +8,8 @@ import Calendar from 'react-calendar'
 
 export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }) {
     const itens = Array.from(rawData)
-    const [byMonth, setByMonth] = useState([]);
-    const months = Array.from({length: 31}, (v, k) => k+1)
+    const [byDay, setByDay] = useState([]);
+    const days = Array.from({length: 31}, (v, k) => k+1)
 
     const calc = (list) => {
         const amountExpense = Array.from(list)
@@ -28,13 +28,12 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
     }
 
     useEffect(() => {
-        Array.from(months).map((month) => (
-            setByMonth((prev) => ({ ...prev,
-                [month]: {
+        Array.from(days).map((day) => (
+            setByDay((prev) => ({ ...prev,
+                [day]: {
                     amount: sheetType === 'todoPayments'
-                    ? calc(itens.filter((item) => (Number(item.date.split('-')[2]) === month))).total
-                    : calc(itens.filter((item) => (Number(item.date.split('-')[2]) === month))).expense,
-                    month: month
+                    ? calc(itens.filter((item) => (Number(item.date.split('-')[2]) === day))).total
+                    : calc(itens.filter((item) => (Number(item.date.split('-')[2]) === day))).expense
                 }
             }))
          ))
@@ -45,11 +44,11 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
         if (view === 'month') {
             const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY })
             // const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG)
-            const day = byMonth[date.getDate()]
+            const day = byDay[date.getDate()]
             return <div className='amount'> {day?.amount > 0 ? handleValue(day?.amount):'-'} </div>;
         }
       }
-      console.log(byMonth)
+
   return (
     <ClickAwayListener onClickAway={() => setShowCalendar(false)}>
         <Box className='Calendar'>
