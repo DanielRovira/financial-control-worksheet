@@ -2,14 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     z-index: 10;
-    /* margin: 5px; */
-    /* position: absolute; */
-    /* display: flex; */
     width: 100%;
-    /* height: 170px; */
     text-align: center;
-    background: teal;
+    background: #fff;
     animation: scaleAnimationIn .1s;
+    border-bottom: 1px solid #DADCE0;
 `;
 
 export const Buttons = styled.div`
@@ -18,7 +15,7 @@ export const Buttons = styled.div`
     top: 80px;
 
     button {
-        color: white;
+        color: #767676;
     }
 
     button:hover {
@@ -32,5 +29,5 @@ export const Header = styled.h1``;
 export const Title = styled.div`
     padding-top: 75px;
     padding-bottom: 10px;
-    color: #fff;
+    color: #3C4043;
 `;

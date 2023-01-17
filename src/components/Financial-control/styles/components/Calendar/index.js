@@ -55,6 +55,7 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
         <Box className='Calendar'>
             <Calendar
                 tileContent={tileContent}
+                calendarType='US'
             />
         </Box>
     </ClickAwayListener>

@@ -36,19 +36,19 @@ export default function NestedList({ section, setOpen, hideTitle, arrow }) {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-summary/${section.title}`); setOpen && setOpen(false)}}>
-            <ListItemIcon sx={{ color: 'black' }} >
+            <ListItemIcon sx={{ color: '#3C4043' }} >
               <BarChartIcon/>
             </ListItemIcon>
             <ListItemText primary={lang.summary} />
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); setOpen && setOpen(false)}}>
-            <ListItemIcon sx={{ color: 'black' }} >
+            <ListItemIcon sx={{ color: '#3C4043' }} >
               <CalendarMonthIcon/>
             </ListItemIcon>
             <ListItemText primary={lang.todoPayments} />
           </ListItemButton>
           <ListItemButton sx={{ pl: 4 }} onClick={() => {history(`/financial-control/${section.title}`); setOpen && setOpen(false)}}>
-            <ListItemIcon sx={{ color: 'black' }} >
+            <ListItemIcon sx={{ color: '#3C4043' }} >
               <ListAltIcon />
             </ListItemIcon>
             <ListItemText primary={lang.financialControl} />

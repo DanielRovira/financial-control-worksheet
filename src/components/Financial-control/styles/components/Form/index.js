@@ -1,7 +1,7 @@
 import './index.css'
 import React, { useState } from 'react';
 import * as C from './styles';
-import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@mui/material';
+import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -273,7 +273,7 @@ const Form = ({ insertDocument, sheetType }) => {
                             </span>
                         </label>
                 </C.InputContent>
-                <C.Button onClick={handleSave} style={{textTransform: 'uppercase'}} >{lang.add}</C.Button>
+                <Button onClick={handleSave} variant='contained' >{lang.add}</Button>
             </C.Container>
 
         </C.Form>
