@@ -69,7 +69,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     <div className='LoginContainer' >
         {/* <Typography style={{ padding: '20px' }} align='center' variant='h3'>{lang.financialControl}</Typography> */}
         <form onSubmit={handleSubmit}>
-            <img src="/Logo.jpg" alt="logo" />
+            <img src={process.env.REACT_APP_LOGO} alt="logo" />
             <Box
               marginLeft='auto'
               marginRight='auto'
