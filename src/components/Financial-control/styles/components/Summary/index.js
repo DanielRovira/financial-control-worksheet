@@ -60,9 +60,9 @@ const Summary = ({ rawData, setAdd }) => {
         return date.toLocaleString(process.env.REACT_APP_LANG, { month: 'long' });
       }
 
-const labels = Array.from(months).map((month) => (
+    const labels = Array.from(months).map((month) => (
     getMonthName(month).charAt(0).toUpperCase() + getMonthName(month).slice(1)
-))
+    ))
 
 const data = {
   labels: labels,
@@ -77,6 +77,8 @@ const options = {
     animation: {
         duration: 300
     },
+    maintainAspectRatio: false,
+    // responsive: true,
     plugins: {
         legend: {
             display: false
@@ -93,8 +95,9 @@ const options = {
         padding: {
             top: 20,
             left: 20,
-            bottom: 60
-        }
+            bottom: 20,
+            up: 20,
+        },
     },
     scales: {
         x: {
@@ -116,7 +119,7 @@ const options = {
 }
 
     return (
-        <div className='chartContent'>
+        <div className='Summary'>
             <List>
                 {Array.from(years).map((year, index) => (
                     <ListItem disablePadding key={index}>
@@ -126,7 +129,9 @@ const options = {
                     </ListItem>
                 ))}
             </List>
-            <Bar options={options} data={data} />
+            <div className='chartContent'>
+                <Bar options={options} data={data} style={{width: '900px'}} />
+            </div>
         </div>
     );
 };
