@@ -6,6 +6,7 @@ import FinancialWorksheet from './components/Financial-control/FinancialWorkshee
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
+import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
                 </div>
                     <Routes>
                         <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
+                        <Route path="/signup" element={<Signup />} />
                         <Route path="/main" element={<Main isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setSheetType={setSheetType} />} />
                         <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
                         <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />

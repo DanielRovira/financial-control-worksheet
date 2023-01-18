@@ -14,7 +14,7 @@ export default function MiniDrawer({ open, setOpen }) {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
-                    <ListSubheader component="div" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '20px', fontWeight: 'bold' }}>
+                    <ListSubheader component="div" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold' }}>
                         {lang.costCenter}
                     </ListSubheader>
                 }
