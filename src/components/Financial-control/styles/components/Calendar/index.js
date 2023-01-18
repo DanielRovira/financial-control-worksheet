@@ -1,6 +1,6 @@
 import './index.css'
 import './Calendar.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Box from '@mui/material/Box';
 import Calendar from 'react-calendar'

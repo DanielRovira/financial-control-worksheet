@@ -1,13 +1,25 @@
 import './index.css'
 import React, { useState, useEffect } from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 ChartJS.register( CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend );
 
 const Summary = ({ rawData, setAdd }) => {
+    const toDayYear = new Date().toISOString().substring(0, 4)
     const [byMonth, setByMonth] = useState([]);
+    const [years, setYears] = useState([]);
+    const [year, setYear] = useState(Number(toDayYear));
     const itens = Array.from(rawData)
     const months = Array.from({length: 12}, (v, k) => k+1);
+    itens.sort(function(a, b) {
+        var c = new Date(a.date);
+        var d = new Date(b.date);
+        return c-d;
+    });
 
     const calc = (list) => {
         const amountExpense = Array.from(list)
@@ -29,13 +41,19 @@ const Summary = ({ rawData, setAdd }) => {
         Array.from(months).map((month) => (
             setByMonth((prev) => ({ ...prev,
                 [month]: {
-                    amount: calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month))).expense,
+                    amount: calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year))).expense,
                     month: month
                 }
             }))
          ))
          setAdd(false)
-    }, [rawData]); // eslint-disable-line react-hooks/exhaustive-deps
+        //  console.log(itens.map(item => item.date.split('-')[0]))
+        //  setYears((prev) => ({ ...prev, [itens.map(item => item.date.split('-')[0])]:''}))
+        const rangeOfYears = (start, end) => Array(end - start + 1)
+            .fill(start)
+            .map((year, index) => year + index)
+        setYears(rangeOfYears(Number(itens[0].date.split('-')[0]), Number(itens[itens.length-1].date.split('-')[0])))
+    }, [rawData, year]); // eslint-disable-line react-hooks/exhaustive-deps
 
     function getMonthName(monthNumber) {
         const date = new Date();
@@ -57,6 +75,10 @@ const data = {
 };
 
 const options = {
+    // animation: false,
+    animation: {
+        duration: 300
+    },
     plugins: {
         legend: {
             display: false
@@ -72,7 +94,7 @@ const options = {
     layout: {
         padding: {
             top: 20,
-            left: 80,
+            left: 20,
             bottom: 60
         }
     },
@@ -97,6 +119,15 @@ const options = {
 
     return (
         <div className='chartContent'>
+            <List>
+                {Array.from(years).map((year, index) => (
+                    <ListItem disablePadding key={index}>
+                        <ListItemButton onClick={() => setYear(year)}>
+                            <ListItemText primary={year} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
             <Bar options={options} data={data} />
         </div>
     );
