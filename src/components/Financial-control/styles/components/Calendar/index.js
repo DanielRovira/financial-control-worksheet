@@ -7,9 +7,7 @@ import Calendar from 'react-calendar'
 // const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }) {
-    const itens = Array.from(rawData)
-    const [byDay, setByDay] = useState([]);
-    const days = Array.from({length: 31}, (v, k) => k+1)
+    const itens = Array.from(rawData);
 
     const calc = (list) => {
         const amountExpense = Array.from(list)
@@ -27,25 +25,23 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
         return {expense, income, total}
     }
 
-    useEffect(() => {
-        Array.from(days).map((day) => (
-            setByDay((prev) => ({ ...prev,
-                [day]: {
-                    amount: sheetType === 'todoPayments'
-                    ? calc(itens.filter((item) => (Number(item.date.split('-')[2]) === day))).total
-                    : calc(itens.filter((item) => (Number(item.date.split('-')[2]) === day))).expense
-                }
-            }))
-         ))
-
-    }, [rawData]); // eslint-disable-line react-hooks/exhaustive-deps
-    console.log(byDay)
     function tileContent({ activeStartDate, date, view }) {
+        const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY });
+        const day = Number(date.toLocaleDateString().split('/')[0]);
+        const month = Number(date.toLocaleDateString().split('/')[1]);
+        const year = Number(date.toLocaleDateString().split('/')[2]);
+        const result = sheetType === 'todoPayments' ? 'total' : 'expense';
+        if (view === 'decade') {
+            let amount = calc(itens.filter((item) => (Number(item.date.split('-')[0]) === year)))[result]
+            return <div className='amount'> {amount > 0 ? handleValue(amount):'-'} </div>;
+        }
+        if (view === 'year') {
+            let amount = calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year)))[result]
+            return <div className='amount'> {amount > 0 ? handleValue(amount):'-'} </div>;
+        }
         if (view === 'month') {
-            const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY })
-            // const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG)
-            const day = byDay[date.getDate()]
-            return <div className='amount'> {day?.amount > 0 ? handleValue(day?.amount):'-'} </div>;
+            let amount = calc(itens.filter((item) => (Number(item.date.split('-')[2]) === day && Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year)))[result]
+            return <div className='amount'> {amount > 0 ? handleValue(amount):'-'} </div>;
         }
       }
 
