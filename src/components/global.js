@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     --color0: #F0F0F0;
     --color1: #DEDEDE;
     --color2: #C9C9C9;
+    --font-color: #3C4043;
 
     }
 

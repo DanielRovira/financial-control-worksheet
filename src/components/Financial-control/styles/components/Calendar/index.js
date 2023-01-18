@@ -25,7 +25,7 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
         return {expense, income, total}
     }
 
-    function tileContent({ activeStartDate, date, view }) {
+    function tileContent({ date, view }) {
         const handleValue = (value) => Number(value).toLocaleString(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY });
         const day = Number(date.toLocaleDateString().split('/')[0]);
         const month = Number(date.toLocaleDateString().split('/')[1]);

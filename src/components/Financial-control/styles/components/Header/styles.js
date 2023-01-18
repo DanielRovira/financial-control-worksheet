@@ -31,5 +31,5 @@ export const Header = styled.h1``;
 export const Title = styled.div`
     padding-top: 75px;
     padding-bottom: 10px;
-    color: #3C4043;
+    color: var(--font-color);
 `;

@@ -13,7 +13,7 @@
 }
 
 .MainContainer .MuiListSubheader-root {
-    color: #3C4043;
+    color: var(--font-color);
     text-align: center;
     font-size: 30px;
     font-weight: bold;

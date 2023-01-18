@@ -47,8 +47,6 @@ const Summary = ({ rawData, setAdd }) => {
             }))
          ))
          setAdd(false)
-        //  console.log(itens.map(item => item.date.split('-')[0]))
-        //  setYears((prev) => ({ ...prev, [itens.map(item => item.date.split('-')[0])]:''}))
         const rangeOfYears = (start, end) => Array(end - start + 1)
             .fill(start)
             .map((year, index) => year + index)
