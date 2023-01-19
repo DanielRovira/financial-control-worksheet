@@ -7,18 +7,18 @@ import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-function Main({ isLoggedIn, setIsLoggedIn, setSheetType }) {
+function Main({ refreshToken, isLoggedIn, setSheetType }) {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     
-    const refreshToken = async () => {
-        await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
-        .then(response => response.json())
-        .then(response => response.message && (setIsLoggedIn(false), history('/')))
-        .catch(error => {
-            setIsLoggedIn(false); history('/');
-        })
-    }
+    // const refreshToken = async () => {
+    //     await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
+    //     .then(response => response.json())
+    //     .then(response => response.message && (setIsLoggedIn(false), history('/')))
+    //     .catch(error => {
+    //         setIsLoggedIn(false); history('/');
+    //     })
+    // }
 
     useEffect(() => {
         refreshToken()

@@ -46,7 +46,9 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
       }
 
   return (
-    <ClickAwayListener onClickAway={() => setShowCalendar(false)}>
+    <ClickAwayListener onClickAway={() => setTimeout(() => {  
+        setShowCalendar(false)
+    }, 5)}>
         <Box className='Calendar'>
             <Calendar
                 tileContent={tileContent}
