@@ -45,14 +45,14 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
+    .chartContent {
+        min-width: 420px;
+    }
+}
 
+@media (max-width: 500px) {
     .Summary .MuiList-root .MuiButtonBase-root span {
         font-size: 16px;
-    }
-
-    .chartContent {
-        min-width: 150vw;
-        margin: 10px 20px 10px 10px;
     }
 }
