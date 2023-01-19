@@ -6,6 +6,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     const history = useNavigate();
+    const timer = React.useRef();
     const [loading, setLoading] = React.useState(false);
     const [inputs, setInputs] = useState({
         email: '',
@@ -60,9 +61,14 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
     }
 
     function handleSubmit(e) {
-        setLoading(true)
-        e.preventDefault();
-        sendRequest()
+        if (!loading) {
+            setLoading(true);
+            e.preventDefault();
+            sendRequest();
+            timer.current = window.setTimeout(() => {
+                setLoading(false);
+            }, 5000);
+        }
     }
 
   return (
