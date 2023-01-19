@@ -11,7 +11,7 @@ export default function MiniDrawer({ open, setOpen }) {
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={open} >
-        <List sx={{ width: open ? '230px' : 'var(--closeSidebarWidth)' }}
+        <List sx={{ width: open ? '250px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={

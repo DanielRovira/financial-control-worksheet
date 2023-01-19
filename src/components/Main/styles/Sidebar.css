@@ -1,7 +1,11 @@
-.Sidebar .MuiList-root {
+.Sidebar .MuiList-padding {
     height: 100vh;
     overflow: hidden;
     padding-top: 70px;
     white-space: nowrap;
     transition: .3s;
+}
+
+.MuiCollapse-wrapperInner {
+    padding-top: 0px;
 }
