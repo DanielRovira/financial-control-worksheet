@@ -1,3 +1,13 @@
+.ItensContainer {
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.ItensContainer::-webkit-scrollbar {
+    width: 10px;
+}
+
 .Sidebar .MuiList-padding {
     height: 100vh;
     overflow: hidden;

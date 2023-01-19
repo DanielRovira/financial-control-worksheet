@@ -20,9 +20,9 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType }) => {
                     {sheetType === 'financialControl' && 
                     <>
                     <C.Th width={90} alignCenter>{lang.type}</C.Th>
-                    <C.Th alignCenter><div style={{overflow: 'hidden'}}>{lang.source}</div></C.Th>
+                    <C.Th width={120} alignCenter>{lang.source}</C.Th>
                     <C.Th width={120} alignCenter>{lang.category}</C.Th>
-                    <C.Th >{lang.subCategory}</C.Th>
+                    <C.Th width={130} >{lang.subCategory}</C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
