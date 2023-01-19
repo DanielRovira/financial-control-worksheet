@@ -25,13 +25,14 @@ const App = () => {
         .then(response => response.json())
         .then(response => response.message && (setIsLoggedIn(false), history('/')))
         .catch(error => {
-            setIsLoggedIn(false); history('/');
+            setIsLoggedIn(false);
         })
     }
 
     useEffect(() => {
         refreshToken()
         !isLoggedIn && localStorage.clear(); 
+        !isLoggedIn && history('/'); 
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
