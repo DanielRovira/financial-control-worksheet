@@ -14,20 +14,45 @@ export const Container = styled.div`
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
-    padding: 15px 0;
+    padding: 15px;
     gap: 10px;
+
+    & .MuiInputBase-root {
+        width: 140px;
+    }
 
     @media (max-width: 1400px) {
         display: grid;
         grid: repeat(2, auto) / auto-flow;
+        gap: 15px;
+
+        & .MuiInputBase-root {
+        width: 17vw;
+        }
+
+        & .MuiButtonBase-root {
+            top: 25px;
+        }
     }
     @media (max-width: 850px) {
         display: grid;
         grid: repeat(3, auto) / auto-flow;
+
+        & .MuiInputBase-root {
+        width: 27vw;
+        }
+
+        & .MuiButtonBase-root {
+            top: 0px;
+        }
     }
-    @media (max-width: 650px) {
+    @media (max-width: 500px) {
         display: grid;
-        grid: none
+        grid: none;
+
+        & .MuiInputBase-root {
+        width: 80vw;
+        }
     }
 `;
 
@@ -46,6 +71,7 @@ export const Inputs = css`
     border: none;
     width: 100%;
     height: 100%;
+
 `;
 
 export const Input = styled.input`${Inputs}`

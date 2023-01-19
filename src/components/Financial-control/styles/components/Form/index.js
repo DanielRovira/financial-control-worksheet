@@ -11,7 +11,6 @@ const Form = ({ insertDocument, sheetType }) => {
     let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
-    let inputWidth = 140
 
     // Both
     const [date, setDate]  = useState(toDay);
@@ -90,7 +89,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onChange={(e) => setDate(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
-                        sx={{ width: inputWidth }}
                         label={lang.date}
                         />
                 </C.InputContent>
@@ -104,7 +102,6 @@ const Form = ({ insertDocument, sheetType }) => {
                             defaultValue={""}
                             onChange={(e) => setExpense(e.target.value)}
                             size="small"
-                            sx={{ width: [inputWidth] }}
                             label={lang.type}
                             MenuProps={{disableScrollLock: true,}}
                         >
@@ -123,7 +120,6 @@ const Form = ({ insertDocument, sheetType }) => {
                             onChange={(e) => setSource(e.target.value)}
                             onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                             size="small"
-                            sx={{ width: inputWidth }}
                             label={lang.source}
                             MenuProps={{disableScrollLock: true,}}
                         >
@@ -144,7 +140,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         label={lang.category}
                         size="small"
-                        sx={{ width: inputWidth }}
                     />
                     :
                     <FormControl>
@@ -154,7 +149,6 @@ const Form = ({ insertDocument, sheetType }) => {
                             onChange={(e) => setCategory(e.target.value)}
                             onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                             size="small"
-                            sx={{ width: inputWidth }}
                             label={lang.category}
                             MenuProps={{disableScrollLock: true,}}
                         >
@@ -175,7 +169,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         label={lang.subCategory}
                         size="small"
-                        sx={{ width: inputWidth }}
                     />
                     :
                     <FormControl>
@@ -185,7 +178,6 @@ const Form = ({ insertDocument, sheetType }) => {
                             onChange={(e) => setSubCategory(e.target.value)}
                             onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                             size="small"
-                            sx={{ width: inputWidth }}
                             label={lang.subCategory}
                             MenuProps={{disableScrollLock: true,}}
 >
@@ -205,7 +197,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onChange={(e) => setLink(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
-                        sx={{ width: inputWidth }}
                     />
                 </C.InputContent>
                 <C.InputContent>
@@ -216,7 +207,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onChange={(e) => setBank(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
-                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 <C.InputContent>
@@ -227,7 +217,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onChange={(e) => setIdnumber(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
-                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 </>}
@@ -239,7 +228,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onChange={(e) => setProvider(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
-                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 <C.InputContent>
@@ -250,7 +238,6 @@ const Form = ({ insertDocument, sheetType }) => {
                         onChange={(e) => setDesc(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         size="small"
-                        sx={{ width: inputWidth }}
                         />
                 </C.InputContent>
                 <C.InputContent className='input-contain'>

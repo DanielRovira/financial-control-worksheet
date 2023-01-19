@@ -70,3 +70,27 @@
     -ms-user-select: none;
     user-select: none;
   }
+
+
+  @media (max-width: 1400px) {
+    .input-contain {
+    width: 17vw;
+    }
+    .input {
+    width: auto;
+    }
+
+    .input:focus{
+    width: auto;
+    }
+}
+@media (max-width: 850px) {
+    .input-contain {
+    width: 27vw;
+    }
+}
+@media (max-width: 500px) {
+    .input-contain {
+    width: 80vw;
+    }
+}
