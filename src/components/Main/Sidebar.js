@@ -1,3 +1,4 @@
+import './styles/Sidebar.css'
 import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import ListSubheader from '@mui/material/ListSubheader';
@@ -9,8 +10,8 @@ export default function MiniDrawer({ open, setOpen }) {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     return (
-      <Drawer variant="permanent" open={open} >
-        <List sx={{ height: '100vh', overflow: 'hidden', paddingTop: '70px', width: open ? '250px' : '65px', whiteSpace:'nowrap', transition: '.3s' }}
+      <Drawer className='Sidebar' variant="permanent" open={open} >
+        <List sx={{ width: open ? '230px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={

@@ -8,7 +8,7 @@ export const Form = styled.div`
 
 export const Container = styled.div`
     z-index: 1;
-    margin: 10px 20px 0 80px;
+    margin: 10px 20px 0 calc((var(--closeSidebarWidth)) + 15px);
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
     border-radius: 5px;

@@ -10,14 +10,13 @@ export const Container = styled.div`
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
 
     @media (max-width: 750px) {
-        width: 20%;
 
         p {
-            font-size: 12px;
+            font-size: 16px;
         }
 
         span {
-            font-size: 20px;
+            font-size: 24px;
         }
 
         svg {

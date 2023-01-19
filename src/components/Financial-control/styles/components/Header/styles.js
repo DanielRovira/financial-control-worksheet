@@ -16,10 +16,10 @@ export const Container = styled.div`
         }
     }
     
-    @media (max-width: 400px) {
+    @media (max-width: 500px) {
         & {
             text-align: left;
-            padding-left: 80px;
+            padding-left: 20px;
         }
     }
 `;

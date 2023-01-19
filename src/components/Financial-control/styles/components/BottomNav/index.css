@@ -17,9 +17,9 @@
     border-top-right-radius: 10px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .BottomNav .MuiBottomNavigation-root {
-        margin-left: 65px;
-        /* width: 400px; */
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
     }
 }

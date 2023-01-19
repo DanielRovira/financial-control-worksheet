@@ -1,0 +1,7 @@
+.Sidebar .MuiList-root {
+    height: 100vh;
+    overflow: hidden;
+    padding-top: 70px;
+    white-space: nowrap;
+    transition: .3s;
+}
