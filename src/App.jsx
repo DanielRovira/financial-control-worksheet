@@ -32,7 +32,7 @@ const App = () => {
     useEffect(() => {
         refreshToken()
         !isLoggedIn && localStorage.clear(); 
-    },[isLoggedIn, history])
+    },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>
