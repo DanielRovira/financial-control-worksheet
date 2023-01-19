@@ -6,21 +6,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetType }) => {
+const Header = ({ sendLogoutReq, isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetType }) => {
     const history = useNavigate();
-
-    const sendLogoutReq = async () => {
-        await fetch(`/api/logout`,
-        {
-            method:'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .catch(error => {
-            setIsLoggedIn(false); history('/');
-        })
-    };
 
     const handleLogout = () => {
         setIsLoggedIn(false);

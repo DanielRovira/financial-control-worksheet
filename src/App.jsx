@@ -25,21 +25,36 @@ const App = () => {
         .then(response => response.json())
         .then(response => response.message && (setIsLoggedIn(false), history('/')))
         .catch(error => {
-            setIsLoggedIn(false);
+            setIsLoggedIn(false); history('/');
         })
     }
+    
+    const sendLogoutReq = async () => {
+        await fetch(`/api/logout`,
+        {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .catch(error => {
+            setIsLoggedIn(false); history('/');
+        })
+    };
 
     useEffect(() => {
-        refreshToken()
-        !isLoggedIn && localStorage.clear(); 
-        !isLoggedIn && history('/'); 
+        !isLoggedIn && localStorage.clear();
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+            fetch(`/api/`, { method: 'GET' })
+    },[])
 
     return (
         <>
             <div ref={sidebar}>
             {isLoggedIn ? <Sidebar open={open} setOpen={setOpen} style={{ overflow: 'hidden' }} /> : ""}
-            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
+            <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
