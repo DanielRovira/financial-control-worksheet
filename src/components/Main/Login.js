@@ -67,7 +67,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
             sendRequest();
             timer.current = window.setTimeout(() => {
                 setLoading(false);
-            }, 5000);
+            }, 10000);
         }
     }
 
