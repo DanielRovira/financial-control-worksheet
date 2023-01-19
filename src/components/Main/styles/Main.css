@@ -19,3 +19,9 @@
     font-weight: bold;
     margin: 10px 20px 0 20px;
 }
+
+@media (max-width: 750px) {
+    .MainContainer {
+        margin-left: 60px;
+    }
+}

@@ -16,3 +16,10 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+
+@media (max-width: 600px) {
+    .BottomNav .MuiBottomNavigation-root {
+        margin-left: 65px;
+        /* width: 400px; */
+    }
+}

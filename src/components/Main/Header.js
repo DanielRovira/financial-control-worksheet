@@ -1,3 +1,4 @@
+import './styles/Header.css'
 import { AppBar, Box, Tab, Toolbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +36,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetTyp
     return (
         <>
             {isLoggedIn && (
-            <AppBar position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            <AppBar className='AppBar' position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                 <Toolbar>
                     <IconButton color="inherit" edge="start" onClick={() => setOpen(!open)} >
                         <MenuIcon />

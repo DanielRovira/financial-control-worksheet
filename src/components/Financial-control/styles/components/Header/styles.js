@@ -7,6 +7,21 @@ export const Container = styled.div`
     background: #fff;
     animation: scaleAnimationIn .1s;
     border-bottom: 1px solid #DADCE0;
+
+    
+    @media (max-width: 600px) {
+        & .MuiButtonBase-root {
+            padding: 0;
+            top: -5px;
+        }
+    }
+    
+    @media (max-width: 400px) {
+        & {
+            text-align: left;
+            padding-left: 80px;
+        }
+    }
 `;
 
 export const Buttons = styled.div`
@@ -32,4 +47,10 @@ export const Title = styled.div`
     padding-top: 75px;
     padding-bottom: 10px;
     color: var(--font-color);
+
+    @media (max-width: 600px) {
+        & {
+            padding-top: 60px;
+        }
+    }
 `;

@@ -32,3 +32,20 @@
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
 }
+
+@media (max-width: 600px) {
+    .Summary {
+        overflow: auto;
+        margin: 0 20px 60px 70px;
+    }
+
+    .Summary .MuiList-root .MuiButtonBase-root span {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .chartContent {
+        width: 120vw;
+        margin: 10px 20px 10px 10px;
+    }
+}
