@@ -1,7 +1,9 @@
 .Summary {
     display: flex;
     height: 80vh;
-    margin: 0 20px 60px 80px;
+    padding: 0 10px 0 80px;
+    margin-bottom: 60px;
+    overflow: auto;
 }
 
 .Summary .MuiList-root {
@@ -28,24 +30,29 @@
     padding: 10px;
     padding-bottom: 0;
     margin: 10px 20px 20px 20px;
-    width: 80vw;
+    min-width: 70vw;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     .Summary {
-        overflow: auto;
-        margin: 0 20px 60px 70px;
-    }
-
-    .Summary .MuiList-root .MuiButtonBase-root span {
-        font-size: 14px;
-        font-weight: 500;
+        padding: 0 0 0 10px;
     }
 
     .chartContent {
-        width: 120vw;
+        margin: 10px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .Summary .MuiList-root .MuiButtonBase-root span {
+        font-size: 16px;
+    }
+
+    .chartContent {
+        min-width: 150vw;
         margin: 10px 20px 10px 10px;
     }
 }

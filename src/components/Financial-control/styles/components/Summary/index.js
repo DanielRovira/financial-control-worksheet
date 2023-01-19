@@ -130,7 +130,7 @@ const options = {
                 ))}
             </List>
             <div className='chartContent'>
-                <Bar options={options} data={data} style={{width: '900px'}} />
+                <Bar options={options} data={data} />
             </div>
         </div>
     );
