@@ -7,15 +7,6 @@ export const Container = styled.div`
     background: #fff;
     animation: scaleAnimationIn .1s;
     border-bottom: 1px solid #DADCE0;
-
-    
-    /* @media (max-width: 600px) {
-        & .MuiButtonBase-root {
-            padding: 0;
-            top: -5px;
-            right: -5px;
-        }
-    } */
     
     @media (max-width: 500px) {
         & {
@@ -42,8 +33,12 @@ export const Buttons = styled.div`
 
     @media (max-width: 600px) {
         right: 0px;
-        top: 60px;
+        top: 55px;
         gap: 0px;
+
+        svg {
+            height: 0.9em;
+        }
     }
 
 `
@@ -55,7 +50,7 @@ export const Title = styled.div`
     /* padding-bottom: 10px; */
     color: var(--font-color);
 
-    @media (max-width: 600px) {
+    @media (max-width: 599px) {
         & {
             padding-top: 60px;
             padding-bottom: 0px;

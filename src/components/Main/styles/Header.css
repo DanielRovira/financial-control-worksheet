@@ -1,5 +1,5 @@
 
-@media (max-width: 750px) {
+/* @media (max-width: 750px) {
     .AppBar h1 {
         font-size: 1.4em;
     }
@@ -8,5 +8,11 @@
 @media (max-width: 400px) {
     .AppBar h1 {
         font-size: 1.2em;
+    }
+} */
+@media (max-width: 440px) {
+    .MuiAppBar-root {
+        max-height: 56px;
+        line-height: 1.5em;
     }
 }

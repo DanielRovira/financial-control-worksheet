@@ -60,6 +60,15 @@ const GlobalStyle = createGlobalStyle`
               user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     }
 
+    h1 {
+        @media (max-width: 600px) {
+            font-size: 1.6em;
+        }
+        @media (max-width: 350px) {
+            font-size: 1.4em;
+        }
+    }
+
     .FinancialWorksheet {
         display: flex;
         flex-direction: column;
