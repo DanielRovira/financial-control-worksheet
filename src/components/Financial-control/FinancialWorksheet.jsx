@@ -24,7 +24,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
-
+    
     const getData = async () => {
             if (sectionExists) {
             const res = await

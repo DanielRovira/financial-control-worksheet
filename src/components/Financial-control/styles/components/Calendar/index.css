@@ -12,8 +12,8 @@
 .Calendar {
     z-index: 2;
     position: fixed;
-    right: 130px;
-    top: 135px;
+    right: 120px;
+    top: 110px;
     animation: scaleAnimationIn2 .2s;
 }
 
@@ -30,5 +30,31 @@
 
     .Calendar .react-calendar .react-calendar__tile {
         padding: 3.5vw 0;
+    }
+   
+    .react-calendar__tile {
+        font-size: 18px;
+    }
+
+    .react-calendar__month-view__weekdays abbr[title] {
+        font-size: 14px;
+    }
+
+    .react-calendar__navigation button {
+        font-size: 23px;
+    }
+
+    .react-calendar__tile .amount {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 400px) {
+    .react-calendar__navigation button {
+        font-size: 20px;
+    }
+
+    .Calendar .react-calendar .react-calendar__tile {
+        padding: 2.5vw 0;
     }
 }

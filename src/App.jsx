@@ -9,6 +9,9 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
+    
+let vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 const App = () => {
     const history = useNavigate();

@@ -8,7 +8,7 @@ export const Form = styled.div`
 
 export const Container = styled.div`
     z-index: 1;
-    margin: 10px 20px 0 calc((var(--closeSidebarWidth)) + 15px);
+    margin: 10px 10px 0 calc((var(--closeSidebarWidth)) + 10px);
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
     border-radius: 5px;
@@ -30,9 +30,6 @@ export const Container = styled.div`
         width: 17vw;
         }
 
-        & .MuiButtonBase-root {
-            top: 25px;
-        }
     }
     @media (max-width: 850px) {
         display: grid;
@@ -42,9 +39,6 @@ export const Container = styled.div`
         width: 27vw;
         }
 
-        & .MuiButtonBase-root {
-            top: 0px;
-        }
     }
     @media (max-width: 500px) {
         display: grid;
