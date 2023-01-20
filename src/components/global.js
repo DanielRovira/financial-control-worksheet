@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Poppins', Sans-Serif;
         background-color: #f2f2f2;
+        touch-action: none;
     }
 
     &::-webkit-scrollbar {
@@ -48,6 +49,15 @@ const GlobalStyle = createGlobalStyle`
         100% {
             transform: translate(0, 0);
         }
+    }
+    
+    h1, img {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     }
 
     .FinancialWorksheet {
