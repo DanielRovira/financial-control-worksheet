@@ -2,7 +2,7 @@ import './index.css'
 import { useNavigate } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { BarChart as BarChartIcon, CalendarMonth as CalendarMonthIcon, ListAlt as ListAltIcon } from '@mui/icons-material'
-const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 export default function BottomNav({ section, sheetType }) {
   const history = useNavigate();

@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
 import * as C from './styles'
 import * as D from '../Form/styles'
+import { useRef, useState } from 'react';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit, FaCheck } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
-const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [isActive, setActive] = useState(false);

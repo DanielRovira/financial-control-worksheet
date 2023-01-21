@@ -1,9 +1,9 @@
 import './index.css'
+import * as C from './styles';
 import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button } from '@mui/material';
-import * as C from './styles';
 import CurrencyInput from 'react-currency-input-field'
-const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ insertDocument, sheetType }) => {
     const toDay = new Date().toISOString().substring(0, 10)

@@ -2,7 +2,7 @@ import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip } from '@mui/material';
 import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
-const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar }) => {
     const params = useParams();

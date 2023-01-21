@@ -1,8 +1,8 @@
-import ResumeItem from '../ResumeItem';
 import * as C from './styles';
+import ResumeItem from '../ResumeItem';
 import { ClickAwayListener } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaDollarSign } from 'react-icons/fa';
-const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Resume = ({ result, sheetType, setDrawer }) => {
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];

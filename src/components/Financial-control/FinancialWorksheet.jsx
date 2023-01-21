@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
-import Form from './styles/components/Form';
-import Header from './styles/components/Header';
-import Resume from './styles/components/Resume';
-import Grid from './styles/components/Grid';
-import Summary from './styles/components/Summary';
-import BottomNavigation from './styles/components/BottomNav';
-import Calendar from './styles/components/Calendar';
-
+import BottomNavigation from './components/BottomNav';
+import Calendar from './components/Calendar';
+import Form from './components/Form';
+import Grid from './components/Grid';
+import Header from './components/Header';
+import Resume from './components/Resume';
+import Summary from './components/Summary';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
