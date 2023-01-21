@@ -13,13 +13,13 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function NestedList({ section, setOpen, hideTitle, arrow }) {
+export default function NestedList({ section, setOpenSidebar, hideTitle, arrow }) {
     const history = useNavigate();
-    const [open, setOpenSection] = React.useState(false);
+    const [openSection, setOpenSection] = React.useState(false);
 
     const handleClick = () => {
-        setOpen && setOpen(true);
-        setOpenSection(!open);
+        setOpenSidebar && setOpenSidebar(true);
+        setOpenSection(!openSection);
     };
 
   return (
@@ -30,24 +30,24 @@ export default function NestedList({ section, setOpen, hideTitle, arrow }) {
           {section.title.slice(0, 3)}
         </ListItemIcon>
         <ListItemText primary={section.name} />
-        {arrow && (open ? <ExpandLess /> : <ExpandMore />)}
+        {arrow && (openSection ? <ExpandLess /> : <ExpandMore />)}
       </ListItemButton>
       </ClickAwayListener>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={openSection} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-summary/${section.title}`); setOpen && setOpen(false)}}>
+          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-summary/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
             <ListItemIcon sx={{ color: '#3C4043' }} >
               <BarChartIcon/>
             </ListItemIcon>
             <ListItemText primary={lang.summary} />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); setOpen && setOpen(false)}}>
+          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
             <ListItemIcon sx={{ color: '#3C4043' }} >
               <CalendarMonthIcon/>
             </ListItemIcon>
             <ListItemText primary={lang.todoPayments} />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }} onClick={() => {history(`/financial-control/${section.title}`); setOpen && setOpen(false)}}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => {history(`/financial-control/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
             <ListItemIcon sx={{ color: '#3C4043' }} >
               <ListAltIcon />
             </ListItemIcon>

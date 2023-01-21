@@ -68,6 +68,11 @@ const GlobalStyle = createGlobalStyle`
             font-size: 1.4em;
         }
     }
+    
+    .MuiTooltip-popper {
+        padding: 0 6px;
+        letter-spacing: 1px;
+    }
 
     .FinancialWorksheet {
         display: flex;

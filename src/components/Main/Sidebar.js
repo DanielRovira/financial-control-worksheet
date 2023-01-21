@@ -6,12 +6,12 @@ import List from '@mui/material/List';
 import NestedList from './NestedList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function MiniDrawer({ open, setOpen }) {
+export default function MiniDrawer({ openSidebar, setOpenSidebar }) {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     return (
-      <Drawer className='Sidebar' variant="permanent" open={open} >
-        <List sx={{ width: open ? '250px' : 'var(--closeSidebarWidth)' }}
+      <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
+        <List sx={{ width: openSidebar ? '250px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
@@ -22,7 +22,7 @@ export default function MiniDrawer({ open, setOpen }) {
         >
             <div className='ItensContainer'>
                 {Array.from(sections).map((section, index) => (
-                    <NestedList key={index} section={section} setOpen={setOpen}/>
+                    <NestedList key={index} section={section} setOpenSidebar={setOpenSidebar}/>
                 ))}
             </div>
             <div style={{ position: 'absolute', bottom: '20px', left: '60px' }}>

@@ -13,6 +13,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
+    const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
+
     return (
         <C.Container>
             <C.Header>
@@ -20,18 +22,18 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </C.Header>
             <C.Buttons>
                 {sheetType !== 'summary' &&
-                <Tooltip title={<h3>{lang.add}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
-                    <IconButton  onClick={() => setAdd(!add)} >
+                <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig}>
+                    <IconButton  onClick={() => setAdd(!add)}>
                         {!add ? <AddCircleIcon fontSize='large'/>
                              : <RemoveCircleIcon fontSize='large'/>}
                     </IconButton>
                 </Tooltip>}
-                <Tooltip title={<h3>{lang.calendar}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
+                <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig}>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon fontSize='large'/>
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.details}</h3>} PopperProps={{fontSize: '30px', modifiers: [{name: "offset", options: {offset: [0, -10]}}]}}>
+                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig}>
                     <IconButton onClick={() => setDrawer(true)}>
                         <InfoOutlinedIcon fontSize='large'/>
                     </IconButton>

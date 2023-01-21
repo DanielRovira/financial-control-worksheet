@@ -23,13 +23,13 @@ export const Buttons = styled.div`
     top: 65px;
     gap: 5px;
 
-    button {
+    /* button {
         color: #767676;
     }
 
     button:hover {
         background-color: rgba(0, 0, 0, 0.08);
-    }
+    } */
 
     @media (max-width: 600px) {
         right: 0px;

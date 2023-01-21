@@ -19,12 +19,12 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 const App = () => {
     const history = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
-    const [accName, setAccName] = useState(localStorage.getItem('userName'));
-    const [open, setOpen] = useState(false);
+    // const [accName, setAccName] = useState(localStorage.getItem('user'));
+    const [openSidebar, setOpenSidebar] = useState(false);
     const [sheetType, setSheetType] = useState();
     const [loading, setLoading] = useState(false);
     const sidebar = useRef(null);
-    const collapseSidebar = () => { open && setOpen(false) }
+    const collapseSidebar = () => { openSidebar && setOpenSidebar(false) }
     useClickAway(sidebar, collapseSidebar);
 
     const refreshToken = async () => {
@@ -51,7 +51,7 @@ const App = () => {
 
     const clearLogin = () => {
         setIsLoggedIn(false);
-        setAccName(null);
+        // setAccName(null);
         setLoading(false);
         localStorage.clear();
         history('/');
@@ -74,11 +74,11 @@ const App = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <div ref={sidebar}>
-            {isLoggedIn && !loading ? <Sidebar open={open} setOpen={setOpen} style={{ overflow: 'hidden' }} /> : ""}
-            <Header accName={accName} sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
+            {isLoggedIn && !loading ? <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} style={{ overflow: 'hidden' }} /> : ""}
+            <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
             </div>
                 <Routes>
-                    <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />
+                    <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} />} />
                     <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     const history = useNavigate();
     const timer = React.useRef();
     const [loading, setLoading] = React.useState(false);
@@ -44,8 +44,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setAccName }) => {
         getSections()
         getCategories()
         localStorage.setItem('isLoggedIn', JSON.stringify(true))
-        localStorage.setItem('userName', res.user.name)
-        setAccName(res.user.name)
+        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}))
+        // setAccName(res.user.name)
         // setIsLoggedIn(true)
     };
 
