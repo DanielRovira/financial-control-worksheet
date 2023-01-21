@@ -1,23 +1,17 @@
 import './styles/Header.css'
-import { AppBar, Box, Tab, Toolbar } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Avatar, AppBar, Box, Button, Card, Toolbar } from '@mui/material';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Header = ({ sendLogoutReq, isLoggedIn, setIsLoggedIn, setAccName, open, setOpen, sheetType }) => {
-    const history = useNavigate();
+const Header = ({ accName, sendLogoutReq, isLoggedIn, open, setOpen, sheetType }) => {
+    const [openPanel, setOpenPanel] = useState(false);
 
     const handleLogout = () => {
-        setIsLoggedIn(false);
-        setAccName(null)
-        localStorage.clear();
-        history('/');
-        sendLogoutReq()
-            // .then(() => setAccName(null))
-            // .then(() => setIsLoggedIn(false))
-            // .then(() => history('/'));
+        sendLogoutReq();
+        setOpenPanel(false);
     };
 
     return (
@@ -30,15 +24,18 @@ const Header = ({ sendLogoutReq, isLoggedIn, setIsLoggedIn, setAccName, open, se
                     </IconButton>
                     <h1 style={{paddingLeft: '20px'}} >{lang[sheetType]}</h1>
                     <Box sx={{ marginLeft: 'auto' }}>
-                        
-                            <Tab
-                            onClick={handleLogout}
-                            to='/'
-                            LinkComponent={Link}
-                            label='Logout'
-                            />
+                        <Avatar onClick={() => setOpenPanel(!openPanel)} children={accName[0]} />
                     </Box>
                 </Toolbar>
+                { openPanel &&
+                <ClickAwayListener onClickAway={() => setTimeout(() => {  
+                    setOpenPanel(false)
+                }, 5)}>
+                    <Card className='Panel'>
+                        <h2>{accName}</h2>
+                        <Button onClick={handleLogout}>{lang.logout}</Button>
+                    </Card>
+                </ClickAwayListener>}
             </AppBar>
             )}
         </>

@@ -10,20 +10,11 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 function Main({ refreshToken, isLoggedIn, setSheetType }) {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    
-    // const refreshToken = async () => {
-    //     await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
-    //     .then(response => response.json())
-    //     .then(response => response.message && (setIsLoggedIn(false), history('/')))
-    //     .catch(error => {
-    //         setIsLoggedIn(false); history('/');
-    //     })
-    // }
 
     useEffect(() => {
         refreshToken()
         setSheetType('')
-        !isLoggedIn && history('/')
+        // !isLoggedIn && history('/')
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -31,7 +22,7 @@ function Main({ refreshToken, isLoggedIn, setSheetType }) {
             <List
                 subheader={
                     <ListSubheader>
-                        {lang.costCenter}
+                        <h2>{lang.costCenter}</h2>
                     </ListSubheader>
                   }
                 >

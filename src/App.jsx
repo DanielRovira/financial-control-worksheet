@@ -9,6 +9,9 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
+
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
     
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -19,20 +22,24 @@ const App = () => {
     const [accName, setAccName] = useState(localStorage.getItem('userName'));
     const [open, setOpen] = useState(false);
     const [sheetType, setSheetType] = useState();
+    const [loading, setLoading] = useState(false);
     const sidebar = useRef(null);
     const collapseSidebar = () => { open && setOpen(false) }
     useClickAway(sidebar, collapseSidebar);
 
     const refreshToken = async () => {
+        setLoading(true);
         await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => response.message && (setIsLoggedIn(false), history('/')))
+        .then(response => response.message && sendLogoutReq())
         .catch(error => {
-            setIsLoggedIn(false); history('/');
+            clearLogin();
         })
+        .then(() => setLoading(false))
     }
     
     const sendLogoutReq = async () => {
+        clearLogin();
         await fetch(`/api/logout`,
         {
             method:'POST',
@@ -40,13 +47,18 @@ const App = () => {
             credentials: 'include'
         })
         .then(response => response.json())
-        .catch(error => {
-            setIsLoggedIn(false); history('/');
-        })
     };
 
+    const clearLogin = () => {
+        setIsLoggedIn(false);
+        setAccName(null);
+        setLoading(false);
+        localStorage.clear();
+        history('/');
+    }
+
     useEffect(() => {
-        !isLoggedIn && localStorage.clear();
+        !isLoggedIn && sendLogoutReq();
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -55,9 +67,15 @@ const App = () => {
 
     return (
         <>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <div ref={sidebar}>
-            {isLoggedIn ? <Sidebar open={open} setOpen={setOpen} style={{ overflow: 'hidden' }} /> : ""}
-            <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} accName={accName} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
+            {isLoggedIn && !loading ? <Sidebar open={open} setOpen={setOpen} style={{ overflow: 'hidden' }} /> : ""}
+            <Header accName={accName} sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} setAccName={setAccName} open={open} setOpen={setOpen} sheetType={sheetType} />
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setAccName={setAccName} />} />

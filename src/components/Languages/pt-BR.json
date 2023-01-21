@@ -22,6 +22,7 @@
     "idnumber": "CPF/CNPJ",
     "link": "Link",
     "login": "Login",
+    "logout": "Logout",
     "number": "Número",
     "other": "Outro",
     "password": "Senha",
