@@ -1,7 +1,7 @@
 import './index.css'
-import React, { useState } from 'react';
-import * as C from './styles';
+import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button } from '@mui/material';
+import * as C from './styles';
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 

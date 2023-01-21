@@ -1,12 +1,7 @@
 import './index.css'
-import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
+import { BarChart as BarChartIcon, CalendarMonth as CalendarMonthIcon, ListAlt as ListAltIcon } from '@mui/icons-material'
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 export default function BottomNav({ section, sheetType }) {

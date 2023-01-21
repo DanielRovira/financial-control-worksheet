@@ -1,7 +1,6 @@
-import React from 'react';
 import ResumeItem from '../ResumeItem';
 import * as C from './styles';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { ClickAwayListener } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaDollarSign } from 'react-icons/fa';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 

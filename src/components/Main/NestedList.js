@@ -1,21 +1,12 @@
-import * as React from 'react';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { useState } from 'react';
+import { ClickAwayListener, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function NestedList({ section, setOpenSidebar, hideTitle, arrow }) {
+const NestedList = ({ section, setOpenSidebar, hideTitle, arrow }) => {
     const history = useNavigate();
-    const [openSection, setOpenSection] = React.useState(false);
+    const [openSection, setOpenSection] = useState(false);
 
     const handleClick = () => {
         setOpenSidebar && setOpenSidebar(true);
@@ -59,3 +50,5 @@ export default function NestedList({ section, setOpenSidebar, hideTitle, arrow }
       
   );
 }
+
+export default NestedList

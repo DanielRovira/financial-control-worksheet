@@ -9,9 +9,7 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
-
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import  { Backdrop, CircularProgress } from '@mui/material';
     
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);

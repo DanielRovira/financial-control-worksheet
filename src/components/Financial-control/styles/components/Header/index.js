@@ -1,12 +1,7 @@
-import React from 'react';
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { IconButton, Tooltip } from '@mui/material';
+import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar }) => {

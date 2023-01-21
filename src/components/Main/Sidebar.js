@@ -1,12 +1,9 @@
 import './styles/Sidebar.css'
-import * as React from 'react';
-import Drawer from '@mui/material/Drawer';
-import ListSubheader from '@mui/material/ListSubheader';
-import List from '@mui/material/List';
+import { Drawer, List, ListSubheader } from '@mui/material';
 import NestedList from './NestedList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function MiniDrawer({ openSidebar, setOpenSidebar }) {
+ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     return (
@@ -32,3 +29,5 @@ export default function MiniDrawer({ openSidebar, setOpenSidebar }) {
       </Drawer>
   );
 }
+
+export default Sidebar

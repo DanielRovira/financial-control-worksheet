@@ -1,9 +1,6 @@
 import './index.css'
-import React, { useState, useEffect } from 'react';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
+import { useState, useEffect } from 'react';
+import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 ChartJS.register( CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend );

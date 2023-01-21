@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const Signup = () => {
   const history = useNavigate();
   const [inputs, setInputs] = useState({

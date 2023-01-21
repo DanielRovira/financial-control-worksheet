@@ -1,13 +1,13 @@
 import './styles/Login.css'
+import { useEffect, useState, useRef } from 'react';
 import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     const history = useNavigate();
-    const timer = React.useRef();
-    const [loading, setLoading] = React.useState(false);
+    const timer = useRef();
+    const [loading, setLoading] = useState(false);
     const [inputs, setInputs] = useState({
         email: '',
         password: '',

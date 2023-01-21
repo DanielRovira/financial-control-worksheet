@@ -1,8 +1,6 @@
 import './Calendar.css';
 import './index.css'
-import React from 'react';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Box from '@mui/material/Box';
+import { Box, ClickAwayListener } from '@mui/material';
 import Calendar from 'react-calendar'
 // const lang = require(`../../../../Languages/${process.env.REACT_APP_LANG}.json`);
 

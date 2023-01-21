@@ -1,19 +1,16 @@
 import './styles/Main.css'
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { List, ListSubheader } from '@mui/material';
 import NestedList from './NestedList';
+import ListSubheader from '@mui/material/ListSubheader';
+import List from '@mui/material/List';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Main = ({ refreshToken, isLoggedIn, setSheetType }) => {
+function Settings ({  }) {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
-    useEffect(() => {
-        refreshToken()
-        setSheetType('')
-        // !isLoggedIn && history('/')
-    }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='MainContainer'>
