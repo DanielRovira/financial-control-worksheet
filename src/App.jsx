@@ -34,7 +34,19 @@ const App = () => {
         .catch(error => {
             clearLogin();
         })
+    }
+    
+    const getSections = async () => {
+        await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
+        .then(response => response.json())
+        .then(response => localStorage.setItem('sections', JSON.stringify(response)))
         .then(() => setLoading(false))
+    }
+
+    const getCategories = async () => {
+        await fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
+        .then(response => response.json())
+        .then(response => localStorage.setItem('categories', JSON.stringify(response)))
     }
     
     const sendLogoutReq = async () => {
@@ -57,12 +69,10 @@ const App = () => {
     }
 
     useEffect(() => {
+        getSections();
+        getCategories();
         !isLoggedIn && sendLogoutReq();
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
-
-    useEffect(() => {
-            fetch(`/api/`, { method: 'GET' })
-    },[])
 
     return (
         <div className='App'>
@@ -80,7 +90,7 @@ const App = () => {
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} />} />
-                    <Route path="/settings" element={<Settings sheetType={sheetType} setSheetType={setSheetType} />} />
+                    <Route path="/settings" element={<Settings setSheetType={setSheetType} getSections={getSections} getCategories={getCategories} />} />
                     <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
                     <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
                     <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />

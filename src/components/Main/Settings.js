@@ -1,3 +1,4 @@
+import React from 'react';
 import './styles/Settings.css'
 // import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -5,16 +6,18 @@ import { Divider, IconButton, List, ListItem, ListItemText, ListSubheader, TextF
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Settings = ({ sheetType, setSheetType }) => {
+const Settings = ({ setSheetType, getSections, getCategories }) => {
     // const history = useNavigate();
     const categories = JSON.parse(localStorage.getItem("categories")) || [];
-    const CategoriesListItem = new Set(categories.map((item) => item.type))
+    const CategoriesListItem = new Set(Array.from(categories)?.map((item) => item.type))
     const [showAdd, setShowAdd] = useState(false)
     const [showRemove, setShowRemove] = useState(false)
     const [showInput, setShowInput] = useState(false)
+    const [value, setValue] = useState()
 
     function insertDocument(transaction) {
-        fetch(`/api/${process.env.REACT_APP_DB}/add/`,
+        categories.push(transaction)
+        fetch(`/api/${process.env.REACT_APP_DB}/add/categories`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -22,7 +25,23 @@ const Settings = ({ sheetType, setSheetType }) => {
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
-        // .then(() => getData())
+        .then(() => {getSections(); getCategories()})
+    }
+
+    function deleteDocument(item) {
+        fetch(`/api/${process.env.REACT_APP_DB}/delete/categories`,
+        {
+            method:'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(item)
+        })
+        .then(() => {getSections(); getCategories()})
+    }
+
+    const transaction = {
+            name: value,
+            type: showInput,
     }
 
     useEffect(() => {
@@ -48,11 +67,13 @@ const Settings = ({ sheetType, setSheetType }) => {
                     <ListItem dense >
                     <TextField
                         autoFocus
+                        value={value}
                         size="small"
                         variant="standard"
                         margin="none"
                         placeholder={`${lang.add} ${lang[CategoriesListItem]}`}
-                        onBlur={() => setShowInput()}
+                        onChange={(e) => setValue(e.target.value)}
+                        onBlur={() => {value && insertDocument(transaction); setShowInput(); setValue()}}
                     />
                 </ListItem>}
                 {Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (
@@ -65,7 +86,7 @@ const Settings = ({ sheetType, setSheetType }) => {
                             primary={section.name}
                         />
                         {showRemove === section._id && 
-                        <IconButton>
+                        <IconButton onClick={() => deleteDocument(section)}>
                             <RemoveCircleIcon />
                         </IconButton>}
                     </ListItem>
@@ -78,10 +99,10 @@ const Settings = ({ sheetType, setSheetType }) => {
         <div className='SettingsContainer'>
             <div className='SettingsSubContainer'>
                 {Array.from(CategoriesListItem).map((item, index) => (
-                    <>
+                    <React.Fragment key={index}>
                         <CategoriesList CategoriesListItem={item} />
                         {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />}
-                    </>
+                    </React.Fragment>
                 ))}
                 
             </div>

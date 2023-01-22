@@ -13,19 +13,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
         password: '',
     });
 
-    const getSections = async () => {
-        await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
-        .then(response => response.json())
-        .then(response => localStorage.setItem('sections', JSON.stringify(response)))
-        setIsLoggedIn(true)
-    }
-
-    const getCategories = async () => {
-        await fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
-        .then(response => response.json())
-        .then(response => localStorage.setItem('categories', JSON.stringify(response)))
-    }
-
     const sendRequest = async () => {
         const res = await fetch(`/api/login`,
         {
@@ -41,12 +28,12 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
         if (res.status !== 200) {
             return alert(lang.alert03);
         }
-        getSections()
-        getCategories()
+        // getSections()
+        // getCategories()
         localStorage.setItem('isLoggedIn', JSON.stringify(true))
         localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}))
         // setAccName(res.user.name)
-        // setIsLoggedIn(true)
+        setIsLoggedIn(true)
     };
 
     useEffect(() => {
