@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Poppins', Sans-Serif;
     }
 
+    html {
+        overflow: hidden;
+    }
+
     body {
         font-family: 'Poppins', Sans-Serif;
         background-color: #f2f2f2;
@@ -74,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
         letter-spacing: 1px;
     }
 
-    .FinancialWorksheet {
+    .FinancialWorksheet, .App {
         display: flex;
         flex-direction: column;
         height: 100vh;

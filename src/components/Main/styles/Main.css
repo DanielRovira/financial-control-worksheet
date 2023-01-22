@@ -3,7 +3,8 @@
     justify-content: center;
     row-gap: 30px;
     padding-top: 150px;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
+    overflow: auto;
 }
 
 .MainContainer ul {
@@ -11,6 +12,7 @@
     box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.1);
     width: 300px;
     background-color: white;
+
 }
 
 .MainContainer .MuiListSubheader-root {
@@ -21,8 +23,8 @@
     margin: 10px 20px 0 20px;
 }
 
-@media (max-height: 600px) {
+@media (max-width: 600px), (max-height: 600px) {
     .MainContainer {
-        padding-top: calc(5vh + 60px);
+        padding-top: 70px;
     }
 }

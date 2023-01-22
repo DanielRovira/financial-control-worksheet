@@ -17,7 +17,7 @@
     }
 }
 
-.AppBar .MuiAvatar-root {
+.AppBar .MuiBox-root .MuiAvatar-root {
     cursor: pointer;
 }
 

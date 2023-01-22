@@ -13,6 +13,18 @@ const Settings = ({ sheetType, setSheetType }) => {
     const [showRemove, setShowRemove] = useState(false)
     const [showInput, setShowInput] = useState(false)
 
+    function insertDocument(transaction) {
+        fetch(`/api/${process.env.REACT_APP_DB}/add/`,
+        {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(transaction)
+        })
+        .then(response => response.json())
+        // .then(() => getData())
+    }
+
     useEffect(() => {
         setSheetType('settings')
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps

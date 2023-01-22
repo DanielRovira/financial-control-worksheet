@@ -65,7 +65,7 @@ const App = () => {
     },[])
 
     return (
-        <>
+        <div className='App'>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loading}
@@ -86,7 +86,7 @@ const App = () => {
                     <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
                 </Routes> 
             <GlobalStyle />
-        </>
+        </div>
     )
 };
 
