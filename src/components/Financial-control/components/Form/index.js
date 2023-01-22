@@ -8,7 +8,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 const Form = ({ insertDocument, sheetType }) => {
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
+    let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
 
@@ -44,7 +44,7 @@ const Form = ({ insertDocument, sheetType }) => {
             financialControl: {
                 date: date,
                 expense: isExpense === null ? true : isExpense,
-                source: source ? source : provenience[0]?.name,
+                source: source ? source : sources[0]?.name,
              // category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
                 category: category === '' ? '' : otherCategory !== '' ? otherCategory : category ,
                 subCategory: subCategory === '' ? '' : otherSubCategory !== '' ? otherSubCategory : subCategory,
@@ -123,9 +123,9 @@ const Form = ({ insertDocument, sheetType }) => {
                             label={lang.source}
                             MenuProps={{disableScrollLock: true,}}
                         >
-                            {provenience.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
+                            {sources.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                     </Select>
-                    {!source && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{provenience[0]?.name}</FormHelperText>}
+                    {!source && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{sources[0]?.name}</FormHelperText>}
                     </FormControl>
                 </C.InputContent>
                 <C.InputContent>

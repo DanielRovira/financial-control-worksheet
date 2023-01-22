@@ -2,9 +2,11 @@ import './styles/Header.css'
 import { Avatar, AppBar, Box, Button, Card, ClickAwayListener, Divider, IconButton, Toolbar, Tooltip } from '@mui/material';
 import { Menu as MenuIcon, SettingsOutlined as SettingsOutlinedIcon } from '@mui/icons-material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetType }) => {
+    const history = useNavigate();
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const [openPanel, setOpenPanel] = useState(false);
     const [show, setShow] = useState(false)
@@ -15,7 +17,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
         setOpenPanel(false);
     };
 
-    const tooltipTitle = (
+    const TooltipTitle = (
         <>
             <h2>{`${lang.account} ${process.env.REACT_APP_NAME}`}</h2>
             <p>{user.name}</p>
@@ -37,7 +39,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                         <Tooltip
                             id='AppBarTooltip'
                             disableInteractive
-                            title={tooltipTitle}
+                            title={TooltipTitle}
                             open={!openPanel && show} 
                             disableHoverListener
                             onMouseEnter={() => setShow(true)}
@@ -56,7 +58,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                     <Card className='Panel'>
                         <div className='userContainer'>
                             <Tooltip disableInteractive title={<h3>{lang.settings}</h3>} PopperProps={poppersConfig}>
-                                <IconButton>
+                                <IconButton onClick={() => history(`/settings`)}>
                                     <SettingsOutlinedIcon />
                                 </IconButton>
                             </Tooltip>
@@ -74,4 +76,4 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
     )
 };
 
-export default Header;
+export default Header

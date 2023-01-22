@@ -126,4 +126,4 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
   );
 };
 
-export default Login;
+export default Login

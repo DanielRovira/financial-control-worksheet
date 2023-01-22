@@ -6,7 +6,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Resume = ({ result, sheetType, setDrawer }) => {
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
+    let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
 
     return ( 
         <ClickAwayListener onClickAway={() => setDrawer(false)}>
@@ -15,7 +15,7 @@ const Resume = ({ result, sheetType, setDrawer }) => {
                 {sheetType === 'financialControl' && <>
                 <ResumeItem title={lang.entries} Icon={FaRegArrowAltCircleUp} color={'green'} value={result[sheetType].income} />
                 <ResumeItem title={lang.expenses} Icon={FaRegArrowAltCircleDown} color={'red'} value={result[sheetType].expense} />
-                {Array.from(provenience)?.map((item, index) => (
+                {Array.from(sources)?.map((item, index) => (
                    <ResumeItem key={index} title={item.name} Icon={FaDollarSign} value={result[item.name].total} /> 
                 ))}
                 </>}

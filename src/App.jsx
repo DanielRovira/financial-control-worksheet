@@ -9,6 +9,7 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
+import Settings from './components/Main/Settings';
 import  { Backdrop, CircularProgress } from '@mui/material';
     
 let vh = window.innerHeight * 0.01;
@@ -79,6 +80,7 @@ const App = () => {
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} />} />
+                    <Route path="/settings" element={<Settings />} />
                     <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
                     <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
                     <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />

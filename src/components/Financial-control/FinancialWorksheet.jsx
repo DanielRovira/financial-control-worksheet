@@ -22,7 +22,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
+    let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
     
     const getData = async () => {
             if (sectionExists) {
@@ -113,7 +113,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
             todoPayments: calc(transactionsList2),
         }))
 
-        Array.from(provenience)?.map((prov) => (
+        Array.from(sources)?.map((prov) => (
             setResult((prev) => ({ ...prev, [prov.name]:
                 calc(transactionsList.filter((item) => (item.source === prov.name)))
             }))

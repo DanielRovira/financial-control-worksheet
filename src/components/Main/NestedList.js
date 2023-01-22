@@ -26,13 +26,13 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow }) => {
       </ClickAwayListener>
       <Collapse in={openSection} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-summary/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => {history(`/financial-summary/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
             <ListItemIcon sx={{ color: '#3C4043' }} >
               <BarChartIcon/>
             </ListItemIcon>
             <ListItemText primary={lang.summary} />
           </ListItemButton>
-          <ListItemButton sx={{ pl: 4 }}  onClick={() => {history(`/financial-todos/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => {history(`/financial-todos/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
             <ListItemIcon sx={{ color: '#3C4043' }} >
               <CalendarMonthIcon/>
             </ListItemIcon>

@@ -23,7 +23,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [amountValue, setAmountValue] = useState(item.amount)
     const ref = useRef(null);
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let provenience = Array.from(categoriesList || []).filter(item => item.type === 'provenience').sort((a, b) => a.name.localeCompare(b.name))
+    let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
 
@@ -126,7 +126,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                         onChange={(e) => setSourceTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     >
-                        {provenience.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
+                        {sources.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
