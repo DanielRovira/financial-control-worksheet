@@ -3,6 +3,7 @@
     justify-content: center;
     row-gap: 30px;
     padding-top: 150px;
+    padding-bottom: 5px;
 }
 
 .MainContainer ul {
@@ -18,4 +19,10 @@
     /* font-size: 26px; */
     /* font-weight: bold; */
     margin: 10px 20px 0 20px;
+}
+
+@media (max-height: 600px) {
+    .MainContainer {
+        padding-top: calc(5vh + 60px);
+    }
 }
