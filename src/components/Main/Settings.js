@@ -6,9 +6,9 @@ import { Divider, IconButton, List, ListItem, ListItemText, ListSubheader, TextF
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Settings = ({ setSheetType, getSections, getCategories }) => {
+const Settings = ({ setSheetType, refreshToken }) => {
     // const history = useNavigate();
-    const categories = JSON.parse(localStorage.getItem("categories")) || [];
+    const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
     const CategoriesListItem = new Set(Array.from(categories)?.map((item) => item.type));
     const [showAdd, setShowAdd] = useState(false);
     const [showRemove, setShowRemove] = useState(false);
@@ -16,7 +16,7 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
     const [value, setValue] = useState();
 
     function insertDocument(transaction) {
-        categories.push(transaction)
+        setCategories((prev) => [...prev, transaction])
         fetch(`/api/${process.env.REACT_APP_DB}/add/categories`,
         {
             method:'POST',
@@ -25,10 +25,11 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
-        .then(() => {getSections(); getCategories()})
+        .then(() => {refreshToken()})
     }
 
     function deleteDocument(item) {
+        setCategories((prev) => [...prev.filter((items) => items !== item)])
         fetch(`/api/${process.env.REACT_APP_DB}/delete/categories`,
         {
             method:'DELETE',
@@ -36,7 +37,6 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        .then(() => {getSections(); getCategories()})
     }
 
     const transaction = {
@@ -52,8 +52,13 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
     }
 
     useEffect(() => {
-        setSheetType('settings')
+        setSheetType('settings');
+        refreshToken();
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        setCategories(JSON.parse(localStorage.getItem("categories")))
+    }, [localStorage.getItem("categories")])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const CategoriesList = ({ CategoriesListItem }) => {
        return (
@@ -70,23 +75,9 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
                     </ListSubheader>
                 }
             >
-                {showInput === CategoriesListItem &&
-                    <ListItem dense >
-                        <TextField
-                            autoFocus
-                            value={value}
-                            size="small"
-                            variant="standard"
-                            margin="none"
-                            placeholder={`${lang.add} ${lang[CategoriesListItem]}`}
-                            onChange={(e) => setValue(e.target.value)}
-                            onBlur={() => {value && insertDocument(transaction); setShowInput(); setValue()}}
-                            onKeyDown={event => { if (event.key === 'Enter') {value && insertDocument(transaction); setShowInput(); setValue()}}}
-                        />
-                    </ListItem>}
                 {Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (
                     <ListItem dense 
-                        key={section._id}
+                        key={index}
                         onMouseEnter={() => setShowRemove(section._id)}
                         onMouseLeave={() => setShowRemove(null)}
                     >
@@ -99,6 +90,20 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
                         </IconButton>}
                     </ListItem>
                 ))}
+                {showInput === CategoriesListItem &&
+                    <ListItem dense >
+                        <TextField
+                            autoFocus
+                            value={value}
+                            size="small"
+                            variant="standard"
+                            margin="none"
+                            placeholder={`${lang.add} ${lang[CategoriesListItem]}`}
+                            onChange={(e) => setValue(e.target.value)}
+                            onBlur={() => {value && insertDocument(transaction); setShowInput(); setValue()}}
+                            onKeyDown={event => { if (event.key === 'Enter') {value && insertDocument(transaction); setValue()}}}
+                        />
+                    </ListItem>}
             </List>
         )
     }
@@ -108,7 +113,7 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
             <div className='SettingsSubContainer'>
                 {Array.from(CategoriesListItem).map((item, index) => (
                     <React.Fragment key={`${index}${item}`}>
-                        <CategoriesList CategoriesListItem={item} key={`${item}${index}`} />
+                        <CategoriesList CategoriesListItem={item} />
                         {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />}
                     </React.Fragment>
                 ))}

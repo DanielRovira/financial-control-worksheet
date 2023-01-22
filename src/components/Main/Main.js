@@ -5,13 +5,14 @@ import { List, ListSubheader } from '@mui/material';
 import NestedList from './NestedList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Main = ({ refreshToken, isLoggedIn, setSheetType }) => {
+const Main = ({ refreshToken, isLoggedIn, setSheetType, setLoading }) => {
     const history = useNavigate();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     useEffect(() => {
-        refreshToken()
-        setSheetType('')
+        setLoading(true);
+        refreshToken();
+        setSheetType('');
         // !isLoggedIn && history('/')
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 

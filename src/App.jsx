@@ -27,7 +27,8 @@ const App = () => {
     useClickAway(sidebar, collapseSidebar);
 
     const refreshToken = async () => {
-        setLoading(true);
+        getSections();
+        getCategories();
         await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
         .then(response => response.message && sendLogoutReq())
@@ -69,8 +70,6 @@ const App = () => {
     }
 
     useEffect(() => {
-        getSections();
-        getCategories();
         !isLoggedIn && sendLogoutReq();
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -87,13 +86,13 @@ const App = () => {
             <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
             </div>
                 <Routes>
-                    <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+                    <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} />} />
-                    <Route path="/settings" element={<Settings setSheetType={setSheetType} getSections={getSections} getCategories={getCategories} />} />
-                    <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
-                    <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
-                    <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
+                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} setLoading={setLoading} />} />
+                    <Route path="/settings" element={<Settings setSheetType={setSheetType} refreshToken={refreshToken} />} />
+                    <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
+                    <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
+                    <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

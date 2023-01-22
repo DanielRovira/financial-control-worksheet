@@ -10,7 +10,7 @@ import Resume from './components/Resume';
 import Summary from './components/Summary';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
+const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [transactionsList2, setTransactionsList2] = useState([]);
     const [result, setResult] = useState([]);
@@ -44,6 +44,7 @@ const FinancialWorksheet = ({ isLoggedIn, setIsLoggedIn, sheetType, setSheetType
         }
 
     useEffect(() => {
+        refreshToken()
         setSheetType(sheetType)
         setTransactionsList([])
         setTransactionsList2([])

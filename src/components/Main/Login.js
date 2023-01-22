@@ -4,10 +4,10 @@ import { Box, Button, TextField, Typography, CircularProgress } from '@mui/mater
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Login = ({ isLoggedIn, setIsLoggedIn }) => {
+const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
     const history = useNavigate();
     const timer = useRef();
-    const [loading, setLoading] = useState(false);
+    const [loadingButton, setLoadingButton] = useState(false);
     const [inputs, setInputs] = useState({
         email: '',
         password: '',
@@ -30,10 +30,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
         }
         // getSections()
         // getCategories()
-        localStorage.setItem('isLoggedIn', JSON.stringify(true))
-        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}))
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
         // setAccName(res.user.name)
-        setIsLoggedIn(true)
+        setIsLoggedIn(true);
+        setLoading(true);
     };
 
     useEffect(() => {
@@ -48,12 +49,12 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
     }
 
     function handleSubmit(e) {
-        if (!loading) {
-            setLoading(true);
+        if (!loadingButton) {
+            setLoadingButton(true);
             e.preventDefault();
             sendRequest();
             timer.current = window.setTimeout(() => {
-                setLoading(false);
+                setLoadingButton(false);
             }, 10000);
         }
     }
@@ -101,11 +102,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn }) => {
                 <Button
                     variant='contained'
                     type='submit'
-                    disabled={loading}
+                    disabled={loadingButton}
                 >
                   {lang.login}
                 </Button>
-                {loading && <CircularProgress size={null} />}
+                {loadingButton && <CircularProgress size={null} />}
           </Box>
         </Box>
       </form>
