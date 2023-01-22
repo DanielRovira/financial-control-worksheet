@@ -9,7 +9,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
     const history = useNavigate();
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const [openPanel, setOpenPanel] = useState(false);
-    const [show, setShow] = useState(false)
+    const [showTooltip, setShowTooltip] = useState(false)
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
     const handleLogout = () => {
@@ -40,10 +40,10 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                             id='AppBarTooltip'
                             disableInteractive
                             title={TooltipTitle}
-                            open={!openPanel && show} 
+                            open={!openPanel && showTooltip} 
                             disableHoverListener
-                            onMouseEnter={() => setShow(true)}
-                            onMouseLeave={() => setShow(false)}
+                            onMouseEnter={() => setShowTooltip(true)}
+                            onMouseLeave={() => setShowTooltip(false)}
                             placement='bottom-end'
                             PopperProps={poppersConfig}
                         >
@@ -58,7 +58,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                     <Card className='Panel'>
                         <div className='userContainer'>
                             <Tooltip disableInteractive title={<h3>{lang.settings}</h3>} PopperProps={poppersConfig}>
-                                <IconButton onClick={() => history(`/settings`)}>
+                                <IconButton onClick={() => {setOpenPanel(false); history(`/settings`)}}>
                                     <SettingsOutlinedIcon />
                                 </IconButton>
                             </Tooltip>

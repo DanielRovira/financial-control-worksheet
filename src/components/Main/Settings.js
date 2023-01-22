@@ -1,16 +1,21 @@
 import './styles/Settings.css'
 // import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Divider, IconButton, List, ListItem, ListItemText, ListSubheader, TextField } from '@mui/material';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
-const Settings = () => {
+
+const Settings = ({ sheetType, setSheetType }) => {
     // const history = useNavigate();
     const categories = JSON.parse(localStorage.getItem("categories")) || [];
     const CategoriesListItem = new Set(categories.map((item) => item.type))
     const [showAdd, setShowAdd] = useState(false)
     const [showRemove, setShowRemove] = useState(false)
     const [showInput, setShowInput] = useState(false)
+
+    useEffect(() => {
+        setSheetType('settings')
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const CategoriesList = ({ CategoriesListItem }) => {
        return (
