@@ -9,11 +9,11 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 const Settings = ({ setSheetType, getSections, getCategories }) => {
     // const history = useNavigate();
     const categories = JSON.parse(localStorage.getItem("categories")) || [];
-    const CategoriesListItem = new Set(Array.from(categories)?.map((item) => item.type))
-    const [showAdd, setShowAdd] = useState(false)
-    const [showRemove, setShowRemove] = useState(false)
-    const [showInput, setShowInput] = useState(false)
-    const [value, setValue] = useState()
+    const CategoriesListItem = new Set(Array.from(categories)?.map((item) => item.type));
+    const [showAdd, setShowAdd] = useState(false);
+    const [showRemove, setShowRemove] = useState(false);
+    const [showInput, setShowInput] = useState(false);
+    const [value, setValue] = useState();
 
     function insertDocument(transaction) {
         categories.push(transaction)
@@ -44,6 +44,13 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
             type: showInput,
     }
 
+    const handleClick = (CategoriesListItem) => {
+        setTimeout(() => {  
+            setValue();
+            setShowInput(CategoriesListItem);
+        }, 10);
+    }
+
     useEffect(() => {
         setSheetType('settings')
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
@@ -57,7 +64,7 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
                     <ListSubheader sx={{ display: 'flex', justifyContent:'space-between'}}>
                         <h2>{lang[`${CategoriesListItem}`]}s</h2>
                         {showAdd === CategoriesListItem &&
-                        <IconButton onClick={() => setShowInput(CategoriesListItem)}>
+                        <IconButton onMouseDown={() => handleClick(CategoriesListItem)}>
                             <AddCircleIcon />
                         </IconButton>}
                     </ListSubheader>
@@ -65,17 +72,18 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
             >
                 {showInput === CategoriesListItem &&
                     <ListItem dense >
-                    <TextField
-                        autoFocus
-                        value={value}
-                        size="small"
-                        variant="standard"
-                        margin="none"
-                        placeholder={`${lang.add} ${lang[CategoriesListItem]}`}
-                        onChange={(e) => setValue(e.target.value)}
-                        onBlur={() => {value && insertDocument(transaction); setShowInput(); setValue()}}
-                    />
-                </ListItem>}
+                        <TextField
+                            autoFocus
+                            value={value}
+                            size="small"
+                            variant="standard"
+                            margin="none"
+                            placeholder={`${lang.add} ${lang[CategoriesListItem]}`}
+                            onChange={(e) => setValue(e.target.value)}
+                            onBlur={() => {value && insertDocument(transaction); setShowInput(); setValue()}}
+                            onKeyDown={event => { if (event.key === 'Enter') {value && insertDocument(transaction); setShowInput(); setValue()}}}
+                        />
+                    </ListItem>}
                 {Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (
                     <ListItem dense 
                         key={section._id}
@@ -86,7 +94,7 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
                             primary={section.name}
                         />
                         {showRemove === section._id && 
-                        <IconButton onClick={() => deleteDocument(section)}>
+                        <IconButton onMouseDown={() => deleteDocument(section)}>
                             <RemoveCircleIcon />
                         </IconButton>}
                     </ListItem>
@@ -99,8 +107,8 @@ const Settings = ({ setSheetType, getSections, getCategories }) => {
         <div className='SettingsContainer'>
             <div className='SettingsSubContainer'>
                 {Array.from(CategoriesListItem).map((item, index) => (
-                    <React.Fragment key={index}>
-                        <CategoriesList CategoriesListItem={item} />
+                    <React.Fragment key={`${index}${item}`}>
+                        <CategoriesList CategoriesListItem={item} key={`${item}${index}`} />
                         {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />}
                     </React.Fragment>
                 ))}
