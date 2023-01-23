@@ -17,6 +17,10 @@
     }
 }
 
+.AppBar .MuiBox-root .MuiAvatar-root, .Panel.MuiCard-root .userContainer .MuiAvatar-root {
+    background-color: var(--avatarColor);
+}
+
 .AppBar .MuiBox-root .MuiAvatar-root {
     cursor: pointer;
 }

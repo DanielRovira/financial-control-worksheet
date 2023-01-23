@@ -13,6 +13,8 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
     const [hovered, setHovered] = useState(false);
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
+    document.documentElement.style.setProperty('--avatarColor', stringToColor(user.name || ''));
+
     const handleLogout = () => {
         sendLogoutReq();
         setOpenPanel(false);
@@ -29,6 +31,24 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
           setShowTooltip(false)
         };
       }, [hovered, openPanel]);
+
+      function stringToColor(string) {
+        let hash = 0;
+        let i;
+      
+        for (i = 0; i < string.length; i += 1) {
+          hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        }
+      
+        let color = '#';
+      
+        for (i = 0; i < 3; i += 1) {
+          const value = (hash >> (i * 8)) & 0xff;
+          color += `AA${value.toString(16)}`.slice(-2);
+        }
+      
+        return color;
+      }
 
     const TooltipTitle = (
         <>
