@@ -4,12 +4,8 @@ import NestedList from './NestedList';
 import { useState, useEffect } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
- const Sidebar = ({ openSidebar, setOpenSidebar }) => {
-    const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
-
-    useEffect(() => {
-        setSections(JSON.parse(localStorage.getItem("sections")))
-    }, [localStorage.getItem("sections")])  // eslint-disable-line react-hooks/exhaustive-deps
+ const Sidebar = ({ sections, openSidebar, setOpenSidebar }) => {
+    // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
