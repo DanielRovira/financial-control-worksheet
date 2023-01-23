@@ -41,14 +41,14 @@ const App = () => {
     const getSections = async () => {
         await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => localStorage.setItem('sections', JSON.stringify(response)))
+        .then(response => localStorage.setItem('sections', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
         .then(() => setLoading(false))
     }
 
     const getCategories = async () => {
         await fetch(`/api/${process.env.REACT_APP_DB}/categories`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => localStorage.setItem('categories', JSON.stringify(response)))
+        .then(response => localStorage.setItem('categories', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
     }
     
     const sendLogoutReq = async () => {

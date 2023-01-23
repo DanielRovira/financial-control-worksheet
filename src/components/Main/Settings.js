@@ -10,12 +10,13 @@ const Settings = ({ sections, setSections, setSheetType, refreshToken }) => {
     // const history = useNavigate();
     const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
-    const CategoriesListItem = new Set(Array.from(categories)?.map((item) => item.type));
+    // const CategoriesListItem = new Set((Array.from(categories)?.map((item) => item.type)));
+    const CategoriesListItem = ["source",  "category", "subCategory"];
     const [showAdd, setShowAdd] = useState(false);
     const [showRemove, setShowRemove] = useState(false);
     const [showInput, setShowInput] = useState(false);
     const [value, setValue] = useState();
-console.log(CategoriesListItem)
+// console.log(CategoriesListItem)
     function insertDocument(transaction, CategoriesListItem) {
         let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories');
         CategoriesListItem === 'sections'
@@ -137,14 +138,12 @@ console.log(CategoriesListItem)
     return (
         <div className='SettingsContainer'>
             <div className='SettingsSubContainer'>
-                <div>
+                <div className='SettingsCardContainer'>
                     <CategoriesList CategoriesListItem={'sections'}/>
-                    {/* <Divider orientation="vertical" /> */}
                 </div>
                 {Array.from(CategoriesListItem).map((item, index) => (
-                    <div key={`${index}${item}`}>
+                    <div className='SettingsCardContainer' key={`${index}${item}`}>
                         <CategoriesList CategoriesListItem={item}/>
-                        {/* {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />} */}
                     </div>
                 ))}
                 

@@ -14,7 +14,7 @@
     padding: 10px;
     margin-left: 70px;
 }
-.SettingsContainer > .SettingsSubContainer > div {
+.SettingsContainer > .SettingsSubContainer > .SettingsCardContainer {
     flex: 1;
     display: flex;
     justify-content: space-around;
