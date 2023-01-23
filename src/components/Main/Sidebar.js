@@ -1,7 +1,7 @@
 import './styles/Sidebar.css'
 import { Drawer, List, ListSubheader } from '@mui/material';
 import NestedList from './NestedList';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
  const Sidebar = ({ sections, openSidebar, setOpenSidebar }) => {

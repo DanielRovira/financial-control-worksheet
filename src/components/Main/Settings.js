@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/Settings.css'
 // import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Divider, IconButton, List, ListItem, ListItemText, ListSubheader, TextField } from '@mui/material';
+import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField } from '@mui/material';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
