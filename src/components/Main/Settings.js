@@ -48,8 +48,8 @@ console.log(CategoriesListItem)
 
     const transaction = {
         sections: {
-            title: value?.slice(0,3),
-            name: value,
+            title: value?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toUpperCase(),
+            name: value?.toUpperCase().slice(0,1) + value?.slice(1),
         },
         categories: {
             type: showInput,
@@ -87,10 +87,9 @@ console.log(CategoriesListItem)
                 <ListItemText
                     primary={section.name}
                 />
-                {showRemove === section._id && 
-                <IconButton onMouseDown={() => deleteDocument(section, CategoriesListItem)}>
+                <IconButton onMouseDown={() => deleteDocument(section, CategoriesListItem)} sx={{visibility: showRemove === section._id ? 'auto' : 'hidden' }}>
                     <RemoveCircleIcon />
-                </IconButton>}
+                </IconButton>
             </ListItem>
         )
     }
@@ -103,10 +102,9 @@ console.log(CategoriesListItem)
                 subheader={
                     <ListSubheader sx={{ display: 'flex', justifyContent:'space-between'}}>
                         <h2>{lang[`${CategoriesListItem}`]}</h2>
-                        {showAdd === CategoriesListItem &&
-                        <IconButton onMouseDown={() => handleClick(CategoriesListItem)}>
+                        <IconButton onMouseDown={() => handleClick(CategoriesListItem)} sx={{visibility: showAdd === CategoriesListItem ? 'auto' : 'hidden' }}>
                             <AddCircleIcon />
-                        </IconButton>}
+                        </IconButton>
                     </ListSubheader>
                 }
             >
@@ -139,15 +137,15 @@ console.log(CategoriesListItem)
     return (
         <div className='SettingsContainer'>
             <div className='SettingsSubContainer'>
-                <React.Fragment>
+                <div>
                     <CategoriesList CategoriesListItem={'sections'}/>
-                    <Divider orientation="vertical" />
-                </React.Fragment>
+                    {/* <Divider orientation="vertical" /> */}
+                </div>
                 {Array.from(CategoriesListItem).map((item, index) => (
-                    <React.Fragment key={`${index}${item}`}>
+                    <div key={`${index}${item}`}>
                         <CategoriesList CategoriesListItem={item}/>
-                        {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />}
-                    </React.Fragment>
+                        {/* {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />} */}
+                    </div>
                 ))}
                 
             </div>
