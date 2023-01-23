@@ -63,8 +63,8 @@ const Settings = ({ setSheetType, refreshToken }) => {
     const CategoriesList = ({ CategoriesListItem }) => {
        return (
             <List
-                onMouseEnter={() => setShowAdd(CategoriesListItem)}
-                onMouseLeave={() => setShowAdd(null)}
+                onMouseEnter={() => {setShowAdd(CategoriesListItem); setShowRemove()}}
+                onMouseLeave={() => setShowAdd()}
                 subheader={
                     <ListSubheader sx={{ display: 'flex', justifyContent:'space-between'}}>
                         <h2>{lang[`${CategoriesListItem}`]}s</h2>
@@ -79,7 +79,7 @@ const Settings = ({ setSheetType, refreshToken }) => {
                     <ListItem dense 
                         key={index}
                         onMouseEnter={() => setShowRemove(section._id)}
-                        onMouseLeave={() => setShowRemove(null)}
+                        onMouseLeave={() => setShowRemove()}
                     >
                         <ListItemText
                             primary={section.name}
@@ -112,8 +112,8 @@ const Settings = ({ setSheetType, refreshToken }) => {
         <div className='SettingsContainer'>
             <div className='SettingsSubContainer'>
                 {Array.from(CategoriesListItem).map((item, index) => (
-                    <React.Fragment key={`${index}${item}`}>
-                        <CategoriesList CategoriesListItem={item} />
+                    <React.Fragment key={`${index}${item}`} onMouseOut={() => {setShowRemove(); setShowAdd()}}>
+                        <CategoriesList CategoriesListItem={item}/>
                         {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />}
                     </React.Fragment>
                 ))}
