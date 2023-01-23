@@ -10,7 +10,7 @@ import Resume from './components/Resume';
 import Summary from './components/Summary';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
+const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType, categories, sections }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [transactionsList2, setTransactionsList2] = useState([]);
     const [result, setResult] = useState([]);
@@ -19,11 +19,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [showCalendar, setShowCalendar] = useState(false);
     const history = useNavigate();
     const params = useParams();
-    const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
-    const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
-    
+    // const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+    let sources = Array.from(categories || []).filter(item => item.type === 'source')
+
     const getData = async () => {
             if (sectionExists) {
             const res = await
@@ -123,12 +123,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar}  />
-            {add && <Form insertDocument={insertDocument} sheetType={sheetType}/>}
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} sections={sections} />
+            {add && <Form insertDocument={insertDocument} sheetType={sheetType} categoriesList={categories} />}
             {transactionsList.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType}/>
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} categoriesList={categories} />
             }</>
             }
 
@@ -139,7 +139,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             onClose={() => setDrawer(false)}
             sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
             >
-              <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
+              <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} categoriesList={categories} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
         </div>

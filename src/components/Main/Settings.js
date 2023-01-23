@@ -6,9 +6,9 @@ import { Divider, IconButton, List, ListItem, ListItemText, ListSubheader, TextF
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Settings = ({ sections, setSections, setSheetType, refreshToken }) => {
+const Settings = ({ categories, setCategories, sections, setSections, setSheetType, refreshToken }) => {
     // const history = useNavigate();
-    const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
+    // const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     // const CategoriesListItem = new Set((Array.from(categories)?.map((item) => item.type)));
     const CategoriesListItem = ["source",  "category", "subCategory"];

@@ -1,7 +1,7 @@
 import './styles/Header.css'
 import { Avatar, AppBar, Box, Button, Card, ClickAwayListener, Divider, IconButton, Toolbar, Tooltip } from '@mui/material';
 import { Menu as MenuIcon, SettingsOutlined as SettingsOutlinedIcon } from '@mui/icons-material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -10,12 +10,25 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const [openPanel, setOpenPanel] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false)
+    const [hovered, setHovered] = useState(false);
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
     const handleLogout = () => {
         sendLogoutReq();
         setOpenPanel(false);
     };
+
+    const onTimeout = () => {
+        setShowTooltip(true)
+      };      
+
+    useEffect(() => {
+        const timer = hovered && setTimeout(onTimeout, 800);
+        return () => {
+          clearTimeout(timer);
+          setShowTooltip(false)
+        };
+      }, [hovered, openPanel]);
 
     const TooltipTitle = (
         <>
@@ -24,7 +37,6 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
             <p>{user.email}</p>
         </>
     )
-    
 
     return (
         <>
@@ -42,10 +54,12 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                             title={TooltipTitle}
                             open={!openPanel && showTooltip} 
                             disableHoverListener
-                            onMouseEnter={() => setShowTooltip(true)}
-                            onMouseLeave={() => setShowTooltip(false)}
+                            onMouseEnter={() => setHovered(true)}
+                            onMouseLeave={() => setHovered(false)}
                             placement='bottom-end'
                             PopperProps={poppersConfig}
+                            // enterDelay={800}
+                            // enterNextDelay={800}
                         >
                             <Avatar onClick={() => (setOpenPanel(!openPanel))} children={user.name[0]} />
                         </Tooltip>
@@ -57,7 +71,13 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                 }, 5)}>
                     <Card className='Panel'>
                         <div className='userContainer'>
-                            <Tooltip disableInteractive title={<h3>{lang.settings}</h3>} PopperProps={poppersConfig}>
+                            <Tooltip
+                                disableInteractive
+                                title={<h3>{lang.settings}</h3>}
+                                PopperProps={poppersConfig}
+                                enterDelay={800}
+                                enterNextDelay={800}
+                            >
                                 <IconButton onClick={() => {setOpenPanel(false); history(`/settings`)}}>
                                     <SettingsOutlinedIcon />
                                 </IconButton>
