@@ -9,39 +9,52 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 const Settings = ({ setSheetType, refreshToken }) => {
     // const history = useNavigate();
     const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
+    const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     const CategoriesListItem = new Set(Array.from(categories)?.map((item) => item.type));
     const [showAdd, setShowAdd] = useState(false);
     const [showRemove, setShowRemove] = useState(false);
     const [showInput, setShowInput] = useState(false);
     const [value, setValue] = useState();
-
-    function insertDocument(transaction) {
-        setCategories((prev) => [...prev, transaction])
-        fetch(`/api/${process.env.REACT_APP_DB}/add/categories`,
+console.log(CategoriesListItem)
+    function insertDocument(transaction, CategoriesListItem) {
+        let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories');
+        CategoriesListItem === 'sections'
+        ? setSections((prev) => [...prev, transaction['sections']])
+        : setCategories((prev) => [...prev, transaction['categories']]);
+        fetch(`/api/${process.env.REACT_APP_DB}/add/${type}`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify(transaction)
+            body: JSON.stringify(transaction[type])
         })
         .then(response => response.json())
         .then(() => {refreshToken()})
     }
 
-    function deleteDocument(item) {
+    function deleteDocument(item, CategoriesListItem) {
+        let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories')
         setCategories((prev) => [...prev.filter((items) => items !== item)])
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/categories`,
+        setSections((prev) => [...prev.filter((items) => items !== item)])
+        fetch(`/api/${process.env.REACT_APP_DB}/delete/${type}`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify(item)
         })
+        CategoriesListItem === 'sections' && refreshToken()
     }
 
     const transaction = {
+        sections: {
+            title: value?.slice(0,3),
             name: value,
+        },
+        categories: {
             type: showInput,
+            name: value,
+        }
     }
 
     const handleClick = (CategoriesListItem) => {
@@ -59,6 +72,28 @@ const Settings = ({ setSheetType, refreshToken }) => {
     useEffect(() => {
         setCategories(JSON.parse(localStorage.getItem("categories")))
     }, [localStorage.getItem("categories")])  // eslint-disable-line react-hooks/exhaustive-deps
+    
+    useEffect(() => {
+        setSections(JSON.parse(localStorage.getItem("sections")))
+    }, [localStorage.getItem("sections")])  // eslint-disable-line react-hooks/exhaustive-deps
+
+    const CustomListItem = ({ section, index, CategoriesListItem }) => {
+        return (
+            <ListItem dense 
+                key={index}
+                onMouseEnter={() => setShowRemove(section._id)}
+                onMouseLeave={() => setShowRemove()}
+            >
+                <ListItemText
+                    primary={section.name}
+                />
+                {showRemove === section._id && 
+                <IconButton onMouseDown={() => deleteDocument(section, CategoriesListItem)}>
+                    <RemoveCircleIcon />
+                </IconButton>}
+            </ListItem>
+        )
+    }
 
     const CategoriesList = ({ CategoriesListItem }) => {
        return (
@@ -67,7 +102,7 @@ const Settings = ({ setSheetType, refreshToken }) => {
                 onMouseLeave={() => setShowAdd()}
                 subheader={
                     <ListSubheader sx={{ display: 'flex', justifyContent:'space-between'}}>
-                        <h2>{lang[`${CategoriesListItem}`]}s</h2>
+                        <h2>{lang[`${CategoriesListItem}`]}</h2>
                         {showAdd === CategoriesListItem &&
                         <IconButton onMouseDown={() => handleClick(CategoriesListItem)}>
                             <AddCircleIcon />
@@ -75,21 +110,14 @@ const Settings = ({ setSheetType, refreshToken }) => {
                     </ListSubheader>
                 }
             >
-                {Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (
-                    <ListItem dense 
-                        key={index}
-                        onMouseEnter={() => setShowRemove(section._id)}
-                        onMouseLeave={() => setShowRemove()}
-                    >
-                        <ListItemText
-                            primary={section.name}
-                        />
-                        {showRemove === section._id && 
-                        <IconButton onMouseDown={() => deleteDocument(section)}>
-                            <RemoveCircleIcon />
-                        </IconButton>}
-                    </ListItem>
-                ))}
+                {CategoriesListItem === 'sections'
+                ? Array.from(sections).map((section, index) => (
+                    <CustomListItem section={section} index={index} key={index} CategoriesListItem={CategoriesListItem} />
+                ))
+                : Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (
+                    <CustomListItem section={section} index={index} key={index} CategoriesListItem={CategoriesListItem} />
+                ))
+                }
                 {showInput === CategoriesListItem &&
                     <ListItem dense >
                         <TextField
@@ -100,8 +128,8 @@ const Settings = ({ setSheetType, refreshToken }) => {
                             margin="none"
                             placeholder={`${lang.add} ${lang[CategoriesListItem]}`}
                             onChange={(e) => setValue(e.target.value)}
-                            onBlur={() => {value && insertDocument(transaction); setShowInput(); setValue()}}
-                            onKeyDown={event => { if (event.key === 'Enter') {value && insertDocument(transaction); setValue()}}}
+                            onBlur={() => {value && insertDocument(transaction, CategoriesListItem); setShowInput(); setValue()}}
+                            onKeyDown={event => { if (event.key === 'Enter') {value && insertDocument(transaction, CategoriesListItem); setValue()}}}
                         />
                     </ListItem>}
             </List>
@@ -111,8 +139,12 @@ const Settings = ({ setSheetType, refreshToken }) => {
     return (
         <div className='SettingsContainer'>
             <div className='SettingsSubContainer'>
+                <React.Fragment>
+                    <CategoriesList CategoriesListItem={'sections'}/>
+                    <Divider orientation="vertical" />
+                </React.Fragment>
                 {Array.from(CategoriesListItem).map((item, index) => (
-                    <React.Fragment key={`${index}${item}`} onMouseOut={() => {setShowRemove(); setShowAdd()}}>
+                    <React.Fragment key={`${index}${item}`}>
                         <CategoriesList CategoriesListItem={item}/>
                         {index !== (CategoriesListItem.size - 1) && <Divider orientation="vertical" />}
                     </React.Fragment>

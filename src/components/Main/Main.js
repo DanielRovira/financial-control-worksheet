@@ -21,7 +21,7 @@ const Main = ({ refreshToken, isLoggedIn, setSheetType, setLoading }) => {
             <List
                 subheader={
                     <ListSubheader>
-                        <h2>{lang.costCenter}</h2>
+                        <h2>{lang.sections}</h2>
                     </ListSubheader>
                   }
                 >

@@ -1,10 +1,15 @@
 import './styles/Sidebar.css'
 import { Drawer, List, ListSubheader } from '@mui/material';
 import NestedList from './NestedList';
+import { useState, useEffect } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
  const Sidebar = ({ openSidebar, setOpenSidebar }) => {
-    const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
+
+    useEffect(() => {
+        setSections(JSON.parse(localStorage.getItem("sections")))
+    }, [localStorage.getItem("sections")])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
@@ -13,7 +18,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                 aria-labelledby="nested-list-subheader"
                 subheader={
                     <ListSubheader component="h1" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold' }}>
-                        {lang.costCenter}
+                        {lang.sections}
                     </ListSubheader>
                 }
         >
