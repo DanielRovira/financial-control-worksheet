@@ -13,9 +13,9 @@ export default function BottomNav({ section, sheetType }) {
         showLabels
         value={lang[sheetType]}
       >
-        <BottomNavigationAction value={lang.summary} label={lang.summary} icon={<BarChartIcon />} onClick={() => history(`/financial-summary/${section}`)} />
-        <BottomNavigationAction value={lang.todoPayments} label={lang.todoPayments} icon={<CalendarMonthIcon />} onClick={() => history(`/financial-todos/${section}`)} />
-        <BottomNavigationAction value={lang.financialControl} label={lang.financialControl} icon={<ListAltIcon />} onClick={() => history(`/financial-control/${section}`)} />
+        <BottomNavigationAction value={lang.summary} label={lang.summary} icon={<BarChartIcon />} onClick={() => history(`/summary/${section}`)} />
+        <BottomNavigationAction value={lang.todoPayments} label={lang.todoPayments} icon={<CalendarMonthIcon />} onClick={() => history(`/todoPayments/${section}`)} />
+        <BottomNavigationAction value={lang.financialControl} label={lang.financialControl} icon={<ListAltIcon />} onClick={() => history(`/financialControl/${section}`)} />
       </BottomNavigation>
     </Box>
   );
