@@ -5,9 +5,9 @@ import { List, ListSubheader } from '@mui/material';
 import NestedList from './NestedList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Main = ({ refreshToken, isLoggedIn, setSheetType, setLoading }) => {
+const Main = ({ sections, refreshToken, isLoggedIn, setSheetType, setLoading }) => {
     const history = useNavigate();
-    const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     useEffect(() => {
         setLoading(true);

@@ -4,9 +4,9 @@ import { IconButton, Tooltip } from '@mui/material';
 import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, sections }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar }) => {
     const params = useParams();
-    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 

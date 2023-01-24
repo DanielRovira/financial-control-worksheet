@@ -18,7 +18,6 @@ document.documentElement.style.setProperty('--vh', `${vh}px`);
 const App = () => {
     const history = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
-    // const [accName, setAccName] = useState(localStorage.getItem('user'));
     const [openSidebar, setOpenSidebar] = useState(false);
     const [sheetType, setSheetType] = useState();
     const [loading, setLoading] = useState(false);
@@ -43,6 +42,7 @@ const App = () => {
         await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
         .then(response => localStorage.setItem('sections', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
+        .then(() => setSections(JSON.parse(localStorage.getItem("sections")) || []))
         .then(() => setLoading(false))
     }
 
@@ -90,11 +90,11 @@ const App = () => {
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} setLoading={setLoading} />} />
+                    <Route path="/main" element={<Main sections={sections} refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} setLoading={setLoading} />} />
                     <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setSheetType={setSheetType} refreshToken={refreshToken} />} />
-                    <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} categories={categories} sections={sections} />} />
-                    <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} categories={categories} sections={sections} />} />
-                    <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} categories={categories} sections={sections} />} />
+                    <Route path="/financial-summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType}/>} />
+                    <Route path="/financial-control/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType}/>} />
+                    <Route path="/financial-todos/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

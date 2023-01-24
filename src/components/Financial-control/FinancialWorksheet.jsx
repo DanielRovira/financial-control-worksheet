@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
 import BottomNavigation from './components/BottomNav';
@@ -8,21 +8,25 @@ import Grid from './components/Grid';
 import Header from './components/Header';
 import Resume from './components/Resume';
 import Summary from './components/Summary';
+import Snackbar from './components/Snackbar';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType, categories, sections }) => {
+const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [transactionsList2, setTransactionsList2] = useState([]);
     const [result, setResult] = useState([]);
     const [add, setAdd] = useState();
     const [drawer, setDrawer] = useState(false);
     const [showCalendar, setShowCalendar] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [undo, setUndo] = useState(false);
     const history = useNavigate();
     const params = useParams();
-    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
-    // const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let sources = Array.from(categories || []).filter(item => item.type === 'source')
+    const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+    let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
+    let clearTimerRef = useRef();
 
     const getData = async () => {
             if (sectionExists) {
@@ -69,16 +73,26 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function updateDocument(item) {
-        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
-        {
-            method:'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(item)
-        })
-        .then(response => response.json())
-        .then(() => getData())
-    }
+        setOpenSnackbar(true)
+        clearTimerRef.current = setTimeout(() => {
+            fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
+            {
+                method:'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify(item)
+            })
+            .then(response => response.json())
+            .then(() => getData())
+        }, 2000);
+        }
+
+        useEffect(() => {
+              clearTimeout(clearTimerRef.current);
+          }, [undo]);
+
+
+
 
     function deleteDocument(item) {
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
@@ -123,12 +137,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} sections={sections} />
-            {add && <Form insertDocument={insertDocument} sheetType={sheetType} categoriesList={categories} />}
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
+            {add && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {transactionsList.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} categoriesList={categories} />
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} />
             }</>
             }
 
@@ -139,9 +153,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             onClose={() => setDrawer(false)}
             sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
             >
-              <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} categoriesList={categories} />
+              <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
+            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} setUndo={setUndo} />
         </div>
     );
 };
