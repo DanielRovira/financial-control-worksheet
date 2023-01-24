@@ -21,6 +21,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
+    const [deleteDelay, setDeleteDelay] = useState(false)
     const ref = useRef(null);
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
@@ -94,6 +95,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
 
     useClickAway(ref, toggleEdit)
 
+    if (deleteDelay) {return (<></>)}
     if (isActive === true) {
         return (
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
@@ -239,7 +241,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                     />
                 </C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
-                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
+                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setDeleteDelay(true); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
             </C.Tr>
     )}
     else {

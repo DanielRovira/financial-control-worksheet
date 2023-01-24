@@ -87,14 +87,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         }, 2000);
         }
 
-        useEffect(() => {
-              clearTimeout(clearTimerRef.current);
-          }, [undo]);
-
-
-
+    useEffect(() => {
+        clearTimeout(clearTimerRef.current);
+        setUndo(false)
+      }, [undo]);
 
     function deleteDocument(item) {
+        setOpenSnackbar(true)
+        clearTimerRef.current = setTimeout(() => {
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
@@ -103,6 +103,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(() => getData())
+    }, 2000);
     }
 
     useEffect(() => {
@@ -139,10 +140,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
             {add && <Form insertDocument={insertDocument} sheetType={sheetType} />}
-            {transactionsList.length === 0 ? <LinearProgress /> :
+            {transactionsList?.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} />
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undo={undo} />
             }</>
             }
 
