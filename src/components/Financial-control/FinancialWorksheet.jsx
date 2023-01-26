@@ -76,7 +76,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     function updateDocument(item) {
         setOpenSnackbar(true)
-        clearTimerRef[item._id] = setTimeout(() => {
+        clearTimerRef.current = setTimeout(() => {
             fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
             {
                 method:'PATCH',
@@ -90,7 +90,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         }
 
     useEffect(() => {
-        clearTimeout(clearTimerRef[undoItem]);
+        clearTimeout(clearTimerRef.current);
         setUndo(false)
         setUndoItem()
       }, [undo]); 

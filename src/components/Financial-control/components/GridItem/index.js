@@ -98,21 +98,22 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, undo, undo
     useEffect(() => {
         return () => {
             if (undoItem === item._id) {
-            setDateTemp(item.date)
-            setExpenseTemp(item.expense)
-            setSourceTemp(item.source)
-            setProviderTemp(item.provider)
-            setLinkTemp(item.link)
-            setBankTemp(item.bank)
-            setCategoryTemp(item.category)
-            setSubCategoryTemp(item.subCategory)
-            setOtherCategoryTemp(categoryTemp)
-            setOtherSubCategoryTemp(subCategoryTemp)
-            setIdnumberTemp(item.idnumber)
-            setDescTemp(item.desc)
-            setAmountTemp(item.amount)
-            setAmountValue(item.amount)
-            setDeleteDelay(false)}
+                setDateTemp(item.date)
+                setExpenseTemp(item.expense)
+                setSourceTemp(item.source)
+                setProviderTemp(item.provider)
+                setLinkTemp(item.link)
+                setBankTemp(item.bank)
+                setCategoryTemp(item.category)
+                setSubCategoryTemp(item.subCategory)
+                setOtherCategoryTemp(categoryTemp)
+                setOtherSubCategoryTemp(subCategoryTemp)
+                setIdnumberTemp(item.idnumber)
+                setDescTemp(item.desc)
+                setAmountTemp(item.amount)
+                setAmountValue(item.amount)
+                setDeleteDelay(false)
+            }
         };
     }, [undo]) // eslint-disable-line react-hooks/exhaustive-deps
 
