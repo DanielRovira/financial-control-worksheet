@@ -41,7 +41,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, setUndo 
     <div>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={2000}
+        autoHideDuration={5000}
         onClose={handleClose}
         message="Note archived"
         action={action}

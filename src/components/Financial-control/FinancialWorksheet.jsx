@@ -20,6 +20,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [showCalendar, setShowCalendar] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [undo, setUndo] = useState(false);
+    const [undoItem, setUndoItem] = useState();
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -74,7 +75,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     function updateDocument(item) {
         setOpenSnackbar(true)
-        clearTimerRef.current = setTimeout(() => {
+        clearTimerRef[item._id] = setTimeout(() => {
             fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
             {
                 method:'PATCH',
@@ -84,17 +85,18 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             })
             .then(response => response.json())
             .then(() => getData())
-        }, 2000);
+        }, 5000);
         }
 
     useEffect(() => {
-        clearTimeout(clearTimerRef.current);
+        clearTimeout(clearTimerRef[undoItem]);
         setUndo(false)
-      }, [undo]);
+        setUndoItem()
+      }, [undo]); 
 
     function deleteDocument(item) {
         setOpenSnackbar(true)
-        clearTimerRef.current = setTimeout(() => {
+        clearTimerRef[item._id] = setTimeout(() => {
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
@@ -103,7 +105,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(() => getData())
-    }, 2000);
+    }, 5000);
     }
 
     useEffect(() => {
@@ -143,7 +145,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {transactionsList?.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undo={undo} />
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undo={undo} undoItem={undoItem} setUndoItem={setUndoItem} />
             }</>
             }
 

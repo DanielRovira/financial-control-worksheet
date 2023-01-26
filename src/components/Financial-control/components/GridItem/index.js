@@ -1,11 +1,11 @@
 import * as C from './styles'
 import * as D from '../Form/styles'
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit, FaCheck } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
+const GridItem = ({ item, index, onDelete, updateDocument, sheetType, undo, undoItem, setUndoItem }) => {
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -61,8 +61,9 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 category: categoryTemp === lang.other || "" ? otherCategoryTemp : categoryTemp,
                 subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
                 provider: providerTemp,
-                desc:descTemp,
+                desc: descTemp,
                 amount: amountTemp });
+                setUndoItem(item._id)
             }}
 
         if (sheetType === 'todoPayments') {
@@ -82,6 +83,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                 provider: providerTemp,
                 desc: descTemp,
                 amount: amountTemp });
+                setUndoItem(item._id)
         }}
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)
@@ -92,6 +94,27 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
         }, 5);
 
     };
+
+    useEffect(() => {
+        return () => {
+            if (undoItem === item._id) {
+            setDateTemp(item.date)
+            setExpenseTemp(item.expense)
+            setSourceTemp(item.source)
+            setProviderTemp(item.provider)
+            setLinkTemp(item.link)
+            setBankTemp(item.bank)
+            setCategoryTemp(item.category)
+            setSubCategoryTemp(item.subCategory)
+            setOtherCategoryTemp(categoryTemp)
+            setOtherSubCategoryTemp(subCategoryTemp)
+            setIdnumberTemp(item.idnumber)
+            setDescTemp(item.desc)
+            setAmountTemp(item.amount)
+            setAmountValue(item.amount)
+            setDeleteDelay(false)}
+        };
+    }, [undo]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useClickAway(ref, toggleEdit)
 
@@ -241,7 +264,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType }) => {
                     />
                 </C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
-                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setDeleteDelay(true); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
+                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setDeleteDelay(true); setUndoItem(item._id); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
             </C.Tr>
     )}
     else {
