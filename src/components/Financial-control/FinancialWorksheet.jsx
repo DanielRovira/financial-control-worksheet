@@ -26,8 +26,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
-    let clearTimerRef = useRef();
-    const timeOut = 5000;
 
     const getData = async () => {
             if (sectionExists) {
@@ -89,7 +87,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     function deleteDocument(item) {
         setOpenSnackbar(true)
-        clearTimerRef[item._id] = setTimeout(() => {
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
@@ -98,7 +95,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(() => getData())
-    }, timeOut);
     }
 
     useEffect(() => {
@@ -152,7 +148,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} timeOut={timeOut} updateDocument={updateDocument} />
+            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} updateDocument={updateDocument} />
         </div>
     );
 };
