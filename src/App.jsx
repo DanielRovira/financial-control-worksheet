@@ -92,8 +92,8 @@ const App = () => {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/main" element={<Main sections={sections} refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} setLoading={setLoading} />} />
                     <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setSheetType={setSheetType} refreshToken={refreshToken} />} />
-                    <Route path="/summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType}/>} />
-                    <Route path="/financialControl/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType}/>} />
+                    <Route path="/summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
+                    <Route path="/financialControl/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
                     <Route path="/todoPayments/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
                 </Routes> 
             <GlobalStyle />

@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, setUndo }) {
+export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, setUndo, timeOut }) {
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -41,7 +41,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, setUndo 
     <div>
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={5000}
+        autoHideDuration={timeOut}
         onClose={handleClose}
         message="Note archived"
         action={action}

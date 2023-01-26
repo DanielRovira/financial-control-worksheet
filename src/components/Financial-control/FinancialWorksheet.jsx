@@ -28,6 +28,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
     let clearTimerRef = useRef();
+    const timeOut = 5000;
 
     const getData = async () => {
             if (sectionExists) {
@@ -85,7 +86,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             })
             .then(response => response.json())
             .then(() => getData())
-        }, 5000);
+        }, timeOut);
         }
 
     useEffect(() => {
@@ -105,7 +106,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(() => getData())
-    }, 5000);
+    }, timeOut);
     }
 
     useEffect(() => {
@@ -159,7 +160,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} setUndo={setUndo} />
+            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} setUndo={setUndo} timeOut={timeOut} />
         </div>
     );
 };
