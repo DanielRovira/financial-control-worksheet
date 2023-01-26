@@ -19,7 +19,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [drawer, setDrawer] = useState(false);
     const [showCalendar, setShowCalendar] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [undo, setUndo] = useState(false);
     const [undoItem, setUndoItem] = useState();
     const history = useNavigate();
     const params = useParams();
@@ -59,6 +58,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
+        setUndoItem()
         setSheetType(sheetType)
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -76,24 +76,16 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     function updateDocument(item) {
         setOpenSnackbar(true)
-        clearTimerRef.current = setTimeout(() => {
-            fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
-            {
-                method:'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify(item)
-            })
-            .then(response => response.json())
-            .then(() => getData())
-        }, timeOut);
-        }
-
-    useEffect(() => {
-        clearTimeout(clearTimerRef.current);
-        setUndo(false)
-        setUndoItem()
-      }, [undo]); 
+        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
+        {
+            method:'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(item)
+        })
+        .then(response => response.json())
+        .then(() => getData())
+    }
 
     function deleteDocument(item) {
         setOpenSnackbar(true)
@@ -146,7 +138,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {transactionsList?.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undo={undo} undoItem={undoItem} setUndoItem={setUndoItem} />
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undoItem={undoItem} setUndoItem={setUndoItem} />
             }</>
             }
 
@@ -160,7 +152,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} setUndo={setUndo} timeOut={timeOut} />
+            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} timeOut={timeOut} updateDocument={updateDocument} />
         </div>
     );
 };

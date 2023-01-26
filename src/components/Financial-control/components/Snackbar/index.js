@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, setUndo, timeOut }) {
+export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, timeOut, updateDocument }) {
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -17,7 +17,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, setUndo,
     if (reason === 'clickaway') {
       return;
     }
-    setUndo(true)
+    updateDocument(undoItem)
     setOpenSnackbar(false);
   };
 

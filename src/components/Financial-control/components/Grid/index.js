@@ -2,7 +2,7 @@ import * as C from './styles';
 import GridItem from '../GridItem';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undo, undoItem, setUndoItem }) => {
+const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undoItem, setUndoItem }) => {
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
         var c = new Date(a.date);
@@ -39,7 +39,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undo, undoIt
             </C.Thead>
             <C.Tbody>
                 {Array.from(itens)?.map((item, index) => (
-                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undo={undo} undoItem={undoItem} setUndoItem={setUndoItem} />
+                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} />
                 ))}
             </C.Tbody>
         </C.Table>
