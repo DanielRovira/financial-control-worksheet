@@ -13,6 +13,10 @@ export const TableContent = styled.div`
         margin-top: 35px;
     }
 
+    & .MuiCheckbox-root {
+        padding: 0;
+    }
+
 `;
 
 export const Table = styled.table`

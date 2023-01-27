@@ -27,7 +27,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, setUndoItem,
         <C.Table>
             <C.Thead>
                 <C.Tr>
-                    <C.Th alignCenter width={40}><Checkbox checked={checked.length === itens.length && itens.length > 0} onChange={handleSelect} indeterminate={checked.length > 0 && checked.length < itens.length} /></C.Th>
+                    <C.Th alignCenter width={30}><Checkbox checked={checked.length === itens.length && itens.length > 0} onChange={handleSelect} indeterminate={checked.length > 0 && checked.length < itens.length} /></C.Th>
                     <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
@@ -38,7 +38,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, setUndoItem,
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
-                    <C.Th width={100} alignCenter>{lang.number}</C.Th>
+                    <C.Th width={60} alignCenter>{lang.number}</C.Th>
                     <C.Th width={100} alignCenter>{lang.link}</C.Th>
                     <C.Th width={140} >{lang.bank}</C.Th>
                     <C.Th width={140}>{lang.idnumber}</C.Th>
