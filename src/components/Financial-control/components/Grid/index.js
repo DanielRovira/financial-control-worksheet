@@ -1,8 +1,10 @@
 import * as C from './styles';
 import GridItem from '../GridItem';
+import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undoItem, setUndoItem }) => {
+    const params = useParams();
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
         var c = new Date(a.date);
@@ -33,8 +35,11 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undoItem, se
                     <C.Th width={200}>{lang.provider}</C.Th>
                     <C.Th width={250}>{lang.description}</C.Th>
                     <C.Th width={130}>{lang.value}</C.Th>
+                    {params.taskTitle !== 'TRASH' && <>
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
                     <C.Th width={60} alignCenter>{lang.delete}</C.Th>
+                    </>}
+                    {params.taskTitle === 'TRASH' && <C.Th width={100} alignCenter>{lang.sections}</C.Th>}
                 </C.Tr>
             </C.Thead>
             <C.Tbody>

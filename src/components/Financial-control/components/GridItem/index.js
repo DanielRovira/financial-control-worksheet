@@ -3,9 +3,11 @@ import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit, FaCheck } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
+import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, setUndoItem }) => {
+    const params = useParams();
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -120,7 +122,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     useClickAway(ref, toggleEdit)
 
     if (deleteDelay) {return (<></>)}
-    if (isActive === true) {
+    if (isActive === true && params.taskTitle !== 'TRASH') {
         return (
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
                 <C.Td alignCenter width={9}><C.TdCont>
@@ -287,8 +289,11 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{providerTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
+                {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td>
+                </>}
+                {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{item.costCenter}</C.TdCont></C.Td>}
             </C.Tr>
         )}
 };

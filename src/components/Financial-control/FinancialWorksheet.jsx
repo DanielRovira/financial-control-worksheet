@@ -23,7 +23,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    const sectionExists = sections.find((blog) => String(blog.title) === params.taskTitle)
+    const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
 
@@ -97,7 +97,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         // .then(() => getData())
-        fetch(`/api/${process.env.REACT_APP_DB}/add/trash`,
+        fetch(`/api/${process.env.REACT_APP_DB}/add/TRASH-${sheetType}`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -141,7 +141,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     return (
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
-            {add && <Form insertDocument={insertDocument} sheetType={sheetType} />}
+            {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {transactionsList?.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :

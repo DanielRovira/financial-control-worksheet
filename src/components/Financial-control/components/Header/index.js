@@ -15,6 +15,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             <C.Header>
                 <C.Title>{section ? section.name : ''}</C.Title>
             </C.Header>
+            {params.taskTitle !== 'TRASH' && 
             <C.Buttons>
                 {sheetType !== 'summary' &&
                 <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
@@ -34,6 +35,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </IconButton>
                 </Tooltip>
             </C.Buttons>
+            }
         </C.Container>
     );
 };

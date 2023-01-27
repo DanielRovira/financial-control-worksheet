@@ -1,5 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useClickAway } from 'react-use';
 import GlobalStyle from './components/global';
@@ -95,6 +94,7 @@ const App = () => {
                     <Route path="/summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
                     <Route path="/financialControl/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
                     <Route path="/todoPayments/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
+                    <Route path="/trash" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'trash'} setSheetType={setSheetType} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

@@ -110,7 +110,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
                 }
             >
                 {CategoriesListItem === 'sections'
-                ? Array.from(sections).map((section, index) => (
+                ? Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
                     <CustomListItem section={section} index={index} key={index} CategoriesListItem={CategoriesListItem} />
                 ))
                 : Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (

@@ -25,7 +25,7 @@ const Main = ({ sections, refreshToken, isLoggedIn, setSheetType, setLoading }) 
                     </ListSubheader>
                   }
                 >
-                {Array.from(sections).map((section, index) => (
+                {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
                     <NestedList key={index} section={section} hideTitle={true} arrow={true} />
                 ))}
             </List>
