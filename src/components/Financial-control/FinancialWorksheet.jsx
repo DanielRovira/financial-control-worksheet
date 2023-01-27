@@ -76,6 +76,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
     }
 
+    const handleDuplicateSelected = () => {
+        checked.map((item) => {
+            let newItem = JSON.parse(JSON.stringify(item))
+            delete newItem._id;
+            insertDocument(newItem);
+        })
+    }
+console.log(checked)
     const handleSetArchived = () => {
         checked.map((item) => {
             updateDocument({ ...item, archived: !item.archived})
@@ -92,6 +100,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
         .then(response => response.json())
         .then(() => getData())
+        .then(() => setChecked([]))
     }
 
     function updateDocument(item) {
@@ -117,7 +126,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(() => getData())
-        .then(() => setChecked([]))
     }
 
     useEffect(() => {
@@ -152,7 +160,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteAll={handleDeleteAll} handleSetArchived={handleSetArchived} filter={filter} setFilter={setFilter} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteAll={handleDeleteAll} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} />
             {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
