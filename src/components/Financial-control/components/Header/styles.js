@@ -7,11 +7,36 @@ export const Container = styled.div`
     background: #fff;
     animation: scaleAnimationIn .1s;
     border-bottom: 1px solid #DADCE0;
+
+    .leftButtons {
+    left: 80px;
+    }
+    
+    .rightButtons {
+    right: 30px;
+    }
+
+    
+    @media (max-width: 750px) {
+        .leftButtons {
+        left: 10px;
+        }
+    }
+    @media (max-width: 600px) {
+
+        .rightButtons {
+        right: 0px;
+        }
+
+        svg {
+            height: 0.9em;
+        }
+    }
     
     @media (max-width: 500px) {
         & {
-            text-align: left;
-            padding-left: 20px;
+            /* text-align: left; */
+            /* padding-left: 20px; */
         }
     }
 `;
@@ -19,28 +44,13 @@ export const Container = styled.div`
 export const Buttons = styled.div`
     display: flex;
     position: fixed;
-    right: 30px;
     top: 65px;
     gap: 5px;
 
-    /* button {
-        color: #767676;
-    }
-
-    button:hover {
-        background-color: rgba(0, 0, 0, 0.08);
-    } */
-
     @media (max-width: 600px) {
-        right: 0px;
-        top: 55px;
-        gap: 0px;
-
-        svg {
-            height: 0.9em;
-        }
+    top: 55px;
+    gap: 0px;
     }
-
 `
 
 export const Header = styled.h1``;

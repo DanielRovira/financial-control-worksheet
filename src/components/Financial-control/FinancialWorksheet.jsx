@@ -20,6 +20,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [showCalendar, setShowCalendar] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [undoItem, setUndoItem] = useState();
+    const [checked, setChecked] = useState([]);
+    const [filter, setFilter] = useState(false);
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -58,7 +60,20 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     useEffect(() => {
         setUndoItem()
         setSheetType(sheetType)
+        setChecked([])
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleDeleteAll = () => {
+        checked.map((item) => {
+            deleteDocument(item)
+        })
+    }
+
+    const handleSetArchived = () => {
+        checked.map((item) => {
+            updateDocument({ ...item, archived: !item.archived})
+        })
+    }
 
     function insertDocument(transaction) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${sheetType}`,
@@ -140,12 +155,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteAll={handleDeleteAll} handleSetArchived={handleSetArchived} filter={filter} setFilter={setFilter} />
             {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {transactionsList?.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} />
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} />
             }</>
             }
 
