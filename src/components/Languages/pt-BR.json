@@ -35,6 +35,7 @@
     "provider": "Fornecedor",
     "todoPayments": "Pagamentos a fazer",
     "total": "Total",
+    "trash": "Lixeira",
     "type": "Tipo",
     "value": "Valor",
     "valuePlaceholder": "R$ 0,00",
