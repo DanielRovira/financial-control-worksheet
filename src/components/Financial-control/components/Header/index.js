@@ -1,7 +1,7 @@
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip, ToggleButton  } from '@mui/material';
-import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon  } from '@mui/icons-material';
+import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteAll, handleSetArchived, filter, setFilter }) => {
@@ -12,24 +12,25 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
     return (
         <C.Container>
-            {params.taskTitle !== 'TRASH' && <>
             <C.Buttons className='leftButtons'>
-            {sheetType === 'todoPayments' &&
+            {params.taskTitle !== 'TRASH' && <>
+                {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang.filter}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <ToggleButton selected={filter} onClick={() => {setFilter(!filter); setChecked([])}} sx={{height:'40px', width: '40px', marginTop: '5px'}}>
                         <FilterAltIcon fontSize='large'/>
                     </ToggleButton>
-            </Tooltip>}
-            {checked.length !== 0 && <>
+                </Tooltip>}
+
+                {checked.length !== 0 && <>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDeleteAll} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => handleDeleteAll('del')} disabled={checked.length > 5 ? true : false}>
                             <DeleteIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 {sheetType === 'todoPayments' &&
-                    <Tooltip title={<h3>{lang[!filter ? 'mark' : 'unMark']} {lang.asDone}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang[!filter ? 'mark' : 'unMark']} {lang.asDone}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleSetArchived}>
                         {filter
                         ? <RemoveDoneIcon fontSize='large'/>
@@ -38,8 +39,16 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </IconButton>
                 </Tooltip>}
                 </>}
-            </C.Buttons>
             </>}
+                {params.taskTitle === 'TRASH' && checked.length !== 0 &&
+                <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <IconButton onClick={() => handleDeleteAll('restore')}>
+                        <RestoreFromTrashIcon fontSize='large'/>
+                    </IconButton>
+                </Tooltip>}
+            
+            </C.Buttons>
+            
             <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
             </C.Header>

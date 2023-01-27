@@ -63,9 +63,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setChecked([])
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const handleDeleteAll = () => {
+    const handleDeleteAll = (type) => {
         checked.map((item) => {
+            // sendDocumentToTrash(item)
             deleteDocument(item)
+            delete item._id
+            delete item.archived
+            type === 'del' && insertDocument(item, 'TRASH')
+            type === 'restore' && insertDocument(item, item.costCenter)
         })
     }
 
@@ -75,8 +80,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
     }
 
-    function insertDocument(transaction) {
-        fetch(`/api/${process.env.REACT_APP_DB}/add/${params.taskTitle}-${sheetType}`,
+    function insertDocument(transaction, path) {
+        fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -101,8 +106,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function deleteDocument(item) {
-        let transaction = JSON.parse(JSON.stringify(item))
-        delete transaction._id
         setOpenSnackbar(true)
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
         {
@@ -111,16 +114,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        // .then(() => getData())
-        fetch(`/api/${process.env.REACT_APP_DB}/add/TRASH-${sheetType}`,
-        {
-            method:'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(transaction)
-        })
-        .then(response => response.json())
         .then(() => getData())
+        .then(() => setChecked([]))
     }
 
     useEffect(() => {

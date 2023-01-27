@@ -50,7 +50,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, setUndoItem,
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
                     <C.Th width={60} alignCenter>{lang.delete}</C.Th>
                     </>}
-                    {params.taskTitle === 'TRASH' && <C.Th width={100} alignCenter>{lang.sections}</C.Th>}
+                    {params.taskTitle === 'TRASH' && <C.Th width={130} alignCenter>{lang.sections}</C.Th>}
                 </C.Tr>
             </C.Thead>
             <C.Tbody>

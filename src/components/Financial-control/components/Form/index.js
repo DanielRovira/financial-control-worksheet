@@ -53,7 +53,7 @@ const Form = ({ insertDocument, sheetType }) => {
                 provider: provider,
                 desc: desc,
                 amount: Number(amount.replace(/,/g, '.')),
-                costCenter: params.taskTitle
+                costCenter: params.taskTitle,
             },
             todoPayments: {
                 date: date,
@@ -63,6 +63,7 @@ const Form = ({ insertDocument, sheetType }) => {
                 provider: provider,
                 desc: desc,
                 amount: Number(amount.replace(/,/g, '.')),
+                costCenter: params.taskTitle,
             }
         }
 
