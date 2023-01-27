@@ -1,10 +1,13 @@
 import * as C from './styles';
 import GridItem from '../GridItem';
 import { useParams } from 'react-router-dom';
+import { Checkbox } from '@mui/material';
+import { useState } from 'react';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undoItem, setUndoItem }) => {
+const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, setUndoItem }) => {
     const params = useParams();
+    const [checked, setChecked] = useState([]);
     const itens = Array.from(rawData)
     itens.sort(function(a, b) {
         var c = new Date(a.date);
@@ -12,11 +15,21 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undoItem, se
         return c-d;
     });
 
+    const allItens = itens.map((item) => item._id)
+
+    const handleSelect = (event) => {
+        checked.length === allItens.length
+        ? setChecked([])
+        : setChecked(allItens)
+    }
+
+console.log(checked.length)
     return ( 
         <C.TableContent>
         <C.Table>
             <C.Thead>
                 <C.Tr>
+                    <C.Th alignCenter width={40}><Checkbox checked={checked.length === allItens.length} onChange={handleSelect} indeterminate={checked.length > 0 && checked.length < allItens.length} /></C.Th>
                     <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
@@ -44,7 +57,7 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, undoItem, se
             </C.Thead>
             <C.Tbody>
                 {Array.from(itens)?.map((item, index) => (
-                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} />
+                    <GridItem key={item._id} item={item} index={index} onDelete={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} />
                 ))}
             </C.Tbody>
         </C.Table>

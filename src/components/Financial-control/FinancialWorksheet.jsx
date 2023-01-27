@@ -145,7 +145,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {transactionsList?.length === 0 ? <LinearProgress /> :
             <>{sheetType === 'summary' ?
             <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} undoItem={undoItem} setUndoItem={setUndoItem} />
+            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} />
             }</>
             }
 

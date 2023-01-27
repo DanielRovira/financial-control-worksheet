@@ -1,12 +1,13 @@
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
+import { Checkbox } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit, FaCheck } from 'react-icons/fa';
 import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, setUndoItem }) => {
+const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked }) => {
     const params = useParams();
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
@@ -24,6 +25,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [amountValue, setAmountValue] = useState(item.amount)
     const [deleteDelay, setDeleteDelay] = useState(false)
+
     const ref = useRef(null);
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
@@ -36,6 +38,12 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
         {setAmountTemp(value.replace(/,/g, '.'))}
         else {setAmountTemp('0.00')}
     };
+
+    const handleSelect = (event) => {
+        checked.includes(item._id)
+        ? setChecked(checked.filter(it => it !== item._id))
+        : setChecked((prev) => [ ...prev, item._id])
+      };
 
     const toggleEdit = (element) => {
         if (descTemp === '' || amountTemp === '' || dateTemp === '') {
@@ -125,7 +133,8 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     if (isActive === true && params.taskTitle !== 'TRASH') {
         return (
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
-                <C.Td alignCenter width={9}><C.TdCont>
+                <C.Td alignCenter><Checkbox checked={checked.includes(item._id) || checked.includes('all')} disabled /></C.Td>
+                <C.Td alignCenter><C.TdCont>
                     <D.Input
                         style={{textAlign: 'center', padding: '1px 0 0 3.5px', height: '25px'}}
                         value={dateTemp}
@@ -273,6 +282,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     else {
         return (
             <C.Tr>
+                <C.Td className='checkboxContainer' alignCenter><Checkbox checked={checked.includes(item._id) || checked.includes('all')} onChange={handleSelect} /></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>

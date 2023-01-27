@@ -6,6 +6,10 @@ export const Tr = styled.tr`
     &:hover {
         background-color: var(--color0);
     }
+
+    .checkboxContainer:focus-within, .checkboxContainer:hover {
+        background-color: inherit;
+    }
 `;
 
 export const TdCont = styled.div`
@@ -51,4 +55,9 @@ export const Td = styled.td`
     & + .nohover:hover {
         background-color: inherit;
     }
+
+    & .MuiCheckbox-root {
+        padding: 0;
+    }
+
 `;
