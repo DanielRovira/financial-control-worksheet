@@ -1,11 +1,13 @@
 import './index.css'
 import * as C from './styles';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ insertDocument, sheetType }) => {
+    const params = useParams();
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
@@ -50,7 +52,8 @@ const Form = ({ insertDocument, sheetType }) => {
                 subCategory: subCategory === '' ? '' : otherSubCategory !== '' ? otherSubCategory : subCategory,
                 provider: provider,
                 desc: desc,
-                amount: amount.replace(/,/g, '.'),
+                amount: Number(amount.replace(/,/g, '.')),
+                costCenter: params.taskTitle
             },
             todoPayments: {
                 date: date,
@@ -59,7 +62,7 @@ const Form = ({ insertDocument, sheetType }) => {
                 idnumber: idnumber,
                 provider: provider,
                 desc: desc,
-                amount: amount.replace(/,/g, '.'),
+                amount: Number(amount.replace(/,/g, '.')),
             }
         }
 

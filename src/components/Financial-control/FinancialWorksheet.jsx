@@ -86,6 +86,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function deleteDocument(item) {
+        let transaction = JSON.parse(JSON.stringify(item))
+        delete transaction._id
         setOpenSnackbar(true)
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
         {
@@ -94,6 +96,15 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             credentials: 'include',
             body: JSON.stringify(item)
         })
+        // .then(() => getData())
+        fetch(`/api/${process.env.REACT_APP_DB}/add/trash`,
+        {
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(transaction)
+        })
+        .then(response => response.json())
         .then(() => getData())
     }
 
