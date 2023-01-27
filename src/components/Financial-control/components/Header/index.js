@@ -16,9 +16,11 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             {params.taskTitle !== 'TRASH' && <>
                 {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang.filter}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <ToggleButton selected={filter} onClick={() => {setFilter(!filter); setChecked([])}} sx={{height:'40px', width: '40px', marginTop: '5px'}}>
+                    <span>
+                    <ToggleButton value={0} selected={filter} onClick={() => {setFilter(!filter); setChecked([])}} sx={{height:'40px', width: '40px', marginTop: '5px'}}>
                         <FilterAltIcon fontSize='large'/>
                     </ToggleButton>
+                    </span>
                 </Tooltip>}
 
                 {checked.length !== 0 && <>

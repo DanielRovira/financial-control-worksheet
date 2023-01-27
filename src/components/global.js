@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --color2: #C9C9C9;
     --font-color: #3C4043;
     --closeSidebarWidth: 60px;
+    --navbar-color: #1976d2;
     }
 
     @media (max-width: 750px) {

@@ -61,7 +61,7 @@ export const Inputs = css`
     outline: none;
     border-radius: 5px;
     font-size: 16px;
-    text-transform: capitalize;
+    text-transform: ${(props) => (props.lowercase ? 'none' : 'capitalize')};
     border: none;
     width: 100%;
     height: 100%;

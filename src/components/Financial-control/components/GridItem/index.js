@@ -3,6 +3,7 @@ import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
 import { Checkbox } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit, FaCheck } from 'react-icons/fa';
+import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
@@ -44,6 +45,10 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
         ? setChecked(checked.filter(it => it !== item))
         : setChecked((prev) => [ ...prev, item])
       };
+
+    const openInNewTab = (url) => {
+        window.open(url, '_blank', 'noreferrer');
+    };
 
     const toggleEdit = (element) => {
         if (descTemp === '' || amountTemp === '' || dateTemp === '') {
@@ -223,6 +228,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                         onChange={(e) => setLinkTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         width={100}
+                        lowercase
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
@@ -292,7 +298,9 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 </>}
                 {sheetType === 'todoPayments' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{++index}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{linkTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter>
+                    <C.TdCont style={{height: '20px'}}>{linkTemp && <CloudDownloadIcon onClick={() => openInNewTab(linkTemp)} htmlColor='var(--navbar-color)' style={{position: 'relative', width: '50px', height: '30px', marginTop: '-5px', marginLeft: '-5px'}} />}</C.TdCont>
+                </C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{bankTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{idnumberTemp}</C.TdCont></C.Td>
                 </>}

@@ -22,6 +22,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [undoItem, setUndoItem] = useState();
     const [checked, setChecked] = useState([]);
     const [filter, setFilter] = useState(false);
+    const [loadingData, setLoadingData] = useState();
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -43,7 +44,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
                 })
-            if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || [])} else {setIsLoggedIn(false); history('/')} 
+            if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || []); setLoadingData(false)} else {setIsLoggedIn(false); history('/')} 
             }
             else {history('/')}
         }
@@ -53,6 +54,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setSheetType(sheetType)
         setTransactionsList([])
         setTransactionsList2([])
+        setLoadingData(true)
         isLoggedIn ? getData() : history('/')
         // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -65,12 +67,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     const handleDeleteAll = (type) => {
         checked.map((item) => {
-            // sendDocumentToTrash(item)
-            deleteDocument(item)
-            delete item._id
-            delete item.archived
-            type === 'del' && insertDocument(item, 'TRASH')
-            type === 'restore' && insertDocument(item, item.costCenter)
+            deleteDocument(item);
+            let newItem = JSON.parse(JSON.stringify(item))
+            delete newItem._id;
+            delete newItem.archived;
+            type === 'del' && insertDocument(newItem, 'TRASH');
+            type === 'restore' && insertDocument(newItem, newItem.costCenter);
         })
     }
 
@@ -152,10 +154,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteAll={handleDeleteAll} handleSetArchived={handleSetArchived} filter={filter} setFilter={setFilter} />
             {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
-            {transactionsList?.length === 0 ? <LinearProgress /> :
-            <>{sheetType === 'summary' ?
-            <Summary rawData={transactionsList} setAdd={setAdd} /> :
-            <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} />
+            {loadingData ? <LinearProgress /> :
+            <>{sheetType === 'summary'
+            ? transactionsList?.length > 0 &&<Summary rawData={transactionsList} setAdd={setAdd} />
+            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} />
             }</>
             }
 
