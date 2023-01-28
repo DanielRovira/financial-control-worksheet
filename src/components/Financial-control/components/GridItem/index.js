@@ -78,7 +78,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 provider: providerTemp,
                 desc: descTemp,
                 amount: amountTemp });
-                setUndoItem(item)
+                setUndoItem([item])
             }}
 
         if (sheetType === 'todoPayments') {
@@ -98,7 +98,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 provider: providerTemp,
                 desc: descTemp,
                 amount: amountTemp });
-                setUndoItem(item)
+                setUndoItem([item])
         }}
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)
@@ -282,7 +282,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                     />
                 </C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
-                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setDeleteDelay(true); setUndoItem(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td>
+                {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setDeleteDelay(true); setUndoItem(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td> */}
             </C.Tr>
     )}
     else {
@@ -309,7 +309,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
                 {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
-                <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td>
+                {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td> */}
                 </>}
                 {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{item.costCenter}</C.TdCont></C.Td>}
             </C.Tr>

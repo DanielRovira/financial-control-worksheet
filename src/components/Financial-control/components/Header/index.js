@@ -4,7 +4,7 @@ import { IconButton, Tooltip, ToggleButton  } from '@mui/material';
 import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteAll, handleSetArchived, handleDuplicateSelected, filter, setFilter }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter }) => {
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
@@ -26,14 +26,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {checked.length !== 0 && <>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => handleDeleteAll('del')} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => {handleDeleteSelected('del'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
                             <DeleteIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDuplicateSelected} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => {handleDuplicateSelected(); setChecked([])}} disabled={checked.length > 5 ? true : false}>
                             <DifferenceIcon fontSize='large'/>
                         </IconButton>
                     </span>
@@ -51,7 +51,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </>}
                 {params.taskTitle === 'TRASH' && checked.length !== 0 &&
                 <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={() => handleDeleteAll('restore')}>
+                    <IconButton onClick={() => handleDeleteSelected('restore')}>
                         <RestoreFromTrashIcon fontSize='large'/>
                     </IconButton>
                 </Tooltip>}

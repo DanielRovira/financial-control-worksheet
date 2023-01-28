@@ -19,7 +19,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [drawer, setDrawer] = useState(false);
     const [showCalendar, setShowCalendar] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [undoItem, setUndoItem] = useState();
+    const [undoItem, setUndoItem] = useState([]);
     const [checked, setChecked] = useState([]);
     const [filter, setFilter] = useState(false);
     const [loadingData, setLoadingData] = useState();
@@ -60,20 +60,23 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        setUndoItem()
+        setUndoItem([])
         setSheetType(sheetType)
         setChecked([])
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    const handleDeleteAll = (type) => {
-        checked.map((item) => {
-            deleteDocument(item);
+    const handleDeleteSelected = (type) => {
+        (type === 'undo' ? undoItem : checked).map((item) => {
+            type === 'undo' ? deleteDocument(item, 'TRASH') : deleteDocument(item);
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             delete newItem.archived;
             type === 'del' && insertDocument(newItem, 'TRASH');
             type === 'restore' && insertDocument(newItem, newItem.costCenter);
+            type === 'undo' && insertDocument(newItem);
         })
+        setUndoItem([]);
+        setChecked([]);
     }
 
     const handleDuplicateSelected = () => {
@@ -83,7 +86,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             insertDocument(newItem);
         })
     }
-console.log(checked)
+
     const handleSetArchived = () => {
         checked.map((item) => {
             updateDocument({ ...item, archived: !item.archived})
@@ -99,8 +102,8 @@ console.log(checked)
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
-        .then(() => getData())
-        .then(() => setChecked([]))
+        .then(response => setUndoItem((prev) => [ ...prev, response]))
+        .then(() => !path && getData())
     }
 
     function updateDocument(item) {
@@ -116,16 +119,16 @@ console.log(checked)
         .then(() => getData())
     }
 
-    function deleteDocument(item) {
+    function deleteDocument(item, path) {
         setOpenSnackbar(true)
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/${params.taskTitle}-${sheetType}`,
+        fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        .then(() => getData())
+        .then(() => !path && getData())
     }
 
     useEffect(() => {
@@ -160,7 +163,7 @@ console.log(checked)
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteAll={handleDeleteAll} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} />
             {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
@@ -179,7 +182,7 @@ console.log(checked)
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} updateDocument={updateDocument} />
+            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} />
         </div>
     );
 };
