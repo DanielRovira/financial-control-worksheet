@@ -56,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
         }
     }
     
-    h1, h2, img {
+    h1, h2, img, span {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */
