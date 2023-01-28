@@ -67,8 +67,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleDeleteSelected = (type) => {
-        (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).map((item) => {
-            type === 'undo' ? deleteDocument(item, 'TRASH') : deleteDocument(item);
+        (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).map((item, index) => {
+            type === 'undo'
+                ? deleteDocument(item, 'TRASH')
+                : index === (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).length - 1
+                    ? deleteDocument(item)
+                    : deleteDocument(item, params.taskTitle);
+            
+            
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             delete newItem.archived;
