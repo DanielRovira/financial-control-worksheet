@@ -19,12 +19,10 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     if (reason === 'clickaway') {
       return;
     }
-    operationType === 'update' && updateDocument(undoItem[0])
+    operationType === 'update' && updateDocument(undoItem[0], true)
     operationType === 'remove' && handleDeleteSelected('undo')
     operationType === 'archive' && handleSetArchived()
-    // console.log(undoItem.length)
     setOpenSnackbar(false);
-    // setUndoItem([]);
     setOperationType()
     setUndoItem([])
   };

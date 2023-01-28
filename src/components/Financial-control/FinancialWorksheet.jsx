@@ -92,12 +92,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         (operationType === 'archive' ? undoItem : checked).map((item, index) => {
             index === (operationType === 'archive' ? undoItem : checked).length - 1
             ? updateDocument({ ...item, archived: !item.archived}, true)
-            : updateDocument({ ...item, archived: !item.archived}, false)
+            : updateDocument({ ...item, archived: !item.archived})
         })
         setChecked([])
         setOperationType()
     }
-// console.log(undoItem)
+console.log(undoItem)
+console.log(operationType)
+// console.log(checked)
     function insertDocument(transaction, path) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
@@ -169,7 +171,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} />
             {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'

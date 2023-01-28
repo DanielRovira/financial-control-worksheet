@@ -45,7 +45,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
         ? setChecked(checked.filter(it => it !== item))
         : setChecked((prev) => [ ...prev, item]);
         setOperationType();
-        setUndoItem([]);
+        // setUndoItem([]);
       };
 
     const openInNewTab = (url) => {
@@ -79,7 +79,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: amountTemp });
+                amount: amountTemp }, true);
                 setUndoItem([item])
             }}
 
@@ -99,7 +99,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 idnumber: idnumberTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: amountTemp });
+                amount: amountTemp }, true);
                 setUndoItem([item])
         }}
         setCategoryTemp(otherCategoryTemp)
