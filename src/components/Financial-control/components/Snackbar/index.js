@@ -2,12 +2,14 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
     const history = useNavigate();
     const timeOut = 6000
+    const [message, setMessage] = useState();
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -37,10 +39,30 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     };
   }, [history]);
 
+  useEffect(() => {
+    switch (operationType) {
+        case 'update':
+            setMessage('Item modificado')
+            break;
+        case 'remove':
+            setMessage('Item deletado')
+            break;
+        case 'archive':
+            setMessage('Item arquivado')
+            break;
+        case 'add':
+            setMessage('Item adicionado')
+            break;
+    
+        default:
+            break;
+    }
+  }, [operationType]);
+
   const action = (
     <>
       <Button color="secondary" size="small" onClick={handleUndo}>
-        UNDO
+        {lang.undo}
       </Button>
       <IconButton
         size="small"
@@ -60,7 +82,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
         autoHideDuration={timeOut}
         resumeHideDuration={0}
         onClose={handleClose}
-        message="Note archived"
+        message={message}
         action={action}
         />
     </div>
