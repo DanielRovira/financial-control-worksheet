@@ -58,6 +58,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
         <Snackbar
         open={openSnackbar}
         autoHideDuration={timeOut}
+        resumeHideDuration={0}
         onClose={handleClose}
         message="Note archived"
         action={action}

@@ -50,8 +50,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             }
             else {history('/')}
         }
-console.log(undoItem)
-console.log(operationType)
+
     useEffect(() => {
         refreshToken()
         setSheetType(sheetType)
@@ -67,6 +66,13 @@ console.log(operationType)
         setSheetType(sheetType)
         setChecked([])
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const handleOpenSnackbar = () => {
+        setOpenSnackbar(false)
+        setTimeout(() => {
+            setOpenSnackbar(true)
+        }, 5);
+    }
 
     const handleDeleteSelected = (type) => {
         (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).map((item, index) => {
@@ -107,7 +113,7 @@ console.log(operationType)
     }
 
     function insertDocument(transaction, path) {
-        params.taskTitle !== 'TRASH' && setOpenSnackbar(true);
+        params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'POST',
@@ -121,7 +127,7 @@ console.log(operationType)
     }
 
     function updateDocument(item, update) {
-        params.taskTitle !== 'TRASH' && setOpenSnackbar(true);
+        params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
             method:'PATCH',
@@ -135,7 +141,7 @@ console.log(operationType)
     }
 
     function deleteDocument(item, path) {
-        params.taskTitle !== 'TRASH' && setOpenSnackbar(true);
+        params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
