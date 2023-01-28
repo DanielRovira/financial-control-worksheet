@@ -1,9 +1,11 @@
+import { useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
+    const params = useParams();
     const timeOut = 6000
 
   const handleClose = (event, reason) => {
@@ -46,13 +48,14 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
 
   return (
     <div>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={timeOut}
-        onClose={handleClose}
-        message="Note archived"
-        action={action}
-      />
+        {params.taskTitle !== 'TRASH' &&
+            <Snackbar
+            open={openSnackbar}
+            autoHideDuration={timeOut}
+            onClose={handleClose}
+            message="Note archived"
+            action={action}
+        />}
     </div>
   );
 }
