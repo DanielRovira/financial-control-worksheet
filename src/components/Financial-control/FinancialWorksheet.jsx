@@ -23,6 +23,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [checked, setChecked] = useState([]);
     const [filter, setFilter] = useState(false);
     const [loadingData, setLoadingData] = useState();
+    const [operationType, setOperationType] = useState();
     const history = useNavigate();
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -163,12 +164,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} />
             {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList?.length > 0 &&<Summary rawData={transactionsList} setAdd={setAdd} />
-            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} />
+            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} />
             }</>
             }
 
@@ -182,7 +183,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} />
+            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} />
         </div>
     );
 };

@@ -8,7 +8,7 @@ import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked }) => {
+const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType }) => {
     const params = useParams();
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
@@ -103,6 +103,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)
         setActive(!isActive);
+        setOperationType('update')
 
         !isActive && setTimeout(() => {  
             element.target.querySelector('input')?.focus()
