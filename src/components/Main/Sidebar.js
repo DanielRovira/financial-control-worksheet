@@ -1,5 +1,5 @@
 import './styles/Sidebar.css'
-import { Drawer, List, ListSubheader } from '@mui/material';
+import { Drawer, IconButton, List, ListSubheader, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import NestedList from './NestedList';
 import { FaTrash } from 'react-icons/fa';
@@ -10,6 +10,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
     const history = useNavigate();
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
+    const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
@@ -19,7 +20,12 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                 subheader={
                     <ListSubheader component="h1" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold', display:'flex', justifyContent: 'space-between' }}>
                         {lang.sections}
-                        <FaTrash onClick={() => history('/financialControl/TRASH')} />
+                        <Tooltip title={<h3>{lang.trash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                            <IconButton onClick={() => {history('/financialControl/TRASH'); setOpenSidebar(false)}}>
+                                <FaTrash />
+                            </IconButton>
+                        </Tooltip>
+                        
                     </ListSubheader>
                 }
         >

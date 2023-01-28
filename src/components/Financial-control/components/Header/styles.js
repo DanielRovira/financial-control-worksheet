@@ -9,7 +9,7 @@ export const Container = styled.div`
     border-bottom: 1px solid #DADCE0;
 
     .leftButtons {
-    left: 80px;
+    left: 70px;
     }
     
     .rightButtons {

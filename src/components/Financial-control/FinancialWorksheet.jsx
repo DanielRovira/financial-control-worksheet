@@ -30,7 +30,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
-console.log(checked)
+
     const getData = async () => {
             if (sectionExists) {
             const res = await
@@ -50,7 +50,8 @@ console.log(checked)
             }
             else {history('/')}
         }
-
+console.log(undoItem)
+console.log(operationType)
     useEffect(() => {
         refreshToken()
         setSheetType(sheetType)
@@ -95,9 +96,9 @@ console.log(checked)
         })
     }
 
-    const handleSetArchived = () => {
-        (operationType === 'archive' ? undoItem : checked).map((item, index) => {
-            index === (operationType === 'archive' ? undoItem : checked).length - 1
+    const handleSetArchived = (type) => {
+        (type === 'archive' ? undoItem : checked).map((item, index) => {
+            index === (type === 'archive' ? undoItem : checked).length - 1
             ? updateDocument({ ...item, archived: !item.archived}, true)
             : updateDocument({ ...item, archived: !item.archived})
         })

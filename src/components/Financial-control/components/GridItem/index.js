@@ -45,7 +45,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
         checked.includes(item)
         ? setChecked(checked.filter(it => it !== item))
         : setChecked((prev) => [ ...prev, item]);
-        setOperationType();
+        // setOperationType();
         // setUndoItem([]);
       };
 

@@ -65,7 +65,6 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         </IconButton>
                     </span>
                 </Tooltip>
-                {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang[!filter ? 'mark' : 'unMark']} {lang.asDone}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleArchiveButton}>
                         {filter
@@ -73,7 +72,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         : <EventAvailableIcon fontSize='large'/>
                         }
                     </IconButton>
-                </Tooltip>}
+                </Tooltip>
                 </>}
             </>}
                 {params.taskTitle === 'TRASH' &&
