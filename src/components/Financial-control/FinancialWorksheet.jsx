@@ -67,7 +67,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleDeleteSelected = (type) => {
-        (type === 'undo' ? undoItem : checked).map((item) => {
+        (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).map((item) => {
             type === 'undo' ? deleteDocument(item, 'TRASH') : deleteDocument(item);
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
@@ -101,6 +101,7 @@ console.log(undoItem)
 console.log(operationType)
 // console.log(checked)
     function insertDocument(transaction, path) {
+        setOpenSnackbar(true)
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'POST',
@@ -172,7 +173,7 @@ console.log(operationType)
     return (
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} />
-            {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} />}
+            {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList?.length > 0 &&<Summary rawData={transactionsList} setAdd={setAdd} />

@@ -26,14 +26,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {checked.length !== 0 && <>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => {setOperationType('remove'); handleDeleteSelected('del'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => {setUndoItem([]); setOperationType('remove'); handleDeleteSelected('del'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
                             <DeleteIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => {setOperationType('duplicate'); handleDuplicateSelected(); setChecked([])}} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => {setUndoItem([]); setOperationType('duplicate'); handleDuplicateSelected(); setChecked([])}} disabled={checked.length > 5 ? true : false}>
                             <DifferenceIcon fontSize='large'/>
                         </IconButton>
                     </span>

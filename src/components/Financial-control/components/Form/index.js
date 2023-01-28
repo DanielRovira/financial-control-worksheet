@@ -6,7 +6,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, B
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, sheetType }) => {
+const Form = ({ insertDocument, sheetType, setOperationType }) => {
     const params = useParams();
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -79,6 +79,7 @@ const Form = ({ insertDocument, sheetType }) => {
         setOtherSubCategory('');
         setCategory('');
         setSubCategory('');
+        setOperationType('duplicate')
     };
 
     return ( 
