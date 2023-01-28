@@ -97,9 +97,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setChecked([])
         setOperationType()
     }
-console.log(undoItem)
-console.log(operationType)
-// console.log(checked)
+
     function insertDocument(transaction, path) {
         setOpenSnackbar(true)
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,

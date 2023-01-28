@@ -1,7 +1,7 @@
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip, ToggleButton  } from '@mui/material';
-import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
+import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, DeleteForever as DeleteForeverIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem }) => {
@@ -49,13 +49,20 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>}
                 </>}
             </>}
-                {params.taskTitle === 'TRASH' && checked.length !== 0 &&
-                <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={() => handleDeleteSelected('restore')}>
-                        <RestoreFromTrashIcon fontSize='large'/>
+                {params.taskTitle === 'TRASH' &&
+                <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <IconButton onClick={() => handleDeleteSelected()}>
+                        <DeleteForeverIcon fontSize='large'/>
                     </IconButton>
                 </Tooltip>}
-            
+                {params.taskTitle === 'TRASH' && checked.length !== 0 &&
+                <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <span>
+                    <IconButton onClick={() => handleDeleteSelected('restore')} disabled={checked.length > 5 ? true : false}>
+                        <RestoreFromTrashIcon fontSize='large'/>
+                    </IconButton>
+                    </span>
+                </Tooltip>}
             </C.Buttons>
             
             <C.Header>
