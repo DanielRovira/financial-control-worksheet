@@ -28,6 +28,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     const [deleteDelay, setDeleteDelay] = useState(false)
 
     const ref = useRef(null);
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
@@ -314,7 +315,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td> */}
                 </>}
-                {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{item.costCenter}</C.TdCont></C.Td>}
+                {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{Array.from(sections).filter((section) => section.title === item.costCenter)[0].name}</C.TdCont></C.Td>}
             </C.Tr>
         )}
 };

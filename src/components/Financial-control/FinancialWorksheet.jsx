@@ -105,7 +105,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function insertDocument(transaction, path) {
-        setOpenSnackbar(true)
+        params.taskTitle !== 'TRASH' && setOpenSnackbar(true);
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'POST',
@@ -119,7 +119,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function updateDocument(item, update) {
-        setOpenSnackbar(true)
+        params.taskTitle !== 'TRASH' && setOpenSnackbar(true);
         fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
             method:'PATCH',
@@ -133,7 +133,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function deleteDocument(item, path) {
-        setOpenSnackbar(true)
+        params.taskTitle !== 'TRASH' && setOpenSnackbar(true);
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
