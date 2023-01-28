@@ -65,6 +65,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setUndoItem([])
         setSheetType(sheetType)
         setChecked([])
+        setFilter(false)
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleOpenSnackbar = () => {
