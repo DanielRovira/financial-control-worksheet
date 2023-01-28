@@ -19,7 +19,8 @@ const Grid = ({ rawData, deleteDocument, updateDocument, sheetType, setUndoItem,
     const handleSelect = (event) => {
         checked.length === itens.length
         ? setChecked([])
-        : setChecked(itens)
+        : setChecked(itens);
+        setOperationType()
     }
 
     return ( 

@@ -26,6 +26,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     setOpenSnackbar(false);
     // setUndoItem([]);
     setOperationType()
+    setUndoItem([])
   };
 
   const action = (

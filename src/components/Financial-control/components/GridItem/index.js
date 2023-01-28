@@ -43,7 +43,9 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     const handleSelect = (event) => {
         checked.includes(item)
         ? setChecked(checked.filter(it => it !== item))
-        : setChecked((prev) => [ ...prev, item])
+        : setChecked((prev) => [ ...prev, item]);
+        setOperationType();
+        setUndoItem([]);
       };
 
     const openInNewTab = (url) => {

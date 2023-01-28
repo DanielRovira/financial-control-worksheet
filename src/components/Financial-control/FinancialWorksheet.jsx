@@ -89,12 +89,15 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleSetArchived = () => {
-        (operationType === 'archive' ? undoItem : checked).map((item) => {
-            updateDocument({ ...item, archived: !item.archived})
+        (operationType === 'archive' ? undoItem : checked).map((item, index) => {
+            index === (operationType === 'archive' ? undoItem : checked).length - 1
+            ? updateDocument({ ...item, archived: !item.archived}, true)
+            : updateDocument({ ...item, archived: !item.archived}, false)
         })
-        
+        setChecked([])
+        setOperationType()
     }
-
+// console.log(undoItem)
     function insertDocument(transaction, path) {
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
@@ -108,7 +111,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         .then(() => !path && getData())
     }
 
-    function updateDocument(item) {
+    function updateDocument(item, update) {
         setOpenSnackbar(true)
         fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
@@ -119,7 +122,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
         .then(response => response.json())
         .then(response => setUndoItem((prev) => [ ...prev, response]))
-        .then(() => getData())
+        .then(() => update && getData())
     }
 
     function deleteDocument(item, path) {
