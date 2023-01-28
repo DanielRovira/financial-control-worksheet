@@ -85,7 +85,8 @@ const options = {
                 label: function(context) {
                     return Intl.NumberFormat(process.env.REACT_APP_LANG, { style: 'currency', currency: process.env.REACT_APP_CURRENCY }).format(context.parsed.y)
                 }
-            }
+            },
+            displayColors: false
         },
     },
     layout: {

@@ -13,7 +13,7 @@ export const Container = styled.div`
     }
     
     .rightButtons {
-    right: 30px;
+    right: 20px;
     }
 
     
@@ -50,6 +50,10 @@ export const Buttons = styled.div`
     @media (max-width: 600px) {
     top: 55px;
     gap: 0px;
+
+    .MuiIconButton-root {
+        padding: 8px 3px;
+    }
     }
 `
 

@@ -1,7 +1,7 @@
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
-import { IconButton, Tooltip, ToggleButton  } from '@mui/material';
-import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, DeleteForever as DeleteForeverIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
+import { IconButton, Menu, MenuItem, Tooltip, ToggleButton  } from '@mui/material';
+import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, DeleteForever as DeleteForeverIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, FilterAlt as FilterAltIcon, InfoOutlined as InfoOutlinedIcon, MoreVert as MoreVertIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem }) => {
@@ -41,14 +41,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         <C.Container>
             <C.Buttons className='leftButtons'>
             {params.taskTitle !== 'TRASH' && <>
-                {sheetType === 'todoPayments' &&
+                {/* {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang.filter}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                    <ToggleButton value={0} selected={filter} onClick={handleFilterButton} sx={{height:'40px', width: '40px', marginTop: '5px'}}>
+                    <ToggleButton value={0} selected={filter} onClick={handleFilterButton} sx={{height:'40px', width: '40px', marginTop: '4px'}}>
                         <FilterAltIcon fontSize='large'/>
                     </ToggleButton>
                     </span>
-                </Tooltip>}
+                </Tooltip>} */}
 
                 {checked.length !== 0 && <>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
@@ -112,6 +112,11 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={() => setDrawer(true)}>
                         <InfoOutlinedIcon fontSize='large'/>
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <IconButton onClick={handleFilterButton}>
+                        <MoreVertIcon />
                     </IconButton>
                 </Tooltip>
             </C.Buttons>
