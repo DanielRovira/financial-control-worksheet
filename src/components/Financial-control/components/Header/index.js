@@ -26,21 +26,21 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {checked.length !== 0 && <>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => {handleDeleteSelected('del'); setOperationType('remove'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => {setOperationType('remove'); handleDeleteSelected('del'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
                             <DeleteIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => {handleDuplicateSelected(); setOperationType('duplicate'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={() => {setOperationType('duplicate'); handleDuplicateSelected(); setChecked([])}} disabled={checked.length > 5 ? true : false}>
                             <DifferenceIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang[!filter ? 'mark' : 'unMark']} {lang.asDone}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={() => {handleSetArchived(); setOperationType('archive')}}>
+                    <IconButton onClick={() => {handleSetArchived(); setOperationType('archive'); setChecked([])}}>
                         {filter
                         ? <RemoveDoneIcon fontSize='large'/>
                         : <EventAvailableIcon fontSize='large'/>

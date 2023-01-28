@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType }) {
+export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
     const timeOut = 5000
 
   const handleClose = (event, reason) => {
@@ -12,16 +12,20 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     }
     setOpenSnackbar(false);
     setUndoItem([]);
+    setOperationType()
   };
 
   const handleUndo = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    operationType === 'update' ? updateDocument(undoItem[0]) : handleDeleteSelected('undo');
+    operationType === 'update' && updateDocument(undoItem[0])
+    operationType === 'remove' && handleDeleteSelected('undo')
+    operationType === 'archive' && handleSetArchived()
     // console.log(undoItem.length)
     setOpenSnackbar(false);
     // setUndoItem([]);
+    setOperationType()
   };
 
   const action = (
