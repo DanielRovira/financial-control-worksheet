@@ -79,7 +79,7 @@ const Form = ({ insertDocument, sheetType, setOperationType }) => {
         setOtherSubCategory('');
         setCategory('');
         setSubCategory('');
-        setOperationType('duplicate')
+        setOperationType('add')
     };
 
     return ( 

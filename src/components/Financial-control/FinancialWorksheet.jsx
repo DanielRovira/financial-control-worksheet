@@ -30,7 +30,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
-
+console.log(checked)
     const getData = async () => {
             if (sectionExists) {
             const res = await
@@ -45,6 +45,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
                 })
+            setChecked([])
             if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || []); setLoadingData(false)} else {setIsLoggedIn(false); history('/')} 
             }
             else {history('/')}
@@ -83,7 +84,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             type === 'undo' && insertDocument(newItem);
         })
         setUndoItem([]);
-        setChecked([]);
+        // setChecked([]);
     }
 
     const handleDuplicateSelected = () => {
@@ -100,7 +101,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             ? updateDocument({ ...item, archived: !item.archived}, true)
             : updateDocument({ ...item, archived: !item.archived})
         })
-        setChecked([])
+        // setChecked([])
         setOperationType()
     }
 

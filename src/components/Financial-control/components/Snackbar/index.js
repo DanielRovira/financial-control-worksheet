@@ -25,7 +25,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     operationType === 'update' && updateDocument(undoItem[0], true)
     operationType === 'remove' && handleDeleteSelected('undo')
     operationType === 'archive' && handleSetArchived()
-    operationType === 'duplicate' && handleDeleteSelected('undoDuplicate')
+    operationType === 'add' && handleDeleteSelected('undoDuplicate')
     setOpenSnackbar(false);
     setOperationType()
     setUndoItem([])

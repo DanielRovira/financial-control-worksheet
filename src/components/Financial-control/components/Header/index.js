@@ -10,6 +10,33 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
+    const handleFilterButton = () => {
+        setFilter(!filter);
+        setChecked([]);
+    }
+
+    const handleDeleteButton = () => {
+        handleDeleteSelected('del');
+        setOperationType('remove');
+        setUndoItem([]);
+        // setChecked([]);
+    }
+
+    const handleDuplicateButton = () => {
+        handleDuplicateSelected();
+        setOperationType('add');
+        setUndoItem([]);
+        // setChecked([]);
+    }
+
+    const handleArchiveButton = () => {
+        handleSetArchived();
+        setOperationType('archive');
+        setUndoItem([]);
+        // setChecked([]);
+    }
+
+
     return (
         <C.Container>
             <C.Buttons className='leftButtons'>
@@ -17,7 +44,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang.filter}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                    <ToggleButton value={0} selected={filter} onClick={() => {setFilter(!filter); setChecked([])}} sx={{height:'40px', width: '40px', marginTop: '5px'}}>
+                    <ToggleButton value={0} selected={filter} onClick={handleFilterButton} sx={{height:'40px', width: '40px', marginTop: '5px'}}>
                         <FilterAltIcon fontSize='large'/>
                     </ToggleButton>
                     </span>
@@ -26,21 +53,21 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {checked.length !== 0 && <>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => {setUndoItem([]); setOperationType('remove'); handleDeleteSelected('del'); setChecked([])}} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={handleDeleteButton} disabled={checked.length > 5 ? true : false}>
                             <DeleteIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={() => {setUndoItem([]); setOperationType('duplicate'); handleDuplicateSelected(); setChecked([])}} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={handleDuplicateButton} disabled={checked.length > 5 ? true : false}>
                             <DifferenceIcon fontSize='large'/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang[!filter ? 'mark' : 'unMark']} {lang.asDone}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={() => {setUndoItem([]); handleSetArchived(); setOperationType('archive'); setChecked([])}}>
+                    <IconButton onClick={handleArchiveButton}>
                         {filter
                         ? <RemoveDoneIcon fontSize='large'/>
                         : <EventAvailableIcon fontSize='large'/>
