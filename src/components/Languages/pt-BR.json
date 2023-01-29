@@ -28,6 +28,7 @@
     "limit": "Máximo 5 itens",
     "login": "Login",
     "logout": "Sair",
+    "archived": "Itens arquivados",
     "archive": "Arquivar",
     "unAarchive": "Desarquivar",
     "number": "Número",

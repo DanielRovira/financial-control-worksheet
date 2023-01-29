@@ -95,6 +95,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             
             <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
+                {filter && <p className='archivedTitle'>{lang.archived}</p>}
             </C.Header>
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>

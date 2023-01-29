@@ -39,6 +39,12 @@ export const Container = styled.div`
             /* padding-left: 20px; */
         }
     }
+
+    .archivedTitle {
+        margin: 0;
+        color: grey;
+        font-size: 15px;
+    }
 `;
 
 export const Buttons = styled.div`
