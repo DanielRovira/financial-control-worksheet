@@ -112,6 +112,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         setSubCategoryTemp(otherSubCategoryTemp)
         setActive(!isActive);
         setOperationType('update')
+        setChecked([])
 
         !isActive && setTimeout(() => {  
             element.target.querySelector('input')?.focus()

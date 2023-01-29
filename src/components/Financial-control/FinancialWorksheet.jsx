@@ -96,7 +96,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
         // setUndoItem([]);
     }
-// console.log(undoItem)
+
     const handleDuplicateSelected = () => {
         let list = JSON.parse(JSON.stringify(checked))
         setChecked([])
@@ -106,7 +106,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, newItem])
             sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, newItem])
             insertDocument(newItem)
-            index === list.length - 1 && getData()
+
+            clearTimeout(timer.current)
+            timer.current = setTimeout(() => {
+                getData()
+            }, 3000); 
         })
     }
 
@@ -128,15 +132,15 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
                 updateDocument({ ...item, archived: filter ? false : true})
             }
+
             clearTimeout(timer.current)
-            // index === list.length - 1 && 
             timer.current = setTimeout(() => {
                 getData()
             }, 3000); 
         })
         setOperationType()
     }
-console.log(checked)
+
     function insertDocument(transaction, update, path) {
         params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
@@ -148,7 +152,7 @@ console.log(checked)
         })
         .then(response => response.json())
         .then(response => setUndoItem((prev) => [ ...prev, response]))
-        .then(() => update && getData())
+        // .then(() => update && getData())
     }
 
     function updateDocument(item, update) {
