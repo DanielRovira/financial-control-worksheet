@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
 import BottomNavigation from './components/BottomNav';
@@ -26,6 +26,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [operationType, setOperationType] = useState();
     const history = useNavigate();
     const params = useParams();
+    const timer = useRef(null);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -116,25 +117,26 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         
         list.forEach((item, index) => {
             if (type === 'undo') {
-                // sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, item])
-                // sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, item])
+                sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, item])
+                sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, item])
                 updateDocument({ ...item, archived: filter ? true : false})
             }
 
             else {
                 setUndoItem((prev) => [ ...prev, item])
-                sheetType === 'financialControl' && setTransactionsList(transactionsList.filter(it => it._id !== item._id))
-                sheetType === 'todoPayments' && setTransactionsList2(transactionsList2.filter(it => it._id !== item._id))
+                sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
+                sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
                 updateDocument({ ...item, archived: filter ? false : true})
             }
-            
-            index === list.length - 1 && setTimeout(() => {
+            clearTimeout(timer.current)
+            // index === list.length - 1 && 
+            timer.current = setTimeout(() => {
                 getData()
-            }, 1000); 
+            }, 3000); 
         })
         setOperationType()
     }
-console.log(undoItem)
+console.log(checked)
     function insertDocument(transaction, update, path) {
         params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,

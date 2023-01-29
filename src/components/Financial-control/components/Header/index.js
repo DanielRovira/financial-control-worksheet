@@ -66,14 +66,18 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {filter === false && <>
                     <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDeleteButton} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={handleDeleteButton}
+                        // disabled={checked.length > 5 ? true : false}
+                        >
                             <DeleteIcon/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDuplicateButton} disabled={checked.length > 5 ? true : false}>
+                        <IconButton onClick={handleDuplicateButton} 
+                        // disabled={checked.length > 5 ? true : false}
+                        >
                             <DifferenceIcon/>
                         </IconButton>
                     </span>
@@ -97,7 +101,9 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>
                 <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                    <IconButton onClick={() => handleDeleteSelected('restore')} disabled={checked.length > 5 ? true : false}>
+                    <IconButton onClick={() => handleDeleteSelected('restore')}
+                    // disabled={checked.length > 5 ? true : false}
+                    >
                         <RestoreFromTrashIcon/>
                     </IconButton>
                     </span>

@@ -147,7 +147,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     if (isActive === true && params.taskTitle !== 'TRASH' && !filter) {
         return (
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
-                <C.Td alignCenter><Checkbox checked={checked.includes(item._id) || checked.includes('all')} disabled /></C.Td>
+                <C.Td alignCenter><Checkbox checked={checked.includes(item._id)} disabled /></C.Td>
                 <C.Td alignCenter><C.TdCont>
                     <D.Input
                         style={{textAlign: 'center', padding: '1px 0 0 3.5px', height: '25px'}}
