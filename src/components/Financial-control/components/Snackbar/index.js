@@ -8,7 +8,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
     const history = useNavigate();
-    const timeOut = 7000
+    const timeOut = 10000
     const [message, setMessage] = useState();
 
   const handleClose = (event, reason) => {
@@ -81,7 +81,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
         <Snackbar
         open={openSnackbar}
         autoHideDuration={timeOut}
-        resumeHideDuration={0}
+        resumeHideDuration={1000}
         onClose={handleClose}
         message={message}
         action={action}

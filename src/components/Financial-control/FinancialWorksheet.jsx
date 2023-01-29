@@ -45,7 +45,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
                 })
-            setChecked([])
+            // setChecked([])
             if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || []); setLoadingData(false)} else {setIsLoggedIn(false); history('/')} 
             }
             else {history('/')}
@@ -76,7 +76,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleDeleteSelected = (type) => {
-        let list = (type === 'undo' || type === 'add') ? undoItem : checked
+        let checkedList = JSON.parse(JSON.stringify(checked));
+        setChecked([]);
+        let list = (type === 'undo' || type === 'add') ? undoItem : checkedList
         list.forEach((item, index) => {
             type === 'undo'
                 ? deleteDocument(item, false, 'TRASH')
@@ -92,27 +94,30 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             type === 'undo' && insertDocument(newItem);
         })
         setUndoItem([]);
-        // setChecked([]);
     }
 
     const handleDuplicateSelected = () => {
-        checked.forEach((item, index) => {
+        let list = JSON.parse(JSON.stringify(checked))
+        setChecked([])
+        list.forEach((item, index) => {
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
-            index === checked.length - 1
-            ? insertDocument(newItem, true)
-            : insertDocument(newItem);
+            sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, newItem])
+            sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, newItem])
+            insertDocument(newItem)
+            index === list.length - 1 && getData()
         })
     }
 
     const handleSetArchived = (type) => {
-        let list = (type === 'archive') ? undoItem : checked
+        let checkedList = JSON.parse(JSON.stringify(checked));
+        setChecked([]);
+        let list = (type === 'archive') ? undoItem : checkedList
         list.forEach((item, index) => {
             index === list.length - 1
             ? updateDocument({ ...item, archived: !item.archived}, true)
             : updateDocument({ ...item, archived: !item.archived})
         })
-        // setChecked([])
         setOperationType()
     }
 
