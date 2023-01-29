@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
@@ -37,7 +37,7 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     return () => {
         handleClose()
     };
-  }, [history]);
+  }, [history]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     switch (operationType) {

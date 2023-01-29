@@ -2,7 +2,7 @@ import * as C from './styles'
 import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
 import { Checkbox } from '@mui/material';
-import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaTrash, FaRegEdit, FaCheck } from 'react-icons/fa';
+import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaRegEdit, FaCheck } from 'react-icons/fa';
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
@@ -24,7 +24,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
-    const [amountValue, setAmountValue] = useState(item.amount)
+    // const [amountValue, setAmountValue] = useState(item.amount)
     const [deleteDelay, setDeleteDelay] = useState(false)
 
     const ref = useRef(null);

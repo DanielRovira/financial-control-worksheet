@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
 import BottomNavigation from './components/BottomNav';
@@ -74,15 +74,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             setOpenSnackbar(true)
         }, 5);
     }
-
+// eslint-disable-line
     const handleDeleteSelected = (type) => {
-        (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).map((item, index) => {
+        (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).forEach((item, index) => {
             type === 'undo'
                 ? deleteDocument(item, 'TRASH')
                 : index === (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).length - 1
                     ? deleteDocument(item)
                     : deleteDocument(item, params.taskTitle);
-            
             
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
@@ -96,7 +95,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleDuplicateSelected = () => {
-        checked.map((item) => {
+        checked.forEach((item) => {
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             insertDocument(newItem);
@@ -104,7 +103,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleSetArchived = (type) => {
-        (type === 'archive' ? undoItem : checked).map((item, index) => {
+        (type === 'archive' ? undoItem : checked).forEach((item, index) => {
             index === (type === 'archive' ? undoItem : checked).length - 1
             ? updateDocument({ ...item, archived: !item.archived}, true)
             : updateDocument({ ...item, archived: !item.archived})
