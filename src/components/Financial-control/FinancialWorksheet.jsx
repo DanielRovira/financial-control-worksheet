@@ -76,10 +76,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleDeleteSelected = (type) => {
-        (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).forEach((item, index) => {
+        let list = (type === 'undo' || type === 'add') ? undoItem : checked
+        list.forEach((item, index) => {
             type === 'undo'
                 ? deleteDocument(item, false, 'TRASH')
-                : index === (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).length - 1
+                : index === list.length - 1
                     ? deleteDocument(item, true)
                     : deleteDocument(item);
             
@@ -105,8 +106,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleSetArchived = (type) => {
-        (type === 'archive' ? undoItem : checked).forEach((item, index) => {
-            index === (type === 'archive' ? undoItem : checked).length - 1
+        let list = (type === 'archive') ? undoItem : checked
+        list.forEach((item, index) => {
+            index === list.length - 1
             ? updateDocument({ ...item, archived: !item.archived}, true)
             : updateDocument({ ...item, archived: !item.archived})
         })
