@@ -185,7 +185,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     return (
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} />
-            {add && params.taskTitle !== 'TRASH' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} />}
+            {add && params.taskTitle !== 'TRASH' && filter === false && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList?.length > 0 &&<Summary rawData={transactionsList} setAdd={setAdd} />

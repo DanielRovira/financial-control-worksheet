@@ -9,11 +9,11 @@ export const Container = styled.div`
     border-bottom: 1px solid #DADCE0;
 
     .leftButtons {
-    left: 70px;
+    left: 75px;
     }
     
     .rightButtons {
-    right: 20px;
+    right: 10px;
     }
 
     
@@ -39,23 +39,18 @@ export const Container = styled.div`
             /* padding-left: 20px; */
         }
     }
-
-    .archivedTitle {
-        margin: 0;
-        color: grey;
-        font-size: 15px;
-    }
 `;
+
 
 export const Buttons = styled.div`
     display: flex;
     position: fixed;
     top: 65px;
-    gap: 5px;
+    /* gap: 5px; */
 
     @media (max-width: 600px) {
     top: 55px;
-    gap: 0px;
+    /* gap: 0px; */
 
     .MuiIconButton-root {
         padding: 8px 3px;
@@ -69,6 +64,7 @@ export const Title = styled.div`
     padding-top: 65px;
     /* padding-bottom: 10px; */
     color: var(--font-color);
+    font-size: 1.5rem;
 
     @media (max-width: 599px) {
         & {
@@ -77,3 +73,22 @@ export const Title = styled.div`
         }
     }
 `;
+
+export const ArchivedTitle = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    animation: scaleAnimationIn .1s;
+
+     p {
+        margin: 0;
+        color: white;
+        font-size: 14px;
+        text-shadow: .5px .5px grey;
+    }
+
+    svg {
+            height: 0.8em;
+            color: white;
+        }
+`

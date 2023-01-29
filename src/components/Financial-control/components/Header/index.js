@@ -2,6 +2,7 @@ import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip  } from '@mui/material';
 import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, DeleteForever as DeleteForeverIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, InfoOutlined as InfoOutlinedIcon, MoreVert as MoreVertIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
+import FmdBadOutlinedIcon from '@mui/icons-material/FmdBadOutlined';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem }) => {
@@ -38,6 +39,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
 
     return (
+        <>
         <C.Container>
             <C.Buttons className='leftButtons'>
             {params.taskTitle !== 'TRASH' && <>
@@ -55,14 +57,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                         <IconButton onClick={handleDeleteButton} disabled={checked.length > 5 ? true : false}>
-                            <DeleteIcon fontSize='large'/>
+                            <DeleteIcon/>
                         </IconButton>
                     </span>
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                         <IconButton onClick={handleDuplicateButton} disabled={checked.length > 5 ? true : false}>
-                            <DifferenceIcon fontSize='large'/>
+                            <DifferenceIcon/>
                         </IconButton>
                     </span>
                 </Tooltip>
@@ -70,8 +72,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 <Tooltip title={<h3>{lang[!filter ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleArchiveButton}>
                         {filter
-                        ? <RemoveDoneIcon fontSize='large'/>
-                        : <EventAvailableIcon fontSize='large'/>
+                        ? <RemoveDoneIcon/>
+                        : <EventAvailableIcon/>
                         }
                     </IconButton>
                 </Tooltip>
@@ -80,13 +82,13 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
                 <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={() => handleDeleteSelected()}>
-                        <DeleteForeverIcon fontSize='large'/>
+                        <DeleteForeverIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                     <IconButton onClick={() => handleDeleteSelected('restore')} disabled={checked.length > 5 ? true : false}>
-                        <RestoreFromTrashIcon fontSize='large'/>
+                        <RestoreFromTrashIcon/>
                     </IconButton>
                     </span>
                 </Tooltip>
@@ -95,27 +97,28 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             
             <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
-                {filter && <p className='archivedTitle'>{lang.archived}</p>}
             </C.Header>
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>
+                {filter === false && <>
                 {sheetType !== 'summary' &&
                 <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton  onClick={() => setAdd(!add)}>
-                        {!add ? <AddCircleIcon fontSize='large'/>
-                             : <RemoveCircleIcon fontSize='large'/>}
+                        {!add ? <AddCircleIcon/>
+                             : <RemoveCircleIcon/>}
                     </IconButton>
                 </Tooltip>}
                 <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
-                        <CalendarMonthIcon fontSize='large'/>
+                        <CalendarMonthIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={() => setDrawer(true)}>
-                        <InfoOutlinedIcon fontSize='large'/>
+                        <InfoOutlinedIcon/>
                     </IconButton>
                 </Tooltip>
+                </>}
                 <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleFilterButton}>
                         <MoreVertIcon />
@@ -124,6 +127,13 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </C.Buttons>
             }
         </C.Container>
+        {filter &&
+            <C.ArchivedTitle className='archivedTitle'>
+                <FmdBadOutlinedIcon color='white'/>
+                <p>{lang.archived}</p>
+            </C.ArchivedTitle>
+        }
+        </>
     );
 };
  
