@@ -19,7 +19,7 @@ const Form = ({ insertDocument, sheetType, setOperationType }) => {
     const [desc, setDesc]  = useState('');
     const [amount, setAmount] = useState('');
     const [provider, setProvider]  = useState('');
-console.log(amount)
+
     // Paid payments
     const [source, setSource]  = useState('');
     const [isExpense, setExpense] = useState(null);
@@ -67,7 +67,7 @@ console.log(amount)
             }
         }
 
-        insertDocument(transaction[sheetType]);
+        insertDocument(transaction[sheetType], true);
         
         setDesc('');
         setAmount('');

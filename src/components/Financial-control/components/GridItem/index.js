@@ -8,7 +8,7 @@ import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter }) => {
+const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter }) => {
     const params = useParams();
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
@@ -45,7 +45,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
 
         else {setAmountTemp(value?.replace(/,/g, '.'))}
     };
-console.log(amountTemp)
+
     const handleSelect = (event) => {
         checked.includes(item)
         ? setChecked(checked.filter(it => it !== item))

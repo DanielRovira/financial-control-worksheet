@@ -1,8 +1,18 @@
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip  } from '@mui/material';
-import { AddCircle as AddCircleIcon, CalendarMonth as CalendarMonthIcon, Delete as DeleteIcon, DeleteForever as DeleteForeverIcon, Difference as DifferenceIcon, EventAvailable as EventAvailableIcon, InfoOutlined as InfoOutlinedIcon, MoreVert as MoreVertIcon, RemoveCircle as RemoveCircleIcon, RemoveDone as RemoveDoneIcon, RestoreFromTrash  as RestoreFromTrashIcon } from '@mui/icons-material';
-import FmdBadOutlinedIcon from '@mui/icons-material/FmdBadOutlined';
+import { AddCircle as AddCircleIcon,
+         ArchiveOutlined as ArchiveOutlinedIcon,
+         CalendarMonth as CalendarMonthIcon,
+         Delete as DeleteIcon,
+         DeleteForever as DeleteForeverIcon,
+         Difference as DifferenceIcon,
+         FmdBadOutlined as FmdBadOutlinedIcon,
+         InfoOutlined as InfoOutlinedIcon,
+         MoreVert as MoreVertIcon,
+         RemoveCircle as RemoveCircleIcon,
+         RestoreFromTrash  as RestoreFromTrashIcon,
+         UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem }) => {
@@ -72,8 +82,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 <Tooltip title={<h3>{lang[!filter ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleArchiveButton}>
                         {filter
-                        ? <RemoveDoneIcon/>
-                        : <EventAvailableIcon/>
+                        ? <UnarchiveOutlinedIcon />
+                        : <ArchiveOutlinedIcon />
                         }
                     </IconButton>
                 </Tooltip>

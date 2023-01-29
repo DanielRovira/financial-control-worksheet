@@ -78,16 +78,16 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const handleDeleteSelected = (type) => {
         (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).forEach((item, index) => {
             type === 'undo'
-                ? deleteDocument(item, 'TRASH')
+                ? deleteDocument(item, false, 'TRASH')
                 : index === (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).length - 1
-                    ? deleteDocument(item)
-                    : deleteDocument(item, params.taskTitle);
+                    ? deleteDocument(item, true)
+                    : deleteDocument(item);
             
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             delete newItem.archived;
-            type === 'del' && insertDocument(newItem, 'TRASH');
-            type === 'restore' && insertDocument(newItem, newItem.costCenter);
+            type === 'del' && insertDocument(newItem, false, 'TRASH');
+            type === 'restore' && insertDocument(newItem, false, newItem.costCenter);
             type === 'undo' && insertDocument(newItem);
         })
         setUndoItem([]);
@@ -95,10 +95,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     const handleDuplicateSelected = () => {
-        checked.forEach((item) => {
+        checked.forEach((item, index) => {
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
-            insertDocument(newItem);
+            index === checked.length - 1
+            ? insertDocument(newItem, true)
+            : insertDocument(newItem);
         })
     }
 
@@ -112,7 +114,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setOperationType()
     }
 
-    function insertDocument(transaction, path) {
+    function insertDocument(transaction, update, path) {
         params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
@@ -123,7 +125,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
         .then(response => response.json())
         .then(response => setUndoItem((prev) => [ ...prev, response]))
-        .then(() => !path && getData())
+        .then(() => update && getData())
     }
 
     function updateDocument(item, update) {
@@ -140,7 +142,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         .then(() => update && getData())
     }
 
-    function deleteDocument(item, path) {
+    function deleteDocument(item, update, path) {
         params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
         {
@@ -149,7 +151,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        .then(() => !path && getData())
+        .then(() => update && getData())
     }
 
     useEffect(() => {
@@ -189,7 +191,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList?.length > 0 &&<Summary rawData={transactionsList} setAdd={setAdd} />
-            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} deleteDocument={deleteDocument} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} />
+            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} />
             }</>
             }
 
