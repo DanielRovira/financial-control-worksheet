@@ -74,7 +74,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             setOpenSnackbar(true)
         }, 5);
     }
-// eslint-disable-line
+
     const handleDeleteSelected = (type) => {
         (type === 'undo' || type === 'undoDuplicate' ? undoItem : checked).forEach((item, index) => {
             type === 'undo'
