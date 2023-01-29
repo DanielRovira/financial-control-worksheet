@@ -35,12 +35,17 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
 
     const handleAmountType = (value) => {
-        setAmountValue(value)
-        if (value !== null) 
-        {setAmountTemp(value.replace(/,/g, '.'))}
-        else {setAmountTemp('0.00')}
-    };
+        // setAmountValue(value)
+        // if (value === null) 
+            // {setAmountTemp('0.00')}
+        // else if (value === ',00') 
+        //     {setAmountTemp('0.00')}
+        // else {setAmountTemp(value?.replace(/,/g, '.'))}
+        if (value === ',00') {setAmountTemp('0.00')}
 
+        else {setAmountTemp(value?.replace(/,/g, '.'))}
+    };
+console.log(amountTemp)
     const handleSelect = (event) => {
         checked.includes(item)
         ? setChecked(checked.filter(it => it !== item))
@@ -54,10 +59,10 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
     };
 
     const toggleEdit = (element) => {
-        if (descTemp === '' || amountTemp === '' || dateTemp === '') {
+        if (descTemp === '' || !amountTemp || dateTemp === '') {
             alert(lang.alert01);
             return;
-        }   else if (amountTemp.toString().replace(/,/g, '.') < 0.01) {
+        }   else if (amountTemp?.toString().replace(/,/g, '.') < 0.01) {
             alert(lang.alert02);
             return;  
         }
@@ -80,7 +85,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: amountTemp }, true);
+                amount: Number(amountTemp) }, true);
                 setUndoItem([item])
             }}
 
@@ -100,7 +105,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 idnumber: idnumberTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: amountTemp }, true);
+                amount: Number(amountTemp) }, true);
                 setUndoItem([item])
         }}
         setCategoryTemp(otherCategoryTemp)
@@ -128,7 +133,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
             setIdnumberTemp(item.idnumber)
             setDescTemp(item.desc)
             setAmountTemp(item.amount)
-            setAmountValue(item.amount)
+            // setAmountValue(item.amount)
             setDeleteDelay(false)
     }
 
@@ -274,7 +279,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
                     <D.Currency
-                        value={amountValue}
+                        value={amountTemp}
                         prefix={lang.valuePrefix}
                         placeholder={lang.valuePlaceholder}
                         allowDecimals
@@ -315,7 +320,7 @@ const GridItem = ({ item, index, onDelete, updateDocument, sheetType, rawData, s
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td> */}
                 </>}
-                {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{Array.from(sections).filter((section) => section.title === item.costCenter)[0].name}</C.TdCont></C.Td>}
+                {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{Array.from(sections).filter((section) => section.title === item.costCenter)[0]?.name}</C.TdCont></C.Td>}
             </C.Tr>
         )}
 };
