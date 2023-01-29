@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
+export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
     const history = useNavigate();
-    const timeOut = 10000
+
     const [message, setMessage] = useState();
 
   const handleClose = (event, reason) => {

@@ -33,6 +33,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
+    let tempId = item._id ? item._id : Date.now()
 
     const handleAmountType = (value) => {
         // setAmountValue(value)
@@ -48,8 +49,8 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
 
     const handleSelect = (event) => {
         checked.includes(item)
-        ? setChecked(checked.filter(it => it !== item))
-        : setChecked((prev) => [ ...prev, item]);
+        ? item._id && setChecked(checked.filter(it => it !== item))
+        : item._id && setChecked((prev) => [ ...prev, item]);
         // setOperationType();
         // setUndoItem([]);
       };
@@ -298,7 +299,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     else {
         return (
             <C.Tr>
-                <C.Td className='checkboxContainer' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === item._id} onChange={handleSelect} /></C.Td>
+                <C.Td className='checkboxContainer' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === tempId} onChange={handleSelect} /></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>

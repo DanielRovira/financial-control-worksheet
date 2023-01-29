@@ -27,6 +27,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const history = useNavigate();
     const params = useParams();
     const timer = useRef(null);
+    const timeOut = 10000
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -78,21 +79,37 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     const handleDeleteSelected = (type) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
-        setChecked([]);
         let list = (type === 'undo' || type === 'add') ? undoItem : checkedList
+        setChecked([]);
+        
         list.forEach((item, index) => {
             type === 'undo'
                 ? deleteDocument(item, false, 'TRASH')
-                : index === list.length - 1
-                    ? deleteDocument(item, true)
-                    : deleteDocument(item);
+                : deleteDocument(item)
             
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             delete newItem.archived;
-            type === 'del' && insertDocument(newItem, false, 'TRASH');
+
+            if (type === 'undo') {
+                sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, item])
+                sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, item])
+                insertDocument(newItem);
+            }
+
+            if (type === 'del')  {
+                setUndoItem((prev) => [ ...prev, item])
+                sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
+                sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
+                insertDocument(newItem, false, 'TRASH');
+            }
+
             type === 'restore' && insertDocument(newItem, false, newItem.costCenter);
-            type === 'undo' && insertDocument(newItem);
+
+            clearTimeout(timer.current)
+            timer.current = setTimeout(() => {
+                getData()
+            }, timeOut/3); 
         })
         // setUndoItem([]);
     }
@@ -110,10 +127,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             clearTimeout(timer.current)
             timer.current = setTimeout(() => {
                 getData()
-            }, 3000); 
+            }, 500); 
         })
     }
-
+console.log(checked)
     const handleSetArchived = (type) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
         let list = (type === 'undo') ? undoItem : checkedList
@@ -136,7 +153,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             clearTimeout(timer.current)
             timer.current = setTimeout(() => {
                 getData()
-            }, 3000); 
+            }, timeOut/3); 
         })
         setOperationType()
     }
@@ -151,7 +168,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
-        .then(response => setUndoItem((prev) => [ ...prev, response]))
+        // .then(response => setUndoItem((prev) => [ ...prev, response]))
         // .then(() => update && getData())
     }
 
@@ -166,7 +183,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
         .then(response => response.json())
         // .then(response => setUndoItem((prev) => [ ...prev, response]))
-        .then(() => update && getData())
+        // .then(() => update && getData())
     }
 
     function deleteDocument(item, update, path) {
@@ -178,7 +195,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        .then(() => update && getData())
+        // .then(() => update && getData())
     }
 
     useEffect(() => {
@@ -232,7 +249,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={sheetType === 'todoPayments' ? transactionsList2 : transactionsList} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} />
+            <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} />
         </div>
     );
 };
