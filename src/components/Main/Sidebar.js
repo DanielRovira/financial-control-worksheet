@@ -21,7 +21,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     <ListSubheader component="h1" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold', display:'flex', justifyContent: 'space-between' }}>
                         {lang.sections}
                         <Tooltip title={<h3>{lang.trash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                            <IconButton onClick={() => {history('/financialControl/TRASH'); setOpenSidebar(false)}}>
+                            <IconButton size='small' sx={{width: '35px', height: '35px', marginTop: '5px'}} onClick={() => {history('/financialControl/TRASH'); setOpenSidebar(false)}}>
                                 <FaTrash />
                             </IconButton>
                         </Tooltip>

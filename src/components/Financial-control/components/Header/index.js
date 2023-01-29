@@ -51,7 +51,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>} */}
 
                 {checked.length !== 0 && <>
-                <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                {filter === false && <>
+                    <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                         <IconButton onClick={handleDeleteButton} disabled={checked.length > 5 ? true : false}>
                             <DeleteIcon fontSize='large'/>
@@ -65,7 +66,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         </IconButton>
                     </span>
                 </Tooltip>
-                <Tooltip title={<h3>{lang[!filter ? 'mark' : 'unMark']} {lang.asDone}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                </>}
+                <Tooltip title={<h3>{lang[!filter ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleArchiveButton}>
                         {filter
                         ? <RemoveDoneIcon fontSize='large'/>
@@ -75,20 +77,20 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>
                 </>}
             </>}
-                {params.taskTitle === 'TRASH' &&
+                {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
                 <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={() => handleDeleteSelected()}>
                         <DeleteForeverIcon fontSize='large'/>
                     </IconButton>
-                </Tooltip>}
-                {params.taskTitle === 'TRASH' && checked.length !== 0 &&
+                </Tooltip>
                 <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                     <IconButton onClick={() => handleDeleteSelected('restore')} disabled={checked.length > 5 ? true : false}>
                         <RestoreFromTrashIcon fontSize='large'/>
                     </IconButton>
                     </span>
-                </Tooltip>}
+                </Tooltip>
+                </>}
             </C.Buttons>
             
             <C.Header>
