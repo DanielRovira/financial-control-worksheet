@@ -32,24 +32,24 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
 
     const getData = async () => {
-            if (sectionExists) {
-            const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
-                .then(response => response.json())
-                .catch(error => {
-                    setIsLoggedIn(false); history('/');
-                })
-            const res2 = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
-                .then(response => response.json())
-                .catch(error => {
-                    setIsLoggedIn(false); history('/');
-                })
-            // setChecked([])
-            if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || []); setLoadingData(false)} else {setIsLoggedIn(false); history('/')} 
-            }
-            else {history('/')}
+        if (sectionExists) {
+        const res = await
+        fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
+            .then(response => response.json())
+            .catch(error => {
+                setIsLoggedIn(false); history('/');
+            })
+        const res2 = await
+        fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
+            .then(response => response.json())
+            .catch(error => {
+                setIsLoggedIn(false); history('/');
+            })
+        // setChecked([])
+        if (res.status === 200 && res2.status === 200) {setTransactionsList(res.post || []); setTransactionsList2(res2.post || []); setLoadingData(false)} else {setIsLoggedIn(false); history('/')} 
         }
+        else {history('/')}
+    }
 
     useEffect(() => {
         refreshToken()
@@ -93,9 +93,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             type === 'restore' && insertDocument(newItem, false, newItem.costCenter);
             type === 'undo' && insertDocument(newItem);
         })
-        setUndoItem([]);
+        // setUndoItem([]);
     }
-
+// console.log(undoItem)
     const handleDuplicateSelected = () => {
         let list = JSON.parse(JSON.stringify(checked))
         setChecked([])
@@ -111,16 +111,30 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     const handleSetArchived = (type) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
+        let list = (type === 'undo') ? undoItem : checkedList
         setChecked([]);
-        let list = (type === 'archive') ? undoItem : checkedList
+        
         list.forEach((item, index) => {
-            index === list.length - 1
-            ? updateDocument({ ...item, archived: !item.archived}, true)
-            : updateDocument({ ...item, archived: !item.archived})
+            if (type === 'undo') {
+                // sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, item])
+                // sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, item])
+                updateDocument({ ...item, archived: filter ? true : false})
+            }
+
+            else {
+                setUndoItem((prev) => [ ...prev, item])
+                sheetType === 'financialControl' && setTransactionsList(transactionsList.filter(it => it._id !== item._id))
+                sheetType === 'todoPayments' && setTransactionsList2(transactionsList2.filter(it => it._id !== item._id))
+                updateDocument({ ...item, archived: filter ? false : true})
+            }
+            
+            index === list.length - 1 && setTimeout(() => {
+                getData()
+            }, 1000); 
         })
         setOperationType()
     }
-
+console.log(undoItem)
     function insertDocument(transaction, update, path) {
         params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
@@ -145,7 +159,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(response => response.json())
-        .then(response => setUndoItem((prev) => [ ...prev, response]))
+        // .then(response => setUndoItem((prev) => [ ...prev, response]))
         .then(() => update && getData())
     }
 

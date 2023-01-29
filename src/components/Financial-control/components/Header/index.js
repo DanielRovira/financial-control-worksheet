@@ -27,23 +27,23 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     }
 
     const handleDeleteButton = () => {
+        setUndoItem([]);
         handleDeleteSelected('del');
         setOperationType('remove');
-        setUndoItem([]);
         // setChecked([]);
     }
 
     const handleDuplicateButton = () => {
+        setUndoItem([]);
         handleDuplicateSelected();
         setOperationType('add');
-        setUndoItem([]);
         // setChecked([]);
     }
 
     const handleArchiveButton = () => {
+        setUndoItem([]);
         handleSetArchived();
         setOperationType('archive');
-        setUndoItem([]);
         // setChecked([]);
     }
 

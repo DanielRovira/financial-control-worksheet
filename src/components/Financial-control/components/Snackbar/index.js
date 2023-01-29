@@ -24,13 +24,16 @@ export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem
     if (reason === 'clickaway') {
       return;
     }
-    operationType === 'update' && updateDocument(undoItem[0], true)
-    operationType === 'remove' && handleDeleteSelected('undo')
-    operationType === 'archive' && handleSetArchived('archive')
-    operationType === 'add' && handleDeleteSelected('add')
-    setOpenSnackbar(false);
-    setOperationType()
-    setUndoItem([])
+    console.log(undoItem)
+    setTimeout(() => {
+        operationType === 'update' && updateDocument(undoItem[0], true)
+        operationType === 'archive' && handleSetArchived('undo')
+        operationType === 'remove' && handleDeleteSelected('undo')
+        operationType === 'add' && handleDeleteSelected('add')
+        setOpenSnackbar(false);
+        setOperationType()
+        // setUndoItem([])
+    }, 500);
   };
 
   useEffect(() => {
