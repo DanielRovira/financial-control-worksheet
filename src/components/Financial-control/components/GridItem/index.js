@@ -297,7 +297,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     else {
         return (
             <C.Tr>
-                <C.Td className='checkboxContainer' alignCenter><Checkbox checked={checked.includes(item)} onChange={handleSelect} /></C.Td>
+                <C.Td className='checkboxContainer' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === item._id} onChange={handleSelect} /></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>

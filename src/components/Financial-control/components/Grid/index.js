@@ -8,8 +8,8 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const params = useParams();
     // const [checked, setChecked] = useState([]);
     let itens = params.taskTitle === 'TRASH'
-    ? Array.from(rawData)
-    : !filter ? Array.from(rawData.filter((item) => !item.archived)) : Array.from(rawData.filter((item) => item.archived))
+        ? Array.from(rawData)
+        : !filter ? Array.from(rawData.filter((item) => !item.archived)) : Array.from(rawData.filter((item) => item.archived))
     itens.sort(function(a, b) {
         var c = new Date(a.date);
         var d = new Date(b.date);
