@@ -242,7 +242,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {add && params.taskTitle !== 'TRASH' && filter === false && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
-            ? transactionsList['financialControl']?.length > 0 && <Summary rawData={transactionsList['financialControl']} setAdd={setAdd} />
+            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 && <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} />
             : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} />
             }</>
             }
