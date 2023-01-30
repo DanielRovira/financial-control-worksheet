@@ -24,7 +24,7 @@ export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar,
     if (reason === 'clickaway') {
       return;
     }
-    console.log(undoItem)
+
     setTimeout(() => {
         operationType === 'update' && updateDocument(undoItem[0], true)
         operationType === 'archive' && handleSetArchived('undo', 1)

@@ -33,12 +33,6 @@ export const Container = styled.div`
         }
     }
     
-    @media (max-width: 500px) {
-        & {
-            /* text-align: left; */
-            /* padding-left: 20px; */
-        }
-    }
 `;
 
 
@@ -46,11 +40,9 @@ export const Buttons = styled.div`
     display: flex;
     position: fixed;
     top: 65px;
-    /* gap: 5px; */
 
     @media (max-width: 600px) {
     top: 55px;
-    /* gap: 0px; */
 
     .MuiIconButton-root {
         padding: 8px 3px;
@@ -62,7 +54,6 @@ export const Header = styled.h1``;
 
 export const Title = styled.div`
     padding-top: 65px;
-    /* padding-bottom: 10px; */
     color: var(--font-color);
     font-size: 1.5rem;
 

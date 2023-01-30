@@ -6,7 +6,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, filter, setOperationType, handleOpenSnackbar }) => {
     const params = useParams();
-    // const [checked, setChecked] = useState([]);
+
     let itens = params.taskTitle === 'TRASH'
         ? Array.from(rawData)
         : !filter ? Array.from(rawData.filter((item) => !item.archived)) : Array.from(rawData.filter((item) => item.archived))

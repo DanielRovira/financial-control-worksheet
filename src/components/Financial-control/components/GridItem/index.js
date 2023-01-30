@@ -36,14 +36,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     let tempId = item._id ? item._id : Date.now()
 
     const handleAmountType = (value) => {
-        // setAmountValue(value)
-        // if (value === null) 
-            // {setAmountTemp('0.00')}
-        // else if (value === ',00') 
-        //     {setAmountTemp('0.00')}
-        // else {setAmountTemp(value?.replace(/,/g, '.'))}
         if (value === ',00') {setAmountTemp('0.00')}
-
         else {setAmountTemp(value?.replace(/,/g, '.'))}
     };
 
@@ -51,8 +44,6 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         checked.includes(item)
         ? item._id && setChecked(checked.filter(it => it !== item))
         : item._id && setChecked((prev) => [ ...prev, item]);
-        // setOperationType();
-        // setUndoItem([]);
       };
 
     const openInNewTab = (url) => {
@@ -137,7 +128,6 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
             setIdnumberTemp(item.idnumber)
             setDescTemp(item.desc)
             setAmountTemp(item.amount)
-            // setAmountValue(item.amount)
             setDeleteDelay(false)
     }
 
@@ -157,7 +147,6 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                         style={{textAlign: 'center', padding: '1px 0 0 3.5px', height: '25px'}}
                         value={dateTemp}
                         type='date'
-                        // width={110}
                         onChange={(e) => setDateTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                     />

@@ -6,7 +6,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, B
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransactionsList, setTransactionsList2, setUndoItem }) => {
+const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransactionsList, setUndoItem }) => {
     const params = useParams();
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -47,7 +47,6 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
                 date: date,
                 expense: isExpense === null ? true : isExpense,
                 source: source ? source : sources[0]?.name,
-             // category: category === lang.select ? "" : otherCategory !== '' ? otherCategory : category ,
                 category: category === '' ? '' : otherCategory !== '' ? otherCategory : category ,
                 subCategory: subCategory === '' ? '' : otherSubCategory !== '' ? otherSubCategory : subCategory,
                 provider: provider,
@@ -69,8 +68,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
 
         insertDocument(transaction[sheetType]);
         setUndoItem(transaction[sheetType])
-        sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, transaction[sheetType]])
-        sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, transaction[sheetType]])
+        setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], transaction[sheetType]]}) )
         getData()
 
         setDesc('');

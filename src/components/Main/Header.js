@@ -78,8 +78,6 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                             onMouseLeave={() => setHovered(false)}
                             placement='bottom-end'
                             PopperProps={poppersConfig}
-                            // enterDelay={800}
-                            // enterNextDelay={800}
                         >
                             <Avatar onClick={() => (setOpenPanel(!openPanel))} children={user.name[0]} />
                         </Tooltip>

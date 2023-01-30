@@ -61,7 +61,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
 
   return (
     <div className='LoginContainer' >
-        {/* <Typography style={{ padding: '20px' }} align='center' variant='h3'>{lang.financialControl}</Typography> */}
         <form onSubmit={handleSubmit}>
             <img src={process.env.REACT_APP_LOGO} alt="logo" />
             <Box
@@ -80,7 +79,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
               type={'email'}
               value={inputs.email}
               variant='outlined'
-            //   placeholder={lang.email}
               margin='normal'
               autoComplete='username'
               label={lang.email}
@@ -92,7 +90,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
               type='password'
               value={inputs.password}
               variant='outlined'
-            //   placeholder={lang.password}
               margin='normal'
               autoComplete='current-password'
               label={lang.password}
