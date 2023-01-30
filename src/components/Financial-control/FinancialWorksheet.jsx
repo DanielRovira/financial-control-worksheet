@@ -239,7 +239,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     return (
         <div className='FinancialWorksheet'>
             <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} />
-            {add && params.taskTitle !== 'TRASH' && filter === false && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
+            {add && params.taskTitle !== 'TRASH' && filter === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 && <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} />
