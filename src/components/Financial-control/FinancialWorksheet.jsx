@@ -34,7 +34,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
 
     const getData = async () => {
-        clearTimeout(timer.current)
         if (sectionExists) {
         const res = await
         fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
@@ -65,6 +64,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
+        clearTimeout(timer.current)
         setUndoItem([])
         setSheetType(sheetType)
         setChecked([])
