@@ -77,14 +77,21 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         }, 5);
     }
 
+    const getDataTimeout = () => {
+        clearTimeout(timer.current)
+        timer.current = setTimeout(() => {
+            getData()
+        }, timeOut/4); 
+    }
+
     const handleDeleteSelected = (type) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
-        let list = (type === 'undo' || type === 'add') ? undoItem : checkedList
+        let list = (type === 'undo') ? undoItem : checkedList
         setChecked([]);
         
         list.forEach((item, index) => {
             type === 'undo'
-                ? deleteDocument(item, false, 'TRASH')
+                ? deleteDocument(item, 'TRASH')
                 : deleteDocument(item)
             
             let newItem = JSON.parse(JSON.stringify(item))
@@ -101,15 +108,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 setUndoItem((prev) => [ ...prev, item])
                 sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
                 sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
-                insertDocument(newItem, false, 'TRASH');
+                insertDocument(newItem, 'TRASH');
             }
 
-            type === 'restore' && insertDocument(newItem, false, newItem.costCenter);
+            type === 'restore' && insertDocument(newItem, newItem.costCenter);
 
-            clearTimeout(timer.current)
-            timer.current = setTimeout(() => {
-                getData()
-            }, timeOut/3); 
+            getDataTimeout()
         })
         // setUndoItem([]);
     }
@@ -124,13 +128,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, newItem])
             insertDocument(newItem)
 
-            clearTimeout(timer.current)
-            timer.current = setTimeout(() => {
-                getData()
-            }, 500); 
+            getDataTimeout()
         })
     }
-console.log(checked)
+
     const handleSetArchived = (type) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
         let list = (type === 'undo') ? undoItem : checkedList
@@ -138,28 +139,31 @@ console.log(checked)
         
         list.forEach((item, index) => {
             if (type === 'undo') {
+                item.archived = filter ? true : false
+                sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
                 sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, item])
+                sheetType === 'todoPayments' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
                 sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, item])
                 updateDocument({ ...item, archived: filter ? true : false})
             }
 
             else {
                 setUndoItem((prev) => [ ...prev, item])
+                item.archived = filter ? false : true
                 sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
+                sheetType === 'financialControl' && setTransactionsList((prev) => [ ...prev, item])
                 sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
+                sheetType === 'todoPayments' && setTransactionsList((prev) => [ ...prev, item])
                 updateDocument({ ...item, archived: filter ? false : true})
             }
 
-            clearTimeout(timer.current)
-            timer.current = setTimeout(() => {
-                getData()
-            }, timeOut/3); 
+            getDataTimeout()
         })
         setOperationType()
     }
 
-    function insertDocument(transaction, update, path) {
-        params.taskTitle !== 'TRASH' && handleOpenSnackbar();
+    function insertDocument(transaction, path) {
+        // params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'POST',
@@ -168,12 +172,10 @@ console.log(checked)
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
-        // .then(response => setUndoItem((prev) => [ ...prev, response]))
-        // .then(() => update && getData())
     }
 
     function updateDocument(item, update) {
-        params.taskTitle !== 'TRASH' && handleOpenSnackbar();
+        // params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
             method:'PATCH',
@@ -182,12 +184,11 @@ console.log(checked)
             body: JSON.stringify(item)
         })
         .then(response => response.json())
-        // .then(response => setUndoItem((prev) => [ ...prev, response]))
-        // .then(() => update && getData())
+        .then(() => update && getDataTimeout())
     }
 
-    function deleteDocument(item, update, path) {
-        params.taskTitle !== 'TRASH' && handleOpenSnackbar();
+    function deleteDocument(item, path) {
+        // params.taskTitle !== 'TRASH' && handleOpenSnackbar();
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
@@ -195,7 +196,6 @@ console.log(checked)
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        // .then(() => update && getData())
     }
 
     useEffect(() => {
@@ -230,12 +230,12 @@ console.log(checked)
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} />
-            {add && params.taskTitle !== 'TRASH' && filter === false && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} />}
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} />
+            {add && params.taskTitle !== 'TRASH' && filter === false && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setTransactionsList2={setTransactionsList2} setUndoItem={setUndoItem} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList?.length > 0 &&<Summary rawData={transactionsList} setAdd={setAdd} />
-            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} />
+            : <Grid rawData={sheetType === 'financialControl' ? transactionsList : transactionsList2} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} />
             }</>
             }
 

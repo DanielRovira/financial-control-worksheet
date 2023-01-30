@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, filter, setOperationType }) => {
+const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, filter, setOperationType, handleOpenSnackbar }) => {
     const params = useParams();
     // const [checked, setChecked] = useState([]);
     let itens = params.taskTitle === 'TRASH'
@@ -56,7 +56,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             </C.Thead>
             <C.Tbody>
                 {Array.from(itens)?.map((item, index) => (
-                    <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} />
+                    <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} handleOpenSnackbar={handleOpenSnackbar} />
                 ))}
             </C.Tbody>
         </C.Table>

@@ -8,7 +8,7 @@ import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter }) => {
+const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
     const params = useParams();
     const [isActive, setActive] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
@@ -88,6 +88,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 desc: descTemp,
                 amount: Number(amountTemp) }, true);
                 setUndoItem([item])
+                handleOpenSnackbar()
             }}
 
         if (sheetType === 'todoPayments') {
@@ -108,6 +109,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 desc: descTemp,
                 amount: Number(amountTemp) }, true);
                 setUndoItem([item])
+                handleOpenSnackbar()
         }}
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)

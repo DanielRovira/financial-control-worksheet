@@ -15,7 +15,7 @@ import { AddCircle as AddCircleIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem, handleOpenSnackbar }) => {
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
@@ -31,13 +31,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         handleDeleteSelected('del');
         setOperationType('remove');
         // setChecked([]);
-    }
-
-    const handleDuplicateButton = () => {
-        setUndoItem([]);
-        handleDuplicateSelected();
-        setOperationType('add');
-        // setChecked([]);
+        handleOpenSnackbar();
     }
 
     const handleArchiveButton = () => {
@@ -45,6 +39,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         handleSetArchived();
         setOperationType('archive');
         // setChecked([]);
+        handleOpenSnackbar();
     }
 
 
@@ -75,7 +70,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDuplicateButton} 
+                        <IconButton onClick={handleDuplicateSelected} 
                         // disabled={checked.length > 5 ? true : false}
                         >
                             <DifferenceIcon/>
