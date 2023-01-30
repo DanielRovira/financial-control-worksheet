@@ -10,9 +10,10 @@ import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
 import  { Backdrop, CircularProgress } from '@mui/material';
-    
+
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
+document.querySelector('link[rel=icon]').href = `${process.env.REACT_APP_LOGO}.png`
 
 const App = () => {
     const history = useNavigate();

@@ -62,7 +62,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
   return (
     <div className='LoginContainer' >
         <form onSubmit={handleSubmit}>
-            <img src={process.env.REACT_APP_LOGO} alt="logo" />
+            <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="logo" />
             <Box
               marginLeft='auto'
               marginRight='auto'
