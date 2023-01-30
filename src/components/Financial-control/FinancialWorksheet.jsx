@@ -81,10 +81,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         clearTimeout(timer.current)
         timer.current = setTimeout(() => {
             getData()
-        }, time || timeOut/4); 
+        }, time || timeOut); 
     }
 
-    const handleDeleteSelected = (type) => {
+    const handleDeleteSelected = (type, time) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
         let list = (type === 'undo') ? undoItem : checkedList
         setChecked([]);
@@ -113,7 +113,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
             type === 'restore' && insertDocument(newItem, newItem.costCenter);
 
-            getDataTimeout()
+            getDataTimeout(time)
         })
         // setUndoItem([]);
     }
@@ -132,7 +132,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         })
     }
 
-    const handleSetArchived = (type) => {
+    const handleSetArchived = (type, time) => {
         let checkedList = JSON.parse(JSON.stringify(checked));
         let list = (type === 'undo') ? undoItem : checkedList
         setChecked([]);
@@ -157,7 +157,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 updateDocument({ ...item, archived: filter ? false : true})
             }
 
-            getDataTimeout()
+            getDataTimeout(time)
         })
         setOperationType()
     }

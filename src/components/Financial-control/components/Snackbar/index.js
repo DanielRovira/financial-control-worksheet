@@ -27,8 +27,8 @@ export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar,
     console.log(undoItem)
     setTimeout(() => {
         operationType === 'update' && updateDocument(undoItem[0], true)
-        operationType === 'archive' && handleSetArchived('undo')
-        operationType === 'remove' && handleDeleteSelected('undo')
+        operationType === 'archive' && handleSetArchived('undo', 1)
+        operationType === 'remove' && handleDeleteSelected('undo', 1)
         setOpenSnackbar(false);
         setOperationType()
         // setUndoItem([])
