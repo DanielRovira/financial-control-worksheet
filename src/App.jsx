@@ -14,6 +14,7 @@ import  { Backdrop, CircularProgress } from '@mui/material';
 let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 document.querySelector('link[rel=icon]').href = `${process.env.REACT_APP_LOGO}.png`
+document.title = process.env.REACT_APP_NAME
 
 const App = () => {
     const history = useNavigate();
