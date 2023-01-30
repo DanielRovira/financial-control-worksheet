@@ -34,6 +34,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
 
     const getData = async () => {
+        clearTimeout(timer.current)
         if (sectionExists) {
         const res = await
         fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
@@ -116,7 +117,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
             }
 
-            type === 'restore' && insertDocument(newItem, newItem.costCenter);
+            if (type === 'restore')  {
+                insertDocument(newItem, newItem.costCenter)
+                sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
+                sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
+            }
 
             getDataTimeout(time)
         })
