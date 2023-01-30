@@ -224,14 +224,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         }
 
         setResult((prev) => ({ ...prev,
-            summary: calc(transactionsList['financialControl'] || []),
-            financialControl: calc(transactionsList['financialControl'] || []),
-            todoPayments: calc(transactionsList['todoPayments'] || []),
+            summary: calc(transactionsList['financialControl']?.filter(item => !item.archived) || []),
+            financialControl: calc(transactionsList['financialControl']?.filter(item => !item.archived) || []),
+            todoPayments: calc(transactionsList['todoPayments']?.filter(item => !item.archived) || []),
         }))
 
         Array.from(sources)?.map((prov) => (
             setResult((prev) => ({ ...prev, [prov.name]:
-                calc((transactionsList['financialControl'] || []).filter((item) => (item.source === prov.name)))
+                calc((transactionsList['financialControl'] || [])?.filter(item => !item.archived).filter((item) => (item.source === prov.name)))
             }))
          ))
     }, [transactionsList]); // eslint-disable-line react-hooks/exhaustive-deps
