@@ -90,7 +90,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </>}
                 {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
                 <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={() => handleDeleteSelected()}>
+                    <IconButton onClick={() => handleDeleteSelected('trash', 1)}>
                         <DeleteForeverIcon/>
                     </IconButton>
                 </Tooltip>

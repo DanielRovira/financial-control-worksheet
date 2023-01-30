@@ -111,6 +111,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 insertDocument(newItem, 'TRASH');
             }
 
+            if (type === 'trash')  {
+                sheetType === 'financialControl' && setTransactionsList((prev) => prev.filter(it => it._id !== item._id))
+                sheetType === 'todoPayments' && setTransactionsList2((prev) => prev.filter(it => it._id !== item._id))
+            }
+
             type === 'restore' && insertDocument(newItem, newItem.costCenter);
 
             getDataTimeout(time)
