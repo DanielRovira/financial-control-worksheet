@@ -10,8 +10,6 @@ const Summary = ({ rawData, setAdd }) => {
     const [byMonth, setByMonth] = useState([]);
     const [years, setYears] = useState([]);
     const [year, setYear] = useState(Number(toDayYear));
-    console.log(rawData)
-    console.log(rawData?.filter(item => !item.archived))
     const itens = Array.from(rawData)
     const months = Array.from({length: 12}, (v, k) => k+1);
     itens.sort(function(a, b) {
