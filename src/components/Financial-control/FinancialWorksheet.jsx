@@ -77,11 +77,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         }, 5);
     }
 
-    const getDataTimeout = () => {
+    const getDataTimeout = (time) => {
         clearTimeout(timer.current)
         timer.current = setTimeout(() => {
             getData()
-        }, timeOut/4); 
+        }, time || timeOut/4); 
     }
 
     const handleDeleteSelected = (type) => {
@@ -128,7 +128,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             sheetType === 'todoPayments' && setTransactionsList2((prev) => [ ...prev, newItem])
             insertDocument(newItem)
 
-            getDataTimeout()
+            getDataTimeout(1)
         })
     }
 
@@ -184,7 +184,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(response => response.json())
-        .then(() => update && getDataTimeout())
+        .then(() => update && getDataTimeout(1))
     }
 
     function deleteDocument(item, path) {
