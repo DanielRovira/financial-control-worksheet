@@ -133,7 +133,9 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     }
 
     useEffect(() => {
-        setTimeout(setDefault, 5)
+        return () => {
+            setTimeout(setDefault, 5)
+        }
     }, [rawData]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useClickAway(ref, toggleEdit)
