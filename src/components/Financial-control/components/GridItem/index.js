@@ -36,10 +36,12 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     let tempId = item._id ? item._id : Date.now()
 
     const handleAmountType = (value) => {
-        if (value === ',00') {setAmountTemp('0.00')}
-        else {setAmountTemp(value?.replace(/,/g, '.'))}
+        // if (value === ',00') {setAmountTemp('0.00')}
+        // else {setAmountTemp(value?.replace(/,/g, '.'))}
+        setAmountTemp(value)
     };
-
+console.log(Number(amountTemp.toString().replace(/,/g, '.')))
+console.log(item.amount)
     const handleSelect = (event) => {
         checked.includes(item)
         ? item._id && setChecked(checked.filter(it => it !== item))
@@ -68,7 +70,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 subCategoryTemp !== item.subCategory ||
                 providerTemp !== item.provider ||
                 descTemp !== item.desc ||
-                Number(amountTemp) !== item.amount
+                Number(amountTemp?.toString().replace(/,/g, '.')) !== item.amount
                 )   { updateDocument({ ...item,
                 date: dateTemp,
                 expense: expenseTemp,
@@ -77,7 +79,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp) }, true);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true);
                 setUndoItem([item])
                 handleOpenSnackbar()
             }}
@@ -90,7 +92,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 idnumberTemp !== item.idnumber ||
                 providerTemp !== item.provider ||
                 descTemp !== item.desc ||
-                Number(amountTemp) !== item.amount
+                Number(amountTemp?.toString().replace(/,/g, '.')) !== item.amount
                 )   { updateDocument({ ...item, 
                 date: dateTemp,
                 link: linkTemp,
@@ -98,18 +100,21 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 idnumber: idnumberTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp) }, true);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true);
                 setUndoItem([item])
                 handleOpenSnackbar()
         }}
         setCategoryTemp(otherCategoryTemp)
         setSubCategoryTemp(otherSubCategoryTemp)
-        setActive(!isActive);
         setOperationType('update')
         setChecked([])
 
         !isActive && setTimeout(() => {  
             element.target.querySelector('input')?.focus()
+        }, 50);
+
+        setTimeout(() => {  
+            setActive(!isActive)
         }, 5);
 
     };
@@ -133,9 +138,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     }
 
     useEffect(() => {
-        return () => {
-            setTimeout(setDefault, 5)
-        }
+        setTimeout(setDefault, 5)
     }, [rawData]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useClickAway(ref, toggleEdit)
@@ -311,7 +314,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 </>}
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{providerTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
                 {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td> */}

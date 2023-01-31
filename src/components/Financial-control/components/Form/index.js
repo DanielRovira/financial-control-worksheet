@@ -256,7 +256,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
                         allowDecimals
                         disableAbbreviations
                         decimalScale='2'
-                        onValueChange={(e) => {setAmount(e)}}
+                        onValueChange={(e) => setAmount(e)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         label={lang.value}
                         // placeholder={lang.valuePlaceholder}

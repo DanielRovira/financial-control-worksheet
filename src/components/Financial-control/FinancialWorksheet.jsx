@@ -26,7 +26,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const history = useNavigate();
     const params = useParams();
     const timer = useRef(null);
-    const timeOut = 10000
+    const timeOut = 7000
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -139,8 +139,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             delete newItem._id;
             setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], newItem]}) )
             insertDocument(newItem)
-
-            getDataTimeout(1)
+            getDataTimeout(50)
         })
     }
 
@@ -150,21 +149,11 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setChecked([]);
         
         list.forEach((item, index) => {
-            if (type === 'undo') {
-                item.archived = filter ? true : false
-                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
-                setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
-                updateDocument(item)
-            }
-
-            else {
-                setUndoItem((prev) => [ ...prev, item])
-                item.archived = filter ? false : true
-                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
-                setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
-                updateDocument(item)
-            }
-
+            type !== 'undo' && setUndoItem((prev) => [ ...prev, item])
+            item.archived = !item.archived
+            setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+            setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
+            updateDocument(item)
             getDataTimeout(time)
         })
         setOperationType()
