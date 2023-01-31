@@ -13,8 +13,6 @@ import Snackbar from './components/Snackbar';
 
 const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
-    // const [transactionsList2, setTransactionsList2] = useState([]);
-    // const [transactionsList0, setTransactionsList0] = useState([]);
     const [result, setResult] = useState([]);
     const [add, setAdd] = useState();
     const [drawer, setDrawer] = useState(false);
@@ -36,22 +34,22 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     const getData = async () => {
         if (sectionExists) {
+
             const res = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
                 .then(response => response.json())
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
                 })
+
             const res2 = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
                 .then(response => response.json())
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
                 })
-            // setChecked([])
+
             if (res.status === 200 && res2.status === 200) {
-                // setTransactionsList(res.post || []);
-                // setTransactionsList2(res2.post || []);
                 setLoadingData(false)
 
                 setTransactionsList({
@@ -71,7 +69,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setTransactionsList([])
         setLoadingData(true)
         isLoggedIn ? getData() : history('/')
-        // sections && (Array.from(sections || []).filter((section) => section.title === params.taskTitle)[0] ? setSectionName(sections) : history('/'))
     },[params.taskTitle, isLoggedIn]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -184,7 +181,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         .then(response => response.json())
     }
 
-    function updateDocument(item, update) {
+    function updateDocument(item, update, time) {
         fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
             method:'PATCH',
@@ -193,7 +190,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(item)
         })
         .then(response => response.json())
-        .then(() => update && getDataTimeout(1))
+        .then(() => update && getDataTimeout(time))
     }
 
     function deleteDocument(item, path) {

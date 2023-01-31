@@ -38,7 +38,7 @@ const App = () => {
             clearLogin();
         })
     }
-    
+
     const getSections = async () => {
         await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
@@ -52,7 +52,7 @@ const App = () => {
         .then(response => response.json())
         .then(response => localStorage.setItem('categories', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
     }
-    
+
     const sendLogoutReq = async () => {
         clearLogin();
         await fetch(`/api/logout`,

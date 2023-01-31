@@ -114,7 +114,8 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
 
     };
 
-    const setDefault = () => {
+    const setDefault = () => {  //Altera os dados quando mudam (principalmente pra quando der Undo). Is active serve pra não alterar um dado que esta jendo alterado.
+        if (!isActive) {
             setDateTemp(item.date)
             setExpenseTemp(item.expense)
             setSourceTemp(item.source)
@@ -128,7 +129,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
             setIdnumberTemp(item.idnumber)
             setDescTemp(item.desc)
             setAmountTemp(item.amount)
-            setDeleteDelay(false)
+            setDeleteDelay(false)}
     }
 
     useEffect(() => {
@@ -138,7 +139,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     useClickAway(ref, toggleEdit)
 
     if (deleteDelay) {return (<></>)}
-    if (isActive === true && params.taskTitle !== 'TRASH' && !filter) {
+    if (isActive && params.taskTitle !== 'TRASH' && !filter) {
         return (
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
                 <C.Td alignCenter><Checkbox checked={checked.includes(item._id)} disabled /></C.Td>
