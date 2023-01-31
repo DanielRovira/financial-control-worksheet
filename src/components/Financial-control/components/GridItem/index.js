@@ -40,8 +40,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         // else {setAmountTemp(value?.replace(/,/g, '.'))}
         setAmountTemp(value)
     };
-console.log(Number(amountTemp.toString().replace(/,/g, '.')))
-console.log(item.amount)
+
     const handleSelect = (event) => {
         checked.includes(item)
         ? item._id && setChecked(checked.filter(it => it !== item))
