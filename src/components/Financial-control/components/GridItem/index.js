@@ -1,9 +1,9 @@
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
-import { Checkbox } from '@mui/material';
+import { Checkbox, ToggleButton } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaRegEdit, FaCheck } from 'react-icons/fa';
-import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
+import {CloudDownload as CloudDownloadIcon, UnfoldMore as UnfoldMoreIcon, UnfoldLess as UnfoldLessIcon } from '@mui/icons-material';
 import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
@@ -11,6 +11,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
     const params = useParams();
     const [isActive, setActive] = useState(false);
+    const [expandRow, setExpandRow] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
     const [sourceTemp, setSourceTemp] = useState(item.source)
@@ -117,7 +118,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         }, 5);
 
     };
-
+console.log(expandRow)
     const setDefault = () => {  //Altera os dados quando mudam (principalmente pra quando der Undo). Is active serve pra não alterar um dado que esta jendo alterado.
         if (!isActive) {
             setDateTemp(item.date)
@@ -149,7 +150,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 <C.Td alignCenter><Checkbox checked={checked.includes(item._id)} disabled /></C.Td>
                 <C.Td alignCenter><C.TdCont>
                     <D.Input
-                        style={{textAlign: 'center', padding: '1px 0 0 3.5px', height: '25px'}}
+                        style={{textAlign: 'center', padding: '1px 0 0 3.5px'}}
                         value={dateTemp}
                         type='date'
                         onChange={(e) => setDateTemp(e.target.value)}
@@ -234,45 +235,44 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                         placeholder={`${lang.placeholder} ${lang.link}`}
                         onChange={(e) => setLinkTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={100}
                         lowercase
                     />
                 </C.TdCont></C.Td>
-                <C.Td><C.TdCont>
+                <C.Td><C.TdCont expandRow={expandRow}>
                     <D.Input
                         value={bankTemp}
-                        placeholder={`${lang.placeholder} ${lang.bank}`}
+                        placeholder={`${lang.bank}`}
                         onChange={(e) => setBankTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={100}
+                        multiline={expandRow}
                     />
                 </C.TdCont></C.Td>
-                <C.Td><C.TdCont>
+                <C.Td><C.TdCont expandRow={expandRow}>
                     <D.Input
                         value={idnumberTemp}
                         placeholder={`${lang.placeholder} ${lang.idnumber}`}
                         onChange={(e) => setIdnumberTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={100}
+                        multiline={expandRow}
                     />
                 </C.TdCont></C.Td>
                 </>}
-                <C.Td><C.TdCont>
+                <C.Td><C.TdCont expandRow={expandRow}>
                     <D.Input
                         value={providerTemp}
                         placeholder={`${lang.placeholder} ${lang.provider}`}
                         onChange={(e) => setProviderTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={100}
+                        multiline={expandRow}
                     />
                 </C.TdCont></C.Td>
-                <C.Td><C.TdCont>
+                <C.Td><C.TdCont expandRow={expandRow}>
                     <D.Input
                         value={descTemp}
                         placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDescTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={100}
+                        multiline={expandRow}
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
@@ -289,34 +289,42 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                     />
                 </C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
-                {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='#BA0000' onClick={() => {onDelete(item); setDeleteDelay(true); setUndoItem(item); setActive(!isActive)}} style={{cursor: 'pointer'}}/></C.TdCont></C.Td> */}
+                <C.Td alignCenter className='nohover'>
+                    <C.TdCont>
+                        <ToggleButton onClick={() => setExpandRow(!expandRow)} selected={expandRow} size='small' children={expandRow? <UnfoldLessIcon /> : <UnfoldMoreIcon />} />
+                    </C.TdCont>
+                </C.Td>
             </C.Tr>
     )}
     else {
         return (
             <C.Tr>
-                <C.Td className='checkboxContainer' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === tempId} onChange={handleSelect} /></C.Td>
+                <C.Td className='nohover' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === tempId} onChange={handleSelect} /></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont >{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{sourceTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{categoryTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont expandRow={expandRow} style={{ marginLeft: '-13.5px'}}>{categoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont expandRow={expandRow} style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && <>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{++index}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont >{++index}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter>
                     <C.TdCont style={{height: '20px'}}>{linkTemp && <CloudDownloadIcon onClick={() => openInNewTab(linkTemp)} htmlColor='var(--navbar-color)' style={{position: 'relative', width: '50px', height: '30px', marginTop: '-5px', marginLeft: '-5px'}} />}</C.TdCont>
                 </C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{bankTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{idnumberTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{bankTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{idnumberTemp}</C.TdCont></C.Td>
                 </>}
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{providerTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{descTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont>{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{providerTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{descTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont >{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
                 {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
-                {/* <C.Td alignCenter className='nohover'><C.TdCont><FaTrash color='grey' style={{cursor: 'not-allowed', transform: 'scale(1)'}} /></C.TdCont></C.Td> */}
+                <C.Td alignCenter className='nohover'>
+                    <C.TdCont>
+                        <ToggleButton onClick={() => setExpandRow(!expandRow)} selected={expandRow} size='small' children={expandRow? <UnfoldLessIcon /> : <UnfoldMoreIcon />} />
+                    </C.TdCont>
+                </C.Td>
                 </>}
                 {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{Array.from(sections).filter((section) => section.title === item.costCenter)[0]?.name}</C.TdCont></C.Td>}
             </C.Tr>

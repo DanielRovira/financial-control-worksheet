@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import CurrencyInput from 'react-currency-input-field'
+import InputMui from '@mui/material/Input';
 
 export const Form = styled.div`
     z-index: 1;
@@ -65,10 +66,10 @@ export const Inputs = css`
     border: none;
     width: 100%;
     height: 100%;
-
+    background-color: white;
 `;
 
-export const Input = styled.input`${Inputs}`
+export const Input = styled(InputMui)`${Inputs}`
 export const Select = styled.select`${Inputs}`
 export const Currency = styled(CurrencyInput)`${Inputs}`
 

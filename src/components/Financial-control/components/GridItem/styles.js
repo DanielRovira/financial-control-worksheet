@@ -7,19 +7,27 @@ export const Tr = styled.tr`
         background-color: var(--color0);
     }
 
-    .checkboxContainer:focus-within, .checkboxContainer:hover {
+    .nohover:hover, .nohover:focus-within {
         background-color: inherit;
     }
+
 `;
 
 export const TdCont = styled.div`
-    height: inherit;
     padding-left: 5px;
     background-color: inherit;
+    height: ${(props) => (props.expandRow ? 'auto' : '24px')};
 
     input {
         margin-left: -5px;
         padding-left: 5px;
+    }
+
+    & .MuiInput-root{
+        font-family: inherit;
+        letter-spacing: inherit;
+        padding: 0;
+        line-height: inherit;
     }
 
 `
@@ -30,6 +38,7 @@ export const Td = styled.td`
     overflow: hidden;
     text-transform: capitalize;
     padding: 0 5px;
+    /* height: 30px; */
 
     &:hover {
         background-color: var(--color1);
@@ -54,6 +63,12 @@ export const Td = styled.td`
 
     & .MuiCheckbox-root {
         padding: 0;
+    }
+
+    & .MuiToggleButton-root {
+        height: inherit;
+        margin-top: -3px;
+        border: none;
     }
 
 `;
