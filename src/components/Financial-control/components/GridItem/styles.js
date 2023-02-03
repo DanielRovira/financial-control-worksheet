@@ -21,6 +21,7 @@ export const TdCont = styled.div`
     
     & p {
         padding-left: 5px;
+        width: ${(props) => (props.expandRow ? 'none' : 'max-content')};
     }
 
     & .MuiInput-root, & .MuiAutocomplete-root, & .MuiOutlinedInput-root, & .MuiTextField-root {
