@@ -44,6 +44,10 @@ export const TdCont = styled.div`
         padding-left: 5px;
     }
 
+    & .MuiMenu-paper {
+    transition-duration: 0s !important;
+}
+
 `
 
 export const Td = styled.td`

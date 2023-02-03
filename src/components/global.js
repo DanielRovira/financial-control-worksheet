@@ -88,12 +88,6 @@ const GlobalStyle = createGlobalStyle`
         overflow: hidden;
     }
 
-    .MuiButtonBase-root.MuiMenuItem-root {
-        line-height: inherit;
-        letter-spacing: inherit;
-        padding: 7px 18px;
-    }
-
 `;
 
 export default  GlobalStyle;

@@ -162,7 +162,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                     <Select
                         value={expenseTemp ? lang.expense : lang.entry}
                         onChange={() => setExpenseTemp(!expenseTemp)}
-                        MenuProps={{disableScrollLock: true,}}
+                        MenuProps={{disableScrollLock: true, disablePortal: true,}}
                     >
                         <MenuItem value={lang.entry}>{lang.entry}</MenuItem>
                         <MenuItem value={lang.expense}>{lang.expense}</MenuItem>
@@ -171,10 +171,9 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 <C.Td><C.TdCont expandRow={expandRow}>
                     <Select
                             value={sourceTemp}
-                            disablePortal
                             onChange={(e) => setSourceTemp(e.target.value)}
                             onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                            MenuProps={{disableScrollLock: true,}}
+                            MenuProps={{disableScrollLock: true, disablePortal: true,}}
                         >
                             {sources.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                     </Select>
@@ -291,9 +290,9 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont >{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{sourceTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ marginLeft: '5px'}}>{sourceTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow} style={{ marginLeft: '5px'}}>{categoryTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont expandRow={expandRow} style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow} style={{ marginLeft: '5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont >{++index}</C.TdCont></C.Td>
