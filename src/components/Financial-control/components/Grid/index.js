@@ -41,8 +41,8 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <>
                     <C.Th width={60} alignCenter>{lang.number}</C.Th>
                     <C.Th width={100} alignCenter>{lang.link}</C.Th>
-                    <C.Th width={140} >{lang.bank}</C.Th>
-                    <C.Th width={160}>{lang.idnumber}</C.Th>
+                    <C.Th width={140}>{lang.bank}</C.Th>
+                    <C.Th width={160} alignCenter>{lang.idnumber}</C.Th>
                     </>}
                     <C.Th width={200}>{lang.provider}</C.Th>
                     <C.Th width={250}>{lang.description}</C.Th>

@@ -289,7 +289,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         return (
             <C.Tr>
                 <C.Td className='nohover' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === tempId} onChange={handleSelect} /></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont >{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{sourceTemp}</C.TdCont></C.Td>
@@ -301,11 +301,11 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 <C.Td onDoubleClick={toggleEdit} alignCenter>
                     <C.TdCont style={{height: '20px'}}>{linkTemp && <CloudDownloadIcon onClick={() => openInNewTab(linkTemp)} htmlColor='var(--navbar-color)' style={{position: 'relative', width: '50px', height: '30px', marginTop: '-5px', marginLeft: '-5px'}} />}</C.TdCont>
                 </C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{bankTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{idnumberTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{bankTemp}</p></C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{idnumberTemp}</p></C.TdCont></C.Td>
                 </>}
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{providerTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}>{descTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{providerTemp}</p></C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{descTemp}</p></C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont >{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
                 {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>

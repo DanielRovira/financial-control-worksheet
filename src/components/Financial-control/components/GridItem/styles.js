@@ -17,6 +17,10 @@ export const TdCont = styled.div`
     background-color: inherit;
     height: ${(props) => (props.expandRow ? 'auto' : '24px')};
     width: 100%;
+    
+    & p {
+        padding-left: 5px;
+    }
 
     & .MuiInput-root, & .MuiAutocomplete-root, & .MuiOutlinedInput-root, & .MuiTextField-root {
         height: inherit;
@@ -29,7 +33,7 @@ export const TdCont = styled.div`
     }
 
     & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
-        height: inherit;
+        /* height: inherit; */
         padding: 0;
         /* padding-left: 20px; */
         background-color: white;
@@ -38,6 +42,7 @@ export const TdCont = styled.div`
 
     & .MuiInputBase-input, & .MuiAutocomplete-root .MuiOutlinedInput-root {
         padding-left: 5px;
+        /* background-color: white; */
     }
 
 `
