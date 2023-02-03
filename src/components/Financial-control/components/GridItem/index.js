@@ -79,7 +79,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 subCategory: subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 1);
                 setUndoItem([item])
                 handleOpenSnackbar()
             }}
@@ -100,7 +100,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 idnumber: idnumberTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 1);
                 setUndoItem([item])
                 handleOpenSnackbar()
         }}
@@ -111,14 +111,15 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
 
         !isActive && setTimeout(() => {  
             element.target.querySelector('input')?.focus()
-        }, 150);
+        }, 50);
 
         setTimeout(() => {  
             setActive(!isActive)
-        }, 100);
+        }, 10);
 
     };
-console.log(categories.map(it => it.name))
+console.log(categoryTemp)
+console.log(item.category)
     const setDefault = () => {  //Altera os dados quando mudam (principalmente pra quando der Undo). Is active serve pra não alterar um dado que esta jendo alterado.
         if (!isActive) {
             setDateTemp(item.date)
@@ -179,74 +180,39 @@ console.log(categories.map(it => it.name))
                         {sources.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
                 </C.TdCont></C.Td>
-                <C.Td><C.TdCont>
-
-                <Autocomplete 
-                    freeSolo
-                    openOnFocus
-                    // defaultValue={null}
-                    onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                    options={categories.map((options) => options.name)}
-                    inputValue={categoryTemp}
-                    onInputChange={(event, newInputValue) => setCategoryTemp(newInputValue)}
-                    renderInput={(params) => (
-
-                        <D.TextField 
-                        {...params}
-
-                        // placeholder={`${lang.placeholder} ${lang.description}`}
-                        // value={params.value || ''}
-                        multiline={expandRow}
-                        />
-                )}
-                />
-
-
-
-                    {/* {categoryTemp === lang.other ?
-                    <D.Input
-                        autoFocus
-                        value={otherCategoryTemp}
-                        onChange={(e) => setOtherCategoryTemp(e.target.value)}
+                <C.Td><C.TdCont expandRow={expandRow}>
+                    <Autocomplete 
+                        freeSolo
+                        openOnFocus
+                        disablePortal
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={98}
+                        options={categories.map((options) => options.name)}
+                        inputValue={categoryTemp}
+                        onInputChange={(event, newInputValue) => setCategoryTemp(newInputValue)}
+                        renderInput={(params) => (
+                            <D.TextField 
+                            {...params}
+                            placeholder={`${lang.category}`}
+                            multiline={expandRow}
+                            />)}
                     />
-                    :
-                    <D.Select
-                        value={categoryTemp === '' ? lang.select : categoryTemp}
-                        onChange={(e) => {setCategoryTemp(e.target.value); e.target.value === lang.other ? categories.some(cat => cat.name === categoryTemp) ? setOtherCategoryTemp('') : setOtherCategoryTemp(categoryTemp) : setOtherCategoryTemp(e.target.value)}}
-                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        style={categoryTemp === '' ? {color: 'gray', textAlign: 'center'} : {color: 'black', textAlign: 'center'}}
-                        width={110}
-                    >
-                        <option defaultValue disabled hidden>{lang.select}</option>
-                        {!categories.some(cat => cat.name === categoryTemp) && <option disabled hidden>{categoryTemp}</option>}
-                        {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
-                    </D.Select>
-                    } */}
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
-                    {subCategoryTemp === lang.other ?
-                    <D.Input
-                        autoFocus
-                        value={otherSubCategoryTemp}
-                        onChange={(e) => setOtherSubCategoryTemp(e.target.value)}
-                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        width={98}
+                    <Autocomplete 
+                            freeSolo
+                            openOnFocus
+                            disablePortal
+                            onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                            options={subCategories.map((options) => options.name)}
+                            inputValue={subCategoryTemp}
+                            onInputChange={(event, newInputValue) => setSubCategoryTemp(newInputValue)}
+                            renderInput={(params) => (
+                                <D.TextField 
+                                {...params}
+                                placeholder={`${lang.subCategory}`}
+                                multiline={expandRow}
+                                />)}
                     />
-                    :
-                    <D.Select
-                        value={subCategoryTemp === '' ? lang.select : subCategoryTemp}
-                        onChange={(e) => {setSubCategoryTemp(e.target.value); e.target.value === lang.other ? subCategories.some(cat => cat.name === subCategoryTemp) ? setOtherSubCategoryTemp('') : setOtherSubCategoryTemp(subCategoryTemp) : setOtherSubCategoryTemp(e.target.value)}}
-                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        style={subCategoryTemp === '' ? {color: 'gray', textAlign: 'center'} : {color: 'black', textAlign: 'center'}}
-                        width={110}
-                    >
-                        <option defaultValue disabled hidden>{lang.select}</option>
-                        {!subCategories.some(cat => cat.name === subCategoryTemp) && <option disabled hidden>{subCategoryTemp}</option>}
-                        {subCategories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
-                    </D.Select>
-                }
                 </C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && 
@@ -327,7 +293,7 @@ console.log(categories.map(it => it.name))
                 {sheetType === 'financialControl' && <>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont >{expenseTemp ? (<FaRegArrowAltCircleDown style={{transform: 'scale(1)'}} color='red' />) : (<FaRegArrowAltCircleUp style={{transform: 'scale(1)'}} color='green' />)}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ marginLeft: '-13.5px'}}>{sourceTemp}</C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont expandRow={expandRow} style={{ marginLeft: '-13.5px'}}>{categoryTemp}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow} style={{ marginLeft: '5px'}}>{categoryTemp}</C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont expandRow={expandRow} style={{ marginLeft: '-13.5px'}}>{subCategoryTemp}</C.TdCont></C.Td>
                 </>}
                 {sheetType === 'todoPayments' && <>
