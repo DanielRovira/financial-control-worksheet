@@ -1,7 +1,7 @@
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
-import { Autocomplete, Checkbox, ToggleButton } from '@mui/material';
+import { Autocomplete, Checkbox, MenuItem, ToggleButton, TextField, Select } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaRegEdit, FaCheck } from 'react-icons/fa';
 import {CloudDownload as CloudDownloadIcon, UnfoldMore as UnfoldMoreIcon, UnfoldLess as UnfoldLessIcon } from '@mui/icons-material';
 import {useClickAway} from 'react-use';
@@ -10,7 +10,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
     const params = useParams();
-    const [isActive, setActive] = useState(false);
+    const [isActive, setActive] = useState(true);
     const [expandRow, setExpandRow] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -118,8 +118,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         }, 10);
 
     };
-console.log(categoryTemp)
-console.log(item.category)
+
     const setDefault = () => {  //Altera os dados quando mudam (principalmente pra quando der Undo). Is active serve pra não alterar um dado que esta jendo alterado.
         if (!isActive) {
             setDateTemp(item.date)
@@ -142,7 +141,7 @@ console.log(item.category)
         setTimeout(setDefault, 5)
     }, [rawData]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    useClickAway(ref, toggleEdit)
+    // useClickAway(ref, toggleEdit)
 
     if (deleteDelay) {return (<></>)}
     if (isActive && params.taskTitle !== 'TRASH' && !filter) {
@@ -161,24 +160,25 @@ console.log(item.category)
                 {sheetType === 'financialControl' && 
                 <>
                 <C.Td alignCenter><C.TdCont>
-                    <D.Select
-                        style={{textAlign: 'center'}}
+                    <Select
                         value={expenseTemp ? lang.expense : lang.entry}
                         onChange={() => setExpenseTemp(!expenseTemp)}
+                        MenuProps={{disableScrollLock: true,}}
                     >
-                        <option value={lang.entry}>{lang.entry}</option>
-                        <option value={lang.expense}>{lang.expense}</option>
-                    </D.Select>
+                        <MenuItem value={lang.entry}>{lang.entry}</MenuItem>
+                        <MenuItem value={lang.expense}>{lang.expense}</MenuItem>
+                    </Select>
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
-                    <D.Select
-                        style={{textAlign: 'center'}}
-                        value={sourceTemp}
-                        onChange={(e) => setSourceTemp(e.target.value)}
-                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                    >
-                        {sources.map(element => <option key={element.name} value={element.name}>{element.name}</option>)}
-                    </D.Select>
+                    <Select
+                            value={sourceTemp}
+                            disablePortal
+                            onChange={(e) => setSourceTemp(e.target.value)}
+                            onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                            MenuProps={{disableScrollLock: true,}}
+                        >
+                            {sources.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
+                    </Select>
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
                     <Autocomplete 
@@ -190,7 +190,7 @@ console.log(item.category)
                         inputValue={categoryTemp}
                         onInputChange={(event, newInputValue) => setCategoryTemp(newInputValue)}
                         renderInput={(params) => (
-                            <D.TextField 
+                            <TextField 
                             {...params}
                             placeholder={`${lang.category}`}
                             multiline={expandRow}
@@ -207,7 +207,7 @@ console.log(item.category)
                             inputValue={subCategoryTemp}
                             onInputChange={(event, newInputValue) => setSubCategoryTemp(newInputValue)}
                             renderInput={(params) => (
-                                <D.TextField 
+                                <TextField 
                                 {...params}
                                 placeholder={`${lang.subCategory}`}
                                 multiline={expandRow}

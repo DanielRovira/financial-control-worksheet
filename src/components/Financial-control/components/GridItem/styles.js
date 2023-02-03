@@ -29,14 +29,17 @@ export const TdCont = styled.div`
         letter-spacing: inherit;
         padding: 0;
         line-height: inherit;
+        width: 100%;
+        border-radius: 5px;
     }
 
-    & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+    & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input, & .MuiOutlinedInput-input.MuiSelect-select {
+        height: inherit;
         padding: 0;
         padding-left: 5px;
+        background-color: white;
+        border-radius: 5px;
     }
-
-
 
 `
 
