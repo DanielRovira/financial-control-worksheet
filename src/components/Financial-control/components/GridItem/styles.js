@@ -14,16 +14,11 @@ export const Tr = styled.tr`
 `;
 
 export const TdCont = styled.div`
-    padding-left: 5px;
     background-color: inherit;
     height: ${(props) => (props.expandRow ? 'auto' : '24px')};
+    width: 100%;
 
-    input {
-        margin-left: -5px;
-        padding-left: 5px;
-    }
-
-    & .MuiInput-root, & .MuiAutocomplete-root, & .MuiOutlinedInput-root {
+    & .MuiInput-root, & .MuiAutocomplete-root, & .MuiOutlinedInput-root, & .MuiTextField-root {
         height: inherit;
         font-family: inherit;
         letter-spacing: inherit;
@@ -33,12 +28,16 @@ export const TdCont = styled.div`
         border-radius: 5px;
     }
 
-    & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input, & .MuiOutlinedInput-input.MuiSelect-select {
+    & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
         height: inherit;
         padding: 0;
-        padding-left: 5px;
+        /* padding-left: 20px; */
         background-color: white;
         border-radius: 5px;
+    }
+
+    & .MuiInputBase-input, & .MuiAutocomplete-root .MuiOutlinedInput-root {
+        padding-left: 5px;
     }
 
 `

@@ -10,7 +10,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
     const params = useParams();
-    const [isActive, setActive] = useState(true);
+    const [isActive, setActive] = useState(false);
     const [expandRow, setExpandRow] = useState(false);
     const [dateTemp, setDateTemp] = useState(item.date)
     const [expenseTemp, setExpenseTemp] = useState(item.expense)
@@ -141,7 +141,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         setTimeout(setDefault, 5)
     }, [rawData]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    // useClickAway(ref, toggleEdit)
+    useClickAway(ref, toggleEdit)
 
     if (deleteDelay) {return (<></>)}
     if (isActive && params.taskTitle !== 'TRASH' && !filter) {
@@ -149,7 +149,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
                 <C.Td alignCenter><Checkbox checked={checked.includes(item._id)} disabled /></C.Td>
                 <C.Td alignCenter><C.TdCont>
-                    <D.Input
+                    <TextField
                         style={{textAlign: 'center', padding: '1px 0 0 3.5px'}}
                         value={dateTemp}
                         type='date'
@@ -219,7 +219,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 <>
                 <C.Td alignCenter><C.TdCont>{++index}</C.TdCont></C.Td>
                 <C.Td><C.TdCont>
-                    <D.Input
+                    <TextField
                         value={linkTemp}
                         placeholder={`${lang.placeholder} ${lang.link}`}
                         onChange={(e) => setLinkTemp(e.target.value)}
@@ -228,7 +228,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
-                    <D.Input
+                    <TextField
                         value={bankTemp}
                         placeholder={`${lang.bank}`}
                         onChange={(e) => setBankTemp(e.target.value)}
@@ -237,7 +237,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
-                    <D.Input
+                    <TextField
                         value={idnumberTemp}
                         placeholder={`${lang.placeholder} ${lang.idnumber}`}
                         onChange={(e) => setIdnumberTemp(e.target.value)}
@@ -247,7 +247,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 </C.TdCont></C.Td>
                 </>}
                 <C.Td><C.TdCont expandRow={expandRow}>
-                    <D.Input
+                    <TextField
                         value={providerTemp}
                         placeholder={`${lang.placeholder} ${lang.provider}`}
                         onChange={(e) => setProviderTemp(e.target.value)}
@@ -256,7 +256,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
-                    <D.Input
+                    <TextField
                         value={descTemp}
                         placeholder={`${lang.placeholder} ${lang.description}`}
                         onChange={(e) => setDescTemp(e.target.value)}
