@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CurrencyInput from 'react-currency-input-field'
 
 export const Tr = styled.tr`
     height: 30px;
@@ -33,16 +34,13 @@ export const TdCont = styled.div`
     }
 
     & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
-        /* height: inherit; */
         padding: 0;
-        /* padding-left: 20px; */
         background-color: white;
         border-radius: 5px;
     }
 
     & .MuiInputBase-input, & .MuiAutocomplete-root .MuiOutlinedInput-root {
         padding-left: 5px;
-        /* background-color: white; */
     }
 
 `
@@ -87,3 +85,32 @@ export const Td = styled.td`
     }
 
 `;
+
+export const Currency = styled(CurrencyInput)`
+    position: relative;
+    /* outline: none; */
+    border-radius: 5px;
+    font-size: 16px;
+    text-transform: ${(props) => (props.lowercase ? 'none' : 'capitalize')};
+    /* border: none; */
+    width: calc(100% - 5px);
+    height: 22px;
+    background-color: white;
+    border: 1px solid #C4C4C4;
+    padding-left: 4.2px;
+    
+    &:hover {
+        border-color: black;
+    }
+
+    &:focus{
+    outline: none;
+    height: 20px;
+
+    border: 2px solid #1976D2;
+    padding-left: 3.4px;
+    /* padding: 0 0 0 9px; */
+}
+
+
+`

@@ -265,7 +265,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
-                    <D.Currency
+                    <C.Currency
                         value={amountTemp}
                         prefix={lang.valuePrefix}
                         placeholder={lang.valuePlaceholder}
@@ -306,7 +306,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 </>}
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{providerTemp}</p></C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{descTemp}</p></C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont >{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont ><p>{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p></C.TdCont></C.Td>
                 {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'>
