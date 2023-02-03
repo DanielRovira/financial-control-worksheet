@@ -1,7 +1,7 @@
 import * as C from './styles'
 import * as D from '../Form/styles'
 import { useRef, useState, useEffect } from 'react';
-import { Checkbox, ToggleButton } from '@mui/material';
+import { Autocomplete, Checkbox, ToggleButton } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaRegEdit, FaCheck } from 'react-icons/fa';
 import {CloudDownload as CloudDownloadIcon, UnfoldMore as UnfoldMoreIcon, UnfoldLess as UnfoldLessIcon } from '@mui/icons-material';
 import {useClickAway} from 'react-use';
@@ -20,7 +20,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     const [bankTemp, setBankTemp] = useState(item.bank)
     const [categoryTemp, setCategoryTemp] = useState(item.category)
     const [subCategoryTemp, setSubCategoryTemp] = useState(item.subCategory)
-    const [otherCategoryTemp, setOtherCategoryTemp] = useState(categoryTemp)
+    // const [otherCategoryTemp, setOtherCategoryTemp] = useState(categoryTemp)
     const [otherSubCategoryTemp, setOtherSubCategoryTemp] = useState(subCategoryTemp)
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
@@ -75,8 +75,8 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 date: dateTemp,
                 expense: expenseTemp,
                 source: sourceTemp,
-                category: categoryTemp === lang.other || "" ? otherCategoryTemp : categoryTemp,
-                subCategory: subCategoryTemp === lang.other || "" ? otherSubCategoryTemp : subCategoryTemp,
+                category: categoryTemp,
+                subCategory: subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
                 amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true);
@@ -104,21 +104,21 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 setUndoItem([item])
                 handleOpenSnackbar()
         }}
-        setCategoryTemp(otherCategoryTemp)
-        setSubCategoryTemp(otherSubCategoryTemp)
+        // setCategoryTemp(otherCategoryTemp)
+        // setSubCategoryTemp(otherSubCategoryTemp)
         setOperationType('update')
         setChecked([])
 
         !isActive && setTimeout(() => {  
             element.target.querySelector('input')?.focus()
-        }, 50);
+        }, 150);
 
         setTimeout(() => {  
             setActive(!isActive)
-        }, 5);
+        }, 100);
 
     };
-console.log(expandRow)
+console.log(categories.map(it => it.name))
     const setDefault = () => {  //Altera os dados quando mudam (principalmente pra quando der Undo). Is active serve pra não alterar um dado que esta jendo alterado.
         if (!isActive) {
             setDateTemp(item.date)
@@ -129,8 +129,8 @@ console.log(expandRow)
             setBankTemp(item.bank)
             setCategoryTemp(item.category)
             setSubCategoryTemp(item.subCategory)
-            setOtherCategoryTemp(categoryTemp)
-            setOtherSubCategoryTemp(subCategoryTemp)
+            // setOtherCategoryTemp(categoryTemp)
+            // setOtherSubCategoryTemp(subCategoryTemp)
             setIdnumberTemp(item.idnumber)
             setDescTemp(item.desc)
             setAmountTemp(item.amount)
@@ -169,7 +169,7 @@ console.log(expandRow)
                         <option value={lang.expense}>{lang.expense}</option>
                     </D.Select>
                 </C.TdCont></C.Td>
-                <C.Td><C.TdCont>
+                <C.Td><C.TdCont expandRow={expandRow}>
                     <D.Select
                         style={{textAlign: 'center'}}
                         value={sourceTemp}
@@ -180,7 +180,30 @@ console.log(expandRow)
                     </D.Select>
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
-                    {categoryTemp === lang.other ?
+
+                <Autocomplete 
+                    freeSolo
+                    openOnFocus
+                    // defaultValue={null}
+                    onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    options={categories.map((options) => options.name)}
+                    inputValue={categoryTemp}
+                    onInputChange={(event, newInputValue) => setCategoryTemp(newInputValue)}
+                    renderInput={(params) => (
+
+                        <D.TextField 
+                        {...params}
+
+                        // placeholder={`${lang.placeholder} ${lang.description}`}
+                        // value={params.value || ''}
+                        multiline={expandRow}
+                        />
+                )}
+                />
+
+
+
+                    {/* {categoryTemp === lang.other ?
                     <D.Input
                         autoFocus
                         value={otherCategoryTemp}
@@ -200,7 +223,7 @@ console.log(expandRow)
                         {!categories.some(cat => cat.name === categoryTemp) && <option disabled hidden>{categoryTemp}</option>}
                         {categories.map(element => <option style={{color: 'black'}} key={element.name} value={element.name}>{element.name}</option>)}
                     </D.Select>
-                    }
+                    } */}
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont>
                     {subCategoryTemp === lang.other ?
@@ -291,7 +314,7 @@ console.log(expandRow)
                 <C.Td alignCenter className='nohover'><C.TdCont><FaCheck onClick={toggleEdit} style={{cursor: 'pointer', color: 'green'}}/></C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'>
                     <C.TdCont>
-                        <ToggleButton onClick={() => setExpandRow(!expandRow)} selected={expandRow} size='small' children={expandRow? <UnfoldLessIcon /> : <UnfoldMoreIcon />} />
+                        <ToggleButton onClick={() => setExpandRow(!expandRow)} value={expandRow} selected={expandRow} size='small' children={expandRow? <UnfoldLessIcon /> : <UnfoldMoreIcon />} />
                     </C.TdCont>
                 </C.Td>
             </C.Tr>
@@ -322,7 +345,7 @@ console.log(expandRow)
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'>
                     <C.TdCont>
-                        <ToggleButton onClick={() => setExpandRow(!expandRow)} selected={expandRow} size='small' children={expandRow? <UnfoldLessIcon /> : <UnfoldMoreIcon />} />
+                        <ToggleButton onClick={() => setExpandRow(!expandRow)} value={expandRow} selected={expandRow} size='small' children={expandRow? <UnfoldLessIcon /> : <UnfoldMoreIcon />} />
                     </C.TdCont>
                 </C.Td>
                 </>}

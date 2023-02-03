@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import CurrencyInput from 'react-currency-input-field'
 import InputMui from '@mui/material/Input';
+import MuiTextField from '@mui/material/TextField';
 
 export const Form = styled.div`
     z-index: 1;
@@ -70,6 +71,7 @@ export const Inputs = css`
 `;
 
 export const Input = styled(InputMui)`${Inputs}`
+export const TextField = styled(MuiTextField)`${Inputs}`
 export const Select = styled.select`${Inputs}`
 export const Currency = styled(CurrencyInput)`${Inputs}`
 

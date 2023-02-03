@@ -23,12 +23,20 @@ export const TdCont = styled.div`
         padding-left: 5px;
     }
 
-    & .MuiInput-root{
+    & .MuiInput-root, & .MuiAutocomplete-root, & .MuiOutlinedInput-root {
+        height: inherit;
         font-family: inherit;
         letter-spacing: inherit;
         padding: 0;
         line-height: inherit;
     }
+
+    & .MuiAutocomplete-root .MuiOutlinedInput-root, & .MuiOutlinedInput-input, & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+        padding: 0;
+        padding-left: 5px;
+    }
+
+
 
 `
 
