@@ -16,7 +16,7 @@ export const Container = styled.div`
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
-    padding: 15px;
+    padding: 8px 0;
     gap: 10px;
 
     & .MuiInputBase-root {

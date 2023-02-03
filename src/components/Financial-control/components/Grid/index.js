@@ -39,7 +39,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
-                    <C.Th width={60} alignCenter>{lang.number}</C.Th>
+                    <C.Th width={20} alignCenter>{lang.number}</C.Th>
                     <C.Th width={100} alignCenter>{lang.link}</C.Th>
                     <C.Th width={140}>{lang.bank}</C.Th>
                     <C.Th width={160} alignCenter>{lang.idnumber}</C.Th>
