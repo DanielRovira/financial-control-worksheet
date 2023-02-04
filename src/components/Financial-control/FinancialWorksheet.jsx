@@ -20,7 +20,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [undoItem, setUndoItem] = useState([]);
     const [checked, setChecked] = useState([]);
-    const [filter, setFilter] = useState(false);
+    const [archived, setArchived] = useState(false);
     const [loadingData, setLoadingData] = useState();
     const [operationType, setOperationType] = useState();
     const history = useNavigate();
@@ -76,7 +76,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setUndoItem([])
         setSheetType(sheetType)
         setChecked([])
-        setFilter(false)
+        setArchived(false)
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleOpenSnackbar = () => {
@@ -224,12 +224,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} filter={filter} setFilter={setFilter} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} />
-            {add && params.taskTitle !== 'TRASH' && filter === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} />
+            {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
             ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 && <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} />
-            : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} filter={filter} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} />
+            : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} />
             }</>
             }
 
