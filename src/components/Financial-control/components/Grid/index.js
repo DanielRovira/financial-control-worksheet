@@ -83,7 +83,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const filterData = (filter === '')
         ? rawData
         : (filterType === 'expense')
-            ? rawData?.filter((item) => item[filterType] === (filter === lang.expense ? true : false))
+            ? rawData?.filter((item) => item[filterType] === (filter === lang.expense ? true : filter === lang.entry ? false : null))
             : rawData?.filter((item) => item[filterType] === filter)
     
         let itens = params.taskTitle === 'TRASH'
