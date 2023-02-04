@@ -164,12 +164,12 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
                     <Select
-                            value={sourceTemp}
-                            onChange={(e) => setSourceTemp(e.target.value)}
-                            onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                            MenuProps={{disableScrollLock: true, disablePortal: true,}}
-                        >
-                            {sources.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
+                        value={sourceTemp}
+                        onChange={(e) => setSourceTemp(e.target.value)}
+                        onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                        MenuProps={{disableScrollLock: true, disablePortal: true,}}
+                    >
+                        {sources.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
                     </Select>
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
