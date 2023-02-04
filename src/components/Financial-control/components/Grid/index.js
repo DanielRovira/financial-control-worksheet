@@ -33,8 +33,8 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     {sheetType === 'financialControl' && 
                     <>
                     <C.Th width={90} alignCenter>{lang.type}</C.Th>
-                    <C.Th width={120} alignCenter>{lang.source}</C.Th>
-                    <C.Th width={130} alignCenter>{lang.category}</C.Th>
+                    <C.Th width={120} >{lang.source}</C.Th>
+                    <C.Th width={130} >{lang.category}</C.Th>
                     <C.Th width={130} >{lang.subCategory}</C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 

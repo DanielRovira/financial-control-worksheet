@@ -19,12 +19,9 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     const [bankTemp, setBankTemp] = useState(item.bank)
     const [categoryTemp, setCategoryTemp] = useState(item.category)
     const [subCategoryTemp, setSubCategoryTemp] = useState(item.subCategory)
-    // const [otherCategoryTemp, setOtherCategoryTemp] = useState(categoryTemp)
-    const [otherSubCategoryTemp, setOtherSubCategoryTemp] = useState(subCategoryTemp)
     const [idnumberTemp, setIdnumberTemp] = useState(item.idnumber)
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
-    // const [amountValue, setAmountValue] = useState(item.amount)
     const [deleteDelay, setDeleteDelay] = useState(false)
 
     const ref = useRef(null);
@@ -40,7 +37,8 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         // else {setAmountTemp(value?.replace(/,/g, '.'))}
         setAmountTemp(value)
     };
-
+console.log(checked)
+console.log(item.archived)
     const handleSelect = (event) => {
         checked.includes(item)
         ? item._id && setChecked(checked.filter(it => it !== item))
@@ -78,7 +76,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 subCategory: subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 1);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 5000);
                 setUndoItem([item])
                 handleOpenSnackbar()
             }}
@@ -99,12 +97,10 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 idnumber: idnumberTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 1);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 5000);
                 setUndoItem([item])
                 handleOpenSnackbar()
         }}
-        // setCategoryTemp(otherCategoryTemp)
-        // setSubCategoryTemp(otherSubCategoryTemp)
         setOperationType('update')
         setChecked([])
 
@@ -128,8 +124,6 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
             setBankTemp(item.bank)
             setCategoryTemp(item.category)
             setSubCategoryTemp(item.subCategory)
-            // setOtherCategoryTemp(categoryTemp)
-            // setOtherSubCategoryTemp(subCategoryTemp)
             setIdnumberTemp(item.idnumber)
             setDescTemp(item.desc)
             setAmountTemp(item.amount)
