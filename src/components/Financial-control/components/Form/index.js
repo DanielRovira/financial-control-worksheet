@@ -21,7 +21,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
     const [provider, setProvider]  = useState('');
 
     // Paid payments
-    const [source, setSource]  = useState('');
+    const [source, setSource]  = useState(sources[0]?.name);
     const [isExpense, setExpense] = useState(null);
     const [category, setCategory]  = useState('');
     const [subCategory, setSubCategory]  = useState('');
@@ -106,7 +106,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
                     <FormControl>
                         <InputLabel size="small" >{lang.type}</InputLabel>
                         <Select
-                            defaultValue={""}
+                            defaultValue={true}
                             onChange={(e) => setExpense(e.target.value)}
                             size="small"
                             label={lang.type}
@@ -115,7 +115,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
                             <MenuItem value={true}>{lang.expense}</MenuItem>
                             <MenuItem value={false}>{lang.entry}</MenuItem>
                         </Select>
-                        {isExpense === null && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{lang.expense}</FormHelperText>}
+                        {/* {isExpense === null && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{lang.expense}</FormHelperText>} */}
                     </FormControl>
                 </C.InputContent>
                 <C.InputContent>
@@ -131,8 +131,8 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
                             MenuProps={{disableScrollLock: true,}}
                         >
                             {sources.map(element => <MenuItem key={element.name} value={element.name}>{element.name}</MenuItem>)}
-                    </Select>
-                    {!source && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{sources[0]?.name}</FormHelperText>}
+                        </Select>
+                        {/* {!source && <FormHelperText className='not-selectable' sx={{position: 'absolute', top: '35px', textAlign: 'center', width: '80%'}}>{sources[0]?.name}</FormHelperText>} */}
                     </FormControl>
                 </C.InputContent>
                 <C.InputContent>
