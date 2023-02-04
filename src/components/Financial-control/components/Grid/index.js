@@ -7,7 +7,7 @@ import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const FilterButton = ({ type, filter, setFilter }) => {
+const FilterButton = ({ type, filter, setFilter, setFilterType }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -21,10 +21,12 @@ const FilterButton = ({ type, filter, setFilter }) => {
         setTimeout(() => {  
             document.querySelector('.selectedFilter').querySelector('input')?.focus()
         }, 150);
+        setFilterType(type)
       };
 
       const handleClose = () => {
         setAnchorEl(null);
+        
       };
 
     //   const handleFilter = (item) => {
@@ -76,8 +78,10 @@ console.log(filter)
 
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar }) => {
     const [filter, setFilter] = useState('');
+    const [filterType, setFilterType] = useState();
     const params = useParams();
-    const filteredData = (filter === '') ? rawData : rawData?.filter((item) => item.source === filter)
+    console.log(filterType)
+    const filteredData = (filter === '') ? rawData : rawData?.filter((item) => item[filterType] === filter)
     let itens = params.taskTitle === 'TRASH'
         ? Array.from(rawData)
         : !archived ? Array.from(filteredData.filter((item) => !item.archived)) : Array.from(filteredData.filter((item) => item.archived))
@@ -103,10 +107,10 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
-                    <C.Th width={90} alignCenter>{lang.type} <FilterButton type={'type'} filter={filter} setFilter={setFilter} /></C.Th>
-                    <C.Th width={140} >{lang.source} <FilterButton type={'source'} filter={filter} setFilter={setFilter} /></C.Th>
-                    <C.Th width={130} >{lang.category} <FilterButton type={'category'} filter={filter} setFilter={setFilter} /></C.Th>
-                    <C.Th width={150} >{lang.subCategory} <FilterButton type={'subCategory'} filter={filter} setFilter={setFilter} /></C.Th>
+                    <C.Th width={90} alignCenter>{lang.type} <FilterButton type={'type'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={140} >{lang.source} <FilterButton type={'source'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={130} >{lang.category} <FilterButton type={'category'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={150} >{lang.subCategory} <FilterButton type={'subCategory'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 
                     <>
