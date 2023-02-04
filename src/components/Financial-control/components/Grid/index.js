@@ -21,12 +21,10 @@ const FilterButton = ({ type, filter, setFilter, setFilterType }) => {
         setTimeout(() => {  
             document.querySelector('.selectedFilter').querySelector('input')?.focus()
         }, 150);
-        setFilterType(type)
       };
 
       const handleClose = () => {
         setAnchorEl(null);
-        
       };
 
     //   const handleFilter = (item) => {
@@ -63,7 +61,7 @@ console.log(filter)
                         // onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         options={source.map((options) => options.name)}
                         inputValue={filter || ''}
-                        onInputChange={(event, newInputValue) => setFilter(newInputValue)}
+                        onInputChange={(event, newInputValue) => (setFilterType(type), setFilter(newInputValue))}
                         renderInput={(params) => (
                             <TextField 
                             {...params}
