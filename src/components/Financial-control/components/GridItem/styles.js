@@ -41,7 +41,7 @@ export const TdCont = styled.div`
     }
 
     & .MuiInputBase-input, & .MuiAutocomplete-root .MuiOutlinedInput-root {
-        padding-left: 5px;
+        padding: 0 3px 0 5px;
     }
 
     & .MuiMenu-paper {

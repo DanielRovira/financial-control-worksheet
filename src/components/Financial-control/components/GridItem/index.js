@@ -37,8 +37,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         // else {setAmountTemp(value?.replace(/,/g, '.'))}
         setAmountTemp(value)
     };
-console.log(checked)
-console.log(item.archived)
+
     const handleSelect = (event) => {
         checked.includes(item)
         ? item._id && setChecked(checked.filter(it => it !== item))
@@ -103,9 +102,10 @@ console.log(item.archived)
         }}
         setOperationType('update')
         setChecked([])
-
+        
+        let parent = element.currentTarget
         !isActive && setTimeout(() => {  
-            element.target.querySelector('input')?.focus()
+            parent.querySelector('input')?.focus()
         }, 50);
 
         setTimeout(() => {  
@@ -216,7 +216,7 @@ console.log(item.archived)
                         placeholder={`${lang.placeholder} ${lang.link}`}
                         onChange={(e) => setLinkTemp(e.target.value)}
                         onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        lowercase
+                        // lowercase
                     />
                 </C.TdCont></C.Td>
                 <C.Td><C.TdCont expandRow={expandRow}>
