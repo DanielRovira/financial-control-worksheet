@@ -12,7 +12,7 @@ const FilterButton = ({ type, filter, setFilter, setFilterType }) => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let source = (type === 'type')
+    let source = (type === 'expense')
         ? [{value: false, name: lang.entry}, {value: true, name: lang.expense}]
         : Array.from(categoriesList || []).filter(item => item.type === type).sort((a, b) => a.name.localeCompare(b.name))
 
@@ -27,11 +27,13 @@ const FilterButton = ({ type, filter, setFilter, setFilterType }) => {
         setAnchorEl(null);
       };
 
-    //   const handleFilter = (item) => {
-    //     setFilter(prev => [...prev, item])
-    //   };
+      const handleFilter = (item) => {
+        // setFilter(prev => [...prev, item])
+        // (type === 'expense') ? setFilter(true) :
+        setFilter(item);
+        setFilterType(type);
+      };
 
-console.log(filter)
     return (<>
         <C.IconButton onClick={handleClick}>
             <FilterListIcon sx={{fontSize: '16px'}} />
@@ -61,7 +63,7 @@ console.log(filter)
                         // onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
                         options={source.map((options) => options.name)}
                         inputValue={filter || ''}
-                        onInputChange={(event, newInputValue) => (setFilterType(type), setFilter(newInputValue))}
+                        onInputChange={(event, value) => handleFilter(value)}
                         renderInput={(params) => (
                             <TextField 
                             {...params}
@@ -78,12 +80,17 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
-    console.log(filterType)
-    const filteredData = (filter === '') ? rawData : rawData?.filter((item) => item[filterType] === filter)
-    let itens = params.taskTitle === 'TRASH'
+    const filterData = (filter === '')
+        ? rawData
+        : (filterType === 'expense')
+            ? rawData?.filter((item) => item[filterType] === (filter === lang.expense ? true : false))
+            : rawData?.filter((item) => item[filterType] === filter)
+    
+        let itens = params.taskTitle === 'TRASH'
         ? Array.from(rawData)
-        : !archived ? Array.from(filteredData.filter((item) => !item.archived)) : Array.from(filteredData.filter((item) => item.archived))
-    itens.sort(function(a, b) {
+        : !archived ? Array.from(filterData.filter((item) => !item.archived)) : Array.from(filterData.filter((item) => item.archived))
+    
+        itens.sort(function(a, b) {
         var c = new Date(a.date);
         var d = new Date(b.date);
         return c-d;
@@ -105,7 +112,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
-                    <C.Th width={90} alignCenter>{lang.type} <FilterButton type={'type'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={90} alignCenter>{lang.type} <FilterButton type={'expense'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     <C.Th width={140} >{lang.source} <FilterButton type={'source'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     <C.Th width={130} >{lang.category} <FilterButton type={'category'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     <C.Th width={150} >{lang.subCategory} <FilterButton type={'subCategory'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
