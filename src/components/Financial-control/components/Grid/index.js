@@ -33,7 +33,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     }
     
     let itens = params.taskTitle === 'TRASH'
-        ? Array.from(rawData)
+        ? Array.from(filterData)
         : !archived ? Array.from(filterData.filter((item) => !item.archived)) : Array.from(filterData.filter((item) => item.archived))
     
     itens.sort(function(a, b) {
@@ -77,7 +77,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
                     <C.Th width={70} alignCenter>{lang.expand}</C.Th>
                     </>}
-                    {params.taskTitle === 'TRASH' && <C.Th width={130} alignCenter>{lang.sections}</C.Th>}
+                    {params.taskTitle === 'TRASH' && <C.Th width={150} alignCenter>{lang.sections} <Filter type={'costCenter'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>}
                 </C.Tr>
             </C.Thead>
             <C.Tbody>

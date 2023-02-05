@@ -9,10 +9,18 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     // const id = open ? 'simple-popover' : undefined;
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-    let source = (type === 'expense')
-        ? [{value: false, name: lang.entry}, {value: true, name: lang.expense}]
-        : Array.from(categoriesList || []).filter(item => item.type === type).sort((a, b) => a.name.localeCompare(b.name))
+    let source
+    if (type === 'expense') {
+        source = [{value: false, name: lang.entry}, {value: true, name: lang.expense}]
+    }
+    else if (type === 'costCenter') {
+        source = sections
+    }
+    else {
+        source = Array.from(categoriesList || []).filter(item => item.type === type).sort((a, b) => a.name.localeCompare(b.name))
+    }
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
