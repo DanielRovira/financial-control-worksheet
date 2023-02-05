@@ -7,7 +7,7 @@ export const IconButton = styled(MuiIconButton)`
     height: 20px;
 
     &:hover {
-        /* background-color: inherit !important; */
+        background-color: var(--color2) !important;
     }
 
 `;

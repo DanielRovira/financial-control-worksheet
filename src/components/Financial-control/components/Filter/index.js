@@ -42,7 +42,7 @@ const Filter = ({ type, filter, setFilter, setFilterType, filterType }) => {
       };
 
     return (<>
-        <C.IconButton onClick={handleClick} sx={{backgroundColor: (filterType === type && filter !== '') ? 'var(--color2)' : 'auto'}}>
+        <C.IconButton onClick={handleClick} sx={{backgroundColor: (filterType === type && filter !== '') ? 'var(--color1)' : 'auto'}}>
             {filterType === type && filter !== ''
                 ? <FilterAltIcon sx={{fontSize: '16px'}} />
                 : <FilterListIcon sx={{fontSize: '16px'}} />
