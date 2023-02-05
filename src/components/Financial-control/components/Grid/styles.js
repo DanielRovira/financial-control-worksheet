@@ -6,7 +6,7 @@ export const TableContent = styled.div`
     background-color: white;
     box-shadow: 0px 0px 5px #ccc;
     border-radius: 5px;
-    padding: 5px;
+    /* padding: 5px; */
     /* width: 93vw; */
 
     &::-webkit-scrollbar-track {

@@ -18,6 +18,7 @@ export const Card = styled(MuiCard)`
     /* height: 200px; */
     padding: 5px;
     /* height: auto; */
+    pointer-events: all;
 
     & .MuiAutocomplete-popper {
         position: relative !important;

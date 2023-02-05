@@ -1,5 +1,5 @@
 import * as C from './styles';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, ClickAwayListener, TextField } from '@mui/material';
 import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -8,7 +8,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 const Filter = ({ type, filter, setFilter, setFilterType }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    // const id = open ? 'simple-popover' : undefined;
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let source = (type === 'expense')
         ? [{value: false, name: lang.entry}, {value: true, name: lang.expense}]
@@ -36,8 +36,9 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
         <C.IconButton onClick={handleClick}>
             <FilterListIcon sx={{fontSize: '16px'}} />
         </C.IconButton>
+
             <Popover
-                id={id}
+                // id={id}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
@@ -50,6 +51,7 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
                     horizontal: 'right',
                   }}
             >
+                <ClickAwayListener onClickAway={handleClose}>
                 <C.Card className='selectedFilter'>
                     <Autocomplete 
                         freeSolo
@@ -69,6 +71,7 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
                             />)}
                     />
                 </C.Card>
+                </ClickAwayListener>
             </Popover>
         </>
     )
