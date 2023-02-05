@@ -3,10 +3,11 @@ import MuiIconButton from '@mui/material/IconButton';
 import MuiCard from '@mui/material/Card';
 
 export const IconButton = styled(MuiIconButton)`
-    width: 10px;
+    width: 20px;
+    height: 20px;
 
     &:hover {
-        background-color: inherit !important;
+        /* background-color: inherit !important; */
     }
 
 `;

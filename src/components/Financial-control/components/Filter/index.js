@@ -3,9 +3,10 @@ import { Autocomplete, ClickAwayListener, TextField } from '@mui/material';
 import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Filter = ({ type, filter, setFilter, setFilterType }) => {
+const Filter = ({ type, filter, setFilter, setFilterType, filterType }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     // const id = open ? 'simple-popover' : undefined;
@@ -41,49 +42,50 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
       };
 
     return (<>
-        <C.IconButton onClick={handleClick}>
-            <FilterListIcon sx={{fontSize: '16px'}} />
+        <C.IconButton onClick={handleClick} sx={{backgroundColor: (filterType === type && filter !== '') ? 'var(--color2)' : 'auto'}}>
+            {filterType === type && filter !== ''
+                ? <FilterAltIcon sx={{fontSize: '16px'}} />
+                : <FilterListIcon sx={{fontSize: '16px'}} />
+            }
         </C.IconButton>
-
-            <Popover
-                // id={id}
-                open={open}
-                style={{pointerEvents: 'none'}}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-            >
-                <ClickAwayListener onClickAway={handleClose}>
-                <C.Card className='selectedFilter'>
-                    <Autocomplete 
-                        freeSolo
-                        openOnFocus
-                        disableCloseOnSelect
-                        disablePortal
-                        popupIcon={null}
-                        open={true}
-                        // onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
-                        options={source.map((options) => options.name)}
-                        inputValue={filter || ''}
-                        onInputChange={(event, value) => handleFilter(value)}
-                        renderInput={(params) => (
-                            <TextField 
-                            {...params}
-                            placeholder={`${lang.filter}`}
-                            />)}
-                    />
-                </C.Card>
-                </ClickAwayListener>
-            </Popover>
-        </>
-    )
+        <Popover
+            // id={id}
+            open={open}
+            style={{pointerEvents: 'none'}}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+        >
+            <ClickAwayListener onClickAway={handleClose}>
+            <C.Card className='selectedFilter'>
+                <Autocomplete 
+                    freeSolo
+                    openOnFocus
+                    disableCloseOnSelect
+                    disablePortal
+                    popupIcon={null}
+                    open={true}
+                    // onKeyDown={event => { if (event.key === 'Enter') {toggleEdit()}}}
+                    options={source.map((options) => options.name)}
+                    inputValue={filter || ''}
+                    onInputChange={(event, value) => handleFilter(value)}
+                    renderInput={(params) => (
+                        <TextField 
+                        {...params}
+                        placeholder={`${lang.filter}`}
+                        />)}
+                />
+            </C.Card>
+            </ClickAwayListener>
+        </Popover>
+    </>)
 }
  
 export default Filter;
