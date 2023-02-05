@@ -18,7 +18,7 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
         setAnchorEl(event.currentTarget);
         setTimeout(() => {  
             document.querySelector('.selectedFilter').querySelector('input')?.focus()
-        }, 150);
+        }, 300);
       };
 
       const handleClose = () => {
