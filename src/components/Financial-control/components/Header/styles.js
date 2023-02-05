@@ -22,7 +22,8 @@ export const Container = styled.div`
         left: 10px;
         }
     }
-    @media (max-width: 600px) {
+
+    @media (max-width: 450px) {
 
         .rightButtons {
         right: 0px;
@@ -39,13 +40,13 @@ export const Container = styled.div`
 export const Buttons = styled.div`
     display: flex;
     position: fixed;
-    top: 65px;
+    top: 50px;
 
-    @media (max-width: 600px) {
-    top: 55px;
+    @media (max-width: 450px) {
+    /* top: 55px; */
 
     .MuiIconButton-root {
-        padding: 8px 3px;
+        padding: 8px 2px;
     }
     }
 `
@@ -53,16 +54,10 @@ export const Buttons = styled.div`
 export const Header = styled.h1``;
 
 export const Title = styled.div`
-    padding-top: 65px;
+    padding-top: 50px;
     color: var(--font-color);
     font-size: 1.5rem;
 
-    @media (max-width: 599px) {
-        & {
-            padding-top: 60px;
-            padding-bottom: 0px;
-        }
-    }
 `;
 
 export const ArchivedTitle = styled.div`

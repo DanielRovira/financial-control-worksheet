@@ -11,7 +11,7 @@
 .Sidebar .MuiList-padding {
     height: 100vh;
     overflow: hidden;
-    padding-top: 70px;
+    padding-top: 50px;
     white-space: nowrap;
     transition: .3s;
     display: flex;

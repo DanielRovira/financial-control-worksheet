@@ -62,7 +62,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
         <>
             {isLoggedIn && (
             <AppBar className='AppBar' position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-                <Toolbar sx={{ justifyContent: 'space-between'}}>
+                <Toolbar variant="dense" sx={{ justifyContent: 'space-between'}}>
                     <IconButton color="inherit" edge="start" onClick={() => setOpenSidebar(!openSidebar)} >
                         <MenuIcon />
                     </IconButton>

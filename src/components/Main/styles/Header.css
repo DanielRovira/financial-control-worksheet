@@ -10,7 +10,7 @@
         font-size: 1.2em;
     }
 } */
-@media (max-width: 440px) {
+@media (max-width: 450px) {
     .MuiAppBar-root {
         max-height: 56px;
         line-height: 1.5em;

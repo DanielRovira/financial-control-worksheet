@@ -66,11 +66,11 @@ const GlobalStyle = createGlobalStyle`
     }
 
     h1 {
-        @media (max-width: 600px) {
+        @media (max-width: 450px) {
             font-size: 1.6em;
         }
-        @media (max-width: 350px) {
-            font-size: 1.4em;
+        @media (max-width: 360px) {
+            /* font-size: 1.4em; */
         }
     }
     
