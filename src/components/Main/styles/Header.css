@@ -23,6 +23,8 @@
 
 .AppBar .MuiBox-root .MuiAvatar-root {
     cursor: pointer;
+    height: 35px;
+    width: 35px;
 }
 
 #AppBarTooltip p {
