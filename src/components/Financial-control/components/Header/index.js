@@ -15,14 +15,14 @@ import { AddCircle as AddCircleIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, filter, setFilter, setOperationType, setUndoItem, handleOpenSnackbar }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived }) => {
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
     const handleFilterButton = () => {
-        setFilter(!filter);
+        setArchived(!archived);
         setChecked([]);
     }
 
@@ -51,14 +51,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {/* {sheetType === 'todoPayments' &&
                 <Tooltip title={<h3>{lang.filter}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                    <ToggleButton value={0} selected={filter} onClick={handleFilterButton} sx={{height:'40px', width: '40px', marginTop: '4px'}}>
+                    <ToggleButton value={0} selected={archived} onClick={handleFilterButton} sx={{height:'40px', width: '40px', marginTop: '4px'}}>
                         <FilterAltIcon fontSize='large'/>
                     </ToggleButton>
                     </span>
                 </Tooltip>} */}
 
                 {checked.length !== 0 && <>
-                {filter === false && <>
+                {archived === false && <>
                     <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                         <IconButton onClick={handleDeleteButton}
@@ -78,9 +78,9 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </span>
                 </Tooltip>
                 </>}
-                <Tooltip title={<h3>{lang[!filter ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang[!archived ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={handleArchiveButton}>
-                        {filter
+                        {archived
                         ? <UnarchiveOutlinedIcon />
                         : <ArchiveOutlinedIcon />
                         }
@@ -111,7 +111,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </C.Header>
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>
-                {filter === false && <>
+                {archived === false && <>
                 {sheetType !== 'summary' &&
                 <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton  onClick={() => setAdd(!add)}>
@@ -138,7 +138,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </C.Buttons>
             }
         </C.Container>
-        {filter &&
+        {archived &&
             <C.ArchivedTitle className='archivedTitle'>
                 <FmdBadOutlinedIcon color='white'/>
                 <p>{lang.archived}</p>
