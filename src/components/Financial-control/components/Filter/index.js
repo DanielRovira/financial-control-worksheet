@@ -16,7 +16,7 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
         source = [{value: false, name: lang.entry}, {value: true, name: lang.expense}]
     }
     else if (type === 'costCenter') {
-        source = sections
+        source = sections.filter(section => section.title !== 'TRASH')
     }
     else {
         source = Array.from(categoriesList || []).filter(item => item.type === type).sort((a, b) => a.name.localeCompare(b.name))
