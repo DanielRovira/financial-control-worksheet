@@ -40,6 +40,7 @@ const Filter = ({ type, filter, setFilter, setFilterType }) => {
             <Popover
                 // id={id}
                 open={open}
+                style={{pointerEvents: 'none'}}
                 anchorEl={anchorEl}
                 onClose={handleClose}
                 anchorOrigin={{

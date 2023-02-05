@@ -75,7 +75,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 subCategory: subCategoryTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 5000);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 5);
                 setUndoItem([item])
                 handleOpenSnackbar()
             }}
@@ -96,7 +96,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 idnumber: idnumberTemp,
                 provider: providerTemp,
                 desc: descTemp,
-                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 5000);
+                amount: Number(amountTemp?.toString().replace(/,/g, '.')) }, true, 5);
                 setUndoItem([item])
                 handleOpenSnackbar()
         }}

@@ -88,10 +88,6 @@ const GlobalStyle = createGlobalStyle`
         overflow: hidden;
     }
 
-    .MuiPopover-root.MuiModal-root {
-        pointer-events: none
-    }
-
 `;
 
 export default  GlobalStyle;
