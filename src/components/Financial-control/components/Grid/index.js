@@ -10,13 +10,18 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
-
+    const novadata = new Date(rawData[0]?.date);
+    console.log(`${new Date(rawData[0]?.date).getDate()} ${new Date(rawData[0]?.date).getMonth()} ${new Date(rawData[0]?.date).getFullYear()}`)
     let filterData
     if (filter === '') {
         filterData = rawData
     }
+
     else {
-        if (filterType === 'expense') {
+        if (filterType === 'date') {
+            filterData = rawData?.filter((item) => `${item[filterType].slice(-2)}/${item[filterType].slice(5,-3)}/${item[filterType].slice(0,-6)}`.includes(filter))
+        }
+        else if (filterType === 'expense') {
             filterData = rawData?.filter((item) => item[filterType] === (filter === lang.expense ? true : filter === lang.entry ? false : null))
         }
         else if (filterType === 'amount') {
