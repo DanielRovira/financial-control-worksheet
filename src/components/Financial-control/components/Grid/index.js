@@ -42,9 +42,9 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
-                    <C.Th width={90} alignCenter>{lang.type} <Filter type={'expense'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={70} alignCenter>{lang.type} <Filter type={'expense'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     <C.Th width={140} >{lang.source} <Filter type={'source'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
-                    <C.Th width={130} >{lang.category} <Filter type={'category'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={120} >{lang.category} <Filter type={'category'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     <C.Th width={150} >{lang.subCategory} <Filter type={'subCategory'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     </>}
                     {sheetType === 'todoPayments' && 
@@ -54,8 +54,8 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th width={140}>{lang.bank}</C.Th>
                     <C.Th width={160} alignCenter>{lang.idnumber}</C.Th>
                     </>}
-                    <C.Th width={200}>{lang.provider}</C.Th>
-                    <C.Th width={250}>{lang.description}</C.Th>
+                    <C.Th width={160}>{lang.provider}</C.Th>
+                    <C.Th width={220}>{lang.description}</C.Th>
                     <C.Th width={130}>{lang.value}</C.Th>
                     {params.taskTitle !== 'TRASH' && <>
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
