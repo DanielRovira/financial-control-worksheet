@@ -1,6 +1,5 @@
 import * as C from './styles';
-import { useParams } from 'react-router-dom';
-import { Checkbox, Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
