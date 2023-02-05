@@ -10,17 +10,28 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
-    const filterData = (filter === '')
-        ? rawData
-        : (filterType === 'expense')
-            ? rawData?.filter((item) => item[filterType] === (filter === lang.expense ? true : filter === lang.entry ? false : null))
-            : rawData?.filter((item) => item[filterType] === filter)
+
+    let filterData
+    if (filter === '') {
+        filterData = rawData
+    }
+    else {
+        if (filterType === 'expense') {
+            filterData = rawData?.filter((item) => item[filterType] === (filter === lang.expense ? true : filter === lang.entry ? false : null))
+        }
+        else if (filterType === 'amount') {
+            filterData = rawData?.filter((item) => item[filterType].toString().includes(Number(filter?.replace(/,/g, '.'))))
+        }
+        else {
+            filterData = rawData?.filter((item) => item[filterType].toLowerCase().includes(filter.toLowerCase()))
+        }
+    }
     
-        let itens = params.taskTitle === 'TRASH'
+    let itens = params.taskTitle === 'TRASH'
         ? Array.from(rawData)
         : !archived ? Array.from(filterData.filter((item) => !item.archived)) : Array.from(filterData.filter((item) => item.archived))
     
-        itens.sort(function(a, b) {
+    itens.sort(function(a, b) {
         var c = new Date(a.date);
         var d = new Date(b.date);
         return c-d;
@@ -54,9 +65,9 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th width={140}>{lang.bank}</C.Th>
                     <C.Th width={160} alignCenter>{lang.idnumber}</C.Th>
                     </>}
-                    <C.Th width={160}>{lang.provider}</C.Th>
-                    <C.Th width={220}>{lang.description}</C.Th>
-                    <C.Th width={130}>{lang.value}</C.Th>
+                    <C.Th width={160}>{lang.provider} <Filter type={'provider'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={220}>{lang.description} <Filter type={'desc'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={130}>{lang.value} <Filter type={'amount'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     {params.taskTitle !== 'TRASH' && <>
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
                     <C.Th width={70} alignCenter>{lang.expand}</C.Th>
