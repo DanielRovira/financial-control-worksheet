@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import MuiIconButton from '@mui/material/IconButton';
-import MuiCard from '@mui/material/Card';
-import MuiList from '@mui/material/List';
 
 export const TableContent = styled.div`
     margin: 10px 10px 60px calc((var(--closeSidebarWidth)) + 10px);
@@ -47,43 +44,4 @@ export const Th = styled.th`
     position: sticky;
     top: 0;
     z-index: 1;
-`;
-
-export const IconButton = styled(MuiIconButton)`
-    width: 10px;
-
-    &:hover {
-        background-color: inherit !important;
-    }
-
-`;
-
-export const Card = styled(MuiCard)`
-    /* display: flex; */
-    width: 200px;
-    /* min-height: min-content; */
-    /* height: 200px; */
-    padding: 5px;
-    /* height: auto; */
-
-    & .MuiAutocomplete-popper {
-        position: relative !important;
-        transform: none !important;
-    }
-
-    & .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
-        padding: 0;
-        background-color: white;
-        border-radius: 5px;
-    }
-
-    & .MuiPaper-root {
-        box-shadow: none;
-    }
-
-`;
-
-export const List  = styled(MuiList)`
-    /* width: 200px;
-    height: 200px; */
 `;
