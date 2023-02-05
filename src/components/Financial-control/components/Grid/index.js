@@ -10,8 +10,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
-    const novadata = new Date(rawData[0]?.date);
-    console.log(`${new Date(rawData[0]?.date).getDate()} ${new Date(rawData[0]?.date).getMonth()} ${new Date(rawData[0]?.date).getFullYear()}`)
+
     let filterData
     if (filter === '') {
         filterData = rawData
