@@ -50,7 +50,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             <C.Thead>
                 <C.Tr>
                     <C.Th alignCenter width={30}><Checkbox checked={checked.length === itens.length && itens.length > 0} onChange={handleSelect} indeterminate={checked.length > 0 && checked.length < itens.length} /></C.Th>
-                    <C.Th alignCenter width={120}><div style={{width: '100px'}}>{lang.date}</div></C.Th>
+                    <C.Th alignCenter width={120}>{lang.date} <Filter type={'date'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     {sheetType === 'financialControl' && 
                     <>
                     <C.Th width={70} alignCenter>{lang.type} <Filter type={'expense'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
@@ -62,8 +62,8 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <>
                     <C.Th width={20} alignCenter>{lang.number}</C.Th>
                     <C.Th width={100} alignCenter>{lang.link}</C.Th>
-                    <C.Th width={140}>{lang.bank}</C.Th>
-                    <C.Th width={160} alignCenter>{lang.idnumber}</C.Th>
+                    <C.Th width={150}>{lang.bank} <Filter type={'bank'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
+                    <C.Th width={160}>{lang.idnumber} <Filter type={'idnumber'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     </>}
                     <C.Th width={160}>{lang.provider} <Filter type={'provider'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
                     <C.Th width={220}>{lang.description} <Filter type={'desc'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} /></C.Th>
