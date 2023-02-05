@@ -66,7 +66,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <>
                     <C.Th width={20} alignCenter>{lang.number}</C.Th>
                     <C.Th width={100} alignCenter>{lang.link}</C.Th>
-                    <C.Th width={150}>{lang.bank} <Filter type={'bank'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
+                    <C.Th width={170}>{lang.bank} <Filter type={'bank'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                     <C.Th width={160}>{lang.idnumber} <Filter type={'idnumber'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                     </>}
                     <C.Th width={160}>{lang.provider} <Filter type={'provider'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
