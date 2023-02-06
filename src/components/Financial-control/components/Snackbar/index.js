@@ -18,7 +18,6 @@ export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar,
     setOpenSnackbar(false);
     setUndoItem([]);
     setOperationType()
-    getDataTimeout(1)
   };
 
   const handleUndo = (event, reason) => {
@@ -71,7 +70,7 @@ export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar,
         size="small"
         aria-label="close"
         color="inherit"
-        onClick={handleClose}
+        onClick={() => {getDataTimeout(1); handleClose()}}
         sx={{marginLeft: '10px'}}
       >
         <CloseIcon fontSize="small" />
