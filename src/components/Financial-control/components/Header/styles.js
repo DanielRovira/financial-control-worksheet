@@ -30,7 +30,7 @@ export const Container = styled.div`
         }
 
         svg {
-            height: 0.9em;
+            /* height: 0.9em; */
         }
     }
     
@@ -43,7 +43,7 @@ export const Buttons = styled.div`
     top: 50px;
 
     .MuiIconButton-root {
-        padding: 6px;
+        padding: 6px 6px;
         border-radius: 5px;
     }
 
