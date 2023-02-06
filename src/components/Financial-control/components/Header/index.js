@@ -59,7 +59,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
                 {checked.length !== 0 && <>
                 {archived === false && <>
-                    <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.delete}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.remove}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
                         <IconButton onClick={handleDeleteButton}
                         // disabled={checked.length > 5 ? true : false}
