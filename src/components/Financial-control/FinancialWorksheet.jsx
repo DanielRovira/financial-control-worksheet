@@ -108,23 +108,23 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             delete newItem.archived;
 
             if (type === 'undo') {
-                setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
+                // setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
                 insertDocument(newItem);
             }
 
             if (type === 'del')  {
                 setUndoItem((prev) => [ ...prev, item])
-                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                // setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
                 insertDocument(newItem, 'TRASH');
             }
 
             if (type === 'trash')  {
-                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                // setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
             }
 
             if (type === 'restore')  {
                 insertDocument(newItem, newItem.costCenter)
-                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                // setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
             }
 
             getDataTimeout(time)
@@ -160,6 +160,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }
 
     function insertDocument(transaction, path) {
+        let res
         fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'POST',
@@ -168,6 +169,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             body: JSON.stringify(transaction)
         })
         .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(console.error)
     }
 
     function updateDocument(item, update, time) {
