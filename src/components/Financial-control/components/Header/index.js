@@ -75,7 +75,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 {archived === false && <>
                     <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.remove}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDeleteButton}
+                        <IconButton onClick={!syncing && handleDeleteButton}
                         // disabled={checked.length > 5 ? true : false}
                         >
                             <DeleteIcon/>
@@ -84,7 +84,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>
                 <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                        <IconButton onClick={handleDuplicateSelected} 
+                        <IconButton onClick={!syncing && handleDuplicateSelected} 
                         // disabled={checked.length > 5 ? true : false}
                         >
                             <DifferenceIcon/>
@@ -93,7 +93,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>
                 </>}
                 <Tooltip title={<h3>{lang[!archived ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={handleArchiveButton}>
+                    <IconButton onClick={!syncing && handleArchiveButton}>
                         {archived
                         ? <UnarchiveOutlinedIcon />
                         : <ArchiveOutlinedIcon />
@@ -104,13 +104,13 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </>}
                 {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
                 <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <IconButton onClick={() => handleDeleteSelected('trash', 1)}>
+                    <IconButton onClick={() => !syncing && handleDeleteSelected('trash', 1)}>
                         <DeleteForeverIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <span>
-                    <IconButton onClick={() => handleDeleteSelected('restore')}
+                    <IconButton onClick={() => !syncing && handleDeleteSelected('restore')}
                     // disabled={checked.length > 5 ? true : false}
                     >
                         <RestoreFromTrashIcon/>
@@ -119,7 +119,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Tooltip>
                 </>}
                     {
-                     <IconButton>
+                     <IconButton disabled>
                          {syncing
                          ? <><SyncIcon /><p style={{fontSize: '14px', paddingLeft: '5px'}}>Salvando...</p></>
                          : <><CloudDoneOutlinedIcon /><p style={{fontSize: '14px', paddingLeft: '5px', display: cloudText}}>Documento salvo</p></>

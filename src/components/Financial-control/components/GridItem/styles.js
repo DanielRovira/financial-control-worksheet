@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import CurrencyInput from 'react-currency-input-field'
 
 export const Tr = styled.tr`
-    height: 30px;
+    height: 32px;
     
     &:hover {
         background-color: var(--color0);
@@ -42,6 +42,7 @@ export const TdCont = styled.div`
 
     & .MuiInputBase-input, & .MuiAutocomplete-root .MuiOutlinedInput-root {
         padding: 0 3px 0 5px;
+        
     }
 
     & .MuiMenu-paper {
