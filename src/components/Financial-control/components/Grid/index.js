@@ -31,7 +31,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
         }
     }
     
-    let itens = params.taskTitle === 'TRASH'
+    let itens = (params.taskTitle === 'TRASH')
         ? Array.from(filterData)
         : !archived ? Array.from(filterData.filter((item) => !item.archived)) : Array.from(filterData.filter((item) => item.archived))
     
