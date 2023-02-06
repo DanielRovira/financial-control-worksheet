@@ -66,7 +66,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
             }
         }
 
-        insertDocument(transaction[sheetType]);
+        insertDocument(transaction[sheetType], null, null, true);
         setUndoItem(transaction[sheetType])
         setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], transaction[sheetType]]}) )
         getData()

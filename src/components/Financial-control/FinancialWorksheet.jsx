@@ -19,10 +19,12 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [showCalendar, setShowCalendar] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [undoItem, setUndoItem] = useState([]);
+    const [undoTrash, setUndoTrash] = useState([]);
     const [checked, setChecked] = useState([]);
     const [archived, setArchived] = useState(false);
     const [loadingData, setLoadingData] = useState();
     const [operationType, setOperationType] = useState();
+    const [syncing, setSyncing] = useState(false);
     const history = useNavigate();
     const params = useParams();
     const timer = useRef(null);
@@ -83,14 +85,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setOpenSnackbar(false)
         setTimeout(() => {
             setOpenSnackbar(true)
-        }, 5);
+        }, 50);
     }
 
     const getDataTimeout = (time) => {
         clearTimeout(timer.current)
         timer.current = setTimeout(() => {
             getData()
-        }, time || timeOut); 
+        }, time || timeOut);
     }
 
     const handleDeleteSelected = (type, time) => {
@@ -99,32 +101,47 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setChecked([]);
         
         list.forEach((item, index) => {
-            type === 'undo'
-                ? deleteDocument(item, 'TRASH')
-                : deleteDocument(item)
+            // type === 'undo'
+            //     ? deleteDocument(item, 'TRASH')
+            //     : deleteDocument(item)
             
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             delete newItem.archived;
 
             if (type === 'undo') {
-                // setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
-                insertDocument(newItem);
+                setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
+                // insertDocument(newItem);
+                deleteDocument(undoTrash[index], 'TRASH')
+                if (index === list.length - 1) {
+                    insertDocument(newItem, null, null, true)
+                    setUndoTrash([])
+                }
+                else {insertDocument(newItem)}
             }
 
             if (type === 'del')  {
                 setUndoItem((prev) => [ ...prev, item])
-                // setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
-                insertDocument(newItem, 'TRASH');
+                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                // insertDocument(newItem, 'TRASH');
+                index === list.length - 1
+                    ? insertDocument(newItem, 'TRASH', item, true)
+                    : insertDocument(newItem, 'TRASH', item)
             }
 
             if (type === 'trash')  {
-                // setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                index === list.length - 1
+                    ? deleteDocument(item, null, null, true)
+                    : deleteDocument(item)
             }
 
             if (type === 'restore')  {
-                insertDocument(newItem, newItem.costCenter)
-                // setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+                // insertDocument(newItem, newItem.costCenter)
+                index === list.length - 1
+                    ? insertDocument(newItem, newItem.costCenter, item, true)
+                    : insertDocument(newItem, newItem.costCenter, item)
             }
 
             getDataTimeout(time)
@@ -134,11 +151,16 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const handleDuplicateSelected = () => {
         let list = JSON.parse(JSON.stringify(checked))
         setChecked([])
+
         list.forEach((item, index) => {
             let newItem = JSON.parse(JSON.stringify(item))
             delete newItem._id;
             setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], newItem]}) )
-            insertDocument(newItem)
+
+            index === list.length - 1
+                ? insertDocument(newItem, null, null, true)
+                : insertDocument(newItem)
+
             getDataTimeout(50)
         })
     }
@@ -153,27 +175,41 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             item.archived = !item.archived
             setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
             setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], item]}) )
-            updateDocument(item)
+            // updateDocument(item)
+
+            index === list.length - 1
+            ? updateDocument(item, null, null, true)
+            : updateDocument(item)
+
             getDataTimeout(time)
         })
         setOperationType()
     }
 
-    function insertDocument(transaction, path) {
-        let res
-        fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
-        {
-            method:'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(transaction)
-        })
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(console.error)
+    async function insertDocument(transaction, path, alsoDelete, last) {
+        setSyncing(true);
+        try {
+            const res = await fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
+                {
+                    method:'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify(transaction)
+                });
+            const data = await res.json()
+            if (res.status === 200) {
+                last && setSyncing(false)
+                alsoDelete && deleteDocument(alsoDelete)
+                path === 'TRASH' && setUndoTrash((prev) => [ ...prev, data])
+            }
+
+        } catch (error) {
+        console.log(error);
+      }
     }
 
-    function updateDocument(item, update, time) {
+    function updateDocument(item, update, time, last) {
+        setSyncing(true);
         fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
         {
             method:'PATCH',
@@ -181,11 +217,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        .then(response => response.json())
+        // .then(response => response.json())
+        .then(response => last && response.status === 200 && setSyncing(false))
         .then(() => update && getDataTimeout(time))
+        .catch(console.error)
     }
 
-    function deleteDocument(item, path) {
+    function deleteDocument(item, path, last) {
+        // setSyncing(true);
         fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
         {
             method:'DELETE',
@@ -193,6 +232,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             credentials: 'include',
             body: JSON.stringify(item)
         })
+        .then(response => last && response.status === 204 && setSyncing(false))
+        .catch(console.error)
     }
 
     useEffect(() => {
@@ -227,7 +268,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} />
             {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getData={getData} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
@@ -246,7 +287,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
               <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
             </Drawer>
             {showCalendar && <Calendar rawData={transactionsList[sheetType]?.filter(item => !item.archived)} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} />
+            <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} getDataTimeout={getDataTimeout} />
         </div>
     );
 };

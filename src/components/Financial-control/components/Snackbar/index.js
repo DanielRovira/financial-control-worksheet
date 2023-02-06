@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived }) {
+export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived, getDataTimeout }) {
     const history = useNavigate();
 
     const [message, setMessage] = useState();
@@ -18,6 +18,7 @@ export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar,
     setOpenSnackbar(false);
     setUndoItem([]);
     setOperationType()
+    getDataTimeout(1)
   };
 
   const handleUndo = (event, reason) => {

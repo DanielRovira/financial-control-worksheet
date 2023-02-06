@@ -42,11 +42,17 @@ export const Buttons = styled.div`
     position: fixed;
     top: 50px;
 
+    .MuiIconButton-root {
+        padding: 6px;
+        border-radius: 5px;
+    }
+
     @media (max-width: 450px) {
     /* top: 55px; */
 
     .MuiIconButton-root {
-        padding: 8px 2px;
+        padding: 6px 2px;
+
     }
     }
 `

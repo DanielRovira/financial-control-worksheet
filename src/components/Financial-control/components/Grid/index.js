@@ -76,7 +76,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                     <C.Th width={50} alignCenter>{lang.edit}</C.Th>
                     <C.Th width={70} alignCenter>{lang.expand}</C.Th>
                     </>}
-                    {params.taskTitle === 'TRASH' && <C.Th width={150} alignCenter>{lang.sections} <Filter type={'costCenter'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>}
+                    {params.taskTitle === 'TRASH' && <C.Th width={160} alignCenter>{lang.sections} <Filter type={'costCenter'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>}
                 </C.Tr>
             </C.Thead>
             <C.Tbody>

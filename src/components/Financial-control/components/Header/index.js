@@ -1,4 +1,5 @@
 import * as C from './styles';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip  } from '@mui/material';
 import { AddCircle as AddCircleIcon,
@@ -13,10 +14,14 @@ import { AddCircle as AddCircleIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
+import SyncIcon from '@mui/icons-material/Sync';
+import CloudDoneOutlinedIcon from '@mui/icons-material/CloudDoneOutlined';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, setSyncing }) => {
     const params = useParams();
+    const timer = useRef(null);
+    const [cloudText, setCloudText] = useState('none')
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
@@ -42,6 +47,15 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         handleOpenSnackbar();
     }
 
+    useEffect(() => {
+        return () => {
+            clearTimeout(timer.current)
+            setCloudText('unset')
+            timer.current = setTimeout(() => {
+                setCloudText('none')
+            }, 4000);
+        };
+    }, [syncing]);
 
     return (
         <>
@@ -104,6 +118,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </span>
                 </Tooltip>
                 </>}
+                    {
+                     <IconButton>
+                         {syncing
+                         ? <><SyncIcon /><p style={{fontSize: '14px', paddingLeft: '5px'}}>Salvando...</p></>
+                         : <><CloudDoneOutlinedIcon /><p style={{fontSize: '14px', paddingLeft: '5px', display: cloudText}}>Documento salvo</p></>
+                        }
+                     </IconButton>
+                    }
             </C.Buttons>
             
             <C.Header>
