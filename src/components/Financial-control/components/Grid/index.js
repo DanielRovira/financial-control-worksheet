@@ -27,7 +27,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             filterData = rawData?.filter((item) => item[filterType].toString().includes(Number(filter?.replace(/,/g, '.'))))
         }
         else {
-            filterData = rawData?.filter((item) => item[filterType].toLowerCase().includes(filter.toLowerCase()))
+            filterData = rawData?.filter((item) => item[filterType]?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(filter?.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()))
         }
     }
     
