@@ -9,8 +9,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
     const timer = useRef();
     const [loadingButton, setLoadingButton] = useState(false);
     const [inputs, setInputs] = useState({
-        email: '',
-        password: '',
+        email: process.env.REACT_APP_DEFAULT_USER,
+        password: process.env.REACT_APP_DEFAULT_PASS,
     });
 
     const sendRequest = async () => {
