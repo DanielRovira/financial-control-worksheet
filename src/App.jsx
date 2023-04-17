@@ -81,7 +81,7 @@ const App = () => {
                 refreshToken() 
             }, 600000) // Call API every 10 minutes
             return () => clearInterval(interval)
-    }, [refreshToken]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='App'>
