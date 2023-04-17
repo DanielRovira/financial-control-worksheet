@@ -76,6 +76,13 @@ const App = () => {
         !isLoggedIn && sendLogoutReq();
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
+    useEffect(() => {
+            const interval = setInterval(() => {
+                refreshToken() 
+            }, 600000) // Call API every 10 minutes
+            return () => clearInterval(interval)
+    }, [refreshToken]) // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <div className='App'>
             <Backdrop

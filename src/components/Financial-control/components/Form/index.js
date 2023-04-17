@@ -2,7 +2,7 @@ import './index.css'
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { TextField, FormControl, InputLabel, Select, MenuItem, FormHelperText, Button } from '@mui/material';
+import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
