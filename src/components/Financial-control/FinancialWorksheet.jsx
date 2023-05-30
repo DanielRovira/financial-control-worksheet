@@ -56,7 +56,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
                 setTransactionsList({
                     financialControl: res.post  || [],
-                    todoPayments: res2.post || []
+                    todoPayments: res2.post || [],
+                    summary: res.post || []
                 } || [])
             }
             else {setIsLoggedIn(false); history('/')} 
