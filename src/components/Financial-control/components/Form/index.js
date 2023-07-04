@@ -6,7 +6,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@m
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransactionsList, setUndoItem }) => {
+const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem }) => {
     const params = useParams();
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -69,7 +69,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getData, setTransac
         insertDocument(transaction[sheetType], null, null, true);
         setUndoItem(transaction[sheetType])
         setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], transaction[sheetType]]}) )
-        getData()
+        getDataTimeout(2000)
 
         setDesc('');
         setAmount('');
