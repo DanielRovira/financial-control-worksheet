@@ -38,7 +38,7 @@ const Summary = ({ rawData, setAdd }) => {
         Array.from(months).map((month) => (
             setByMonth((prev) => ({ ...prev,
                 [month]: {
-                    amount: calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year))).expense,
+                    amount: calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year))).total,
                     month: month
                 }
             }))
