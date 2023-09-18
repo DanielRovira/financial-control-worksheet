@@ -38,7 +38,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     itens.sort(function(a, b) {
         var c = new Date(a.date);
         var d = new Date(b.date);
-        return c-d;
+        return d-c;
     });
 
     const handleSelect = (event) => {
