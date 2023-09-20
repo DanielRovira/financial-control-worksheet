@@ -28,18 +28,19 @@ export default function FloatingCalendar({ rawData, setShowCalendar, sheetType }
         const day = Number(date.toLocaleDateString().split('/')[0]);
         const month = Number(date.toLocaleDateString().split('/')[1]);
         const year = Number(date.toLocaleDateString().split('/')[2]);
-        const result = sheetType === 'todoPayments' ? 'total' : 'expense';
+        // const result = sheetType === 'todoPayments' ? 'total' : 'expense';
+        const result = 'total' ;
         if (view === 'decade') {
             let amount = calc(itens.filter((item) => (Number(item.date.split('-')[0]) === year)))[result]
-            return <div className='amount'> {amount > 0 ? handleValue(amount):'-'} </div>;
+            return <div className='amount'> {Number(amount) === 0 ?  '-' : handleValue(amount)} </div>;
         }
         if (view === 'year') {
             let amount = calc(itens.filter((item) => (Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year)))[result]
-            return <div className='amount'> {amount > 0 ? handleValue(amount):'-'} </div>;
+            return <div className='amount'> {Number(amount) === 0 ?  '-' : handleValue(amount)} </div>;
         }
         if (view === 'month') {
             let amount = calc(itens.filter((item) => (Number(item.date.split('-')[2]) === day && Number(item.date.split('-')[1]) === month && Number(item.date.split('-')[0]) === year)))[result]
-            return <div className='amount'> {amount > 0 ? handleValue(amount):'-'} </div>;
+            return <div className='amount'> {Number(amount) === 0 ?  '-' : handleValue(amount)} </div>;
         }
       }
 
