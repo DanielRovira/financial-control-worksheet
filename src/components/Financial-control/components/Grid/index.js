@@ -38,9 +38,11 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     itens.sort(function(a, b) {
         var c = new Date(a.date);
         var d = new Date(b.date);
-        return d-c;
+        return c-d;
     });
 
+    itens.reverse()
+    
     const handleSelect = (event) => {
         checked.length === itens.length
         ? setChecked([])
