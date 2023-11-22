@@ -21,6 +21,11 @@
     background-color: var(--avatarColor);
 }
 
+.AppBar.MuiPaper-root.MuiAppBar-root.MuiAppBar-colorPrimary {
+    background-color: var(--navbar-color);
+    box-shadow: none;
+}
+
 .AppBar .MuiBox-root .MuiAvatar-root {
     cursor: pointer;
     height: 35px;
