@@ -13,6 +13,7 @@ import { AddCircle as AddCircleIcon,
          MoreVert as MoreVertIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
+         Download as DownloadIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 import SyncIcon from '@mui/icons-material/Sync';
 import CloudDoneOutlinedIcon from '@mui/icons-material/CloudDoneOutlined';
@@ -134,13 +135,19 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>
                 {archived === false && <>
-                {sheetType !== 'summary' &&
+                {sheetType !== 'summary' && <>
                 <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton  onClick={() => setAdd(!add)}>
                         {!add ? <AddCircleIcon/>
                              : <RemoveCircleIcon/>}
                     </IconButton>
-                </Tooltip>}
+                </Tooltip>
+                <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <IconButton  onClick={() => document.getElementById('exportCSV').click()}>
+                        <DownloadIcon/>
+                    </IconButton>
+                </Tooltip>
+                </>}
                 <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon/>
