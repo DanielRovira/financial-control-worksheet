@@ -160,7 +160,9 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
                         <CategoriesList CategoriesListItem={item}/>
                     </div>))} 
                 {tabValue === 2 && (
-                    <Signup/>
+                    <div className='SettingsCardContainer'>
+                        <Signup/>
+                    </div>  
                 )}
             </div>
         </div>

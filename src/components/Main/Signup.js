@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Signup = () => {
   const history = useNavigate();
@@ -37,7 +38,7 @@ const Signup = () => {
     sendRequest().then(() => history("/"));
   };
   return (
-    <div style={{ paddingTop: '150px' }}>
+    <div style={{ padding: '20px 0' }}>
       <form onSubmit={handleSubmit}>
         <Box
           marginLeft="auto"
@@ -48,8 +49,7 @@ const Signup = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Typography variant="h2">Signup</Typography>
-
+          <h2>{lang.signup}</h2>
           <TextField
             name="name"
             onChange={handleChange}
@@ -59,24 +59,24 @@ const Signup = () => {
             margin="normal"
           />
           <TextField
-            name="new-email"
+            name="email"
             onChange={handleChange}
             type="email"
             value={inputs.email}
             variant="outlined"
             placeholder="Email"
             margin="normal"
-            autoComplete="new-password"
+            // autoComplete="new-password"
           />
           <TextField
-            name="new-password"
+            name="password"
             onChange={handleChange}
             type="password"
             value={inputs.password}
             variant="outlined"
             placeholder="Password"
             margin="normal"
-            autoComplete="new-password"
+            // autoComplete="new-password"
           />
           <Button variant="contained" type="submit">
             Signup
