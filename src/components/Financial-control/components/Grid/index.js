@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
 import { CSVLink } from "react-csv";
+import empityFolderImage from './empityFolderImage.svg' //throwIfNamespace: false
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar }) => {
@@ -79,11 +80,13 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
 
     if (rawData.length === 0)
         return (
-        <div style={{margin:'auto', marginTop:'20vh', fontSize:'20px', textAlign:'center'}}>
+        <div style={{margin:'auto', marginTop:'10vh', fontSize:'20px', textAlign:'center'}}>
             {params.taskTitle === 'TRASH' ? 
             (<p>{lang.empityTrashMessage}</p>) :
             (<><p>{lang.empitySheet}</p><p>{lang.empitySheetMessage}</p></>)
-            }</div>
+            }
+            <img src={empityFolderImage} alt="Empity Folder Image" style={{marginTop:'80px'}}/>
+        </div>
         )
     
     else
