@@ -142,7 +142,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                              : <RemoveCircleIcon/>}
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.download}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
                     <IconButton  onClick={() => document.getElementById('exportCSV').click()}>
                         <DownloadIcon/>
                     </IconButton>

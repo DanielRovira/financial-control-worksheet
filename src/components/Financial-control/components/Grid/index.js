@@ -76,8 +76,17 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             amount: item.amount.toString().replace('.', ',')
         })
     )
+
+    if (rawData.length === 0)
+        return (
+        <div style={{margin:'auto', marginTop:'20vh', fontSize:'20px', textAlign:'center'}}>
+            <p>{lang.empitySheet}</p>
+            <p>{lang.empitySheetMessage}</p>
+        </div>
+        )
     
-    return ( 
+    else
+        return ( 
         <C.TableContent>
             <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders[sheetType]} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
             <C.Table>
