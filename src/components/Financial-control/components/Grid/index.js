@@ -35,8 +35,6 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 { label: lang.value, key: "amount" }
             ]
     }
-    
-
 
     let filterData
     if (filter === '') {
