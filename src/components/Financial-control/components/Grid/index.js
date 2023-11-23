@@ -13,8 +13,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const params = useParams();
 
     const CSVheaders = {
-        financialControl: 
-            [
+        financialControl: [
                 { label: lang.date, key: "date" },
                 { label: lang.expense, key: "expense" },
                 { label: lang.source, key: "source" },
@@ -22,18 +21,15 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 { label: lang.subCategory, key: "subCategory" },
                 { label: lang.provider, key: "provider" },
                 { label: lang.description, key: "desc" },
-                { label: lang.value, key: "amount" }
-            ],
-        todoPayments:
-            [
+                { label: lang.value, key: "amount" }],
+        todoPayments:[
                 { label: lang.date, key: "date" },
                 { label: lang.link, key: "link" },
                 { label: lang.bank, key: "bank" },
                 { label: lang.idnumber, key: "idnumber" },
                 { label: lang.provider, key: "provider" },
                 { label: lang.description, key: "desc" },
-                { label: lang.value, key: "amount" }
-            ]
+                { label: lang.value, key: "amount" }]
     }
 
     let filterData
