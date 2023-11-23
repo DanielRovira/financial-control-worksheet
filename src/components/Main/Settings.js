@@ -19,7 +19,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
     const [showRemove, setShowRemove] = useState(false);
     const [showInput, setShowInput] = useState(false);
     const [value, setValue] = useState();
-    const [tabValue, setTabValue] = useState('1');
+    const [tabValue, setTabValue] = useState(0);
 // console.log(CategoriesListItem)
     function insertDocument(transaction, CategoriesListItem) {
         let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories');
@@ -146,9 +146,9 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
     return (
         <div className='SettingsContainer'>
             <Tabs value={tabValue} onChange={handleTabChange} aria-label="basic tabs example">
-                <Tab label="Item One" />
-                <Tab label="Item Two" />
-                <Tab label="Add User" />
+                <Tab label={lang.sections} />
+                <Tab label={lang.category} />
+                <Tab label={lang.signup} />
             </Tabs>
             <div className='SettingsSubContainer'>
                 {tabValue === 0 && (
