@@ -1,9 +1,12 @@
 .SettingsContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin-top: 70px;
     padding: 15px;
     overflow: hidden;
+    margin-left: 70px;
 }
 
 .SettingsSubContainer {
@@ -12,7 +15,7 @@
     width: fit-content;
     overflow: auto;
     padding: 10px;
-    margin-left: 70px;
+
 }
 .SettingsContainer > .SettingsSubContainer > .SettingsCardContainer {
     flex: 1;

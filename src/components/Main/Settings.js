@@ -1,8 +1,11 @@
 import React from 'react';
 import './styles/Settings.css'
+import Signup from './Signup';
 // import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField } from '@mui/material';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -16,6 +19,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
     const [showRemove, setShowRemove] = useState(false);
     const [showInput, setShowInput] = useState(false);
     const [value, setValue] = useState();
+    const [tabValue, setTabValue] = useState('1');
 // console.log(CategoriesListItem)
     function insertDocument(transaction, CategoriesListItem) {
         let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories');
@@ -64,6 +68,10 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
             setShowInput(CategoriesListItem);
         }, 10);
     }
+
+    const handleTabChange = (event, newTabValue) => {
+        setTabValue(newTabValue);
+      };
 
     useEffect(() => {
         setSheetType('settings');
@@ -137,16 +145,23 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
 
     return (
         <div className='SettingsContainer'>
+            <Tabs value={tabValue} onChange={handleTabChange} aria-label="basic tabs example">
+                <Tab label="Item One" />
+                <Tab label="Item Two" />
+                <Tab label="Add User" />
+            </Tabs>
             <div className='SettingsSubContainer'>
-                <div className='SettingsCardContainer'>
-                    <CategoriesList CategoriesListItem={'sections'}/>
-                </div>
-                {Array.from(CategoriesListItem).map((item, index) => (
+                {tabValue === 0 && (
+                    <div className='SettingsCardContainer'>
+                        <CategoriesList CategoriesListItem={'sections'}/>
+                    </div>)}
+                {tabValue === 1 && Array.from(CategoriesListItem).map((item, index) => (
                     <div className='SettingsCardContainer' key={`${index}${item}`}>
                         <CategoriesList CategoriesListItem={item}/>
-                    </div>
-                ))}
-                
+                    </div>))} 
+                {tabValue === 2 && (
+                    <Signup/>
+                )}
             </div>
         </div>
     )
