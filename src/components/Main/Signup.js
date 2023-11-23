@@ -38,7 +38,7 @@ const Signup = () => {
     sendRequest().then(() => history("/"));
   };
   return (
-    <div style={{ padding: '20px 0' }}>
+    <div style={{ padding: '10px 0 20px 0' }}>
       <form onSubmit={handleSubmit}>
         <Box
           marginLeft="auto"
