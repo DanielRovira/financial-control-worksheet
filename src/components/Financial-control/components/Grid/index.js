@@ -80,9 +80,10 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     if (rawData.length === 0)
         return (
         <div style={{margin:'auto', marginTop:'20vh', fontSize:'20px', textAlign:'center'}}>
-            <p>{lang.empitySheet}</p>
-            <p>{lang.empitySheetMessage}</p>
-        </div>
+            {params.taskTitle === 'TRASH' ? 
+            (<p>{lang.empityTrashMessage}</p>) :
+            (<><p>{lang.empitySheet}</p><p>{lang.empitySheetMessage}</p></>)
+            }</div>
         )
     
     else
