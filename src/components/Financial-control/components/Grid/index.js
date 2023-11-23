@@ -4,12 +4,24 @@ import Filter from '../Filter';
 import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
+import { CSVLink } from "react-csv";
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar }) => {
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
+
+    const headers = [
+        { label: lang.date, key: "date" },
+        { label: lang.expense, key: "expense" },
+        { label: lang.source, key: "source" },
+        { label: lang.category, key: "category" },
+        { label: lang.subCategory, key: "subCategory" },
+        { label: lang.provider, key: "provider" },
+        { label: lang.description, key: "desc" },
+        { label: lang.value, key: "amount" }
+      ];
 
     let filterData
     if (filter === '') {
@@ -52,6 +64,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
 
     return ( 
         <C.TableContent>
+            <CSVLink data={filterData} separator={";"} headers={headers}>Download me</CSVLink>
         <C.Table>
             <C.Thead>
                 <C.Tr>
