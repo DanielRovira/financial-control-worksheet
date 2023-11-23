@@ -12,16 +12,31 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filterType, setFilterType] = useState();
     const params = useParams();
 
-    const CSVheaders = [
-        { label: lang.date, key: "date" },
-        { label: lang.expense, key: "expense" },
-        { label: lang.source, key: "source" },
-        { label: lang.category, key: "category" },
-        { label: lang.subCategory, key: "subCategory" },
-        { label: lang.provider, key: "provider" },
-        { label: lang.description, key: "desc" },
-        { label: lang.value, key: "amount" }
-    ];
+    const CSVheaders = {
+        financialControl: 
+            [
+                { label: lang.date, key: "date" },
+                { label: lang.expense, key: "expense" },
+                { label: lang.source, key: "source" },
+                { label: lang.category, key: "category" },
+                { label: lang.subCategory, key: "subCategory" },
+                { label: lang.provider, key: "provider" },
+                { label: lang.description, key: "desc" },
+                { label: lang.value, key: "amount" }
+            ],
+        todoPayments:
+            [
+                { label: lang.date, key: "date" },
+                { label: lang.link, key: "link" },
+                { label: lang.bank, key: "bank" },
+                { label: lang.idnumber, key: "idnumber" },
+                { label: lang.provider, key: "provider" },
+                { label: lang.description, key: "desc" },
+                { label: lang.value, key: "amount" }
+            ]
+    }
+    
+
 
     let filterData
     if (filter === '') {
@@ -70,7 +85,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     
     return ( 
         <C.TableContent>
-            <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
+            <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders[sheetType]} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
             <C.Table>
                 <C.Thead>
                     <C.Tr>
