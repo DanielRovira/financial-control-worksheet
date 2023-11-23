@@ -64,7 +64,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
 
     return ( 
         <C.TableContent>
-            <CSVLink id='exportCSV' data={filterData} separator={";"} headers={CSVheaders} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
+            <CSVLink id='exportCSV' data={itens} separator={";"} headers={CSVheaders} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
             <C.Table>
                 <C.Thead>
                     <C.Tr>
