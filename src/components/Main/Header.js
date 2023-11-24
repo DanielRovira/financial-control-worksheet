@@ -69,6 +69,17 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                     <h1>{lang[sheetType]}</h1>
                     <Box>
                         <Tooltip
+                            disableInteractive
+                            title={<h3>{lang.settings}</h3>}
+                            PopperProps={poppersConfig}
+                            enterDelay={500}
+                            enterNextDelay={500}
+                        >
+                            <IconButton onClick={() => {setOpenPanel(false); history(`/settings`)}}>
+                                <SettingsOutlinedIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip
                             id='AppBarTooltip'
                             disableInteractive
                             title={TooltipTitle}
@@ -89,17 +100,6 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                 }, 5)}>
                     <Card className='Panel'>
                         <div className='userContainer'>
-                            <Tooltip
-                                disableInteractive
-                                title={<h3>{lang.settings}</h3>}
-                                PopperProps={poppersConfig}
-                                enterDelay={800}
-                                enterNextDelay={800}
-                            >
-                                <IconButton onClick={() => {setOpenPanel(false); history(`/settings`)}}>
-                                    <SettingsOutlinedIcon />
-                                </IconButton>
-                            </Tooltip>
                             <Avatar children={user.name[0]} />
                             <h2>{user.name}</h2>
                             <p>{user.email}</p>
