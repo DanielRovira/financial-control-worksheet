@@ -11,19 +11,25 @@
     }
 } */
 
+.AppBar .MuiToolbar-root {
+    padding-right: 10px;
+}
+
 @media (max-width: 450px) {
     .MuiAppBar-root {
         max-height: 56px;
         line-height: 1.5em;
     }
+
+    .AppBar .MuiToolbar-root {
+        padding-right: 0px;
+    }
 }
 
-.AppBar .MuiToolbar-root {
-    padding-right: 10px;
-}
+.AppBar .MuiBox-root {
+    display: flex;
+    flex-direction: row;
 
-.AppBar .MuiToolbar-root h1 {
-    padding-left: 75px;
 }
 
 .AppBar .MuiBox-root svg {

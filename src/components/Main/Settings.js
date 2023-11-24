@@ -94,7 +94,8 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
                 <ListItemText
                     primary={section.name}
                 />
-                <IconButton onMouseDown={() => deleteDocument(section, CategoriesListItem)} sx={{visibility: showRemove === section._id ? 'auto' : 'hidden' }}>
+                {/* <IconButton onMouseDown={() => deleteDocument(section, CategoriesListItem)} sx={{visibility: showRemove === section._id ? 'auto' : 'hidden' }}> */}
+                <IconButton onMouseDown={() => deleteDocument(section, CategoriesListItem)} sx={{opacity: showRemove === section._id ? '100%' : '20%' }}>
                     <RemoveCircleIcon />
                 </IconButton>
             </ListItem>
@@ -109,7 +110,8 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
                 subheader={
                     <ListSubheader sx={{ display: 'flex', justifyContent:'space-between'}}>
                         <h2>{lang[`${CategoriesListItem}`]}</h2>
-                        <IconButton onMouseDown={() => handleClick(CategoriesListItem)} sx={{visibility: showAdd === CategoriesListItem ? 'auto' : 'hidden' }}>
+                        {/* <IconButton onMouseDown={() => handleClick(CategoriesListItem)} sx={{visibility: showAdd === CategoriesListItem ? 'auto' : 'hidden' }}> */}
+                        <IconButton onMouseDown={() => handleClick(CategoriesListItem)} sx={{opacity: showAdd === CategoriesListItem ? '100%' : '20%' }}>
                             <AddCircleIcon />
                         </IconButton>
                     </ListSubheader>
