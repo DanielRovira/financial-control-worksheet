@@ -66,7 +66,9 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                     <IconButton color="inherit" edge="start" onClick={() => setOpenSidebar(!openSidebar)} >
                         <MenuIcon />
                     </IconButton>
-                    <h1>{lang[sheetType]}</h1>
+                    <Box>
+                        <h1>{lang[sheetType]}</h1>
+                    </Box>
                     <Box>
                         <Tooltip
                             disableInteractive
@@ -75,7 +77,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                             enterDelay={500}
                             enterNextDelay={500}
                         >
-                            <IconButton onClick={() => {setOpenPanel(false); history(`/settings`)}}>
+                            <IconButton color="inherit" onClick={() => {setOpenPanel(false); history(`/settings`)}}>
                                 <SettingsOutlinedIcon />
                             </IconButton>
                         </Tooltip>
@@ -90,7 +92,9 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                             placement='bottom-end'
                             PopperProps={poppersConfig}
                         >
-                            <Avatar onClick={() => (setOpenPanel(!openPanel))} children={user.name[0]} />
+                            <IconButton>
+                                <Avatar onClick={() => (setOpenPanel(!openPanel))} children={user.name[0]} />
+                            </IconButton>
                         </Tooltip>
                     </Box>
                 </Toolbar>

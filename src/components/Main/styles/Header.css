@@ -10,6 +10,11 @@
         font-size: 1.2em;
     }
 } */
+@media (min-width: 600px) {
+    .AppBar .MuiToolbar-root {
+        padding-right: 10px;
+    }
+} 
 @media (max-width: 450px) {
     .MuiAppBar-root {
         max-height: 56px;
@@ -20,6 +25,29 @@
 .AppBar .MuiBox-root {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.AppBar .MuiBox-root svg {
+    font-size: 28px;
+}
+
+.AppBar .MuiBox-root .MuiButtonBase-root {
+    border-radius: 0;
+    max-height: 48px;
+}
+
+.AppBar .MuiBox-root .MuiButtonBase-root:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 0;
+}
+
+.AppBar .MuiBox-root h1 {
+    width: 100vw;
+    position: absolute;
+    text-align: center;
+    left: 0;
 }
 
 .AppBar .MuiBox-root .MuiAvatar-root, .Panel.MuiCard-root .userContainer .MuiAvatar-root {
@@ -89,10 +117,10 @@
     top: 0;
 }
 
-.Panel.MuiCard-root .userContainer .MuiIconButton-root svg {
+/* .Panel.MuiCard-root .userContainer .MuiIconButton-root svg {
     font-size: 30px;
     color: #3c4043;
-}
+} */
 
 .Panel.MuiCard-root .MuiDivider-root {
     width: 100%;
