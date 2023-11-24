@@ -3,9 +3,7 @@ import './styles/Settings.css'
 import Signup from './Signup';
 // import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField } from '@mui/material';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField, Tabs, Tab } from '@mui/material';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 

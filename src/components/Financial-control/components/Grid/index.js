@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import { useState } from 'react';
 import { CSVLink } from "react-csv";
+import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 import empityFolderImage from './empityFolderImage.svg' //throwIfNamespace: false
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -83,7 +84,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
         <div style={{margin:'auto', marginTop:'10vh', fontSize:'20px', textAlign:'center'}}>
             {params.taskTitle === 'TRASH' ? 
             (<p>{lang.empityTrashMessage}</p>) :
-            (<><p>{lang.empitySheet}</p><p>{lang.empitySheetMessage}</p></>)
+            (<><p>{lang.empitySheet}</p><p>{lang.empitySheetMessage1} <AddCircleIcon style={{color:'var(--button-color)', verticalAlign:'middle'}} /> {lang.empitySheetMessage2}</p></>)
             }
             <img src={empityFolderImage} alt="Empity Folder" style={{height:'200px',marginTop:'80px', filter:'opacity(50%)'}}/>
         </div>

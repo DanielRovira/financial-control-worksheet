@@ -14,9 +14,9 @@ import { AddCircle as AddCircleIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
          Download as DownloadIcon,
-         UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
-import SyncIcon from '@mui/icons-material/Sync';
-import CloudDoneOutlinedIcon from '@mui/icons-material/CloudDoneOutlined';
+         UnarchiveOutlined as UnarchiveOutlinedIcon,
+         Sync as SyncIcon,
+         CloudDoneOutlined as CloudDoneOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, setSyncing }) => {
