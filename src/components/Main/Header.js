@@ -66,9 +66,9 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                     <IconButton color="inherit" edge="start" onClick={() => setOpenSidebar(!openSidebar)} >
                         <MenuIcon />
                     </IconButton>
-                    <Box>
+
                         <h1>{lang[sheetType]}</h1>
-                    </Box>
+
                     <Box>
                         <Tooltip
                             disableInteractive

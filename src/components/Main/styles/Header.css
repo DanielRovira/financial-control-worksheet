@@ -22,10 +22,8 @@
     padding-right: 10px;
 }
 
-.AppBar .MuiBox-root {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.AppBar .MuiToolbar-root h1 {
+    padding-left: 75px;
 }
 
 .AppBar .MuiBox-root svg {
@@ -41,13 +39,6 @@
 .AppBar .MuiBox-root .MuiButtonBase-root:hover {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 0;
-}
-
-.AppBar .MuiBox-root h1 {
-    width: 100vw;
-    position: absolute;
-    text-align: center;
-    left: 0;
 }
 
 .AppBar .MuiBox-root .MuiAvatar-root, .Panel.MuiCard-root .userContainer .MuiAvatar-root {
