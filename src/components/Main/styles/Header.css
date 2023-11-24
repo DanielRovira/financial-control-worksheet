@@ -10,11 +10,7 @@
         font-size: 1.2em;
     }
 } */
-@media (min-width: 600px) {
-    .AppBar .MuiToolbar-root {
-        padding-right: 10px;
-    }
-} 
+
 @media (max-width: 450px) {
     .MuiAppBar-root {
         max-height: 56px;
@@ -22,11 +18,14 @@
     }
 }
 
+.AppBar .MuiToolbar-root {
+    padding-right: 0px;
+}
+
 .AppBar .MuiBox-root {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 10px;
 }
 
 .AppBar .MuiBox-root svg {
@@ -35,7 +34,8 @@
 
 .AppBar .MuiBox-root .MuiButtonBase-root {
     border-radius: 0;
-    max-height: 48px;
+    height: 48px;
+    width: 48px;
 }
 
 .AppBar .MuiBox-root .MuiButtonBase-root:hover {
