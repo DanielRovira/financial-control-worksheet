@@ -44,10 +44,12 @@
     align-items: center;
     z-index: 2;
     position: fixed;
-    right: 40px;
-    top: 45px;
+    right: 0;
+    top: 50px;
     width: 250px;
     /* padding: 5px; */
+    -webkit-box-shadow: 0 24px 54px rgba(0,0,0,.15), 0 4.5px 13.5px rgba(0,0,0,.08);
+    box-shadow: 0 24px 54px rgba(0,0,0,.15), 0 4.5px 13.5px rgba(0,0,0,.08);
 }
 
 .Panel.MuiCard-root .userContainer {
