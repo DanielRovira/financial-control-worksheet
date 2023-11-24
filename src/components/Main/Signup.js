@@ -13,9 +13,10 @@ const Signup = () => {
   const handleChange = (e) => {
     setInputs((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [e.target.name.slice(4)]: e.target.value,
     }));
   };
+  console.log(inputs)
   const sendRequest = async () => {
       const res = await fetch(`/api/signup`,
       {
@@ -51,7 +52,7 @@ const Signup = () => {
         >
           <h2>{lang.signup}</h2>
           <TextField
-            name="name"
+            name="new-name"
             onChange={handleChange}
             value={inputs.name}
             variant="outlined"
@@ -59,24 +60,24 @@ const Signup = () => {
             margin="normal"
           />
           <TextField
-            name="email"
+            name="new-email"
             onChange={handleChange}
             type="email"
             value={inputs.email}
             variant="outlined"
             placeholder="Email"
             margin="normal"
-            // autoComplete="new-password"
+            autoComplete="new-password"
           />
           <TextField
-            name="password"
+            name="new-password"
             onChange={handleChange}
             type="password"
             value={inputs.password}
             variant="outlined"
             placeholder="Password"
             margin="normal"
-            // autoComplete="new-password"
+            autoComplete="new-password"
           />
           <Button variant="contained" type="submit">
             Signup
