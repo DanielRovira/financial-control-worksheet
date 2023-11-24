@@ -15,6 +15,11 @@
     padding-right: 10px;
 }
 
+.AppBar .MuiToolbar-root h1 {
+    width: 100%;
+    padding-left: 10px;
+}
+
 @media (max-width: 450px) {
     .MuiAppBar-root {
         max-height: 56px;
@@ -29,7 +34,6 @@
 .AppBar .MuiBox-root {
     display: flex;
     flex-direction: row;
-
 }
 
 .AppBar .MuiBox-root svg {

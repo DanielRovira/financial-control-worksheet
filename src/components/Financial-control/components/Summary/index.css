@@ -8,15 +8,25 @@
 
 .Summary .MuiList-root {
     height: min-content;
-    background-color: white;
+    /* background-color: white; */
     padding: 0;
     border-radius: 5px;
     margin-top: 10px;
-    box-shadow: 0px 0px 5px #ccc;
 }
 
 .Summary .MuiList-root .MuiButtonBase-root {
     border-radius: 5px;
+    background-color: white;
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 5px;
+    box-shadow: 0px 0px 5px #ccc;
+
+}
+
+.Summary .MuiList-root .MuiButtonBase-root li {
+    background-color: white;
 }
 
 .Summary .MuiList-root .MuiButtonBase-root span {
@@ -27,7 +37,7 @@
 
 .chartContent {
     background-color: white;
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 0 0;
     margin: 10px;
     min-width: 70vw;
     border-radius: 5px;
@@ -37,10 +47,14 @@
 @media (max-width: 750px) {
     .Summary {
         padding: 0 0 0 10px;
+        flex-direction: column;
     }
 
     .chartContent {
-        margin: 10px 10px 5px 10px;
+        margin: 5px;
+    }
+    .Summary .MuiList-root {
+    display: flex;
     }
 }
 
