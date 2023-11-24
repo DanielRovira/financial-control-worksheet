@@ -1,12 +1,12 @@
 .EmpityFolder {
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 25vh;
     font-size: 20px;
     text-align: center;
 }
 
 .EmpityFolder img {
     height: 200px;
-    margin-top: 80px;
+    margin-top: 10px;
     filter: opacity(50%);
 }
