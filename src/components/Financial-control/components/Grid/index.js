@@ -85,7 +85,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             (<p>{lang.empityTrashMessage}</p>) :
             (<><p>{lang.empitySheet}</p><p>{lang.empitySheetMessage}</p></>)
             }
-            <img src={empityFolderImage} alt="Empity Folder Image" style={{marginTop:'80px'}}/>
+            <img src={empityFolderImage} alt="Empity Folder" style={{height:'200px',marginTop:'80px', filter:'opacity(50%)'}}/>
         </div>
         )
     

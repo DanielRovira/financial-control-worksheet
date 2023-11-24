@@ -145,10 +145,16 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
 
     return (
         <div className='SettingsContainer'>
-            <Tabs value={tabValue} onChange={handleTabChange} aria-label="basic tabs example">
-                <Tab label={lang.sections} />
-                <Tab label={lang.category} />
-                <Tab label={lang.signup} />
+            <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                aria-label="basic tabs example"
+                variant="scrollable"
+                scrollButtons
+                allowScrollButtonsMobile>
+                    <Tab label={lang.sections} />
+                    <Tab label={lang.category} />
+                    <Tab label={lang.signup} />
             </Tabs>
             <div className='SettingsSubContainer'>
                 {tabValue === 0 && (
