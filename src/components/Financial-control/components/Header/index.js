@@ -26,6 +26,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
+    const enterDelay = 500
 
     const handleFilterButton = () => {
         setArchived(!archived);
@@ -74,7 +75,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
                 {checked.length !== 0 && <>
                 {archived === false && <>
-                    <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.remove}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                    <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.remove}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <span>
                         <IconButton onClick={!syncing && handleDeleteButton}
                         // disabled={checked.length > 5 ? true : false}
@@ -83,7 +84,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         </IconButton>
                     </span>
                 </Tooltip>
-                <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <span>
                         <IconButton onClick={!syncing && handleDuplicateSelected} 
                         // disabled={checked.length > 5 ? true : false}
@@ -93,7 +94,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </span>
                 </Tooltip>
                 </>}
-                <Tooltip title={<h3>{lang[!archived ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang[!archived ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={!syncing && handleArchiveButton}>
                         {archived
                         ? <UnarchiveOutlinedIcon />
@@ -104,12 +105,12 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </>}
             </>}
                 {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
-                <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={() => !syncing && handleDeleteSelected('trash', 1)}>
                         <DeleteForeverIcon/>
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <span>
                     <IconButton onClick={() => !syncing && handleDeleteSelected('restore')}
                     // disabled={checked.length > 5 ? true : false}
@@ -136,30 +137,30 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             <C.Buttons className='rightButtons'>
                 {archived === false && <>
                 {sheetType !== 'summary' && <>
-                <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton  onClick={() => setAdd(!add)}>
                         {!add ? <AddCircleIcon/>
                              : <RemoveCircleIcon/>}
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.download}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.download}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton  onClick={() => document.getElementById('exportCSV').click()}>
                         <DownloadIcon/>
                     </IconButton>
                 </Tooltip>
                 </>}
-                <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon/>
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={() => setDrawer(true)}>
                         <InfoOutlinedIcon/>
                     </IconButton>
                 </Tooltip>
                 </>}
-                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={handleFilterButton}>
                         <MoreVertIcon />
                     </IconButton>
