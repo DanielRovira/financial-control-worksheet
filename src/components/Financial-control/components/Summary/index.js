@@ -1,4 +1,5 @@
 import './index.css'
+import EmpityFolder from '../EmpityFolder';
 import { useState, useEffect } from 'react';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
@@ -116,6 +117,12 @@ const options = {
     }
 }
 
+if (rawData.length === 0)
+    return (
+        <EmpityFolder />
+    )
+
+else
     return (
         <div className='Summary'>
             <List>

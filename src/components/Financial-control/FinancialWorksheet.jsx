@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
 import BottomNavigation from './components/BottomNav';
 import Calendar from './components/Calendar';
+import EmpityFolder from './components/EmpityFolder';
 import Form from './components/Form';
 import Grid from './components/Grid';
 import Header from './components/Header';
@@ -273,7 +274,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
             {loadingData ? <LinearProgress /> :
             <>{sheetType === 'summary'
-            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 && <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} />
+            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
             : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} />
             }</>
             }
