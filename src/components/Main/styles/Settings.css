@@ -11,6 +11,7 @@
 
 .MuiTabs-flexContainer {
     max-width: 70vw;
+    background-color: white;
 }
 
 .SettingsSubContainer {
