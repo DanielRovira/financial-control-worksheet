@@ -9,7 +9,7 @@ import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 import empityFolderImage from './empityFolderImage.svg' //throwIfNamespace: false
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar }) => {
+const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar, setAdd }) => {
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
@@ -79,16 +79,17 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
         })
     )
 
-    if (rawData.length === 0)
+    if (rawData.length === 0){
+        setAdd(true)
         return (
         <div style={{margin:'auto', marginTop:'10vh', fontSize:'20px', textAlign:'center'}}>
             {params.taskTitle === 'TRASH' ? 
             (<p>{lang.empityTrashMessage}</p>) :
-            (<><p>{lang.empitySheet}</p><p>{lang.empitySheetMessage1} <AddCircleIcon style={{color:'var(--button-color)', verticalAlign:'middle'}} /> {lang.empitySheetMessage2}</p></>)
+            (<p>{lang.empitySheet}</p>)
             }
             <img src={empityFolderImage} alt="Empity Folder" style={{height:'200px',marginTop:'80px', filter:'opacity(50%)'}}/>
         </div>
-        )
+        )}
     
     else
         return ( 
