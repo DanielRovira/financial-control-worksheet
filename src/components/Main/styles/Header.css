@@ -16,8 +16,19 @@
 }
 
 .AppBar .MuiToolbar-root h1 {
-    width: 100%;
-    padding-left: 10px;
+    width: 100vw;
+    left: 0;
+    /* padding-left: 10px; */
+    text-align: center;
+    position: absolute;
+    z-index: -1;
+}
+
+.AppBar .MuiToolbar-root img {
+    position: absolute;
+    left: 50px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 @media (max-width: 500px) {
@@ -41,6 +52,10 @@
 
 .AppBar .MuiBox-root svg {
     font-size: 28px;
+}
+
+.AppBar .MuiButtonBase-root {
+    z-index: 999;
 }
 
 .AppBar .MuiBox-root .MuiButtonBase-root {
