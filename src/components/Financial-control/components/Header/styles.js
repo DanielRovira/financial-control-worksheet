@@ -10,10 +10,21 @@ export const Container = styled.div`
 
     .leftButtons {
     left: 75px;
+    height: 33px;
     }
     
     .rightButtons {
     right: 10px;
+    height: 33px;
+    }
+
+    p {
+        font-size: 14px;
+        padding-left: 5px;
+    }
+
+    @media (max-width: 1300px) {
+        height: 120px;
     }
 
     @media (max-width: 750px) {
@@ -46,13 +57,29 @@ export const Buttons = styled.div`
         border-radius: 5px;
     }
 
+    .MuiButtonBase-root.MuiIconButton-root:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 1300px) {
+        top: 85px;
+    }
+
+    @media (max-width: 800px) {
+        top: 85px;
+
+        .MuiIconButton-root a {
+        display: none;
+        }
+    }
+
     @media (max-width: 450px) {
     /* top: 55px; */
 
-    .MuiIconButton-root {
+    /* .MuiIconButton-root {
         padding: 6px 2px;
+    } */
 
-    }
     }
 `
 

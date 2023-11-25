@@ -27,11 +27,12 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing }) => {
     const params = useParams();
     const timer = useRef(null);
-    const [cloudText, setCloudText] = useState('none')
+    const [cloudText, setCloudText] = useState('none');
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
-    const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
-    const enterDelay = 500
+    const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]};
+    const enterDelay = 500;
+    const disabled = checked.length > 5 ? true : checked.length > 0 ? false : true;
 
     //MENU
     const [anchorEl, setAnchorEl] = useState(null);
@@ -78,109 +79,71 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         <>
         <C.Container>
             <C.Buttons className='leftButtons'>
-            {params.taskTitle !== 'TRASH' && <>
-                {/* {sheetType === 'todoPayments' &&
-                <Tooltip title={<h3>{lang.filter}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                    <span>
-                    <ToggleButton value={0} selected={archived} onClick={handleFilterButton} sx={{height:'40px', width: '40px', marginTop: '4px'}}>
-                        <FilterAltIcon fontSize='large'/>
-                    </ToggleButton>
-                    </span>
-                </Tooltip>} */}
-
-                {checked.length !== 0 && <>
+            {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
-                    <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.remove}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <span>
-                        <IconButton onClick={!syncing && handleDeleteButton}
-                        // disabled={checked.length > 5 ? true : false}
-                        >
-                            <DeleteIcon/>
-                        </IconButton>
-                    </span>
-                </Tooltip>
-                <Tooltip title={checked.length > 5 ? <h3>{lang.limit}</h3> : <h3>{lang.duplicate}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <span>
-                        <IconButton onClick={!syncing && handleDuplicateSelected} 
-                        // disabled={checked.length > 5 ? true : false}
-                        >
-                            <DifferenceIcon/>
-                        </IconButton>
-                    </span>
-                </Tooltip>
-                </>}
-                <Tooltip title={<h3>{lang[!archived ? 'archive' : 'unAarchive']}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton onClick={!syncing && handleArchiveButton}>
-                        {archived
-                        ? <UnarchiveOutlinedIcon />
-                        : <ArchiveOutlinedIcon />
-                        }
+                    <IconButton  onClick={() => setAdd(!add)}>
+                        {!add ? <AddCircleIcon/>
+                             : <RemoveCircleIcon/>}
+                    <p>{lang.add}</p>
                     </IconButton>
-                </Tooltip>
                 </>}
+                <IconButton onClick={!syncing ? handleDeleteButton : undefined}
+                            disabled={disabled}
+                >
+                    <DeleteIcon/>
+                    <p>{lang.remove}</p>
+                </IconButton>
+                <IconButton onClick={!syncing ? handleDuplicateSelected : undefined} 
+                            disabled={disabled}
+                            >
+                    <DifferenceIcon/>
+                    <p>{lang.duplicate}</p>
+                </IconButton>
+                <IconButton onClick={!syncing ? handleArchiveButton : undefined}
+                            disabled={disabled}
+                            >
+                    {archived
+                    ? <UnarchiveOutlinedIcon />
+                    : <ArchiveOutlinedIcon />
+                    }
+                    <p>{lang[!archived ? 'archive' : 'unAarchive']}</p>
+                </IconButton>
             </>}
                 {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
-                <Tooltip title={<h3>{lang.empityTrash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton onClick={() => !syncing && handleDeleteSelected('trash', 1)}>
+                    <IconButton onClick={() => !syncing ? handleDeleteSelected('trash', 1) : undefined}
+                                disabled={disabled}
+                            >
                         <DeleteForeverIcon/>
+                        <p>{lang.empityTrash}</p>
                     </IconButton>
-                </Tooltip>
-                <Tooltip title={<h3>{lang.restore}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <span>
-                    <IconButton onClick={() => !syncing && handleDeleteSelected('restore')}
-                    // disabled={checked.length > 5 ? true : false}
-                    >
+                    <IconButton onClick={() => !syncing ? handleDeleteSelected('restore') : undefined}
+                                disabled={disabled}
+                            >
                         <RestoreFromTrashIcon/>
+                        <p>{lang.restore}</p>
                     </IconButton>
-                    </span>
-                </Tooltip>
                 </>}
-                    {
+                    {sheetType !== 'summary' && <>
                      <IconButton disabled>
-                         {syncing
-                         ? <><SyncIcon /><p style={{fontSize: '14px', paddingLeft: '5px'}}>Salvando...</p></>
-                         : <><CloudDoneOutlinedIcon /><p style={{fontSize: '14px', paddingLeft: '5px', display: cloudText}}>Documento salvo</p></>
+                        {syncing
+                         ? <><SyncIcon /><p>{lang.saving}</p></>
+                         : <><CloudDoneOutlinedIcon /><p style={{display: cloudText}}>{lang.saved}</p></>
                         }
                      </IconButton>
-                    }
+                     </>}
             </C.Buttons>
-            
             <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
             </C.Header>
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>
                 {archived === false && <>
-                {sheetType !== 'summary' && <>
-                <Tooltip title={<h3>{lang.add}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton  onClick={() => setAdd(!add)}>
-                        {!add ? <AddCircleIcon/>
-                             : <RemoveCircleIcon/>}
-                    </IconButton>
-                </Tooltip>
-                {/* <Tooltip title={<h3>{lang.download}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton  onClick={() => document.getElementById('exportCSV').click()}>
-                        <DownloadIcon/>
-                    </IconButton>
-                </Tooltip> */}
-                </>}
-                <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon/>
+                        <p>{lang.calendar}</p>
                     </IconButton>
-                </Tooltip>
-                {/* <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton onClick={() => setDrawer(true)}>
-                        <InfoOutlinedIcon/>
-                    </IconButton>
-                </Tooltip> */}
                 </>}
-                {/* <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton onClick={handleFilterButton}>
-                        <MoreVertIcon />
-                    </IconButton>
-                </Tooltip> */}
-                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
+                <Tooltip title={<h3>{lang.more}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={handleClick}>
                         <MoreVertIcon />
                     </IconButton>

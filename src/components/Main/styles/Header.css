@@ -20,10 +20,13 @@
     padding-left: 10px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     .MuiAppBar-root {
         max-height: 56px;
         line-height: 1.5em;
+    }
+    .MuiAppBar-root h1 {
+        font-size: 22px;
     }
 
     .AppBar .MuiToolbar-root {
