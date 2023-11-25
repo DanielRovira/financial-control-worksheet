@@ -29,7 +29,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow }) => {
             <List component="div" disablePadding>
                 {types.map((type) => (
                     <ListItemButton key={type} onClick={() => {history(`/${type}/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
-                        <ListItemIcon>
+                        <ListItemIcon style={{marginLeft:'20px'}}>
                             {type === 'summary' && <BarChartIcon />}
                             {type === 'todoPayments' && <CalendarMonthIcon />}
                             {type === 'financialControl' && <ListAltIcon />}
