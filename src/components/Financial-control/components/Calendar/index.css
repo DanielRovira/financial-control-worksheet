@@ -12,8 +12,8 @@
 .Calendar {
     z-index: 2;
     position: fixed;
-    right: 120px;
-    top: 110px;
+    right: 10px;
+    top: 90px;
     animation: scaleAnimationIn2 .2s;
 }
 
