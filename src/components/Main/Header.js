@@ -92,8 +92,8 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetT
                             placement='bottom-end'
                             PopperProps={poppersConfig}
                         >
-                            <IconButton>
-                                <Avatar onClick={() => (setOpenPanel(!openPanel))} children={user.name[0]} />
+                            <IconButton onClick={() => (setOpenPanel(!openPanel))} >
+                                <Avatar children={user.name[0]} />
                             </IconButton>
                         </Tooltip>
                     </Box>

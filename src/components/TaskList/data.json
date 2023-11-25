@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "title": "Study programming",
+        "completed": false
+    },
+    {
+        "id": 2,
+        "title": "Read books",
+        "completed": true
+    },
+    {
+        "id": 3,
+        "title": "Finish React.js project",
+        "completed": true
+    },
+    {
+        "id": 4,
+        "title": "Go shopping",
+        "completed": false
+    },
+    {
+        "id": 5,
+        "title": "Pay the bills",
+        "completed": true
+    }
+]
