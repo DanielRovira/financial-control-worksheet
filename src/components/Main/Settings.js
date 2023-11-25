@@ -18,7 +18,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
     const [showInput, setShowInput] = useState(false);
     const [value, setValue] = useState();
     const [tabValue, setTabValue] = useState(0);
-// console.log(CategoriesListItem)
+
     function insertDocument(transaction, CategoriesListItem) {
         let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories');
         CategoriesListItem === 'sections'
