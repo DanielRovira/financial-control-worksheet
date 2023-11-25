@@ -144,7 +144,10 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
     }
 
     return (
-        <div className='SettingsContainer'>
+        <div className='SettingsContainer'
+        onMouseEnter={() => {setShowAdd(); setShowRemove()}}
+        onMouseLeave={() => {setShowAdd(); setShowRemove()}}
+        >
             <Tabs
                 value={tabValue}
                 onChange={handleTabChange}
