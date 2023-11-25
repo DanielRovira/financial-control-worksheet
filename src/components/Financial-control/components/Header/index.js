@@ -17,9 +17,14 @@ import { AddCircle as AddCircleIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon,
          Sync as SyncIcon,
          CloudDoneOutlined as CloudDoneOutlinedIcon } from '@mui/icons-material';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import UnarchiveIcon from '@mui/icons-material/Unarchive';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, setSyncing }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing }) => {
     const params = useParams();
     const timer = useRef(null);
     const [cloudText, setCloudText] = useState('none')
@@ -27,6 +32,16 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
     const enterDelay = 500
+
+    //MENU
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     const handleFilterButton = () => {
         setArchived(!archived);
@@ -143,28 +158,67 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                              : <RemoveCircleIcon/>}
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.download}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
+                {/* <Tooltip title={<h3>{lang.download}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton  onClick={() => document.getElementById('exportCSV').click()}>
                         <DownloadIcon/>
                     </IconButton>
-                </Tooltip>
+                </Tooltip> */}
                 </>}
                 <Tooltip title={<h3>{lang.calendar}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon/>
                     </IconButton>
                 </Tooltip>
-                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
+                {/* <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={() => setDrawer(true)}>
                         <InfoOutlinedIcon/>
                     </IconButton>
-                </Tooltip>
+                </Tooltip> */}
                 </>}
-                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
+                {/* <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
                     <IconButton onClick={handleFilterButton}>
                         <MoreVertIcon />
                     </IconButton>
+                </Tooltip> */}
+                <Tooltip title={<h3>{lang.details}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
+                    <IconButton onClick={handleClick}>
+                        <MoreVertIcon />
+                    </IconButton>
                 </Tooltip>
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    <MenuItem onClick={() => {setDrawer(true); handleClose()}}>
+                        <ListItemIcon>
+                            <InfoOutlinedIcon/>
+                        </ListItemIcon>
+                            Detalhes
+                    </MenuItem>
+                    <MenuItem onClick={() => {document.getElementById('exportCSV').click(); handleClose()}}>
+                        <ListItemIcon>
+                            <DownloadIcon/>
+                        </ListItemIcon>
+                            Baixar planilha
+                    </MenuItem>
+                    <MenuItem onClick={() => {handleFilterButton(); handleClose()}}>
+                        <ListItemIcon>
+                            {archived ?
+                                <UnarchiveIcon/> :
+                                <ArchiveIcon/>
+                            }
+                        </ListItemIcon>
+                            {archived ?
+                                lang.notArchived :
+                                lang.archived
+                            }
+                    </MenuItem>
+                </Menu>
             </C.Buttons>
             }
         </C.Container>

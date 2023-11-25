@@ -16,7 +16,6 @@ export const Container = styled.div`
     right: 10px;
     }
 
-    
     @media (max-width: 750px) {
         .leftButtons {
         left: 10px;

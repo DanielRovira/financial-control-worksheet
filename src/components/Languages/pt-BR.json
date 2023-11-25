@@ -32,6 +32,7 @@
     "login": "Login",
     "logout": "Sair",
     "archived": "Itens arquivados",
+    "notArchived": "Itens não arquivados",
     "archive": "Arquivar",
     "unAarchive": "Desarquivar",
     "number": "Nº",
