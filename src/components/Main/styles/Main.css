@@ -1,10 +1,18 @@
 .MainContainer {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     row-gap: 30px;
-    padding-top: 150px;
+    padding-top: 80px;
     padding-bottom: 15px;
     overflow: auto;
+    width: max-content;
+    height: max-content;
+    margin-left: calc((var(--closeSidebarWidth)) + 30px);
+}
+
+.MainContainer .SubContainer {
+    display: flex;
 }
 
 .MainContainer ul {

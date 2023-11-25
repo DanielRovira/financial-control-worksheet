@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom"
 import { useEffect } from 'react';
-// import Button from './Button';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Button from '@mui/material/Button';
 
 import './css/TaskDetails.css'
 
 const TaskDetails = ({ tasks, handleDescAddition, taskDetail, setTasksDetail }) => {
-    const params = useParams();
-    const history = useNavigate();
+
     const task = tasks.filter(task => task.id === taskDetail)
     const [description, setDescriptionl] = useState(task[0].description || '');
 
     const handleBackButtonClick = () => {
-        // history(-1);
         setTasksDetail(null)
     };
 
@@ -26,7 +22,7 @@ const TaskDetails = ({ tasks, handleDescAddition, taskDetail, setTasksDetail }) 
         return () => {
             handleDescAddition(description, taskDetail);
         };
-    }, [description]); // eslint-disable-next-line
+    }, [description, handleDescAddition, taskDetail]); // eslint-disable-next-line
 
     return (
         <>
@@ -47,7 +43,6 @@ const TaskDetails = ({ tasks, handleDescAddition, taskDetail, setTasksDetail }) 
                     minRows={5}
                     id='task-input-detail'
                     onChange={handleInputChange}
-                    oninput="this.style.height = ''; this.style.height = this.scrollHeight +'px'"
                     defaultValue={task[0].description}
                     onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
                 />

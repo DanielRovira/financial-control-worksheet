@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import {v4 as uuidv4} from 'uuid'
 
 import externalData from './data.json'
-import Header from './components/Header';
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import TaskDetails from './components/TaskDetails';
-
 import './components/css/App.css'
+const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const App = () => {
     const data = localStorage.getItem("tasks");
@@ -85,15 +84,13 @@ const App = () => {
         };
 
         return (
-
                 <div className='container'>
-                    <Header/>
+                    <h1 style={{ color: "#1976d2"}}>{lang.tasks}</h1>
                     {taskDetail ? 
                         <TaskDetails tasks={tasks} handleDescAddition={handleDescAddition} taskDetail={taskDetail} setTasksDetail={setTasksDetail} /> :
                         <Main/>
                     }
                 </div>
- 
         )
 };
 

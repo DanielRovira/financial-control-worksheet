@@ -48,11 +48,13 @@
     "source": "Proveniência",
     "summary": "Resumo",
     "provider": "Fornecedor",
+    "tasks": "Tarefas",
     "todoPayments": "Pagamentos a fazer",
     "total": "Total",
     "trash": "Lixeira",
     "type": "Tipo",
     "value": "Valor",
     "valuePlaceholder": "R$ 0,00",
-    "valuePrefix": "R$ "
+    "valuePrefix": "R$ ",
+    "welcome": "Bem-vindo!"
 }
