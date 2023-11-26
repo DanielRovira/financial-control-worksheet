@@ -1,0 +1,25 @@
+.ItensContainer {
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 90px;
+}
+
+.ItensContainer::-webkit-scrollbar {
+    width: var(--closeSidebarScrollWidth);
+}
+
+.InsideSidebar .MuiList-padding {
+    height: 100vh;
+    overflow: hidden;
+    /* padding-top: 50px; */
+    white-space: nowrap;
+    transition: .3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiListSubheader-root {
+    background-color: inherit;
+}
+
+

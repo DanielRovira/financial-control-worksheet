@@ -9,7 +9,7 @@ export const Container = styled.div`
     border-bottom: 1px solid #DADCE0;
 
     .leftButtons {
-    left: 75px;
+    left: 70px;
     height: 33px;
     }
     
@@ -20,7 +20,7 @@ export const Container = styled.div`
 
     p {
         font-size: 14px;
-        padding-left: 5px;
+        padding: 0 5px;
     }
 
     @media (max-width: 1300px) {

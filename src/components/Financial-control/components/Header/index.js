@@ -1,8 +1,9 @@
 import * as C from './styles';
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { IconButton, Tooltip  } from '@mui/material';
+import { IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
 import { AddCircle as AddCircleIcon,
+         Archive as ArchiveIcon,
          ArchiveOutlined as ArchiveOutlinedIcon,
          CalendarMonth as CalendarMonthIcon,
          Delete as DeleteIcon,
@@ -10,21 +11,18 @@ import { AddCircle as AddCircleIcon,
          Difference as DifferenceIcon,
          FmdBadOutlined as FmdBadOutlinedIcon,
          InfoOutlined as InfoOutlinedIcon,
+         Menu as MenuIcon,
          MoreVert as MoreVertIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
          Download as DownloadIcon,
+         Unarchive as UnarchiveIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon,
          Sync as SyncIcon,
          CloudDoneOutlined as CloudDoneOutlinedIcon } from '@mui/icons-material';
-import ArchiveIcon from '@mui/icons-material/Archive';
-import UnarchiveIcon from '@mui/icons-material/Unarchive';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
     const params = useParams();
     const timer = useRef(null);
     const [cloudText, setCloudText] = useState('none');
@@ -79,6 +77,9 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         <>
         <C.Container>
             <C.Buttons className='leftButtons'>
+                <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{marginRight:'5px'}}>
+                    <MenuIcon/>
+                </IconButton>
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
                     <IconButton  onClick={() => setAdd(!add)}>
@@ -123,20 +124,20 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         <p>{lang.restore}</p>
                     </IconButton>
                 </>}
-                    {sheetType !== 'summary' && <>
-                     <IconButton disabled>
-                        {syncing
-                         ? <><SyncIcon /><p>{lang.saving}</p></>
-                         : <><CloudDoneOutlinedIcon /><p style={{display: cloudText}}>{lang.saved}</p></>
-                        }
-                     </IconButton>
-                     </>}
             </C.Buttons>
             <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
             </C.Header>
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>
+                {sheetType !== 'summary' && <>
+                     <IconButton disabled>
+                        {syncing
+                         ? <><p>{lang.saving}</p><SyncIcon /></>
+                         : <><p style={{display: cloudText}}>{lang.saved}</p><CloudDoneOutlinedIcon /></>
+                        }
+                     </IconButton>
+                </>}
                 {archived === false && <>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon/>

@@ -8,6 +8,7 @@ import Form from './components/Form';
 import Grid from './components/Grid';
 import Header from './components/Header';
 import Resume from './components/Resume';
+import Sidebar from './components/Sidebar';
 import Summary from './components/Summary';
 import Snackbar from './components/Snackbar';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
@@ -26,6 +27,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [loadingData, setLoadingData] = useState();
     const [operationType, setOperationType] = useState();
     const [syncing, setSyncing] = useState(false);
+    const [openSidebar, setOpenSidebar] = useState(false);
     const history = useNavigate();
     const params = useParams();
     const timer = useRef(null);
@@ -270,26 +272,30 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} />
-            {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
-            {loadingData ? <LinearProgress /> :
-            <>{sheetType === 'summary'
-            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
-            : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} />
-            }</>
-            }
-
-            <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
-            <Drawer
-            anchor='right'
-            open={drawer}
-            onClose={() => setDrawer(false)}
-            sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
-            >
-              <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
-            </Drawer>
-            {showCalendar && <Calendar rawData={transactionsList[sheetType]?.filter(item => !item.archived)} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
-            <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} getDataTimeout={getDataTimeout} />
+            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+            <div style={{display:'flex'}}>
+                <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+                <div>
+                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
+                    {loadingData ? <LinearProgress /> :
+                    <>{sheetType === 'summary'
+                    ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
+                    : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} />
+                    }</>
+                    }
+                    <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
+                    <Drawer
+                    anchor='right'
+                    open={drawer}
+                    onClose={() => setDrawer(false)}
+                    sx={{ '.MuiDrawer-paper': { backgroundColor: 'transparent', boxShadow: 'none'} }}
+                    >
+                      <Resume result={result} sheetType={sheetType} setDrawer={setDrawer} />
+                    </Drawer>
+                    {showCalendar && <Calendar rawData={transactionsList[sheetType]?.filter(item => !item.archived)} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
+                    <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} getDataTimeout={getDataTimeout} />
+                </div>
+            </div>
         </div>
     );
 };
