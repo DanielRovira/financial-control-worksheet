@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ClickAwayListener, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon } from '@mui/icons-material';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const NestedList = ({ section, setOpenSidebar, hideTitle, arrow }) => {
     const history = useNavigate();

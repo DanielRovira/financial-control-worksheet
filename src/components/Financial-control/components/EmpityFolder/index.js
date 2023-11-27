@@ -7,7 +7,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 export default function EmpityFolder({ setAdd }) {
   const params = useParams();
-  setAdd(true)
+//   setAdd(true);
   return (
       <div className='EmpityFolder'>
           {params.taskTitle === 'TRASH' ? 

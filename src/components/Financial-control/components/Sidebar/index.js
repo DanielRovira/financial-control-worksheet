@@ -1,7 +1,7 @@
 import './styles.css'
 import { IconButton, List, ListSubheader, Tooltip } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import NestedList from '../../../Main/NestedList';
+import NestedList from './NestedList';
 import { FaTrash } from 'react-icons/fa';
 // import { useState, useEffect } from 'react';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)

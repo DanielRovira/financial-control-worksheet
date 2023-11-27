@@ -1,38 +1,44 @@
 import './styles/Sidebar.css'
-import { Drawer, IconButton, List, ListSubheader, Tooltip } from '@mui/material';
+import { Drawer, List } from '@mui/material';
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import RequestPageIcon from '@mui/icons-material/RequestPage';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useNavigate } from 'react-router-dom';
-import NestedList from './NestedList';
-import { FaTrash } from 'react-icons/fa';
-// import { useState, useEffect } from 'react';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
- const Sidebar = ({ sections, openSidebar, setOpenSidebar }) => {
-    const history = useNavigate();
-    // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
+ const Sidebar = ({ openSidebar, setOpenSidebar }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
-    const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
+    const history = useNavigate();
+    const handleClick = () => {
+        setOpenSidebar && setOpenSidebar(false);
+    };
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
         <List sx={{ width: openSidebar ? '250px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader component="h1" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold', display:'flex', justifyContent: 'space-between' }}>
-                        {lang.sections}
-                        <Tooltip title={<h3>{lang.trash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                            <IconButton size='small' sx={{width: '35px', height: '35px', marginTop: '5px'}} onClick={() => {history('/financialControl/TRASH'); setOpenSidebar(false)}}>
-                                <FaTrash />
-                            </IconButton>
-                        </Tooltip>
-                        
-                    </ListSubheader>
-                }
         >
             <div className='ItensContainer'>
-                {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
-                    <NestedList key={index} section={section} setOpenSidebar={setOpenSidebar}/>
-                ))}
+                <ListItemButton onClick={() => {handleClick(); history('/main')}} title={lang.home}>
+                    <ListItemIcon>
+                        <HomeIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={lang.home} />
+                </ListItemButton>
+                <ListItemButton onClick={handleClick} title={lang.financialControl}>
+                    <ListItemIcon>
+                        <RequestPageIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={lang.financialControl} />
+                </ListItemButton>
+                <ListItemButton onClick={handleClick} title={lang.todos}>
+                    <ListItemIcon>
+                        <FormatListBulletedIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={lang.todos} />
+                </ListItemButton>
             </div>
             <div style={{ position: 'absolute', bottom: '10px', left: '60px' }}>
                 <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" style={{ maxWidth: '150px'}} />
