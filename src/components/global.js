@@ -94,13 +94,14 @@ const GlobalStyle = createGlobalStyle`
         flex-direction: column;
         height: 100vh;
         height: calc(var(--vh, 1vh) * 99);
+        width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
         max-height: 100%;
         overflow: hidden;
     }
 
     .FinancialWorksheet .GridContainer {
         height: calc(var(--vh, vh) * 100 - var(--closeSidebarWidth) * 2);
-        width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
+        width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 3);
         /* overflow: auto; */
         /* min-width: 10px; */
         /* min-height: 10px; */

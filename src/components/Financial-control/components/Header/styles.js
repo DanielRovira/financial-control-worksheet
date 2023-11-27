@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     z-index: 10;
-    width: 100%;
+    /* width: 100%; */
+    width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
     /* text-align: center; */
     /* background: #fff; */
     animation: scaleAnimationIn .1s;
