@@ -11,7 +11,7 @@ const Main = ({ sections, refreshToken, isLoggedIn, setSheetType, setLoading }) 
     // const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     useEffect(() => {
-        setLoading(true);
+        // setLoading(true);
         refreshToken();
         setSheetType('');
         // !isLoggedIn && history('/')
