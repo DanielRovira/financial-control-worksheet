@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const TableContent = styled.div`
+    /* margin: 10px 10px 60px calc((var(--closeSidebarWidth)) + 10px); */
     margin: 5px;
     overflow: auto;
     background-color: white;
@@ -8,6 +9,25 @@ export const TableContent = styled.div`
     border-radius: 5px;
     /* padding: 5px; */
     /* width: 93vw; */
+
+    /* tbody {
+        display: block;
+        max-height: 300px;
+        overflow-y: auto;
+    } */
+/* 
+    thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    thead, thead tr {
+    width: 300px;
+    max-width: 300px;
+    min-width: 300px;
+
+} */
 
     &::-webkit-scrollbar-track {
         margin-top: 35px;

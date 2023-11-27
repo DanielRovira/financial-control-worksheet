@@ -23,10 +23,12 @@
 }
 
 @media (min-width: 750px) {
-    .BottomNav .MuiBottomNavigation-root {
+    .BottomNav {
         visibility: hidden;
+        height: 0;
     }
 }
+
 @media (max-width: 500px) {
     .BottomNav .MuiBottomNavigation-root {
         border-top-left-radius: 0px;

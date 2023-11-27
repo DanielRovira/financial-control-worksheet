@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import empityFolderImage from './empityFolderImage.svg' //throwIfNamespace: false
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function EmpityFolder() {
+export default function EmpityFolder({ setAdd }) {
   const params = useParams();
-
+  setAdd(true)
   return (
       <div className='EmpityFolder'>
           {params.taskTitle === 'TRASH' ? 

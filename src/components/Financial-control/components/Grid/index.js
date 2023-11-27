@@ -4,8 +4,9 @@ import Filter from '../Filter';
 import EmpityFolder from '../EmpityFolder';
 import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CSVLink } from "react-csv";
+import { FaLowVision } from 'react-icons/fa';
 
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -78,14 +79,16 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             amount: item.amount.toString().replace('.', ',')
         })
     )
-
-    if (rawData.length === 0){
-        setAdd(true)
-        return (
-            <EmpityFolder />
-        )}
+        useEffect(() => {
+            setAdd(false)
+        }, []);
+    // if (rawData.length === 0){
+    //     // setAdd(true)
+    //     return (
+    //         <EmpityFolder />
+    //     )}
     
-    else
+    // else
         return ( 
         <C.TableContent>
             <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders[sheetType]} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>

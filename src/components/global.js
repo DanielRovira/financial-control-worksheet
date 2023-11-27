@@ -80,13 +80,30 @@ const GlobalStyle = createGlobalStyle`
         letter-spacing: 1px;
     }
 
-    .FinancialWorksheet, .App {
+    .App {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        height: calc(var(--vh, 1vh) * 99);
+        max-height: 100%;
+        overflow: hidden;
+    }
+
+    .FinancialWorksheet {
         display: flex;
         flex-direction: column;
         height: 100vh;
         height: calc(var(--vh, 1vh) * 99);
         max-height: 100%;
         overflow: hidden;
+    }
+
+    .FinancialWorksheet .GridContainer {
+        height: calc(var(--vh, vh) * 100 - var(--closeSidebarWidth) * 2);
+        width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
+        /* overflow: auto; */
+        /* min-width: 10px; */
+        /* min-height: 10px; */
     }
 
 `;

@@ -77,7 +77,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         <>
         <C.Container>
             <C.Buttons className='leftButtons'>
-                <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{marginRight:'5px'}}>
+                <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{margin:'0 10px 0 5px'}}>
                     <MenuIcon/>
                 </IconButton>
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>

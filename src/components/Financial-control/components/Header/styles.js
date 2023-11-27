@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
     z-index: 10;
     width: 100%;
-    text-align: center;
-    background: #fff;
+    /* text-align: center; */
+    /* background: #fff; */
     animation: scaleAnimationIn .1s;
-    border-bottom: 1px solid #DADCE0;
+    /* border-bottom: 1px solid #DADCE0; */
 
     .leftButtons {
     left: 70px;
@@ -23,9 +23,9 @@ export const Container = styled.div`
         padding: 0 5px;
     }
 
-    @media (max-width: 1300px) {
+    /* @media (max-width: 1300px) {
         height: 120px;
-    }
+    } */
 
     @media (max-width: 750px) {
         .leftButtons {
@@ -62,13 +62,13 @@ export const Buttons = styled.div`
     }
 
     @media (max-width: 1300px) {
-        top: 85px;
+        /* top: 85px; */
     }
 
-    @media (max-width: 800px) {
-        top: 85px;
+    @media (max-width: 1200px) {
+        /* top: 85px; */
 
-        .MuiIconButton-root a {
+        .MuiIconButton-root p {
         display: none;
         }
     }
@@ -86,10 +86,9 @@ export const Buttons = styled.div`
 export const Header = styled.h1``;
 
 export const Title = styled.div`
-    padding-top: 50px;
+    padding: 80px 0 0 5px;
     color: var(--font-color);
     font-size: 1.5rem;
-
 `;
 
 export const ArchivedTitle = styled.div`

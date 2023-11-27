@@ -8,17 +8,21 @@
     width: var(--closeSidebarScrollWidth);
 }
 
+.InsideSidebar {
+    width: min-content;
+}
+
 .InsideSidebar .MuiList-padding {
-    height: 100vh;
+    /* height: 100vh; */
     overflow: hidden;
-    /* padding-top: 50px; */
+    padding-top: 75px;
     white-space: nowrap;
     transition: .3s;
     display: flex;
     flex-direction: column;
 }
 
-.MuiListSubheader-root {
+.InsideSidebar .MuiListSubheader-root {
     background-color: inherit;
 }
 
