@@ -70,9 +70,6 @@ const GlobalStyle = createGlobalStyle`
         @media (max-width: 450px) {
             font-size: 1.6em;
         }
-        @media (max-width: 360px) {
-            /* font-size: 1.4em; */
-        }
     }
     
     .MuiTooltip-popper {
@@ -99,12 +96,9 @@ const GlobalStyle = createGlobalStyle`
         overflow: hidden;
     }
 
-    .FinancialWorksheet .GridContainer {
+    .FinancialWorksheet {
         height: calc(var(--vh, vh) * 100 - var(--closeSidebarWidth) * 2);
         width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 3);
-        /* overflow: auto; */
-        /* min-width: 10px; */
-        /* min-height: 10px; */
     }
 
 `;

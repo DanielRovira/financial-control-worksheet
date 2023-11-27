@@ -270,28 +270,22 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
          ))
     }, [transactionsList]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return (<>
-                    <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-
-
-        <div className='FinancialWorksheet'>
-            <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-            {/* <div style={{display:'flex'}}> */}
-                {/* <div className='GridContainer'> */}
+    return (
+        <>
+            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+            <div className='FinancialWorksheet'>
+                <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
                     {loadingData ? <LinearProgress /> :
                     <>
-                    {transactionsList[sheetType]?.length === 0 ? <EmpityFolder setAdd={setAdd} /> :
-                    <>
-                    {sheetType === 'summary'
-                    ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
-                    : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} />
-                    }
-                    </>
-                    }
-                    </>
-
-                    }
+                        {transactionsList[sheetType]?.length === 0 ? <EmpityFolder setAdd={setAdd} /> :
+                        <>
+                            {sheetType === 'summary'
+                            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
+                            : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} />
+                            }
+                        </>}
+                    </>}
                     <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
                     <Drawer
                     anchor='right'
@@ -303,9 +297,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     </Drawer>
                     {showCalendar && <Calendar rawData={transactionsList[sheetType]?.filter(item => !item.archived)} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
                     <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} getDataTimeout={getDataTimeout} />
-                {/* </div> */}
-            {/* </div> */}
-        </div>    </>
+            </div>    
+        </>
     );
 };
  
