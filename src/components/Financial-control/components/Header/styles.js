@@ -11,11 +11,11 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 55px 5px 0 5px;
+    margin: 5px 5px 0 5px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
     padding: 0 5px;
-    height: 35px;
+    min-height: 35px;
 
     .leftButtons {
     left: 70px;
@@ -95,7 +95,9 @@ export const Buttons = styled.div`
     }
 `
 
-export const Header = styled.h1``;
+export const Header = styled.h1`
+    margin: 55px 5px 0 5px;
+`;
 
 export const Title = styled.div`
     /* padding: 80px 0 0 5px; */

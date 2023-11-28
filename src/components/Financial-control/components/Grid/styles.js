@@ -65,3 +65,22 @@ export const Th = styled.th`
     top: 0;
     z-index: 1;
 `;
+
+export const Header = styled.h1`
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    
+    p {
+        font-size: 14px;
+        padding: 0 5px;
+    }
+
+`;
+
+export const Title = styled.div`
+    /* padding: 80px 0 0 5px; */
+    color: var(--font-color);
+    font-size: 1.5rem;
+
+`;

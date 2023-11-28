@@ -276,7 +276,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={sheetType === 'Main' ? true : openSidebar} setOpenSidebar={setOpenSidebar} />
             {sheetType === 'Main' ? <Main/> : 
             <div className='FinancialWorksheet'>
-                <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+                <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} />
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
                     {loadingData ? <LinearProgress /> :
                     <>
@@ -284,7 +284,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                         <>
                             {sheetType === 'summary'
                             ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
-                            : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} />
+                            : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} section={params.taskTitle} syncing={syncing} />
                             }
                         </>}
                     </>}

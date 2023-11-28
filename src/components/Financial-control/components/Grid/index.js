@@ -1,16 +1,15 @@
 import * as C from './styles';
 import GridItem from '../GridItem';
 import Filter from '../Filter';
-import EmpityFolder from '../EmpityFolder';
+import SavingCloud from '../SavingCloud';
 import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { CSVLink } from "react-csv";
-import { FaLowVision } from 'react-icons/fa';
 
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar, setAdd }) => {
+const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar, setAdd, section, syncing }) => {
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const params = useParams();
@@ -79,18 +78,17 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             amount: item.amount.toString().replace('.', ',')
         })
     )
-        useEffect(() => {
-            setAdd(false)
-        }, []);
-    // if (rawData.length === 0){
-    //     // setAdd(true)
-    //     return (
-    //         <EmpityFolder />
-    //     )}
-    
-    // else
-        return ( 
+
+    useEffect(() => {
+        setAdd(false)
+    }, [setAdd]);
+
+    return ( 
         <C.TableContent>
+            <C.Header >
+                <C.Title>{lang[sheetType] || lang.home}</C.Title>
+                <SavingCloud syncing={syncing} />
+            </C.Header>
             <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders[sheetType]} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
             <C.Table>
                 <C.Thead>
@@ -128,7 +126,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 </C.Tbody>
             </C.Table>
         </C.TableContent>
-     );
+    );
 };
  
 export default Grid;

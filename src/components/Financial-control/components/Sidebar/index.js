@@ -1,17 +1,17 @@
 import './styles.css'
-import { IconButton, List, ListSubheader, Tooltip } from '@mui/material';
+import { IconButton, List } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import NestedList from './NestedList';
-import { FaTrash } from 'react-icons/fa';
+// import { FaTrash } from 'react-icons/fa';
 // import { useState, useEffect } from 'react';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
  const Sidebar = ({ sections, openSidebar, setOpenSidebar }) => {
-    const history = useNavigate();
+    // const history = useNavigate();
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
-    const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
+    // const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
 
     return (
       <div className='InsideSidebar' variant="permanent" open={openSidebar} style={{marginLeft:'60px'}} >

@@ -1,5 +1,5 @@
 import * as C from './styles';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
 import { AddCircle as AddCircleIcon,
@@ -11,21 +11,18 @@ import { AddCircle as AddCircleIcon,
          Difference as DifferenceIcon,
          FmdBadOutlined as FmdBadOutlinedIcon,
          InfoOutlined as InfoOutlinedIcon,
-         Menu as MenuIcon,
          MoreVert as MoreVertIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
          Download as DownloadIcon,
          Unarchive as UnarchiveIcon,
-         UnarchiveOutlined as UnarchiveOutlinedIcon,
-         Sync as SyncIcon,
-         CloudDoneOutlined as CloudDoneOutlinedIcon } from '@mui/icons-material';
+         UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing }) => {
     const params = useParams();
-    const timer = useRef(null);
-    const [cloudText, setCloudText] = useState('none');
+
+
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]};
@@ -63,19 +60,11 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         handleOpenSnackbar();
     }
 
-    useEffect(() => {
-        return () => {
-            clearTimeout(timer.current)
-            setCloudText('unset')
-            timer.current = setTimeout(() => {
-                setCloudText('none')
-            }, 4000);
-        };
-    }, [syncing]);
-
     return (
         <>
-        {/* <div style={{height:'50px'}}></div> */}
+        <C.Header>
+            <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
+        </C.Header>
         <C.Container>
             <C.Buttons className='leftButtons'>
                 {/* <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{margin:'0 10px 0 5px'}}>
@@ -126,19 +115,19 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </IconButton>
                 </>}
             </C.Buttons>
-            <C.Header>
+            {/* <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
-            </C.Header>
+            </C.Header> */}
             {params.taskTitle !== 'TRASH' && 
             <C.Buttons className='rightButtons'>
-                {sheetType !== 'summary' && <>
+                {/* {sheetType !== 'summary' && <>
                      <IconButton disabled>
                         {syncing
                          ? <><p>{lang.saving}</p><SyncIcon /></>
                          : <><p style={{display: cloudText}}>{lang.saved}</p><CloudDoneOutlinedIcon /></>
                         }
                      </IconButton>
-                </>}
+                </>} */}
                 {archived === false && <>
                     <IconButton onClick={() => setShowCalendar(!showCalendar)}>
                         <CalendarMonthIcon/>
