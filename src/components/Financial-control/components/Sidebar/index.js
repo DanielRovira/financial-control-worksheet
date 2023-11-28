@@ -1,5 +1,6 @@
 import './styles.css'
 import { IconButton, List, ListSubheader, Tooltip } from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import NestedList from './NestedList';
 import { FaTrash } from 'react-icons/fa';
@@ -17,19 +18,26 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
         <List sx={{ width: openSidebar ? '250px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader component="h1" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold', display:'flex', justifyContent: 'space-between' }}>
-                        {lang.sections}
-                        <Tooltip title={<h3>{lang.trash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
-                            <IconButton size='small' sx={{width: '35px', height: '35px', marginTop: '5px'}} onClick={() => {history('/financialControl/TRASH'); setOpenSidebar(false)}}>
-                                <FaTrash />
-                            </IconButton>
-                        </Tooltip>
+                // subheader={
+                //     <ListSubheader component="h1" id="nested-list-subheader" style={{ color: '#3C4043', marginLeft: '-12px', fontSize: '16px', fontWeight: 'bold', display:'flex', justifyContent: 'space-between' }}>
+                //         <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{margin:'0 10px 0 5px'}}>
+                //             <MenuIcon/>
+                //         </IconButton>
+                //         {lang.sections}
+                //         <Tooltip title={<h3>{lang.trash}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={800} enterNextDelay={800}>
+                //             <IconButton size='small' sx={{width: '35px', height: '35px', marginTop: '5px'}} onClick={() => {history('/financialControl/TRASH'); setOpenSidebar(false)}}>
+                //                 <FaTrash />
+                //             </IconButton>
+                //         </Tooltip>
                         
-                    </ListSubheader>
-                }
+                //     </ListSubheader>
+                // }
         >
             <div className='ItensContainer'>
+                    <IconButton  onClick={() => setOpenSidebar(!openSidebar)}>
+                        <MenuIcon/>
+                    </IconButton>
+                    {lang.sections}
                 {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
                     <NestedList key={index} section={section} setOpenSidebar={setOpenSidebar}/>
                 ))}

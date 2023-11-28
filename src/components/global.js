@@ -97,10 +97,10 @@ const GlobalStyle = createGlobalStyle`
         margin-right: 5px;
     }
 
-    /* .FinancialWorksheet {
-        height: calc(var(--vh, vh) * 100 - var(--closeSidebarWidth) * 2);
-        width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 3);
-    } */
+    .FinancialWorksheet .MuiLinearProgress-root {
+        margin: 0 10px;
+        border-radius: 5px;
+    }
 
 `;
 

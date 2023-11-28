@@ -14,7 +14,7 @@ export const Container = styled.div`
     margin: 55px 5px 0 5px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
-    padding: 0 3px;
+    padding: 0 5px;
     height: 35px;
 
     .leftButtons {

@@ -15,7 +15,7 @@
 .InsideSidebar .MuiList-padding {
     /* height: 100vh; */
     overflow: hidden;
-    padding-top: 75px;
+    margin-top: 45px;
     white-space: nowrap;
     transition: .3s;
     display: flex;
@@ -24,6 +24,12 @@
 
 .InsideSidebar .MuiListSubheader-root {
     background-color: inherit;
+}
+
+.InsideSidebar .MuiIconButton-root {
+    /* background-color: black; */
+    /* border-radius: 0; */
+    margin: 0 12px;
 }
 
 
