@@ -1,0 +1,38 @@
+.MainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+    padding-top: 80px;
+    padding-bottom: 15px;
+    overflow: auto;
+    width: max-content;
+    height: max-content;
+    margin-left: calc((var(--closeSidebarWidth)) + 30px);
+}
+
+.MainContainer .SubContainer {
+    display: flex;
+}
+
+.MainContainer ul {
+    border-radius: 5px;
+    /* box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.1); */
+    width: 300px;
+    background-color: white;
+
+}
+
+.MainContainer .MuiListSubheader-root {
+    color: var(--font-color);
+    text-align: center;
+    /* font-size: 26px; */
+    /* font-weight: bold; */
+    margin: 10px 20px 0 20px;
+}
+
+@media (max-width: 600px), (max-height: 600px) {
+    .MainContainer {
+        padding-top: 70px;
+    }
+}

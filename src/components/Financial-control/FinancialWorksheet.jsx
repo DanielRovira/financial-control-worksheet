@@ -7,6 +7,7 @@ import EmpityFolder from './components/EmpityFolder';
 import Form from './components/Form';
 import Grid from './components/Grid';
 import Header from './components/Header';
+import Main from './components/Main';
 import Resume from './components/Resume';
 import Sidebar from './components/Sidebar';
 import Summary from './components/Summary';
@@ -38,8 +39,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
 
     const getData = async () => {
+        if (sheetType !== 'Main'){
         if (sectionExists) {
-
             const res = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
                 .then(response => response.json())
@@ -67,7 +68,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         }
 
         else {history('/')}
-    }
+    }}
 
     useEffect(() => {
         refreshToken()
@@ -272,7 +273,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <>
-            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={sheetType === 'Main' ? true:openSidebar} setOpenSidebar={setOpenSidebar} />
+            {sheetType === 'Main' ? <Main/> : 
             <div className='FinancialWorksheet'>
                 <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
@@ -297,7 +299,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     </Drawer>
                     {showCalendar && <Calendar rawData={transactionsList[sheetType]?.filter(item => !item.archived)} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
                     <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} getDataTimeout={getDataTimeout} />
-            </div>    
+            </div>  } 
         </>
     );
 };

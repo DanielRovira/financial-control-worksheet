@@ -2,8 +2,9 @@ import './styles/Sidebar.css'
 import { Drawer, List } from '@mui/material';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-import RequestPageIcon from '@mui/icons-material/RequestPage';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import ContactsIcon from '@mui/icons-material/Contacts';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -27,11 +28,17 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClick} title={lang.financialControl}>
+                <ListItemButton onClick={() => {handleClick(); history('/FinancialWorksheet')}} title={lang.financialControl}>
                     <ListItemIcon>
-                        <RequestPageIcon/>
+                        <MonetizationOnIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.financialControl} />
+                </ListItemButton>
+                <ListItemButton onClick={handleClick} title={lang.todos}>
+                    <ListItemIcon>
+                        <ContactsIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={lang.todos} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClick} title={lang.todos}>
                     <ListItemIcon>
