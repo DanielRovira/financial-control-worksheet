@@ -55,7 +55,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
             sendRequest();
             timer.current = window.setTimeout(() => {
                 setLoadingButton(false);
-            }, 10000);
+            }, 100000);
         }
     }
 

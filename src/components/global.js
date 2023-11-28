@@ -80,7 +80,7 @@ const GlobalStyle = createGlobalStyle`
     .App {
         display: flex;
         flex-direction: row;
-        height: 100vh;
+        /* height: 100vh; */
         height: calc(var(--vh, 1vh) * 99);
         max-height: 100%;
         overflow: hidden;
@@ -89,17 +89,18 @@ const GlobalStyle = createGlobalStyle`
     .FinancialWorksheet {
         display: flex;
         flex-direction: column;
-        height: 100vh;
-        height: calc(var(--vh, 1vh) * 99);
+        /* height: 100vh; */
+        /* height: calc(var(--vh, 1vh) * 99); */
         width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
-        max-height: 100%;
+        /* max-height: 100%; */
         overflow: hidden;
+        margin-right: 5px;
     }
 
-    .FinancialWorksheet {
+    /* .FinancialWorksheet {
         height: calc(var(--vh, vh) * 100 - var(--closeSidebarWidth) * 2);
         width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 3);
-    }
+    } */
 
 `;
 

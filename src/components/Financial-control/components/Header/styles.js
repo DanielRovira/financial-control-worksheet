@@ -3,20 +3,28 @@ import styled from 'styled-components';
 export const Container = styled.div`
     z-index: 10;
     /* width: 100%; */
-    width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
+    /* width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2); */
     /* text-align: center; */
-    /* background: #fff; */
+    background: #fff;
     animation: scaleAnimationIn .1s;
     /* border-bottom: 1px solid #DADCE0; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 55px 5px 0 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #ccc;
+    padding: 0 3px;
+    height: 35px;
 
     .leftButtons {
     left: 70px;
-    height: 33px;
+    /* height: 33px; */
     }
     
     .rightButtons {
     right: 10px;
-    height: 33px;
+    /* height: 33px; */
     }
 
     p {
@@ -50,12 +58,15 @@ export const Container = styled.div`
 
 export const Buttons = styled.div`
     display: flex;
-    position: fixed;
-    top: 50px;
+    /* position: fixed; */
+    /* top: 50px; */
+    gap:5px;
+    align-items: center;
 
     .MuiIconButton-root {
-        padding: 6px 6px;
+        padding: 0;
         border-radius: 5px;
+        height: 30px;
     }
 
     .MuiButtonBase-root.MuiIconButton-root:hover {
@@ -87,7 +98,7 @@ export const Buttons = styled.div`
 export const Header = styled.h1``;
 
 export const Title = styled.div`
-    padding: 80px 0 0 5px;
+    /* padding: 80px 0 0 5px; */
     color: var(--font-color);
     font-size: 1.5rem;
 `;

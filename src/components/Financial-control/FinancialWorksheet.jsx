@@ -273,7 +273,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     return (
         <>
-            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={sheetType === 'Main' ? true:openSidebar} setOpenSidebar={setOpenSidebar} />
+            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={sheetType === 'Main' ? true : openSidebar} setOpenSidebar={setOpenSidebar} />
             {sheetType === 'Main' ? <Main/> : 
             <div className='FinancialWorksheet'>
                 <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />

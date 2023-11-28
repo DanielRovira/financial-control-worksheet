@@ -75,6 +75,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
     return (
         <>
+        {/* <div style={{height:'50px'}}></div> */}
         <C.Container>
             <C.Buttons className='leftButtons'>
                 <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{margin:'0 10px 0 5px'}}>
