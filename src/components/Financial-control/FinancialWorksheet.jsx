@@ -56,7 +56,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 })
 
             if (res.status === 200 && res2.status === 200) {
-                // setLoadingData(false)
+                setLoadingData(false)
 
                 setTransactionsList({
                     financialControl: res.post  || [],
