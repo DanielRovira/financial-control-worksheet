@@ -9,7 +9,7 @@ import { AddCircle as AddCircleIcon,
          Delete as DeleteIcon,
          DeleteForever as DeleteForeverIcon,
          Difference as DifferenceIcon,
-         FmdBadOutlined as FmdBadOutlinedIcon,
+        //  FmdBadOutlined as FmdBadOutlinedIcon,
          InfoOutlined as InfoOutlinedIcon,
          MoreVert as MoreVertIcon,
          RemoveCircle as RemoveCircleIcon,
@@ -176,12 +176,12 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             </C.Buttons>
             }
         </C.Container>
-        {archived &&
+        {/* {archived &&
             <C.ArchivedTitle className='archivedTitle'>
                 <FmdBadOutlinedIcon color='white'/>
                 <p>{lang.archived}</p>
             </C.ArchivedTitle>
-        }
+        } */}
         </>
     );
 };

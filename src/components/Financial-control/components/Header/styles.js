@@ -110,6 +110,8 @@ export const ArchivedTitle = styled.div`
     justify-content: center;
     background-color: red;
     animation: scaleAnimationIn .1s;
+    margin: 0 8px;
+    /* border-radius: 5px */
 
      p {
         margin: 0;

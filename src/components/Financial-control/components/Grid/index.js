@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Checkbox } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { CSVLink } from "react-csv";
+import { FmdBadOutlined as FmdBadOutlinedIcon } from '@mui/icons-material';
 
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -89,6 +90,12 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 <C.Title>{lang[sheetType] || lang.home}</C.Title>
                 <SavingCloud syncing={syncing} />
             </C.Header>
+            {archived &&
+            <C.ArchivedTitle className='archivedTitle'>
+                <FmdBadOutlinedIcon color='white'/>
+                <p>{lang.archived}</p>
+            </C.ArchivedTitle>
+        }
             <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders[sheetType]} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
             <C.Table>
                 <C.Thead>

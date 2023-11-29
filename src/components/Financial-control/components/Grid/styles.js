@@ -84,3 +84,24 @@ export const Title = styled.div`
     font-size: 1.5rem;
 
 `;
+
+export const ArchivedTitle = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    animation: scaleAnimationIn .1s;
+    /* margin: 0 8px; */
+    /* border-radius: 5px */
+
+     p {
+        margin: 0;
+        color: white;
+        font-size: 14px;
+        text-shadow: .5px .5px grey;
+    }
+
+    svg {
+            height: 0.8em;
+            color: white;
+        }
+`
