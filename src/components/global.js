@@ -84,6 +84,7 @@ const GlobalStyle = createGlobalStyle`
         height: calc(var(--vh, 1vh) * 99);
         max-height: 100%;
         overflow: hidden;
+
     }
 
     .FinancialWorksheet {

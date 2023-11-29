@@ -63,7 +63,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     return (
         <>
         <C.Header>
-            <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
+                <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
         </C.Header>
         <C.Container>
             <C.Buttons className='leftButtons'>

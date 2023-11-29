@@ -1,7 +1,7 @@
 .Summary {
     display: flex;
     height: 80vh;
-    padding: 0 10px 0 75px;
+    padding: 0 10px 0 0px;
     margin-bottom: 50px;
     overflow: auto;
 }
