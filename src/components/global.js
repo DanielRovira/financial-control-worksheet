@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 
     @keyframes scaleAnimationIn {
         0% {
-            transform: translate(0, -100%);
+            transform: translate(0, -50%);
         }
         100% {
             transform: translate(0, 0);

@@ -1,7 +1,7 @@
 @keyframes scaleAnimationIn2 {
     0% {
         opacity: .3;
-        transform: translate(0, -100%);
+        transform: translate(0, -50%);
     }
     100% {
         opacity: 1;
@@ -13,8 +13,8 @@
     z-index: 2;
     position: fixed;
     right: 10px;
-    top: 90px;
-    animation: scaleAnimationIn2 .2s;
+    top: 130px;
+    /* animation: scaleAnimationIn2 .2s; */
 }
 
 @media (max-width: 700px) {
