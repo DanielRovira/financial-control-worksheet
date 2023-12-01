@@ -40,6 +40,7 @@ const GlobalStyle = createGlobalStyle`
     --closeSidebarWidth: 60px;
     --navbar-color: #106EBE;
     --button-color: rgba(0, 0, 0, 0.54);
+    --selected-sidebar: #CFE4FA;
     }
 
     @media (max-width: 750px) {

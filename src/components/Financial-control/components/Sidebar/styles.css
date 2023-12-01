@@ -1,7 +1,7 @@
-.ItensContainer {
+.InsideSidebar .InsideSidebarItensContainer {
     overflow-x: hidden;
     overflow-y: auto;
-    margin-bottom: 90px;
+    /* margin-bottom: 90px; */
 }
 
 .ItensContainer::-webkit-scrollbar {
@@ -20,6 +20,7 @@
     transition: .3s;
     display: flex;
     flex-direction: column;
+    margin-left: 5px;
 }
 
 .InsideSidebar .MuiListSubheader-root {
@@ -30,6 +31,10 @@
     /* background-color: black; */
     /* border-radius: 0; */
     margin: 0 12px;
+}
+
+.InsideSidebar .MuiButtonBase-root {
+    border-radius: 5px;
 }
 
 

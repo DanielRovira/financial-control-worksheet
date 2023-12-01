@@ -13,7 +13,7 @@ const Main = ({ sections, refreshToken, isLoggedIn, setSheetType, setLoading }) 
     useEffect(() => {
         // setLoading(true);
         refreshToken();
-        setSheetType('');
+        setSheetType('Main');
         // !isLoggedIn && history('/')
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -33,7 +33,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
                 //     </ListSubheader>
                 // }
         >
-            <div className='ItensContainer'>
+            <div className='InsideSidebarItensContainer'>
                     <IconButton  onClick={() => setOpenSidebar(!openSidebar)}>
                         <MenuIcon/>
                     </IconButton>
