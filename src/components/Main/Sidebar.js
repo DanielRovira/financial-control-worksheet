@@ -42,15 +42,15 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                 </ListItemButton>
                 <ListItemButton onClick={() => {handleClick(); setMainSheetType('TaskList'); history('/TaskList')}} title={lang.todos}>
                     <ListItemIcon style={mainSheetType === 'TaskList' ? selectedStyle : null} >
-                        <ContactsIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={lang.todos} />
-                </ListItemButton>
-                <ListItemButton onClick={handleClick} title={lang.todos}>
-                    <ListItemIcon>
                         <FormatListBulletedIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.todos} />
+                </ListItemButton>
+                <ListItemButton onClick={handleClick} title={lang.contacts}>
+                    <ListItemIcon>
+                        <ContactsIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={lang.contacts} />
                 </ListItemButton>
             </div>
             <div style={{ position: 'absolute', bottom: '10px', left: '60px' }}>
