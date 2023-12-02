@@ -10,24 +10,9 @@ export const TableContent = styled.div`
     /* padding: 5px; */
     /* width: 93vw; */
 
-    /* tbody {
-        display: block;
-        max-height: 300px;
-        overflow-y: auto;
-    } */
-/* 
-    thead, tbody tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
+    @media (max-width: 750px) {
+        height: calc((var(--vh, 1vh) * 100) - 250px);
     }
-
-    thead, thead tr {
-    width: 300px;
-    max-width: 300px;
-    min-width: 300px;
-
-} */
 
     &::-webkit-scrollbar-track {
         margin-top: 35px;

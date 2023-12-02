@@ -14,9 +14,9 @@ export default function BottomNav({ section, sheetType }) {
         showLabels
         value={lang[sheetType]}
       >
-        {params.taskTitle !== 'TRASH' && <BottomNavigationAction value={lang.summary} icon={<BarChartIcon />} onClick={() => history(`/summary/${section}`)} />}
-        <BottomNavigationAction value={lang.todoPayments} icon={<CalendarMonthIcon />} onClick={() => history(`/todoPayments/${section}`)} />
-        <BottomNavigationAction value={lang.financialControl} icon={<ListAltIcon />} onClick={() => history(`/financialControl/${section}`)} />
+        {params.taskTitle !== 'TRASH' && <BottomNavigationAction value={lang.summary} icon={<BarChartIcon />} onClick={() => history(`/FinancialWorksheet/summary/${section}`)} />}
+        <BottomNavigationAction value={lang.todoPayments} icon={<CalendarMonthIcon />} onClick={() => history(`/FinancialWorksheet/todoPayments/${section}`)} />
+        <BottomNavigationAction value={lang.financialControl} icon={<ListAltIcon />} onClick={() => history(`/FinancialWorksheet/financialControl/${section}`)} />
       </BottomNavigation>
     </Box>
   );
