@@ -19,7 +19,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
                     </IconButton>
                     {lang.sections}
                 {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
-                    <NestedList key={index} section={section} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
+                    <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
             </div>
         </List>

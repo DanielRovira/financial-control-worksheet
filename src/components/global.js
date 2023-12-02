@@ -34,12 +34,12 @@ const GlobalStyle = createGlobalStyle`
 
     :root {
     --color0: #F0F0F0;
+    --color0-5: #E6E6E6;
     --color1: #DEDEDE;
     --color2: #C9C9C9;
     --font-color: #3C4043;
     --closeSidebarWidth: 60px;
     --navbar-color: #106EBE;
-    --button-color: rgba(0, 0, 0, 0.54);
     --selected-sidebar: #CFE4FA;
     }
 

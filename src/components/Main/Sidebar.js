@@ -17,8 +17,9 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
     };
 
     const selectedStyle = {
-        borderLeft: '3px solid #1976d2',
-        paddingLeft: '7px'
+        borderLeft: '3px solid var(--navbar-color)',
+        paddingLeft: '7px',
+        color: 'var(--navbar-color)'
     }
 
     return (

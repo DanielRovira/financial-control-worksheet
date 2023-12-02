@@ -15,6 +15,11 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
         setOpenSection(!openSection);
     };
 
+    const selectedStyle = {
+        backgroundColor: 'var(--color0-5)',
+        color: 'black'
+    }
+
   return (
     <>
         <ClickAwayListener onClickAway={() => setOpenSection(false)}>
@@ -33,11 +38,11 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
                 {types.map((type) => (
                     <ListItemButton
                         className='innerButton'
-                        style={{backgroundColor: section.title === params.taskTitle && type === sheetType ? 'var(--color1)' :  'unset'}}
+                        style={section.title === params.taskTitle && type === sheetType ? selectedStyle :  null}
                         key={type}
                         onClick={() => {history(`/FinancialWorksheet/${type}/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}
                         >
-                        <ListItemIcon style={{marginLeft:'20px'}}>
+                        <ListItemIcon style={section.title === params.taskTitle && type === sheetType ? selectedStyle :  null}>
                             {type === 'summary' && <BarChartIcon />}
                             {type === 'todoPayments' && <CalendarMonthIcon />}
                             {type === 'financialControl' && <ListAltIcon />}
