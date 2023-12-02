@@ -67,11 +67,11 @@ const GlobalStyle = createGlobalStyle`
               user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
     }
 
-    h1 {
+    /* h1 {
         @media (max-width: 450px) {
             font-size: 1.6em;
         }
-    }
+    } */
     
     .MuiTooltip-popper {
         padding: 0 6px;
