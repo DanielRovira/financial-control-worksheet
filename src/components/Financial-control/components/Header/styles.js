@@ -103,6 +103,18 @@ export const Buttons = styled.div`
 
 export const Header = styled.h1`
     margin: 55px 5px 0 5px;
+
+    button {
+        padding: 5px 15px;
+        display: none;
+        transition: .3s ease;
+
+        @media (max-width: 750px) {
+        display: inherit;
+        }
+    }
+
+
 `;
 
 export const Title = styled.div`

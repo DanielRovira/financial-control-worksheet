@@ -12,6 +12,7 @@ import { AddCircle as AddCircleIcon,
         //  FmdBadOutlined as FmdBadOutlinedIcon,
          InfoOutlined as InfoOutlinedIcon,
          MoreVert as MoreVertIcon,
+         Menu as MenuIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
          Download as DownloadIcon,
@@ -19,7 +20,7 @@ import { AddCircle as AddCircleIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
     const params = useParams();
 
 
@@ -60,17 +61,26 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         handleOpenSnackbar();
     }
 
+    const menuButtonStyle = {
+        // display: 'none'
+        transform: 'translateX(-50px)',
+        width: '0',
+        paddingLeft: '0',
+        paddingRight: '0',
+        color: 'transparent'
+    }
+
     return (
         <>
-        <C.Header>
-                <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
+        <C.Header style={{display:'flex', flexDirection:'row'}}>
+            <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={openSidebar ? menuButtonStyle : null}>
+                <MenuIcon/>
+            </IconButton>
+            <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
         </C.Header>
         {sheetType !== 'summary' && 
         <C.Container>
             <C.Buttons className='leftButtons'>
-                {/* <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{margin:'0 10px 0 5px'}}>
-                    <MenuIcon/>
-                </IconButton> */}
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
                     <IconButton  onClick={() => setAdd(!add)}>
