@@ -16,6 +16,7 @@ export const Container = styled.div`
     box-shadow: 0px 0px 5px #ccc;
     padding: 0 5px;
     min-height: 35px;
+    overflow: hidden;
 
     .leftButtons {
     left: 70px;
@@ -77,8 +78,13 @@ export const Buttons = styled.div`
         /* top: 85px; */
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 750px) {
         /* top: 85px; */
+        /* gap: 15px; */
+
+        .MuiIconButton-root {
+            width: 40px;
+        }
 
         .MuiIconButton-root p {
         display: none;
