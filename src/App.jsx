@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useClickAway } from 'react-use';
 import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/routes';
+import TaskList from './components/TaskList/TaskList';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
@@ -104,6 +105,7 @@ const App = () => {
                     <Route path="/main" element={<Main sections={sections} refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} setLoading={setLoading} />} />
                     <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setMainSheetType={setMainSheetType} refreshToken={refreshToken} />} />
                     <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
+                    <Route path="/TaskList/*" element={<TaskList setMainSheetType={setMainSheetType} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

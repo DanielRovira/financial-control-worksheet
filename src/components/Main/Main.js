@@ -9,6 +9,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
     const history = useNavigate();
     // const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const user = JSON.parse(localStorage.getItem("user")) || [];
 
     useEffect(() => {
         // setLoading(true);
@@ -20,10 +21,10 @@ const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading
     return (
         <div className='MainContainer'>
             <div className='Header'>
-                <h1>{lang.welcome}</h1>
+                <h1>{lang.welcome} {user.name}!</h1>
             </div>
             <div className='SubContainer'>
-                <TaskList/>
+                <TaskList setMainSheetType={setMainSheetType} />
             </div>
             {/* <List
                 subheader={

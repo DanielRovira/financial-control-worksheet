@@ -28,24 +28,20 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                 aria-labelledby="nested-list-subheader"
         >
             <div className='ItensContainer'>
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Main'); history('/main')}} title={lang.home}
-                                // style={{backgroundColor: mainSheetType === 'Main' ? 'var(--selected-sidebar)' :  'unset'}}
-                >
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Main'); history('/main')}} title={lang.home}>
                     <ListItemIcon style={mainSheetType === 'Main' ? selectedStyle : null} >
                         <HomeIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}
-                                // style={{backgroundColor: mainSheetType === 'FinancialWorksheet' ? 'var(--selected-sidebar)' :  'unset'}}
-                >
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}>
                     <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.FinancialWorksheet} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClick} title={lang.todos}>
-                    <ListItemIcon>
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('TaskList'); history('/TaskList')}} title={lang.todos}>
+                    <ListItemIcon style={mainSheetType === 'TaskList' ? selectedStyle : null} >
                         <ContactsIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.todos} />

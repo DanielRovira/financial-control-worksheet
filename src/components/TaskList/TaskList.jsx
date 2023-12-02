@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {v4 as uuidv4} from 'uuid'
-
 import externalData from './data.json'
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
@@ -8,10 +7,14 @@ import TaskDetails from './components/TaskDetails';
 import './components/css/App.css'
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const App = () => {
+const TaskList = ({ setMainSheetType }) => {
     const data = localStorage.getItem("tasks");
-        const [tasks, setTasks] = useState(data ? JSON.parse(data) : externalData);
-        const [taskDetail, setTasksDetail] = useState(null);
+    const [tasks, setTasks] = useState(data ? JSON.parse(data) : externalData);
+    const [taskDetail, setTasksDetail] = useState(null);
+
+    useEffect(() => {
+        setMainSheetType('TaskList');
+    }, [setMainSheetType]);
 
         //Import from API
         // useEffect(() => {
@@ -84,7 +87,7 @@ const App = () => {
         };
 
         return (
-                <div className='container'>
+                <div className='TaskList'>
                     <h1 style={{ color: "#1976d2"}}>{lang.tasks}</h1>
                     {taskDetail ? 
                         <TaskDetails tasks={tasks} handleDescAddition={handleDescAddition} taskDetail={taskDetail} setTasksDetail={setTasksDetail} /> :
@@ -94,4 +97,4 @@ const App = () => {
         )
 };
 
-export default App;
+export default TaskList;

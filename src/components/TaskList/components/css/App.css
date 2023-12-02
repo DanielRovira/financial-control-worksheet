@@ -1,6 +1,6 @@
-.container {
+.TaskList {
     width: 400px;
-    margin: 30px auto;
+    margin: auto;
     overflow: auto;
     /* min-height: 300px; */
     /* border: 2px solid #1976d2; */
