@@ -30,13 +30,13 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.financialControl}
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}
                                 style={{backgroundColor: mainSheetType === 'FinancialWorksheet' ? 'var(--selected-sidebar)' :  'unset'}}
                 >
                     <ListItemIcon>
                         <MonetizationOnIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={lang.financialControl} />
+                    <ListItemText primary={lang.FinancialWorksheet} />
                 </ListItemButton>
                 <ListItemButton onClick={handleClick} title={lang.todos}>
                     <ListItemIcon>
