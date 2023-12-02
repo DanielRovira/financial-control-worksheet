@@ -10,6 +10,7 @@
 
 .InsideSidebar {
     width: min-content;
+    margin-left: var(--closeSidebarWidth);
 }
 
 .InsideSidebar .MuiList-padding {

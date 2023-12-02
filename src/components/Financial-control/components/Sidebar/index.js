@@ -4,11 +4,11 @@ import { Menu as MenuIcon } from '@mui/icons-material';
 import NestedList from './NestedList';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
- const Sidebar = ({ sections, openSidebar, setOpenSidebar, setSheetType }) => {
+ const Sidebar = ({ sections, openSidebar, setOpenSidebar }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
 
     return (
-      <div className='InsideSidebar' variant="permanent" open={openSidebar} style={{marginLeft:'60px'}} >
+      <div className='InsideSidebar' variant="permanent" open={openSidebar} >
         <List sx={{ width: openSidebar ? '250px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
