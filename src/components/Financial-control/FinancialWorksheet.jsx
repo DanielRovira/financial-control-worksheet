@@ -277,14 +277,16 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
                     {loadingData ? <LinearProgress /> :
                     <>
-                        {transactionsList[sheetType]?.length === 0 ? <EmpityFolder setAdd={setAdd} /> :
+                        {/* {transactionsList[sheetType]?.length === 0 ? <EmpityFolder /> : */}
                         <>
                             {sheetType === 'summary'
-                            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : <EmpityFolder />
+                            ? transactionsList['financialControl']?.filter(item => !item.archived)?.length > 0 ? <Summary rawData={transactionsList['financialControl']?.filter(item => !item.archived)} setAdd={setAdd} /> : null
                             : <Grid rawData={transactionsList[sheetType] || []} updateDocument={updateDocument} sheetType={sheetType} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} archived={archived} setOperationType={setOperationType} handleOpenSnackbar={handleOpenSnackbar} setAdd={setAdd} section={params.taskTitle} syncing={syncing} />
                             }
-                        </>}
+                        </>
+                         {/* } */}
                     </>}
+                    {transactionsList[sheetType]?.length === 0 && <EmpityFolder />}
                     <BottomNavigation section={params.taskTitle} sheetType={sheetType} />
                     <Drawer
                     anchor='right'

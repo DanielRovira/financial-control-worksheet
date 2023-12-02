@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import empityFolderImage from './empityFolderImage.svg' //throwIfNamespace: false
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function EmpityFolder({ setAdd }) {
+export default function EmpityFolder() {
   const params = useParams();
-//   setAdd(true); //Quebra o gráfico quando da f5
+
   return (
       <div className='EmpityFolder'>
           {params.taskTitle === 'TRASH' ? 

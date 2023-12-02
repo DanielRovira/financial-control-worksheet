@@ -1,7 +1,7 @@
 .EmpityFolder {
     /* margin: auto; */
     position: fixed;
-    margin-top: 25vh;
+    margin-top: 250px;
     font-size: 20px;
     text-align: center;
     margin-left: calc(50% - var(--closeSidebarWidth));
@@ -15,8 +15,8 @@
     filter: opacity(50%);
 }
 
-@media (max-height: 515px) {
+/* @media (max-height: 515px) {
     .EmpityFolder {
-        margin-top: 130px;
+        margin-top: 140px;
     }
-}
+} */

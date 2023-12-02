@@ -65,6 +65,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
         </C.Header>
+        {sheetType !== 'summary' && 
         <C.Container>
             <C.Buttons className='leftButtons'>
                 {/* <IconButton  onClick={() => setOpenSidebar(!openSidebar)} style={{margin:'0 10px 0 5px'}}>
@@ -175,7 +176,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </Menu>
             </C.Buttons>
             }
-        </C.Container>
+        </C.Container>}
         {/* {archived &&
             <C.ArchivedTitle className='archivedTitle'>
                 <FmdBadOutlinedIcon color='white'/>

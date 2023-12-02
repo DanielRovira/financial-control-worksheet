@@ -9,9 +9,10 @@ export const TableContent = styled.div`
     border-radius: 5px;
     /* padding: 5px; */
     /* width: 93vw; */
+    z-index: 10;
 
     @media (max-width: 750px) {
-        height: calc((var(--vh, 1vh) * 100) - 250px);
+        max-height: calc((var(--vh, 1vh) * 100) - 250px);
     }
 
     &::-webkit-scrollbar-track {
