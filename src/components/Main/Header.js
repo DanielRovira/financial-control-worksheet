@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar, sheetType }) => {
+const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
     const history = useNavigate();
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const [openPanel, setOpenPanel] = useState(false);

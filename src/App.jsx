@@ -2,11 +2,10 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useClickAway } from 'react-use';
 import GlobalStyle from './components/global';
-import FinancialWorksheet from './components/Financial-control/FinancialWorksheet';
+import FinancialWorksheet from './components/Financial-control/routes';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
-import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
 import  { Backdrop, CircularProgress } from '@mui/material';
@@ -22,7 +21,7 @@ const App = () => {
     const history = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [openSidebar, setOpenSidebar] = useState(false);
-    const [sheetType, setSheetType] = useState();
+    const [mainSheetType, setMainSheetType] = useState();
     const [loading, setLoading] = useState(false);
     const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
@@ -94,19 +93,14 @@ const App = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <div ref={sidebar}>
-            {isLoggedIn && !loading ? <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} style={{ overflow: 'hidden' }} /> : ""}
-            <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
+            {isLoggedIn && !loading ? <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} mainSheetType={mainSheetType} setMainSheetType={setMainSheetType} style={{ overflow: 'hidden' }} /> : ""}
+            <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/main" element={<Main sections={sections} refreshToken={refreshToken} isLoggedIn={isLoggedIn} setSheetType={setSheetType} setLoading={setLoading} />} />
-                    <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setSheetType={setSheetType} refreshToken={refreshToken} />} />
-                    <Route path="/summary/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'summary'} setSheetType={setSheetType} />} />
-                    <Route path="/financialControl/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'financialControl'} setSheetType={setSheetType} />} />
-                    <Route path="/todoPayments/:taskTitle" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'todoPayments'} setSheetType={setSheetType} />} />
-                    <Route path="/FinancialWorksheet" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'FinancialWorksheet'} setSheetType={setSheetType} />} />
-                    <Route path="/trash" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} sheetType={'trash'} setSheetType={setSheetType} />} />
+                    <Route path="/main" element={<Main sections={sections} refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} setLoading={setLoading} />} />
+                    <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setMainSheetType={setMainSheetType} refreshToken={refreshToken} />} />
+                    <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

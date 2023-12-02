@@ -8,7 +8,7 @@ import ContactsIcon from '@mui/icons-material/Contacts';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
- const Sidebar = ({ openSidebar, setOpenSidebar, sheetType }) => {
+ const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
     const history = useNavigate();
     const handleClick = () => {
@@ -22,16 +22,16 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                 aria-labelledby="nested-list-subheader"
         >
             <div className='ItensContainer'>
-                <ListItemButton onClick={() => {handleClick(); history('/main')}} title={lang.home}
-                                style={{backgroundColor: sheetType === 'Main' ? 'var(--selected-sidebar)' :  'unset'}}
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Main'); history('/main')}} title={lang.home}
+                                style={{backgroundColor: mainSheetType === 'Main' ? 'var(--selected-sidebar)' :  'unset'}}
                 >
                     <ListItemIcon>
                         <HomeIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                <ListItemButton onClick={() => {handleClick(); history('/FinancialWorksheet')}} title={lang.financialControl}
-                                style={{backgroundColor: sheetType === 'FinancialWorksheet' ? 'var(--selected-sidebar)' :  'unset'}}
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.financialControl}
+                                style={{backgroundColor: mainSheetType === 'FinancialWorksheet' ? 'var(--selected-sidebar)' :  'unset'}}
                 >
                     <ListItemIcon>
                         <MonetizationOnIcon/>

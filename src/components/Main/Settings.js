@@ -7,7 +7,7 @@ import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField, Tab
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Settings = ({ categories, setCategories, sections, setSections, setSheetType, refreshToken }) => {
+const Settings = ({ categories, setCategories, sections, setSections, setMainSheetType, refreshToken }) => {
     // const history = useNavigate();
     // const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
@@ -72,7 +72,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setSheetTy
       };
 
     useEffect(() => {
-        setSheetType('settings');
+        setMainSheetType('settings');
         refreshToken();
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 

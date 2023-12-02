@@ -31,7 +31,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow }) => {
         <Collapse in={openSection} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
                 {types.map((type) => (
-                    <ListItemButton key={type} onClick={() => {history(`/${type}/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
+                    <ListItemButton key={type} onClick={() => {history(`/FinancialWorksheet/${type}/${section.title}`); setOpenSidebar && setOpenSidebar(false)}}>
                         <ListItemIcon style={{marginLeft:'20px'}}>
                             {type === 'summary' && <BarChartIcon />}
                             {type === 'todoPayments' && <CalendarMonthIcon />}
@@ -42,8 +42,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow }) => {
                  ))}
             </List>
         </Collapse>
-    </>
-      
+    </> 
   );
 }
 

@@ -6,14 +6,14 @@ import { useEffect } from 'react';
 import TaskList from '../TaskList/TaskList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Main = ({ sections, refreshToken, isLoggedIn, setSheetType, setLoading }) => {
+const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
     const history = useNavigate();
     // const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     useEffect(() => {
         // setLoading(true);
         refreshToken();
-        setSheetType('Main');
+        setMainSheetType('Main');
         // !isLoggedIn && history('/')
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -14,7 +14,7 @@ import Summary from './components/Summary';
 import Snackbar from './components/Snackbar';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType, setSheetType }) => {
+const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);
     const [result, setResult] = useState([]);
     const [add, setAdd] = useState();
@@ -39,7 +39,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
 
     const getData = async () => {
-        if (sheetType !== 'FinancialWorksheet' ){
+        if (sheetType !== undefined ){
         if (sectionExists) {
             const res = await
             fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
@@ -72,7 +72,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     useEffect(() => {
         refreshToken()
-        setSheetType(sheetType)
         setTransactionsList([])
         setLoadingData(true)
         isLoggedIn ? getData() : history('/')
@@ -81,7 +80,6 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     useEffect(() => {
         clearTimeout(timer.current)
         setUndoItem([])
-        setSheetType(sheetType)
         setChecked([])
         setArchived(false)
     },[history]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -271,10 +269,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
          ))
     }, [transactionsList]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return (
-        <>
-            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={sheetType === 'FinancialWorksheet' ? true : openSidebar} setOpenSidebar={setOpenSidebar} />
-            {sheetType === 'FinancialWorksheet' ? <Main/> : 
+    return (<>
+            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={sheetType === undefined ? true : openSidebar} setOpenSidebar={setOpenSidebar} />
+            {sheetType === undefined ? <Main/> : 
             <div className='FinancialWorksheet'>
                     <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} />
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
@@ -299,9 +296,8 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     </Drawer>
                     {showCalendar && <Calendar rawData={transactionsList[sheetType]?.filter(item => !item.archived)} setShowCalendar={setShowCalendar} sheetType={sheetType} />}
                     <Snackbar timeOut={timeOut} openSnackbar={openSnackbar} setOpenSnackbar={setOpenSnackbar} undoItem={undoItem} setUndoItem={setUndoItem} updateDocument={updateDocument} handleDeleteSelected={handleDeleteSelected} operationType={operationType} setOperationType={setOperationType} handleSetArchived={handleSetArchived} getDataTimeout={getDataTimeout} />
-           
-            </div>  } 
-        </>
+            </div>  }
+            </>
     );
 };
  
