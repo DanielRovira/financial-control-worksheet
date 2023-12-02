@@ -21,7 +21,7 @@
     transition: .3s;
     display: flex;
     flex-direction: column;
-    margin-left: 5px;
+    /* margin-left: 5px; */
 }
 
 .InsideSidebar .MuiListSubheader-root {
@@ -35,7 +35,9 @@
 }
 
 .InsideSidebar .MuiButtonBase-root {
-    border-radius: 5px;
+    /* border-radius: 5px; */
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 

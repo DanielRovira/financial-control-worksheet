@@ -11,9 +11,15 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
  const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
     const history = useNavigate();
+
     const handleClick = () => {
         setOpenSidebar && setOpenSidebar(false);
     };
+
+    const selectedStyle = {
+        borderLeft: '3px solid #1976d2',
+        paddingLeft: '7px'
+    }
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
@@ -23,17 +29,17 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
         >
             <div className='ItensContainer'>
                 <ListItemButton onClick={() => {handleClick(); setMainSheetType('Main'); history('/main')}} title={lang.home}
-                                style={{backgroundColor: mainSheetType === 'Main' ? 'var(--selected-sidebar)' :  'unset'}}
+                                // style={{backgroundColor: mainSheetType === 'Main' ? 'var(--selected-sidebar)' :  'unset'}}
                 >
-                    <ListItemIcon>
+                    <ListItemIcon style={mainSheetType === 'Main' ? selectedStyle : null} >
                         <HomeIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
                 <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}
-                                style={{backgroundColor: mainSheetType === 'FinancialWorksheet' ? 'var(--selected-sidebar)' :  'unset'}}
+                                // style={{backgroundColor: mainSheetType === 'FinancialWorksheet' ? 'var(--selected-sidebar)' :  'unset'}}
                 >
-                    <ListItemIcon>
+                    <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.FinancialWorksheet} />
