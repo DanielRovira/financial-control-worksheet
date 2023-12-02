@@ -1,12 +1,21 @@
 .EmpityFolder {
-    margin: auto;
-    margin-top: 25vh;
+    /* margin: auto; */
+    margin-top: 20vh;
     font-size: 20px;
     text-align: center;
+    margin-left: calc(50% - var(--closeSidebarWidth));
+    transform: translateX(-50%);
 }
 
 .EmpityFolder img {
     height: 200px;
     margin-top: 10px;
     filter: opacity(50%);
+}
+
+@media (max-width: 750px) {
+    .EmpityFolder {
+        margin: auto;
+        transform: none;
+    }
 }
