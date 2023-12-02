@@ -4,7 +4,7 @@ import { Menu as MenuIcon } from '@mui/icons-material';
 import NestedList from './NestedList';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
- const Sidebar = ({ sections, openSidebar, setOpenSidebar }) => {
+ const Sidebar = ({ sections, openSidebar, setOpenSidebar, sheetType }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
 
     return (
@@ -19,7 +19,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
                     </IconButton>
                     {lang.sections}
                 {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
-                    <NestedList key={index} section={section} setOpenSidebar={setOpenSidebar} />
+                    <NestedList key={index} section={section} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
             </div>
         </List>

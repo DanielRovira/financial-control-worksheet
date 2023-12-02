@@ -35,9 +35,13 @@
 }
 
 .InsideSidebar .MuiButtonBase-root {
-    /* border-radius: 5px; */
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+.InsideSidebar .MuiButtonBase-root.innerButton {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 
