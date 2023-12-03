@@ -24,7 +24,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
-        <List sx={{ width: openSidebar ? '200px' : 'var(--closeSidebarWidth)' }}
+        <List sx={{ width: openSidebar ? '210px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
         >
