@@ -62,6 +62,18 @@ export const Header = styled.h1`
         padding: 0 5px;
     }
 
+    button {
+        flex-wrap: wrap;
+        padding: 0 5px;
+        align-items: end;
+        padding-bottom: 5px;
+    }
+
+    button svg {
+        height: 20px;
+        width: 20px;
+    }
+
 `;
 
 export const Title = styled.div`
