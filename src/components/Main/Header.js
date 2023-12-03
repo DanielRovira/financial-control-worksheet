@@ -1,6 +1,6 @@
 import './styles/Header.css'
 import { Avatar, AppBar, Box, Button, Card, ClickAwayListener, Divider, IconButton, Toolbar, Tooltip } from '@mui/material';
-import { Menu as MenuIcon, SettingsOutlined as SettingsOutlinedIcon } from '@mui/icons-material';
+import { Menu as MenuIcon, SettingsOutlined as SettingsOutlinedIcon, Apps as AppsIcon } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
@@ -64,7 +64,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
             <AppBar className='AppBar' position='fixed' sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
                 <Toolbar variant="dense" sx={{ justifyContent: 'space-between'}}>
                     <IconButton color="inherit" edge="start" onClick={() => setOpenSidebar(!openSidebar)} >
-                        <MenuIcon />
+                        <AppsIcon style={{fontSize:'28px'}} />
                     </IconButton>
                         {/* <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" onClick={() => history(`/main`)} style={{ maxHeight: '40px', marginLeft:'10px'}} /> */}
                         {/* <h1>{lang[sheetType] || lang.home}</h1> */}
