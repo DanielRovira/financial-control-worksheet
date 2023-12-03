@@ -47,8 +47,8 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.todos} />
                 </ListItemButton>
-                <ListItemButton onClick={handleClick} title={lang.contacts}>
-                    <ListItemIcon>
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Contacts'); history('/Contacts')}} title={lang.contacts}>
+                    <ListItemIcon style={mainSheetType === 'Contacts' ? selectedStyle : null} >
                         <ContactsIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />

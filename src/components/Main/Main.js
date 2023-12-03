@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 // import { List, ListSubheader } from '@mui/material';
 // import NestedList from './NestedList';
-import TaskList from '../TaskList/TaskList';
+// import TaskList from '../TaskList/TaskList';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
@@ -24,7 +24,7 @@ const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading
                 <h1>{lang.welcome} {user.name}!</h1>
             </div>
             <div className='SubContainer'>
-                <TaskList setMainSheetType={setMainSheetType} />
+                {/* <TaskList setMainSheetType={setMainSheetType} /> */}
             </div>
             {/* <List
                 subheader={
