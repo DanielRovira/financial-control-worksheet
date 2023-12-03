@@ -1,6 +1,6 @@
 import './styles/Header.css'
 import { Avatar, AppBar, Box, Button, Card, ClickAwayListener, Divider, IconButton, Toolbar, Tooltip } from '@mui/material';
-import { Menu as MenuIcon, SettingsOutlined as SettingsOutlinedIcon, Apps as AppsIcon } from '@mui/icons-material';
+import { SettingsOutlined as SettingsOutlinedIcon, Apps as AppsIcon } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
