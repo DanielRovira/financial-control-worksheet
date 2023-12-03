@@ -18,13 +18,13 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
     const selectedStyle = {
         borderLeft: '3px solid var(--navbar-color)',
-        paddingLeft: '7px',
+        paddingLeft: '2px',
         color: 'var(--navbar-color)'
     }
 
     return (
       <Drawer className='Sidebar' variant="permanent" open={openSidebar} >
-        <List sx={{ width: openSidebar ? '250px' : 'var(--closeSidebarWidth)' }}
+        <List sx={{ width: openSidebar ? '200px' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
         >
@@ -54,7 +54,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     <ListItemText primary={lang.contacts} />
                 </ListItemButton>
             </div>
-            <div style={{ position: 'absolute', bottom: '10px', left: '60px' }}>
+            <div style={{ position: 'absolute', bottom: '10px', left: '40px' }}>
                 <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" style={{ maxWidth: '150px'}} />
             </div>
         </List>

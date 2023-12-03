@@ -20,9 +20,14 @@
 
 .Sidebar .ItensContainer .MuiButtonBase-root {
     padding-left: 5px;
+    gap: 10px;
 }
 
 .Sidebar .ItensContainer .MuiButtonBase-root .MuiListItemIcon-root {
-    /* border-left: 3px solid #1976d2; */
-    padding-left: 10px;
+    padding-left: 5px;
+    min-width: unset;
+}
+
+.Sidebar .ItensContainer .MuiButtonBase-root .MuiListItemText-root span {
+    transform: translateY(2px);
 }

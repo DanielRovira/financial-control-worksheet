@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --color1: #DEDEDE;
     --color2: #C9C9C9;
     --font-color: #3C4043;
-    --closeSidebarWidth: 60px;
+    --closeSidebarWidth: 45px;
     --navbar-color: #106EBE;
     --selected-sidebar: #CFE4FA;
     }
