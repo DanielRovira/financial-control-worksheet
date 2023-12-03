@@ -67,7 +67,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                         <AppsIcon style={{fontSize:'28px'}} />
                     </IconButton>
                         {/* <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" onClick={() => history(`/main`)} style={{ maxHeight: '40px', marginLeft:'10px'}} /> */}
-                        {/* <h1>{lang[sheetType] || lang.home}</h1> */}
+                        <h1>{process.env.REACT_APP_NAME}</h1>
                     <Box>
                         <Tooltip
                             disableInteractive
