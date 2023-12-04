@@ -1,7 +1,7 @@
 import * as C from './styles';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
+import { Button, IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
 import { AddCircle as AddCircleIcon,
          Archive as ArchiveIcon,
          ArchiveOutlined as ArchiveOutlinedIcon,
@@ -83,11 +83,11 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             <C.Buttons className='leftButtons'>
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
-                    <IconButton  onClick={() => setAdd(!add)}>
+                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation>
                         {!add ? <AddCircleIcon/>
                              : <RemoveCircleIcon/>}
                     <p>{lang.add}</p>
-                    </IconButton>
+                    </Button>
                 </>}
                 <IconButton onClick={!syncing ? handleDeleteButton : undefined}
                             disabled={disabled}

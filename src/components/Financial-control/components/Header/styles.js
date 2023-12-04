@@ -15,7 +15,7 @@ export const Container = styled.div`
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
     padding: 0 5px;
-    min-height: 35px;
+    min-height: 40px;
     overflow: hidden;
 
     .leftButtons {
@@ -61,17 +61,17 @@ export const Buttons = styled.div`
     display: flex;
     /* position: fixed; */
     /* top: 50px; */
-    gap:5px;
+    gap: 3px;
     align-items: center;
 
     .MuiIconButton-root {
-        padding: 0;
+        padding: 0 3px;
         border-radius: 5px;
-        height: 30px;
+        height: 32px;
     }
 
     .MuiButtonBase-root.MuiIconButton-root:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.06);
     }
 
     @media (max-width: 1300px) {
