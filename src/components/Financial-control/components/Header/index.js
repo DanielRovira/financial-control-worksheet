@@ -146,7 +146,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </IconButton>
                 </>}
                 <Tooltip title={<h3>{lang.more}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton onClick={handleClick}>
+                    <IconButton onClick={handleClick} style={{border:'0'}}>
                         <MoreVertIcon />
                     </IconButton>
                 </Tooltip>

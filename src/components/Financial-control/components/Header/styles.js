@@ -73,7 +73,7 @@ export const Buttons = styled.div`
     }
 
     .MuiButtonBase-root.MuiIconButton-root:hover {
-        background-color: #FAFAFA;
+        background-color: #F7F7F7;
         border-color: #E5E5E5;
     }
 
