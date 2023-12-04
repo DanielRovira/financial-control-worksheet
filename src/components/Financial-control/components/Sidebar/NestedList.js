@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ClickAwayListener, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon } from '@mui/icons-material';
+import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon, DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) => {
@@ -27,7 +27,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
                             style={{backgroundColor: section.title === params.taskTitle ? 'var(--selected-sidebar)' :  'unset'}}
                 >
                 <ListItemIcon>
-                    {section.title.slice(0, 3)}
+                    {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title.slice(0, 3)}
                 </ListItemIcon>
                 <ListItemText primary={section.name} />
                 {arrow && (openSection ? <ExpandLess /> : <ExpandMore />)}
@@ -35,7 +35,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
         </ClickAwayListener>
         <Collapse in={openSection} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-                {types.map((type) => (
+                {(section.title === 'TRASH' ? types.slice(1) : types).map((type) => (
                     <ListItemButton
                         className='innerButton'
                         style={section.title === params.taskTitle && type === sheetType ? selectedStyle :  null}

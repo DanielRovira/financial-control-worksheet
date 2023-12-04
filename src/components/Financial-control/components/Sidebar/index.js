@@ -14,11 +14,17 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
                 aria-labelledby="nested-list-subheader"
         >
             <div className='InsideSidebarItensContainer'>
-                    <IconButton  onClick={() => setOpenSidebar(!openSidebar)}>
-                        <MenuIcon/>
-                    </IconButton>
-                    <text className='InsideSidebarTitle'>{lang.sections}</text>
+                <IconButton  onClick={() => setOpenSidebar(!openSidebar)}>
+                    <MenuIcon/>
+                </IconButton>
+
+                <text className='InsideSidebarTitle'>{lang.sections}</text>
+
                 {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
+                    <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
+                ))}
+                <div style={{height:'100px'}}></div>
+                {Array.from(sections).filter((section) => section.title === 'TRASH').map((section, index) => (
                     <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
             </div>
