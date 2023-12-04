@@ -5,8 +5,9 @@ export const TableContent = styled.div`
     margin: 5px;
     overflow: auto;
     background-color: white;
-    box-shadow: 0px 0px 5px #ccc;
-    border-radius: 5px;
+    /* box-shadow: 0px 0px 5px #ccc; */
+    box-shadow: var(--box-shadow);
+    border-radius: 2px;
     /* padding: 5px; */
     /* width: 93vw; */
     z-index: 10;

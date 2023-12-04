@@ -12,10 +12,11 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin: 5px 5px 0 5px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px #ccc;
+    border-radius: 2px;
+    /* box-shadow: 0px 0px 5px #ccc; */
+    box-shadow: var(--box-shadow);
     padding: 0 5px;
-    min-height: 40px;
+    min-height: 38px;
     overflow: hidden;
 
     .leftButtons {
@@ -61,17 +62,19 @@ export const Buttons = styled.div`
     display: flex;
     /* position: fixed; */
     /* top: 50px; */
-    gap: 3px;
+    gap: 2px;
     align-items: center;
 
     .MuiIconButton-root {
         padding: 0 3px;
-        border-radius: 5px;
+        border-radius: 3px;
         height: 32px;
+        border: 1px solid transparent;
     }
 
     .MuiButtonBase-root.MuiIconButton-root:hover {
-    background-color: rgba(0, 0, 0, 0.06);
+        background-color: #FAFAFA;
+        border-color: #E5E5E5;
     }
 
     @media (max-width: 1300px) {

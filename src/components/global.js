@@ -41,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
     --closeSidebarWidth: 45px;
     --navbar-color: #106EBE;
     --selected-sidebar: #CFE4FA;
+    --box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14);
     }
 
     @media (max-width: 750px) {
