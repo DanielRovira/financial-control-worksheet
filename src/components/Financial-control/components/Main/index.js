@@ -1,7 +1,7 @@
 import './styles.css'
-import { List, ListSubheader } from '@mui/material';
-import NestedList from '../Sidebar/NestedList';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+// import { List, ListSubheader } from '@mui/material';
+// import NestedList from '../Sidebar/NestedList';
+// const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Main = ({ setOpenSidebar }) => {
     // const sections = JSON.parse(localStorage.getItem("sections")) || [];

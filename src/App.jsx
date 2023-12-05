@@ -10,6 +10,7 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
+import manifestDetails from './components/manifestDetails.js';
 import  { Backdrop, CircularProgress } from '@mui/material';
 
 window.addEventListener("resize", function () {
@@ -21,6 +22,11 @@ window.addEventListener("resize", function () {
 
 document.querySelector('link[rel=icon]').href = `${process.env.REACT_APP_LOGO}.png`
 document.title = process.env.REACT_APP_NAME
+
+const stringManifest = JSON.stringify(manifestDetails);
+const blob = new Blob([stringManifest], {type: 'application/json'});
+const manifestURL = URL.createObjectURL(blob);
+document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
 
 const App = () => {
     const history = useNavigate();
