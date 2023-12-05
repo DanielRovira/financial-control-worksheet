@@ -1,6 +1,6 @@
 const manifestDetails = {
-    "name": "CONSTEM",
-    "short_name": "CONSTEM",
+    "name": process.env.REACT_APP_NAME,
+    "short_name": process.env.REACT_APP_NAME,
     "start_url":  `${window.location.href}`,
     "display": "standalone",
     "theme_color": "#ffffff",
