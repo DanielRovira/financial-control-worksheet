@@ -12,11 +12,6 @@ const manifestDetails = {
         "type": "image/x-icon"
       },
       {
-        "src": `${process.env.REACT_APP_LOGO}/full.jpg`,
-        "type": "image/png",
-        "sizes": "858x371"
-      },
-      {
           "src": `${process.env.REACT_APP_LOGO}/android-chrome-192x192.png`,
           "sizes":"192x192",
           "type":"image/png"

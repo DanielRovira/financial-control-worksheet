@@ -20,8 +20,10 @@ window.addEventListener("resize", function () {
     document.documentElement.style.setProperty('--vw', `${vw}px`);
 });
 
-document.querySelector('link[rel=icon]').href = `${process.env.REACT_APP_LOGO}.png`
 document.title = process.env.REACT_APP_NAME
+document.querySelector('link[rel=icon]').href = `${process.env.REACT_APP_LOGO}.png`
+document.querySelector('link[rel=apple-touch-icon]').href = `${process.env.REACT_APP_LOGO}/apple-touch-icon.png`
+document.querySelector('link[rel=apple-touch-startup-image]').href = `${process.env.REACT_APP_LOGO}/apple_splash.png`
 
 const stringManifest = JSON.stringify(manifestDetails);
 const blob = new Blob([stringManifest], {type: 'application/json'});
