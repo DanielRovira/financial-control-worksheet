@@ -1,5 +1,7 @@
 import './styles.css'
 import { useState, useEffect } from 'react';
+import { List, ListSubheader } from '@mui/material';
+import MainNestedList from './MainNestedList';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ setOpenSidebar }) => {
@@ -53,7 +55,18 @@ const Main = ({ setOpenSidebar }) => {
                     <h1>{lang.FinancialWorksheet}</h1>
                 </div>
                 <div className='TableContainer'>
-                    <table>
+                    <List
+                        subheader={
+                            <ListSubheader>
+                                <h2>{lang.sections}</h2>
+                            </ListSubheader>
+                          }
+                        >
+                        {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
+                            <MainNestedList key={index} section={section} hideTitle={true} arrow={true} result={results[section.title]?.total} />
+                        ))}
+                    </List>
+                    {/* <table>
                         <thead>
                             <tr>
                                 <th>{lang.sections}</th>
@@ -76,7 +89,7 @@ const Main = ({ setOpenSidebar }) => {
                                 </tr>
                             ))}
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
             </div>
         </div>

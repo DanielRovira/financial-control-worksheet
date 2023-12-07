@@ -42,6 +42,7 @@
     min-width: 70vw;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
+    height: 100%;
 }
 
 @media (max-width: 750px) {
@@ -57,12 +58,12 @@
     display: flex;
     }
 }
-
+/* 
 @media (max-width: 600px) {
     .chartContent {
         min-width: 420px;
     }
-}
+} */
 
 @media (max-width: 500px) {
     .Summary .MuiList-root .MuiButtonBase-root span {
