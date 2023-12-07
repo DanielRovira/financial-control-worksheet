@@ -9,7 +9,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
     return (
       <div className='InsideSidebar' variant="permanent" open={openSidebar} >
-        <List sx={{ width: openSidebar ? '210px' : 'var(--closeSidebarWidth)' }}
+        <List sx={{ width: openSidebar ? 'var(--sidebarWidth)' : 'var(--closeSidebarWidth)' }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
         >
@@ -18,7 +18,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
                     <MenuIcon/>
                 </IconButton>
 
-                <text className='InsideSidebarTitle'>{lang.sections}</text>
+                <span className='InsideSidebarTitle'>{lang.sections}</span>
 
                 {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
                     <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />

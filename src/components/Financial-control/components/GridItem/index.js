@@ -298,7 +298,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 </>}
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{providerTemp}</p></C.TdCont></C.Td>
                 <C.Td onDoubleClick={toggleEdit}><C.TdCont expandRow={expandRow}><p>{descTemp}</p></C.TdCont></C.Td>
-                <C.Td onDoubleClick={toggleEdit}><C.TdCont ><p>{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p></C.TdCont></C.Td>
+                <C.Td onDoubleClick={toggleEdit}><C.TdCont ><p>{Number(amountTemp?.toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: process.env.REACT_APP_CURRENCY })}</p></C.TdCont></C.Td>
                 {params.taskTitle !== 'TRASH' && <>
                 <C.Td alignCenter className='nohover'><C.TdCont><FaRegEdit onClick={toggleEdit} style={{cursor: 'pointer'}} /></C.TdCont></C.Td>
                 <C.Td alignCenter className='nohover'>

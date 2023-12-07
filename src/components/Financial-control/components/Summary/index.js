@@ -110,7 +110,7 @@ const options = {
         y: {
             ticks: {
                 callback: function(value, index, values) {
-                    return value.toLocaleString(process.env.REACT_APP_LANG,{ style:"currency", currency:process.env.REACT_APP_CURRENCY });
+                    return value.toLocaleString(process.env.REACT_APP_LANG,{ style:"currency", currency: process.env.REACT_APP_CURRENCY });
                 }
             }
         }

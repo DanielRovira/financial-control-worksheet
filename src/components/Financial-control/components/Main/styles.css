@@ -8,9 +8,15 @@
     overflow-y: scroll;
 }
 
+.FinancialWorksheetMainContainer .Header {
+    text-align: center;
+}
+
 .FinancialWorksheetMainContainer .SubContainer {
     display: flex;
+    flex-direction: column;
     margin: 20px;
+    transform: translateX(calc(var(--closeSidebarWidth)*-1));
 }
 
 .FinancialWorksheetMainContainer ul {
@@ -18,7 +24,6 @@
     /* box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.1); */
     width: 300px;
     background-color: white;
-
 }
 
 .FinancialWorksheetMainContainer .MuiListSubheader-root {
@@ -35,3 +40,29 @@
         padding-top: 70px;
     }
 } */
+
+.FinancialWorksheetMainContainer .TableContainer table {
+    margin-top: 50px;
+    font-size: 1.2em;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.FinancialWorksheetMainContainer .TableContainer table th {
+    font-size: 1.3em;
+}
+
+.FinancialWorksheetMainContainer .TableContainer table thead tr {
+    background-color: var(--color0);
+    padding: 10px;
+
+}
+.FinancialWorksheetMainContainer .TableContainer table tr:nth-child(even) {
+    background-color: var(--color0);
+}
+
+.FinancialWorksheetMainContainer .TableContainer table td, th {
+    padding: 10px;
+    min-width: 100px;
+}
