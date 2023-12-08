@@ -41,7 +41,7 @@ const Main = ({ setOpenSidebar }) => {
     }
 
     useEffect(() => {
-        // setOpenSidebar(true);
+        setOpenSidebar(false);
 
         Array.from(sections)?.map((prov) => (
             getData(prov.title)
