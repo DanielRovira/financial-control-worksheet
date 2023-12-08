@@ -1,5 +1,5 @@
 import './styles.css'
-import { IconButton, List } from '@mui/material';
+import { IconButton, List, Divider } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import NestedList from './NestedList';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
@@ -23,7 +23,9 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
                 {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
                     <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
-                <div style={{height:'100px'}}></div>
+                <div style={{padding:'10px 5px'}}>
+                    <Divider />
+                </div>
                 {Array.from(sections).filter((section) => section.title === 'TRASH').map((section, index) => (
                     <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
