@@ -84,7 +84,8 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: row;
         /* height: 100vh; */
-        height: calc(var(--vh, 1vh) * 99);
+        height: calc(var(--vh, 1vh) * 99.8);
+        width: calc(var(--vw, 1vw) * 99.8);
         max-height: 100%;
         overflow: hidden;
 

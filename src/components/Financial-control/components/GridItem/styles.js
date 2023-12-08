@@ -12,6 +12,13 @@ export const Tr = styled.tr`
         background-color: inherit;
     }
 
+
+    @media (max-width: 650px) {
+        .Hide {
+                display: none;
+        }
+    }
+
 `;
 
 export const TdCont = styled.div`

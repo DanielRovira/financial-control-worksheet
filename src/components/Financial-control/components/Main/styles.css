@@ -5,7 +5,7 @@
     align-items: center;
     width: 100%;
     margin-top: 50px;
-    padding-top: 20px;
+    padding-top: 50px;
     overflow-y: auto;
     overflow-x: hidden;
     text-wrap: nowrap;
@@ -20,7 +20,7 @@
 .FinancialWorksheetMainContainer .SubContainer {
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    /* margin: 20px; */
     transform: translateX(calc(var(--closeSidebarWidth)*-1));
 }
 

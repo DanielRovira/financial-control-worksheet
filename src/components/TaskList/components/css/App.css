@@ -1,10 +1,32 @@
-.TaskList {
-    width: 400px;
+.TaskListContainer {
+    display: flex;
+    flex-direction: column;
+    /* width: calc(var(--vw, 1vw) * 99,5); */
     margin: auto;
-    overflow: auto;
+    height: calc(var(--vh, 1vh) * 99.8);
+}
+
+.TaskListContainer .TaskListHeader {
+    margin-top: 50px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.TaskListContainer .TaskList {
+    /* width: 400px; */
+
+    margin-top: 10px;
+    /* overflow: auto; */
     /* min-height: 300px; */
     /* border: 2px solid #1976d2; */
-    padding: 30px;
+    padding: 10px;
     border-radius: 10px;
     background-color: white;
+    overflow-y: auto;
+}
+
+@media (max-height: 600px) {
+    .TaskListContainer .TaskListHeader {
+        padding-top: 0;
+    }
 }

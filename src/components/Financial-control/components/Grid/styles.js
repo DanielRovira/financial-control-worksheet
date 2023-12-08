@@ -37,7 +37,13 @@ export const Thead = styled.thead``;
 
 export const Tbody = styled.tbody``;
 
-export const Tr = styled.tr``;
+export const Tr = styled.tr`
+    @media (max-width: 650px) {
+        .Hide {
+                display: none;
+        }
+    }
+`;
 
 export const Th = styled.th`
     background-color: white;

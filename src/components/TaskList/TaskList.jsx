@@ -87,13 +87,17 @@ const TaskList = ({ setMainSheetType }) => {
         };
 
         return (
+            <div className='TaskListContainer'>
+                <div className='TaskListHeader' >
+                    <h1>{lang.tasks}</h1>
+                </div>
                 <div className='TaskList'>
-                    <h1 style={{ color: "#1976d2"}}>{lang.tasks}</h1>
                     {taskDetail ? 
                         <TaskDetails tasks={tasks} handleDescAddition={handleDescAddition} taskDetail={taskDetail} setTasksDetail={setTasksDetail} /> :
                         <Main/>
                     }
                 </div>
+            </div>
         )
 };
 
