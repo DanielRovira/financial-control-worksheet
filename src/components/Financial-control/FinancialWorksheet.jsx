@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
+import { useClickAway } from 'react-use';
 import BottomNavigation from './components/BottomNav';
 import Calendar from './components/Calendar';
 import EmpityFolder from './components/EmpityFolder';
@@ -37,6 +38,10 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const sectionExists = sections.find((section) => String(section.title) === params.taskTitle)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source')
+    
+    const sidebar = useRef(null);
+    const collapseSidebar = () => { openSidebar && setOpenSidebar(false) }
+    useClickAway(sidebar, collapseSidebar);
 
     const getData = async () => {
         if (sheetType !== undefined ){
@@ -270,7 +275,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     }, [transactionsList]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (<>
-            <Sidebar sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
+            <div ref={sidebar}>
+                <Sidebar  sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
+            </div>
             {sheetType === undefined ? <Main setOpenSidebar={setOpenSidebar} /> : 
             <div className='FinancialWorksheet'>
                     <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />

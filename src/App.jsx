@@ -106,8 +106,8 @@ const App = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <div ref={sidebar}>
-            {isLoggedIn && !loading ? <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} mainSheetType={mainSheetType} setMainSheetType={setMainSheetType} style={{ overflow: 'hidden' }} /> : ""}
-            <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+                {isLoggedIn && !loading ? <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} mainSheetType={mainSheetType} setMainSheetType={setMainSheetType} style={{ overflow: 'hidden' }} /> : ""}
+                <Header sendLogoutReq={sendLogoutReq} isLoggedIn={isLoggedIn} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
