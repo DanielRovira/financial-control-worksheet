@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const TableContent = styled.div`
     /* margin: 10px 10px 60px calc((var(--closeSidebarWidth)) + 10px); */
-    margin: 5px;
+    margin: 0 5px;
     overflow: auto;
     background-color: white;
     /* box-shadow: 0px 0px 5px #ccc; */

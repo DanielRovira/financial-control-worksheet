@@ -1,7 +1,7 @@
 .Summary {
     display: flex;
     height: calc((var(--vh, 1vh) * 100) - 70px);
-    padding: 0 10px 0 0px;
+    /* padding: 0 10px 0 0px; */
     margin-bottom: 50px;
     overflow: auto;
 }
@@ -48,7 +48,7 @@
 
 @media (max-width: 750px) {
     .Summary {
-        padding: 0 0 0 10px;
+        /* padding: 0 0 0 10px; */
         flex-direction: column;
     }
 

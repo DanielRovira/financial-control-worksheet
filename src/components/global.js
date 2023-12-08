@@ -99,6 +99,7 @@ const GlobalStyle = createGlobalStyle`
         /* max-height: 100%; */
         overflow: hidden;
         /* margin-right: 5px; */
+        gap: 5px;
     }
 
     .FinancialWorksheet .MuiLinearProgress-root {

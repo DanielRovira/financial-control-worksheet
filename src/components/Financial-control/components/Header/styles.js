@@ -11,7 +11,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 5px 5px 0 5px;
+    margin: 0 5px;
     border-radius: 2px;
     /* box-shadow: 0px 0px 5px #ccc; */
     box-shadow: var(--box-shadow);

@@ -16,12 +16,15 @@ const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading
         refreshToken();
         setMainSheetType('Main');
         // !isLoggedIn && history('/')
+
+        history('/FinancialWorksheet')  //Enquanto não faz a pagina inicial
+
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='MainContainer'>
             <div className='Header'>
-                <h1>{lang.welcome} {user.name}!</h1>
+                {/* <h1>{lang.welcome} {user.name}!</h1> */}
             </div>
             <div className='SubContainer'>
                 {/* <TaskList setMainSheetType={setMainSheetType} /> */}
