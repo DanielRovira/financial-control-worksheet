@@ -12,6 +12,12 @@
     max-width: calc(var(--vw, 1vw) * 99.5);
 }
 
+@media (max-height: 600px) {
+    .FinancialWorksheetMainContainer {
+        padding-top: 0;
+    }
+}
+
 .FinancialWorksheetMainContainer .Header {
     text-align: center;
     /* text-wrap: nowrap; */
@@ -39,6 +45,7 @@
     margin: 10px 20px 0 20px;
     position: relative;
 }
+
 /* 
 @media (max-width: 600px), (max-height: 600px) {
     .FinancialWorksheetMainContainer {
