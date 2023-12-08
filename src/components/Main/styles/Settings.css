@@ -59,17 +59,4 @@
     border-bottom: none;
   }
 
-@media (max-width: 750px) {
-    .SettingsContainer{
-        margin-left: 0;
-    }
-    .SettingsSubContainer {
-        margin: 0 10px 10px 10px;
-    }
-}
 
-@media (max-width: 600px) {
-    .SettingsContainer {
-        margin-top: 60px;
-    }
-}

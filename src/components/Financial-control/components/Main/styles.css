@@ -4,12 +4,17 @@
     /* justify-content: center; */
     align-items: center;
     width: 100%;
-    margin-top: 70px;
-    overflow-y: scroll;
+    margin-top: 50px;
+    padding-top: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-wrap: nowrap;
+    max-width: calc(var(--vw, 1vw) * 99.5);
 }
 
 .FinancialWorksheetMainContainer .Header {
     text-align: center;
+    /* text-wrap: nowrap; */
 }
 
 .FinancialWorksheetMainContainer .SubContainer {
@@ -22,7 +27,7 @@
 .FinancialWorksheetMainContainer ul {
     border-radius: 5px;
     /* box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.1); */
-    /* width: 300px; */
+    width: auto;
     background-color: white;
 }
 
@@ -41,7 +46,7 @@
     }
 } */
 
-.FinancialWorksheetMainContainer .TableContainer table {
+/* .FinancialWorksheetMainContainer .TableContainer table {
     margin-top: 50px;
     font-size: 1.2em;
     width: 100%;
@@ -65,4 +70,4 @@
 .FinancialWorksheetMainContainer .TableContainer table td, th {
     padding: 10px;
     min-width: 100px;
-}
+}  */

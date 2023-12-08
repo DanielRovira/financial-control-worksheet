@@ -32,17 +32,28 @@
     cursor: pointer;
 }
 
+.AppBar .InnerSettingsButton {
+    display: none;
+}
+
 @media (max-width: 500px) {
     .MuiAppBar-root {
         max-height: 56px;
         line-height: 1.5em;
     }
     .MuiAppBar-root h1 {
-        font-size: 22px;
+        font-size: 28px;
     }
 
     .AppBar .MuiToolbar-root {
         padding-right: 0px;
+    }
+
+    .AppBar .OutterSettingsButton {
+        display: none;
+    }
+    .AppBar .InnerSettingsButton {
+        display: unset;
     }
 }
 

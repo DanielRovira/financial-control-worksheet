@@ -75,6 +75,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                             PopperProps={poppersConfig}
                             enterDelay={500}
                             enterNextDelay={500}
+                            className='OutterSettingsButton'
                         >
                             <IconButton color="inherit" onClick={() => {setOpenPanel(false); history(`/settings`)}}>
                                 <SettingsOutlinedIcon />
@@ -103,6 +104,18 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                 }, 5)}>
                     <Card className='Panel'>
                         <div className='userContainer'>
+                            <Tooltip
+                                disableInteractive
+                                title={<h3>{lang.settings}</h3>}
+                                PopperProps={poppersConfig}
+                                enterDelay={800}
+                                enterNextDelay={800}
+                                className='InnerSettingsButton'
+                            >
+                                <IconButton onClick={() => {setOpenPanel(false); history(`/settings`)}}>
+                                    <SettingsOutlinedIcon />
+                                </IconButton>
+                            </Tooltip>
                             <Avatar children={user.name[0]} />
                             <h2>{user.name}</h2>
                             <p>{user.email}</p>
