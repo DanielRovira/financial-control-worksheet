@@ -98,7 +98,7 @@ const GlobalStyle = createGlobalStyle`
         width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
         /* max-height: 100%; */
         overflow: hidden;
-        margin-right: 5px;
+        /* margin-right: 5px; */
     }
 
     .FinancialWorksheet .MuiLinearProgress-root {
