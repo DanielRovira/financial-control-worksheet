@@ -19,6 +19,7 @@
 
 .MainContainer .FinancialWorksheetMainContainer .SubContainer {
     transform: none;
+    width: 100%;
 }
 
 .MainContainer .MainSubContainer .TaskListContainer .TaskList .task-container {
@@ -26,7 +27,8 @@
 }
 
 .MainContainer .FinancialWorksheetMainContainer .TableContainer ul {
-    margin: auto;
+    /* margin: auto; */
+    width: 100%;
 }
 
 .MainContainer ul {
