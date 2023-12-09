@@ -1,10 +1,10 @@
 .task-container {
-    background-color: #444;
+    background-color: var(--color0);
     margin: 8px 0;
     padding: 5px 20px;
     display: flex;
     border-radius: 5px;
-    color: #eee;
+    /* color: #eee; */
     justify-content: space-between;
     align-items: center;
 }
@@ -22,7 +22,7 @@
 .remove-task-button,
 .see-task-detail-button {
     display: flex;
-    background-color: #444;
+    background-color: var(--color0);
     border: none;
     font-size: 24px;
     color: #1976d2;

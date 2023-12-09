@@ -4,8 +4,12 @@
     align-items: center;
 }
 
+.upper-container h2 {
+    min-width: 100px;
+}
+
 .task-details-container {
-    background-color: #444;
+    /* background-color: #444; */
     margin: 8px 0;
     padding: 15px 20px;
     display: flex;
@@ -40,8 +44,8 @@
     border-radius: 5px;
     border: none;
     flex: 2;
-    background-color: #444;
-    color: #eee;
+    background-color: var(--color0);
+    /* color: #eee; */
     font-size: 1rem;
     box-sizing: border-box;
     resize: none;
