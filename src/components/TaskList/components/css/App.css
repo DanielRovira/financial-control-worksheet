@@ -22,7 +22,7 @@
     padding: 10px;
     border-radius: 5px;
     background-color: white;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 @media (max-height: 600px) {

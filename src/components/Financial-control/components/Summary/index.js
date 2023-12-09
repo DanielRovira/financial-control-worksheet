@@ -94,8 +94,8 @@ const options = {
         padding: {
             top: 20,
             left: 20,
-            bottom: 20,
-            up: 20,
+            bottom: 0,
+            right: 20,
         },
     },
     scales: {

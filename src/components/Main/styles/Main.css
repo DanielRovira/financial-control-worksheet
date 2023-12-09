@@ -51,9 +51,10 @@
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     .MainContainer .MainSubContainer {
         display: unset;
+        gap: 0px;
     }
 
     .MainContainer .FinancialWorksheetMainContainer {

@@ -6,8 +6,8 @@
     width: 100%;
     margin-top: 50px;
     padding-top: 50px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* overflow-y: auto; */
+    /* overflow-x: hidden; */
     text-wrap: nowrap;
     max-width: calc(var(--vw, 1vw) * 99.5);
 }

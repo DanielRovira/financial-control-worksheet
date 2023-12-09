@@ -83,9 +83,10 @@ const GlobalStyle = createGlobalStyle`
     .App {
         display: flex;
         flex-direction: row;
-        /* height: 100vh; */
-        height: calc(var(--vh, 1vh) * 99.8);
-        width: calc(var(--vw, 1vw) * 99.8);
+        height: 100vh;
+        width: 100vw;
+        /* height: calc(var(--vh, 1vh) * 99.8); */
+        /* width: calc(var(--vw, 1vw) * 99.8); */
         max-height: 100%;
         overflow: hidden;
 
@@ -96,11 +97,13 @@ const GlobalStyle = createGlobalStyle`
         flex-direction: column;
         /* height: 100vh; */
         /* height: calc(var(--vh, 1vh) * 99); */
-        width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2);
+        /* width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2); */
         /* max-height: 100%; */
         overflow: hidden;
         /* margin-right: 5px; */
         gap: 5px;
+        width: inherit;
+        height: inherit;
     }
 
     .FinancialWorksheet .MuiLinearProgress-root {

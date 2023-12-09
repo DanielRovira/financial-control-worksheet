@@ -13,7 +13,8 @@ export const TableContent = styled.div`
     z-index: 10;
 
     @media (max-width: 750px) {
-        max-height: calc((var(--vh, 1vh) * 100) - 250px);
+        /* max-height: calc((var(--vh, 1vh) * 100) - 250px); */
+        margin-bottom: 55px;
     }
 
     &::-webkit-scrollbar-track {
