@@ -6,6 +6,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ setOpenSidebar }) => {
     const [results, setResults] = useState(JSON.parse(localStorage.getItem("results")) || []);
+    // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     const getData = async (section) => {
@@ -47,9 +48,9 @@ const Main = ({ setOpenSidebar }) => {
     useEffect(() => {
         setOpenSidebar && setOpenSidebar(false);
 
-        Array.from(sections)?.map((prov) => (
-            getData(prov.title)
-         ))
+            Array.from(sections)?.map((prov) => (
+                getData(prov.title)
+             ))
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

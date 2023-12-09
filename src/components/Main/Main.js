@@ -7,9 +7,9 @@ import TaskList from '../TaskList/TaskList';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 import FinancialWorksheetMain from '../Financial-control/components/Main'
 
-const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
+const Main = ({ refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
     const history = useNavigate();
-    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const sections = JSON.parse(localStorage.getItem("sections")) || [];
     // const user = JSON.parse(localStorage.getItem("user")) || [];
 
     useEffect(() => {
@@ -18,16 +18,16 @@ const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading
         setMainSheetType('Main');
         // !isLoggedIn && history('/')
 
-        // history('/FinancialWorksheet')  //Enquanto não faz a pagina inicial
-
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
-
+console.log(sections)
     return (
         <div className='MainContainer'>
-            <div className='SubContainer'>
-                <FinancialWorksheetMain />
-                <TaskList setMainSheetType={undefined} />
-            </div>
+            {sections.length > 0 &&
+                <div className='MainSubContainer'>
+                    <FinancialWorksheetMain />
+                    <TaskList setMainSheetType={undefined} />
+                </div>
+            }
         </div>
     )
 }

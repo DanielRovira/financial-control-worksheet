@@ -111,7 +111,7 @@ const App = () => {
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
-                    <Route path="/main" element={<Main sections={sections} refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} setLoading={setLoading} />} />
+                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} setLoading={setLoading} />} />
                     <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setMainSheetType={setMainSheetType} refreshToken={refreshToken} />} />
                     <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/TaskList/*" element={<TaskList setMainSheetType={setMainSheetType} />} />
