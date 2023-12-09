@@ -111,7 +111,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     <p>{lang[!archived ? 'archive' : 'unAarchive']}</p>
                 </IconButton>
             </>}
-                {params.taskTitle === 'TRASH' && checked.length !== 0 && <>
+                {/* {params.taskTitle === 'TRASH' && checked.length !== 0 && <> */}
                     <IconButton onClick={() => !syncing ? handleDeleteSelected('trash', 1) : undefined}
                                 disabled={disabled}
                             >
@@ -124,7 +124,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         <RestoreFromTrashIcon/>
                         <p>{lang.restore}</p>
                     </IconButton>
-                </>}
+                {/* </>} */}
             </C.Buttons>
             {/* <C.Header>
                 <C.Title>{section ? (section.title === 'TRASH' ? lang.trash : section.name) : ''}</C.Title>
