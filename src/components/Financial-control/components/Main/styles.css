@@ -46,6 +46,9 @@
     position: relative;
 }
 
+.FinancialWorksheetMainContainer .MuiListItemText-root {
+    overflow: hidden;
+}
 /* 
 @media (max-width: 600px), (max-height: 600px) {
     .FinancialWorksheetMainContainer {

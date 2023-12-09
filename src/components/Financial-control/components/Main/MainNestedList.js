@@ -30,7 +30,8 @@ const MainNestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType, 
                     {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title.slice(0, 3)}
                 </ListItemIcon>
                 <ListItemText primary={section.name} />
-                <ListItemText primary={Number((result || 0).toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: process.env.REACT_APP_CURRENCY })} style={{textAlign:'right'}} />
+                <ListItemText primary={Number((result || 0).toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: process.env.REACT_APP_CURRENCY })}
+                              style={{textAlign:'right', minWidth: '60px'}} />
                 {arrow && (openSection ? <ExpandLess /> : <ExpandMore />)}
             </ListItemButton>
         </ClickAwayListener>

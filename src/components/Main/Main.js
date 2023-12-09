@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 // import { List, ListSubheader } from '@mui/material';
 // import NestedList from './NestedList';
-// import TaskList from '../TaskList/TaskList';
+import TaskList from '../TaskList/TaskList';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+import FinancialWorksheetMain from '../Financial-control/components/Main'
 
 const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
     const history = useNavigate();
@@ -17,29 +18,16 @@ const Main = ({ sections, refreshToken, isLoggedIn, setMainSheetType, setLoading
         setMainSheetType('Main');
         // !isLoggedIn && history('/')
 
-        history('/FinancialWorksheet')  //Enquanto não faz a pagina inicial
+        // history('/FinancialWorksheet')  //Enquanto não faz a pagina inicial
 
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='MainContainer'>
-            <div className='Header'>
-                {/* <h1>{lang.welcome} {user.name}!</h1> */}
-            </div>
             <div className='SubContainer'>
-                {/* <TaskList setMainSheetType={setMainSheetType} /> */}
+                <FinancialWorksheetMain />
+                <TaskList setMainSheetType={undefined} />
             </div>
-            {/* <List
-                subheader={
-                    <ListSubheader>
-                        <h2>{lang.sections}</h2>
-                    </ListSubheader>
-                  }
-                >
-                {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
-                    <NestedList key={index} section={section} hideTitle={true} arrow={true} />
-                ))}
-            </List> */}
         </div>
     )
 }

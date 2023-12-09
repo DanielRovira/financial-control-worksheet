@@ -45,7 +45,7 @@ const Main = ({ setOpenSidebar }) => {
     }, [results]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        setOpenSidebar(false);
+        setOpenSidebar && setOpenSidebar(false);
 
         Array.from(sections)?.map((prov) => (
             getData(prov.title)

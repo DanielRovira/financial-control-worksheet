@@ -13,7 +13,7 @@ const TaskList = ({ setMainSheetType }) => {
     const [taskDetail, setTasksDetail] = useState(null);
 
     useEffect(() => {
-        setMainSheetType('TaskList');
+        setMainSheetType && setMainSheetType('TaskList');
     }, [setMainSheetType]);
 
         //Import from API

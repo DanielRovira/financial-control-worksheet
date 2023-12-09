@@ -1,18 +1,32 @@
 .MainContainer {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
-    row-gap: 30px;
-    padding-top: 80px;
-    padding-bottom: 15px;
+    /* row-gap: 30px; */
+    /* margin-top: 50px; */
+    /* padding-top: 80px; */
+    /* padding-bottom: 15px; */
     overflow: auto;
-    width: max-content;
-    height: max-content;
-    margin-left: calc((var(--closeSidebarWidth)) + 30px);
+    width: 100%;
+    /* height: max-content; */
+    /* margin-left: calc((var(--closeSidebarWidth)) + 30px); */
 }
 
 .MainContainer .SubContainer {
     display: flex;
+}
+
+.MainContainer .FinancialWorksheetMainContainer .SubContainer {
+    transform: none;
+}
+.MainContainer .SubContainer .TaskListContainer .TaskList .task-container {
+    text-wrap: nowrap;
+}
+.MainContainer .SubContainer .TaskListContainer {
+    height: fit-content;
+}
+.MainContainer .FinancialWorksheetMainContainer .TableContainer ul {
+    margin: auto;
 }
 
 .MainContainer ul {
@@ -33,6 +47,22 @@
 
 @media (max-width: 600px), (max-height: 600px) {
     .MainContainer {
-        padding-top: 70px;
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .MainContainer .SubContainer {
+        display: unset;
+    }
+
+    .MainContainer .FinancialWorksheetMainContainer {
+        margin-top: 50px;
+        padding-top: 0px;
+    }
+
+     .TaskListContainer .TaskListHeader {
+        margin-top: 10px;
+        padding-top: 0px;
     }
 }
