@@ -19,7 +19,7 @@ const MainNestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType, 
         backgroundColor: 'var(--color0-5)',
         color: 'black'
     }
-console.log(result)
+
   return (
     <>
         <ClickAwayListener onClickAway={() => setOpenSection(false)}>

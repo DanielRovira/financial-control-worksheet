@@ -5,7 +5,7 @@ import MainNestedList from './MainNestedList';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ setOpenSidebar }) => {
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState(JSON.parse(localStorage.getItem("results")) || []);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
     const getData = async (section) => {
@@ -39,6 +39,10 @@ const Main = ({ setOpenSidebar }) => {
             }))
         }
     }
+
+    useEffect(() => {
+        localStorage.setItem("results", JSON.stringify(results));
+    }, [results]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         setOpenSidebar(false);
