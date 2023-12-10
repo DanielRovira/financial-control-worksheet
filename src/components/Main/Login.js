@@ -26,7 +26,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         })
         .then(response => response.json())
         if (res.status !== 200) {
-            return alert(lang.alert03);
+            return (alert(lang.alert03), setLoadingButton(false));
         }
         // getSections()
         // getCategories()
@@ -55,7 +55,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
             sendRequest();
             timer.current = window.setTimeout(() => {
                 setLoadingButton(false);
-            }, 100000);
+            }, 10000);
         }
     }
 

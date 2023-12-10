@@ -14,7 +14,7 @@ export const TableContent = styled.div`
 
     @media (max-width: 750px) {
         /* max-height: calc((var(--vh, 1vh) * 100) - 250px); */
-        margin-bottom: 55px;
+        margin-bottom: 115px;
     }
 
     &::-webkit-scrollbar-track {

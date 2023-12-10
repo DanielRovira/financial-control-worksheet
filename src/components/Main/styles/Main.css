@@ -68,7 +68,7 @@
         height: fit-content;
     }
 
-    .TaskListContainer .TaskListHeader {
+    .MainContainer .TaskListContainer .TaskListHeader {
         margin-top: 10px;
         padding-top: 0px;
     }
