@@ -88,7 +88,7 @@ export const Title = styled.div`
     /* padding: 80px 0 0 5px; */
     color: var(--font-color);
     font-size: 1.5rem;
-
+    white-space: nowrap;
 `;
 
 export const ArchivedTitle = styled.div`
