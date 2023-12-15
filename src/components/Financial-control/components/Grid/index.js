@@ -100,11 +100,11 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
             <C.Table>
                 <C.Thead>
                     <C.Tr>
-                        <C.Th alignCenter width={30}><Checkbox checked={checked.length === itens.length && itens.length > 0} onChange={handleSelect} indeterminate={checked.length > 0 && checked.length < itens.length} /></C.Th>
-                        <C.Th alignCenter width={window.innerWidth < 500 ? 90 : 120}>{lang.date} <Filter type={'date'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
+                        <C.Th alignCenter width={window.innerWidth < 500 ? 16 : 30}><Checkbox checked={checked.length === itens.length && itens.length > 0} onChange={handleSelect} indeterminate={checked.length > 0 && checked.length < itens.length} /></C.Th>
+                        <C.Th alignCenter width={window.innerWidth < 500 ? 64 : 120}>{lang.date} <Filter type={'date'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                         {sheetType === 'financialControl' && 
                         <>
-                        <C.Th width={70} alignCenter>{lang.type} <Filter type={'expense'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
+                        <C.Th width={window.innerWidth < 500 ? 59 : 70} alignCenter>{lang.type} <Filter type={'expense'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                         <C.Th width={140} className='Hide' >{lang.source} <Filter type={'source'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                         <C.Th width={120} className='Hide' >{lang.category} <Filter type={'category'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                         <C.Th width={150} className='Hide' >{lang.subCategory} <Filter type={'subCategory'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
@@ -112,7 +112,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                         {sheetType === 'todoPayments' && 
                         <>
                         <C.Th width={20} alignCenter>{lang.number}</C.Th>
-                        <C.Th width={window.innerWidth < 500 ? 50 : 100} alignCenter>{lang.link}</C.Th>
+                        <C.Th width={window.innerWidth < 500 ? 30 : 100} alignCenter>{lang.link}</C.Th>
                         <C.Th width={170} className='Hide' >{lang.bank} <Filter type={'bank'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                         <C.Th width={160} className='Hide' >{lang.idnumber} <Filter type={'idnumber'} filter={filter} setFilter={setFilter} setFilterType={setFilterType} filterType={filterType} /></C.Th>
                         </>}
