@@ -80,9 +80,9 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
         })
     )
 
-    useEffect(() => {
-        setAdd(false)
-    }, [setAdd]);
+    // useEffect(() => {
+    //     setAdd(false)
+    // }, [setAdd]);
 
     return ( 
         <C.TableContent>
