@@ -6,13 +6,15 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) => {
     const history = useNavigate();
-    const [openSection, setOpenSection] = useState(false);
     const types = ['summary','todoPayments','financialControl']
     const params = useParams();
+    const [openSection, setOpenSection] = useState(section.title === params.taskTitle ? true : false);
 
     const handleClick = () => {
         setOpenSidebar && setOpenSidebar(true);
-        setOpenSection(!openSection);
+        // setOpenSection(!openSection);
+        // section.title === params.taskTitle ? setOpenSection(true) : setOpenSection(!openSection);
+        section.title !== params.taskTitle && setOpenSection(!openSection);
     };
 
     const selectedStyle = {
@@ -22,7 +24,8 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
 
   return (
     <>
-        <ClickAwayListener onClickAway={() => setOpenSection(false)}>
+        {/* <ClickAwayListener onClickAway={() => setOpenSection(false)}> */}
+        <ClickAwayListener onClickAway={() => (section.title !== params.taskTitle && setOpenSection(false))}>
             <ListItemButton onClick={handleClick} title={hideTitle ? '' : section.name}
                             style={{backgroundColor: section.title === params.taskTitle ? 'var(--selected-sidebar)' :  'unset'}}
                 >
