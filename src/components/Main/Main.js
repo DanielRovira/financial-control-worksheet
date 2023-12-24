@@ -19,7 +19,7 @@ const Main = ({ refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
         // !isLoggedIn && history('/')
 
     }, [isLoggedIn, history])  // eslint-disable-line react-hooks/exhaustive-deps
-console.log(sections)
+
     return (
         <div className='MainContainer'>
             {sections.length > 0 &&
