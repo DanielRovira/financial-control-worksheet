@@ -10,6 +10,12 @@ import { FmdBadOutlined as FmdBadOutlinedIcon } from '@mui/icons-material';
 
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
+document.documentElement.style.setProperty('--tableWidth', '100%');
+window.addEventListener("resize", function () {
+    let tableWidth = document.getElementById('table')?.offsetWidth
+    document.documentElement.style.setProperty('--tableWidth', `calc(${tableWidth}px - 10px)`);
+});
+
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar, setAdd, section, syncing }) => {
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
@@ -85,7 +91,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     // }, [setAdd]);
 
     return ( 
-        <C.TableContent>
+        <C.TableContent id='table' >
             <C.Header >
                 <C.Title>{lang[sheetType] || lang.home}</C.Title>
                 <SavingCloud syncing={syncing} />
