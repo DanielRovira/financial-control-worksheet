@@ -49,7 +49,7 @@ const App = () => {
         .then(response => response.json())
         .then(response => response.message && sendLogoutReq())
         .catch(error => {
-            clearLogin();
+            sendLogoutReq();
         })
     }
 
@@ -85,6 +85,11 @@ const App = () => {
         localStorage.clear();
         history('/');
     }
+
+    useEffect(() => {
+        setLoading(true);
+        refreshToken();
+    },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         !isLoggedIn && sendLogoutReq();
