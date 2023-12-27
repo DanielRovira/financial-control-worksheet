@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ClickAwayListener, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon, DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
@@ -21,6 +21,10 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
         backgroundColor: 'var(--color0-5)',
         color: 'black'
     }
+    
+    useEffect(() => {
+        section.title === params.taskTitle ? setOpenSection(true) : setOpenSection(false);
+    }, [history]);  // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

@@ -6,7 +6,7 @@ export const Container = styled.div`
     /* width: calc(var(--vw, 1vw) * 100 - var(--closeSidebarWidth) * 2); */
     /* text-align: center; */
     background: #fff;
-    animation: scaleAnimationIn .1s;
+    /* animation: scaleAnimationIn .1s; */
     /* border-bottom: 1px solid #DADCE0; */
     display: flex;
     flex-direction: row;

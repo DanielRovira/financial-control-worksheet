@@ -32,7 +32,6 @@ export const Table = styled.table`
     width: 100%;
     table-layout:fixed;
     border-spacing: 0;
-    min-width: var(--tableWidth);
     width: var(--tableWidth);
 `;
 

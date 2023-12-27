@@ -4,7 +4,7 @@
     /* padding: 0 10px 0 0px; */
     /* margin-bottom: 55px; */
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     gap: 5px;
     /* width: inherit; */
     flex-direction: column;
@@ -64,7 +64,13 @@
     /* height: inherit; */
     /* width: 100%; */
     height: calc(100% - 45px);
+    overflow: hidden;
+}
 
+.chartContent .chartSubContent {
+    width: var(--graphWidth) !important;
+    height: calc(100% - 10px);
+    overflow: hidden;
 }
 
 @media (max-width: 750px) {

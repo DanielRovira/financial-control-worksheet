@@ -6,6 +6,13 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 import { Bar } from 'react-chartjs-2';
 ChartJS.register( CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend );
 
+document.documentElement.style.setProperty('--graphWidth', 'calc((var(--vw, 1vw) * 100) - (var(--closeSidebarWidth) * 2) - 10px)');
+// window.addEventListener("resize", function () {
+//     let GraphWidth = document.getElementById('Summary')?.offsetWidth
+//     document.documentElement.style.setProperty('--GraphWidth', `calc(${GraphWidth}px - 10px)`);
+//     console.log(GraphWidth)
+// });
+
 const Summary = ({ rawData, setAdd }) => {
     const toDayYear = new Date().toISOString().substring(0, 4)
     const [byMonth, setByMonth] = useState([]);
@@ -135,7 +142,9 @@ else
                 ))}
             </List>
             <div className='chartContent'>
-                <Bar options={options} data={data} />
+                <div className='chartSubContent'>
+                    <Bar options={options} data={data} />
+                </div>
             </div>
         </div>
     );
