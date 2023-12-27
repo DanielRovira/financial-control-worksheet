@@ -10,7 +10,7 @@ export const Form = styled.div`
 
 export const Container = styled.div`
     z-index: 1;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     background-color: #fff;
     box-shadow: 0 0 5px #ccc;
     border-radius: 5px;
