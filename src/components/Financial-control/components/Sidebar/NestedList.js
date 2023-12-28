@@ -32,6 +32,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
         <ClickAwayListener onClickAway={() => (section.title !== params.taskTitle && setOpenSection(false))}>
             <ListItemButton onClick={handleClick} title={hideTitle ? '' : section.name}
                             style={{backgroundColor: section.title === params.taskTitle ? 'var(--selected-sidebar)' :  'unset'}}
+                            className='outterButton'
                 >
                 <ListItemIcon>
                     {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title.slice(0, 3)}
