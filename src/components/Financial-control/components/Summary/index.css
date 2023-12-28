@@ -8,11 +8,12 @@
     gap: 5px;
     /* width: inherit; */
     flex-direction: column;
+    box-shadow: var(--box-shadow);
 }
 
 @media (max-width: 750px) {
     .Summary {
-        margin-bottom: 50px;
+        margin-bottom: 115px;
     }
 }
 
@@ -37,8 +38,7 @@
     padding-top: 0;
     padding-bottom: 0;
     /* margin: 5px; */
-    box-shadow: 0px 0px 5px #ccc;
-
+    box-shadow: var(--box-shadow);
 }
 
 .Summary .MuiList-root .MuiButtonBase-root li {
@@ -63,13 +63,14 @@
     /* min-height: 60vh; */
     /* height: inherit; */
     /* width: 100%; */
-    height: calc(100% - 45px);
+    height: 100%;
     overflow: hidden;
 }
 
 .chartContent .chartSubContent {
     width: var(--graphWidth) !important;
-    height: calc(100% - 10px);
+    /* height: calc(100% - 10px); */
+    height: 100%;
     overflow: hidden;
 }
 
@@ -78,9 +79,9 @@
         flex-direction: row;
     } */
 
-    .chartContent {
+    /* .chartContent {
         margin: 0 5px;
-    }
+    } */
 /* 
     .Summary .MuiList-root {
     flex-direction: column;

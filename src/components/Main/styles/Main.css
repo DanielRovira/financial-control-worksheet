@@ -22,6 +22,10 @@
     width: 100%;
 }
 
+.MainContainer .MainSubContainer .TaskListContainer {
+    width: 100%;
+}
+
 .MainContainer .MainSubContainer .TaskListContainer .TaskList .task-container {
     text-wrap: nowrap;
 }

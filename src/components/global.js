@@ -107,6 +107,12 @@ const GlobalStyle = createGlobalStyle`
         padding-right: 5px;
     }
 
+    @media (max-width: 750px) {
+    .FinancialWorksheet {
+        padding-right: 0;
+    }
+}
+
     .FinancialWorksheet .MuiLinearProgress-root {
         margin: 0 2px;
         border-radius: 5px;
