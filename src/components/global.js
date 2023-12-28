@@ -108,7 +108,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .FinancialWorksheet .MuiLinearProgress-root {
-        margin: 0 10px;
+        margin: 0 2px;
         border-radius: 5px;
     }
 
