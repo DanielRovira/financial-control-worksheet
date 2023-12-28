@@ -103,8 +103,8 @@ const GlobalStyle = createGlobalStyle`
         /* margin-right: 5px; */
         gap: 5px;
         width: inherit;
-        height: inherit;
-        padding: 5px;
+        /* height: inherit; */
+        padding: 5px 5px 0 0;
     }
 
     .FinancialWorksheet .MuiLinearProgress-root {
