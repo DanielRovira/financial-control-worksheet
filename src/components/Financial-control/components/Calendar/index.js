@@ -5,7 +5,7 @@ import Calendar from 'react-calendar'
 // const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 export default function FloatingCalendar({ rawData, setShowCalendar }) {
-    const itens = Array.from(rawData);
+    const itens = Array.from(rawData || []);
 
     const calc = (list) => {
         const amountExpense = Array.from(list)
