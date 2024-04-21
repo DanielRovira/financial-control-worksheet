@@ -6,6 +6,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ setOpenSidebar }) => {
     const [results, setResults] = useState(JSON.parse(localStorage.getItem("results")) || []);
+    const [data, setData] = useState(JSON.parse(localStorage.getItem("data")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
 
@@ -38,6 +39,7 @@ const Main = ({ setOpenSidebar }) => {
             setResults((prev) => ({ ...prev,
                 [section]: calc((res.post).filter(item => !item.archived) || [])
             }))
+            (res.post).filter(item => !item.archived).map((x) => setData((prev) =>( {...prev, [x._id]: x})));
         }
     }
 
@@ -46,9 +48,13 @@ const Main = ({ setOpenSidebar }) => {
     }, [results]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
+        localStorage.setItem("data", JSON.stringify(data));
+    }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
         setOpenSidebar && setOpenSidebar(false);
 
-            Array.from(sections)?.map((prov) => (
+            Array.from(sections)?.filter((section) => section.title !== 'TRASH').map((prov) => (
                 getData(prov.title)
              ))
     }, []); // eslint-disable-line react-hooks/exhaustive-deps

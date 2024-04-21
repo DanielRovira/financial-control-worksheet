@@ -4,7 +4,7 @@ import { Box, ClickAwayListener } from '@mui/material';
 import Calendar from 'react-calendar'
 // const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-export default function FloatingCalendar({ rawData, setShowCalendar }) {
+export default function FloatingCalendar({ rawData, setShowCalendar, defaultView }) {
     const itens = Array.from(rawData || []);
 
     const calc = (list) => {
@@ -46,12 +46,13 @@ export default function FloatingCalendar({ rawData, setShowCalendar }) {
 
   return (
     <ClickAwayListener onClickAway={() => setTimeout(() => {  
-        setShowCalendar(false)
+        setShowCalendar? setShowCalendar(false) : void(0)
     }, 5)}>
         <Box className='Calendar'>
             <Calendar
                 tileContent={tileContent}
                 calendarType='US'
+                defaultView={defaultView}
             />
         </Box>
     </ClickAwayListener>
