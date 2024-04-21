@@ -38,7 +38,7 @@ const Main = ({ setOpenSidebar }) => {
             // setLoadingData(false)
             setResults((prev) => ({ ...prev,
                 [section]: calc((res.post).filter(item => !item.archived) || [])
-            }))
+            }));
             (res.post).filter(item => !item.archived).map((x) => setData((prev) =>( {...prev, [x._id]: x})));
         }
     }

@@ -29,7 +29,7 @@ const Main = ({ refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
                         <div className='CalendarHeader' >
                             <h1>Calendario</h1>
                         </div>
-                        <Calendar rawData={Object.entries(JSON.parse(localStorage.getItem("data"))).map(item => item[1])} defaultView={'year'} />
+                        <Calendar rawData={Object.entries(JSON.parse(localStorage.getItem("data")) || []).map(item => item[1])} defaultView={'year'} />
                     </div>
                     <FinancialWorksheetMain />
                     <TaskList setMainSheetType={undefined} />
