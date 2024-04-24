@@ -78,13 +78,7 @@
 } */
 
 @media (max-width: 750px) {
-    .MainContainer .MainSubContainer .FinancialWorksheetMainContainer {
-        margin-top: -50px;
-    }
-}
 
-
-@media (max-width: 750px) {
     .MainContainer {
         transform: translateX(var(--closeSidebarWidth)/2);
     }
@@ -99,8 +93,13 @@
         padding-top: 0px;
     } */
 
+    .MainContainer .MainSubContainer .FinancialWorksheetMainContainer {
+        margin-top: -50px;
+    }
+
     .MainContainer .MainSubContainer .TaskListContainer {
         height: fit-content;
+        width: 350px;
     }
 
     .MainContainer .TaskListContainer .TaskListHeader {

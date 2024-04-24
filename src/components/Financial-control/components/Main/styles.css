@@ -97,6 +97,7 @@
     width: 350px;
     box-shadow: none;
     border-radius: 5px;
+    margin: auto;
 }
 
 .FinancialWorksheetMainContainer .react-calendar__year-view .react-calendar__tile,
