@@ -94,10 +94,16 @@
 }
 
 .FinancialWorksheetMainContainer .react-calendar {
-    width: 350px;
+    width: min-content;
     box-shadow: none;
     border-radius: 5px;
     margin: auto;
+}
+
+.FinancialWorksheetMainContainer .react-calendar__year-view,
+.FinancialWorksheetMainContainer .react-calendar__decade-view,
+.FinancialWorksheetMainContainer .react-calendar__century-view {
+    width: 350px;
 }
 
 .FinancialWorksheetMainContainer .react-calendar__year-view .react-calendar__tile,
