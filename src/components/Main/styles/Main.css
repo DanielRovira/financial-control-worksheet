@@ -6,6 +6,7 @@
     /* padding-bottom: 15px; */
     /* overflow: auto; */
     overflow-y: scroll;
+    overflow-x: hidden;
     width: 100%;
     /* height: max-content; */
     /* margin-left: calc((var(--closeSidebarWidth)) + 30px); */
@@ -69,12 +70,12 @@
         padding-top: 0;
     }
 } */
-
+/* 
 @media (max-width: 850px) {
     .MainContainer .MainSubContainer {
         transform: translateX(calc(var(--closeSidebarWidth)/2 + var(--scroll)/2));
     }
-}
+} */
 
 @media (max-width: 750px) {
     .MainContainer .MainSubContainer .FinancialWorksheetMainContainer {
