@@ -112,3 +112,20 @@ export const ArchivedTitle = styled.div`
             color: white;
         }
 `
+
+export const Buttons = styled.div`
+    height: min-content;
+
+    .MuiIconButton-root {
+        /* padding: 0 3px; */
+        border-radius: 3px;
+        /* height: 32px; */
+        border: 1px solid transparent;
+        align-items: end;
+    }
+
+    .MuiButtonBase-root.MuiIconButton-root:hover {
+        background-color: #F7F7F7;
+        border-color: #E5E5E5;
+    }
+`

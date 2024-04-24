@@ -3,10 +3,13 @@ import GridItem from '../GridItem';
 import Filter from '../Filter';
 import SavingCloud from '../SavingCloud';
 import { useParams } from 'react-router-dom';
-import { Checkbox } from '@mui/material';
-import { useState} from 'react';
+import { Checkbox, IconButton } from '@mui/material';
+import { useState, useEffect } from 'react';
 import { CSVLink } from "react-csv";
-import { FmdBadOutlined as FmdBadOutlinedIcon } from '@mui/icons-material';
+import { FmdBadOutlined as FmdBadOutlinedIcon,
+         North as NorthIcon,
+         South as SouthIcon,
+         Sort as SortIcon } from '@mui/icons-material';
 
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -19,6 +22,7 @@ document.documentElement.style.setProperty('--tableWidth', 'calc((var(--vw, 1vw)
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar, setAdd, section, syncing }) => {
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
+    const [sortState, setSortState] = useState(sheetType === 'financialControl' ? true : false);
     const params = useParams();
 
     const CSVheaders = {
@@ -68,7 +72,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     itens.sort(function(a, b) {
         var c = new Date(a.date);
         var d = new Date(b.date);
-        return c-d;
+        return sortState? c-d : d-c;
     });
 
     itens.reverse()
@@ -90,11 +94,23 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     //     setAdd(false)
     // }, [setAdd]);
 
+    useEffect(() => {
+        sheetType === 'financialControl' ? setSortState(true) : setSortState(false)
+    }, [sheetType]);
+
     return ( 
         <C.TableContent id='table' >
             <C.Header >
                 <C.Title>{lang[sheetType] || lang.home}</C.Title>
                 <SavingCloud syncing={syncing} />
+
+                    <IconButton onClick={() => setSortState(!sortState)}
+                                style={{position:'absolute',height:'30px' , right:'20px', marginTop:'5px', borderRadius:'5px'}}
+                    >
+                        {sortState? <NorthIcon/> :  <SouthIcon/>}
+                        <SortIcon/>
+                    </IconButton>
+
             </C.Header>
             {archived &&
             <C.ArchivedTitle className='archivedTitle'>
