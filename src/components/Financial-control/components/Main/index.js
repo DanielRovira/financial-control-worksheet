@@ -2,6 +2,7 @@ import './styles.css'
 import { useState, useEffect } from 'react';
 import { List, ListSubheader } from '@mui/material';
 import MainNestedList from './MainNestedList';
+import Calendar from '../Calendar';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ setOpenSidebar }) => {
@@ -62,10 +63,10 @@ const Main = ({ setOpenSidebar }) => {
     return (
         <div className='FinancialWorksheetMainContainer'>
             <div className='SubContainer'>
-                <div className='Header'>
-                    <h1>{lang.FinancialWorksheet}</h1>
-                </div>
                 <div className='TableContainer'>
+                    <div className='Header'>
+                        <h1>{lang.FinancialWorksheet}</h1>
+                    </div>
                     <List
                         subheader={
                             <ListSubheader>
@@ -101,6 +102,12 @@ const Main = ({ setOpenSidebar }) => {
                             ))}
                         </tbody>
                     </table> */}
+                </div>
+                <div>
+                    <div className='CalendarHeader' >
+                        <h1>Calendario</h1>
+                    </div>
+                    <Calendar rawData={Object.entries(data).map(item => item[1])} defaultView={'year'} />
                 </div>
             </div>
         </div>

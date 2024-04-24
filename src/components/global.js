@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     &::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
+        width: var(--scroll);
+        height: var(--scroll);
     }
 
     &::-webkit-scrollbar-thumb {
@@ -40,6 +40,7 @@ const GlobalStyle = createGlobalStyle`
     --font-color: #3C4043;
     --sidebarWidth: 210px;
     --closeSidebarWidth: 45px;
+    --scroll: 12px;
     --navbar-color: #106EBE;
     --selected-sidebar: #CFE4FA;
     --box-shadow: 0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14);

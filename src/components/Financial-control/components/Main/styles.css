@@ -6,16 +6,10 @@
     width: 100%;
     margin-top: 50px;
     padding-top: 50px;
-    /* overflow-y: auto; */
-    /* overflow-x: hidden; */
+    overflow-y: auto;
+    overflow-x: hidden;
     text-wrap: nowrap;
     max-width: calc(var(--vw, 1vw) * 99.5);
-}
-
-@media (max-height: 600px) {
-    .FinancialWorksheetMainContainer {
-        padding-top: 0;
-    }
 }
 
 .FinancialWorksheetMainContainer .Header {
@@ -25,9 +19,10 @@
 
 .FinancialWorksheetMainContainer .SubContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     /* margin: 20px; */
-    transform: translateX(calc(var(--closeSidebarWidth)*-1));
+    transform: translateX(calc(var(--closeSidebarWidth)*-1 - 6px));
+    gap: 50px;
 }
 
 .FinancialWorksheetMainContainer ul {
@@ -81,3 +76,54 @@
     padding: 10px;
     min-width: 100px;
 }  */
+
+ /* Calendar stuff */
+.FinancialWorksheetMainContainer .CalendarHeader {
+    text-align: center;
+    /* margin-top: 50px; */
+    margin-bottom: 10px;
+    /* padding-top: 50px; */
+}
+
+.FinancialWorksheetMainContainer .Calendar {
+    position: relative;
+    right: unset;
+    top: unset;
+    /* margin-top: 50px;
+    padding-top: 50px; */
+}
+
+.FinancialWorksheetMainContainer .react-calendar {
+    width: 350px;
+    box-shadow: none;
+    border-radius: 5px;
+}
+
+.FinancialWorksheetMainContainer .react-calendar__year-view .react-calendar__tile,
+.FinancialWorksheetMainContainer .react-calendar__decade-view .react-calendar__tile,
+.FinancialWorksheetMainContainer .react-calendar__century-view .react-calendar__tile {
+  padding: 1em 0.5em;
+}
+
+@media (max-height: 600px) {
+    .FinancialWorksheetMainContainer {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .FinancialWorksheetMainContainer .SubContainer {
+        gap: 10px;
+        transform: none;
+    }
+}
+
+@media (max-width: 750px) {
+    .FinancialWorksheetMainContainer {
+        margin-top: 0;
+    }
+
+    .FinancialWorksheetMainContainer .SubContainer {
+        flex-direction: column;
+    }
+}
