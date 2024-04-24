@@ -107,7 +107,7 @@ const Main = ({ setOpenSidebar }) => {
                     <div className='CalendarHeader' >
                         <h1>Calendario</h1>
                     </div>
-                    <Calendar rawData={Object.entries(data).map(item => item[1])} defaultView={'year'} />
+                    <Calendar rawData={Object.entries(data).map(item => item[1])} defaultView={'year'}  maxDetail={'year'} />
                 </div>
             </div>
         </div>
