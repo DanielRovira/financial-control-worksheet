@@ -133,10 +133,12 @@ else
     return (
         <div className='Summary'>
             <List>
-                {Array.from(years).map((year, index) => (
+                {Array.from(years).map((yearr, index) => (
                     <ListItem disablePadding key={index}>
-                        <ListItemButton onClick={() => setYear(year)}>
-                            <ListItemText primary={year} />
+                        <ListItemButton onClick={() => setYear(yearr)}
+                                        style={yearr === year ? {backgroundColor:'var(--color1)'} : void(0)}
+                        >
+                            <ListItemText primary={yearr} />
                         </ListItemButton>
                     </ListItem>
                 ))}
