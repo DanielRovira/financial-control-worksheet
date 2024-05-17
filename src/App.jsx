@@ -5,6 +5,7 @@ import GlobalStyle from './components/global';
 import FinancialWorksheet from './components/Financial-control/routes';
 import TaskList from './components/TaskList/TaskList';
 import Contacts from './components/Contacts/Contacts';
+import PurchaseRequests from './components/PurchaseRequests/PurchaseRequests';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
@@ -121,6 +122,7 @@ const App = () => {
                     <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/TaskList/*" element={<TaskList setMainSheetType={setMainSheetType} />} />
                     <Route path="/Contacts/*" element={<Contacts setMainSheetType={setMainSheetType} />} />
+                    <Route path="/PurchaseRequests/*" element={<PurchaseRequests setMainSheetType={setMainSheetType} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

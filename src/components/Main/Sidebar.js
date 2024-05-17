@@ -5,6 +5,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ContactsIcon from '@mui/icons-material/Contacts';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -52,6 +53,12 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                         <ContactsIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />
+                </ListItemButton>
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests}>
+                    <ListItemIcon style={mainSheetType === 'PurchaseRequests' ? selectedStyle : null} >
+                        <ShoppingCartIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={lang.PurchaseRequests} />
                 </ListItemButton>
             </div>
             <div style={{ position: 'absolute', bottom: '10px', left: '40px' }}>
