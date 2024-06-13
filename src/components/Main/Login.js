@@ -110,6 +110,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                 >
                   {lang.login}
                 </Button>
+                <Button
+                  variant='contained'
+                  href="/api/oauth/login/federated/google">Sign in with Google</Button>
                 {loadingButton && <CircularProgress size={null} />}
           </Box>
         </Box>
