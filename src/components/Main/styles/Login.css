@@ -48,6 +48,7 @@
     gap: 10px;
     text-transform: unset;
     color: rgb(92, 108, 117);
+    height: 40px;
 }
 
 .LoginContainer .buttonBox .thirdPartyLogin img {
