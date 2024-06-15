@@ -11,6 +11,7 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
+// import Callback from './components/Main/Callback';
 import manifestDetails from './components/manifestDetails.js';
 import  { Backdrop, CircularProgress } from '@mui/material';
 
@@ -54,6 +55,23 @@ const App = () => {
         })
     }
 
+    const oauthLogin = async () => {
+        const res = await fetch(`/api/oauthLogin`,
+        {
+            method:'GET',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        if (res.status !== 200) {
+            return ;
+        }
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+        !isLoggedIn && setIsLoggedIn(true);
+        setLoading(false);
+    };
+
     const getSections = async () => {
         await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
@@ -89,7 +107,8 @@ const App = () => {
 
     useEffect(() => {
         setLoading(true);
-        refreshToken();
+        //  refreshToken();      //RETIREI PRO GOOGLE AUTH FUNCIONAR
+        oauthLogin();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
@@ -117,7 +136,7 @@ const App = () => {
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
-                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} setLoading={setLoading} />} />
+                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setMainSheetType={setMainSheetType} refreshToken={refreshToken} />} />
                     <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/TaskList/*" element={<TaskList setMainSheetType={setMainSheetType} />} />
