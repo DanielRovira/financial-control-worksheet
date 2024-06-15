@@ -111,7 +111,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                       {lang.login}
                     </Button>
                 </Box>
-                <Divider flexItem />
+                <Divider flexItem variant="middle" />
                 <Box className='buttonBox'>
                     <Button
                       className='thirdPartyLogin'
