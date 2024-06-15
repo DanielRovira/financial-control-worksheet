@@ -8,7 +8,7 @@
     width: 100%;
 }
 
-.LoginContainer img {
+.LoginContainer form > img {
     margin-bottom: 20px;
     max-width: 250px;
     /* box-shadow: 1px 2px 3px rgba(0, 0, 0, .3); */
@@ -42,6 +42,16 @@
     margin: 10px;
     gap: 10px;
     align-items: center;
+}
+
+.LoginContainer .buttonBox .thirdPartyLogin  {
+    gap: 10px;
+    text-transform: unset;
+    color: rgb(92, 108, 117);
+}
+
+.LoginContainer .buttonBox .thirdPartyLogin img {
+    width: 25px;
 }
 
 .LoginContainer button {

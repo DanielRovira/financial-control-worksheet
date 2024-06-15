@@ -1,6 +1,6 @@
 import './styles/Login.css'
 import { useEffect, useState, useRef } from 'react';
-import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
+import { Box, Button, TextField, Typography, CircularProgress, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -78,45 +78,53 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
               justifyContent='center'
               alignItems='center'
             >
-            <Typography variant='h4'>{lang.login}</Typography>
-            <TextField
-              name='email'
-              onChange={handleChange}
-              type={'email'}
-              value={inputs.email}
-              variant='outlined'
-              margin='normal'
-              autoComplete='username'
-              label={lang.email}
-              required
-            />
-            <TextField
-              name='password'
-              onChange={handleChange}
-              type='password'
-              value={inputs.password}
-              variant='outlined'
-              margin='normal'
-              autoComplete='current-password'
-              label={lang.password}
-              required
-            />
-            <Box className='buttonBox'>
-                <Button
-                    id='submitButton'
-                    variant='contained'
-                    type='submit'
-                    disabled={loadingButton}
-                >
-                  {lang.login}
-                </Button>
-                <Button
-                  variant='contained'
-                  href="/api/oauth/login/federated/google">Sign in with Google</Button>
-                {loadingButton && <CircularProgress size={null} />}
-          </Box>
-        </Box>
-      </form>
+                <Typography variant='h4'>{lang.login}</Typography>
+                <TextField
+                  name='email'
+                  onChange={handleChange}
+                  type={'email'}
+                  value={inputs.email}
+                  variant='outlined'
+                  margin='normal'
+                  autoComplete='username'
+                  label={lang.email}
+                  required
+                />
+                <TextField
+                  name='password'
+                  onChange={handleChange}
+                  type='password'
+                  value={inputs.password}
+                  variant='outlined'
+                  margin='normal'
+                  autoComplete='current-password'
+                  label={lang.password}
+                  required
+                />
+                <Box className='buttonBox'>
+                    <Button
+                        id='submitButton'
+                        variant='contained'
+                        type='submit'
+                        disabled={loadingButton}
+                    >
+                      {lang.login}
+                    </Button>
+                </Box>
+                <Divider flexItem />
+                <Box className='buttonBox'>
+                    <Button
+                      className='thirdPartyLogin'
+                      variant='outlined'
+                      href="/api/oauth/login/federated/google"
+                      >
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" />
+                      <p>Google</p>
+                    </Button>
+                    {loadingButton && <CircularProgress size={null} />}
+                </Box>
+            </Box>
+        </form>
     </div>
   );
 };
