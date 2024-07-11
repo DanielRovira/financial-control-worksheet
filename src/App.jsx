@@ -56,7 +56,7 @@ const App = () => {
     }
 
     const oauthLogin = async () => {
-        const res = await fetch(`${process.env.REACT_APP_PROXY}/api/oauthLogin`,
+        const res = await fetch(`/api/oauthLogin`,
         {
             method:'GET',
             headers: { 'Content-Type': 'application/json' },
