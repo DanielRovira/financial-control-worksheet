@@ -112,8 +112,7 @@ const App = () => {
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        // !isLoggedIn && sendLogoutReq();
-        setLoading(false);
+        !isLoggedIn && sendLogoutReq();
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
