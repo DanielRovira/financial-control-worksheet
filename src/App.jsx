@@ -56,14 +56,14 @@ const App = () => {
     }
 
     const oauthLogin = async () => {
-        const res = await fetch(`/api/oauthLogin`,
+        const res = await fetch(`/api/getUser`,
         {
             method:'GET',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
         })
         .then(response => response.json())
-        if (res.status !== 200) {
+        if (!res.user) {
             return ;
         }
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
@@ -112,7 +112,8 @@ const App = () => {
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        !isLoggedIn && sendLogoutReq();
+        // !isLoggedIn && sendLogoutReq();
+        setLoading(false);
     },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
