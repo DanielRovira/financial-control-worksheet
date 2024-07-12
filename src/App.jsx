@@ -58,7 +58,7 @@ const App = () => {
     const oauthLogin = async () => {
         const res = await fetch(`/api/getUser`,
         {
-            method:'GET',
+            method:'POST',
             headers: { 'Content-Type': 'application/json',"Access-Control-Allow-Credentials": true },
             credentials: 'include'
         })
