@@ -58,7 +58,7 @@ const App = () => {
     const oauthLogin = async () => {
         const res = await fetch(`/api/getUser`,
         {
-            method:'POST',
+            method:'GET',
             headers: { 'Content-Type': 'application/json',"Access-Control-Allow-Credentials": true },
             credentials: 'include'
         })
@@ -106,14 +106,14 @@ const App = () => {
     }
 
     useEffect(() => {
-        setLoading(true);
+        // setLoading(true);
         //  refreshToken();      //RETIREI PRO GOOGLE AUTH FUNCIONAR
         oauthLogin();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
-        !isLoggedIn && sendLogoutReq();
-    },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(() => {
+    //     !isLoggedIn && sendLogoutReq();
+    // },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
             const interval = setInterval(() => {
