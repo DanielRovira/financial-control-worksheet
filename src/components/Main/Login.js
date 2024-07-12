@@ -61,7 +61,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
 
     const loginWithGoogle = (ev) => {
         ev.preventDefault();
-        window.open(`${process.env.REACT_APP_PROXY}/api/oauth/login/federated/google`, "_self");
+        window.open(`/api/oauth/login/federated/google`, "_self");
       }
 
     document.addEventListener("keypress", function(event) {

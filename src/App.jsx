@@ -56,12 +56,7 @@ const App = () => {
     }
 
     const oauthLogin = async () => {
-        const res = await fetch(`/api/getUser`,
-        {
-            method:'GET',
-            headers: { 'Content-Type': 'application/json',"Access-Control-Allow-Credentials": true },
-            credentials: 'include'
-        })
+        const res = await fetch(`/api/getUser`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
         if (!res.user) {
             return ;
