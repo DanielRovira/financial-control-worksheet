@@ -49,7 +49,7 @@ const App = () => {
         getCategories();
         await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => response.message && sendLogoutReq())
+        // .then(response => response.message && sendLogoutReq())
         .catch(error => {
             sendLogoutReq();
         })
