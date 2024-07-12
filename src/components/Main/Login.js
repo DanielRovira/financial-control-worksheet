@@ -59,6 +59,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         }
     }
 
+    const loginWithGoogle = (ev) => {
+        ev.preventDefault();
+        window.open(`${process.env.REACT_APP_PROXY}/api/oauth/login/federated/google`, "_self");
+      }
+
     document.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             document.getElementById("submitButton").click();
@@ -116,7 +121,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                     <Button
                       className='thirdPartyLogin'
                       variant='outlined'
-                      href="/api/oauth/login/federated/google"
+                    //   href="/api/oauth/login/federated/google"
+                    onClick={loginWithGoogle}
                       >
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" />
                       <p>Google</p>

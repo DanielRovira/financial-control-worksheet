@@ -59,7 +59,7 @@ const App = () => {
         const res = await fetch(`/api/getUser`,
         {
             method:'GET',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json',"Access-Control-Allow-Credentials": true },
             credentials: 'include'
         })
         .then(response => response.json())
