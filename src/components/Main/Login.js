@@ -124,7 +124,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                     //   href="/api/oauth/login/federated/google"
                     onClick={loginWithGoogle}
                       >
-                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" />
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="google login" />
                       <p>Google</p>
                     </Button>
                     {loadingButton && <CircularProgress size={null} />}
