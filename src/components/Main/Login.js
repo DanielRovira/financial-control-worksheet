@@ -25,16 +25,19 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
               })
         })
         .then(response => response.json())
-        if (res.status !== 200) {
+        .catch(error => {
             return (alert(lang.alert03), setLoadingButton(false));
+        })
+        if (res.status === 200) {
+          // getSections()
+          // getCategories()
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
+          localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+          // setAccName(res.user.name)
+          setIsLoggedIn(true);
+          setLoading(true);
+          return
         }
-        // getSections()
-        // getCategories()
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
-        // setAccName(res.user.name)
-        setIsLoggedIn(true);
-        setLoading(true);
     };
 
     useEffect(() => {
