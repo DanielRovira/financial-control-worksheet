@@ -62,15 +62,15 @@ const App = () => {
             return ;
         }
 
-        const res2 = await fetch(`/api/tokenLogin`, {
-            method:'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({
-                user: res.user,
-              })
-        })
-        .then(response => response.json())
+        // const res2 = await fetch(`/api/tokenLogin`, {
+        //     method:'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     credentials: 'include',
+        //     body: JSON.stringify({
+        //         user: res.user,
+        //       })
+        // })
+        // .then(response => response.json())
 
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
         localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
@@ -113,14 +113,14 @@ const App = () => {
     }
 
     useEffect(() => {
-        setLoading(true);
+        // setLoading(true);
         //  refreshToken();      //RETIREI PRO GOOGLE AUTH FUNCIONAR
         oauthLogin();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
-        !isLoggedIn && sendLogoutReq();
-    },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(() => {
+    //     !isLoggedIn && sendLogoutReq();
+    // },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
             const interval = setInterval(() => {
