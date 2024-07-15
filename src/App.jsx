@@ -44,35 +44,30 @@ const App = () => {
     const collapseSidebar = () => { openSidebar && setOpenSidebar(false) }
     useClickAway(sidebar, collapseSidebar);
 
+    // const refreshToken = async () => {
+    //     getSections();
+    //     getCategories();
+    //     await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
+    //     .then(response => response.json())
+    //     .then(response => response.message && sendLogoutReq())
+    //     .catch(error => {
+    //         sendLogoutReq();
+    //     })
+    // }
+
     const refreshToken = async () => {
         getSections();
         getCategories();
-        await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
+        const res = await fetch(`/api/refreshtoken`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => response.message && sendLogoutReq())
         .catch(error => {
             sendLogoutReq();
         })
-    }
 
-    const oauthLogin = async () => {
-        const res = await fetch(`/api/getUser`, { method:'GET', credentials: 'include' })
-        .then(response => response.json())
         if (!res.user) {
             sendLogoutReq();
-            setLoading(false);
             return ;
         }
-
-        // const res2 = await fetch(`/api/tokenLogin`, {
-        //     method:'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     credentials: 'include',
-        //     body: JSON.stringify({
-        //         user: res.user,
-        //       })
-        // })
-        // .then(response => response.json())
 
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
         localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
@@ -115,8 +110,8 @@ const App = () => {
 
     useEffect(() => {
         setLoading(true);
-        //  refreshToken();      //RETIREI PRO GOOGLE AUTH FUNCIONAR
-        oauthLogin();
+         refreshToken();      //RETIREI PRO GOOGLE AUTH FUNCIONAR
+        // oauthLogin();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {
