@@ -29,11 +29,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
             return (alert(lang.alert03), setLoadingButton(false));
         })
         if (res.status === 200) {
-          // getSections()
-          // getCategories()
           localStorage.setItem('isLoggedIn', JSON.stringify(true));
           localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
-          // setAccName(res.user.name)
           setIsLoggedIn(true);
           setLoading(true);
           return
@@ -124,7 +121,6 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                     <Button
                       className='thirdPartyLogin'
                       variant='outlined'
-                    //   href="/api/oauth/login/federated/google"
                     onClick={loginWithGoogle}
                       >
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="google login" />

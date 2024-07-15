@@ -11,7 +11,6 @@ import Header from './components/Main/Header';
 import Login from './components/Main/Login';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
-// import Callback from './components/Main/Callback';
 import manifestDetails from './components/manifestDetails.js';
 import  { Backdrop, CircularProgress } from '@mui/material';
 
@@ -91,7 +90,6 @@ const App = () => {
 
     const clearLogin = () => {
         setIsLoggedIn(false);
-        // setAccName(null);
         setLoading(false);
         localStorage.clear();
         history('/');
@@ -99,8 +97,7 @@ const App = () => {
 
     useEffect(() => {
         setLoading(true);
-         refreshToken();      //RETIREI PRO GOOGLE AUTH FUNCIONAR
-        // oauthLogin();
+        refreshToken();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {
