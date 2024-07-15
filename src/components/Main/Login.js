@@ -1,6 +1,6 @@
 import './styles/Login.css'
 import { useEffect, useState, useRef } from 'react';
-import { Box, Button, TextField, Typography, CircularProgress } from '@mui/material';
+import { Box, Button, TextField, Typography, CircularProgress, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
 
@@ -25,16 +25,16 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
               })
         })
         .then(response => response.json())
-        if (res.status !== 200) {
+        .catch(error => {
             return (alert(lang.alert03), setLoadingButton(false));
+        })
+        if (res.status === 200) {
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
+          localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+          setIsLoggedIn(true);
+          setLoading(true);
+          return
         }
-        // getSections()
-        // getCategories()
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
-        // setAccName(res.user.name)
-        setIsLoggedIn(true);
-        setLoading(true);
     };
 
     useEffect(() => {
@@ -59,6 +59,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         }
     }
 
+    const loginWithGoogle = (ev) => {
+        ev.preventDefault();
+        window.open(`/api/oauth/login/federated/google`, "_self");
+      }
+
     document.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             document.getElementById("submitButton").click();
@@ -78,42 +83,53 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
               justifyContent='center'
               alignItems='center'
             >
-            <Typography variant='h4'>{lang.login}</Typography>
-            <TextField
-              name='email'
-              onChange={handleChange}
-              type={'email'}
-              value={inputs.email}
-              variant='outlined'
-              margin='normal'
-              autoComplete='username'
-              label={lang.email}
-              required
-            />
-            <TextField
-              name='password'
-              onChange={handleChange}
-              type='password'
-              value={inputs.password}
-              variant='outlined'
-              margin='normal'
-              autoComplete='current-password'
-              label={lang.password}
-              required
-            />
-            <Box className='buttonBox'>
-                <Button
-                    id='submitButton'
-                    variant='contained'
-                    type='submit'
-                    disabled={loadingButton}
-                >
-                  {lang.login}
-                </Button>
-                {loadingButton && <CircularProgress size={null} />}
-          </Box>
-        </Box>
-      </form>
+                <Typography variant='h4'>{lang.login}</Typography>
+                <TextField
+                  name='email'
+                  onChange={handleChange}
+                  type={'email'}
+                  value={inputs.email}
+                  variant='outlined'
+                  margin='normal'
+                  autoComplete='username'
+                  label={lang.email}
+                  required
+                />
+                <TextField
+                  name='password'
+                  onChange={handleChange}
+                  type='password'
+                  value={inputs.password}
+                  variant='outlined'
+                  margin='normal'
+                  autoComplete='current-password'
+                  label={lang.password}
+                  required
+                />
+                <Box className='buttonBox'>
+                    <Button
+                        id='submitButton'
+                        variant='contained'
+                        type='submit'
+                        disabled={loadingButton}
+                    >
+                      {lang.login}
+                    </Button>
+                </Box>
+                <Divider flexItem variant="middle" />
+                <Box className='buttonBox'>
+                    <Button
+                      className='thirdPartyLogin'
+                      variant='outlined'
+                    onClick={loginWithGoogle}
+                      >
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="google login" />
+                      <p>Google</p>
+                    </Button>
+                    {loadingButton && <CircularProgress size={null} />}
+                </Box>
+            </Box>
+        </form>
     </div>
   );
 };

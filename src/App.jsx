@@ -46,13 +46,22 @@ const App = () => {
     const refreshToken = async () => {
         getSections();
         getCategories();
-        await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
+        const res = await fetch(`/api/refreshtoken`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => response.message && sendLogoutReq())
         .catch(error => {
             sendLogoutReq();
         })
-    }
+
+        if (!res.user) {
+            sendLogoutReq();
+            return ;
+        }
+
+        localStorage.setItem('isLoggedIn', JSON.stringify(true));
+        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+        setIsLoggedIn(true);
+        setLoading(false);
+    };
 
     const getSections = async () => {
         await fetch(`/api/${process.env.REACT_APP_DB}/sections`, { method: 'GET', credentials: 'include' })
@@ -81,7 +90,6 @@ const App = () => {
 
     const clearLogin = () => {
         setIsLoggedIn(false);
-        // setAccName(null);
         setLoading(false);
         localStorage.clear();
         history('/');
@@ -92,9 +100,9 @@ const App = () => {
         refreshToken();
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    useEffect(() => {
-        !isLoggedIn && sendLogoutReq();
-    },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(() => {
+    //     !isLoggedIn && sendLogoutReq();
+    // },[isLoggedIn, history]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
             const interval = setInterval(() => {
@@ -117,7 +125,7 @@ const App = () => {
             </div>
                 <Routes>
                     <Route path="*" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setLoading={setLoading} />} />
-                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} setLoading={setLoading} />} />
+                    <Route path="/main" element={<Main refreshToken={refreshToken} isLoggedIn={isLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/settings" element={<Settings  categories={categories} setCategories={setCategories} sections={sections} setSections={setSections} set setMainSheetType={setMainSheetType} refreshToken={refreshToken} />} />
                     <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/TaskList/*" element={<TaskList setMainSheetType={setMainSheetType} />} />
