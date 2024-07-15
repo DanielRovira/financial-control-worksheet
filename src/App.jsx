@@ -44,17 +44,6 @@ const App = () => {
     const collapseSidebar = () => { openSidebar && setOpenSidebar(false) }
     useClickAway(sidebar, collapseSidebar);
 
-    // const refreshToken = async () => {
-    //     getSections();
-    //     getCategories();
-    //     await fetch(`/api/refreshtoken`, { method: 'GET', credentials: 'include' })
-    //     .then(response => response.json())
-    //     .then(response => response.message && sendLogoutReq())
-    //     .catch(error => {
-    //         sendLogoutReq();
-    //     })
-    // }
-
     const refreshToken = async () => {
         getSections();
         getCategories();
