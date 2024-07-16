@@ -28,7 +28,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         .catch(error => {
             return (alert(lang.alert03), setLoadingButton(false));
         })
-        if (res.status === 200) {
+        if (res.user) {
           localStorage.setItem('isLoggedIn', JSON.stringify(true));
           localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
           setIsLoggedIn(true);
