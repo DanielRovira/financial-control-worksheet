@@ -44,23 +44,22 @@ const App = () => {
     useClickAway(sidebar, collapseSidebar);
 
     const refreshToken = async () => {
-        getSections();
-        getCategories();
         const res = await fetch(`/api/refreshtoken`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
         .catch(error => {
             sendLogoutReq();
         })
 
-        if (!res.user) {
-            sendLogoutReq();
+        if (res.user) {
+            getSections();
+            getCategories();
+            localStorage.setItem('isLoggedIn', JSON.stringify(true));
+            localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+            setIsLoggedIn(true);
+            setLoading(false);
             return ;
         }
-
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
-        setIsLoggedIn(true);
-        setLoading(false);
+        sendLogoutReq();
     };
 
     const getSections = async () => {
