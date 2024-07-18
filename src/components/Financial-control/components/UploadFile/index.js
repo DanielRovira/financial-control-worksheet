@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 
-function UploadFile() {
+function UploadFile({ setAmount }) {
 
   const [file, setFile] = useState()
 
   function handleChange(event) {
     setFile(event.target.files[0])
+    document.getElementById('inputFile').click()
   }
   
   async function handleSubmit(event) {
@@ -25,15 +26,17 @@ function UploadFile() {
     .catch(error => {
         // return (alert("Erro"));
     })
+    if (res.amount) {
+        setAmount(Number(res.amount.replace('.','').replace(/,/g, '.')))
+    }
     return
   }
 
   return (
     <div className="UploadFile">
         <form onSubmit={handleSubmit}>
-          <h1>React File Upload</h1>
           <input type="file" onChange={handleChange}/>
-          <button type="submit">Upload</button>
+          <button id="inputFile" type="submit" style={{visibility:"hidden"}} >Upload</button>
         </form>
     </div>
   );

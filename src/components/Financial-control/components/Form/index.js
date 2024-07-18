@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
+import UploadFile from '../UploadFile'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem }) => {
@@ -268,6 +269,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                         </label>
                 </C.InputContent>
                 <Button onClick={handleSave} variant='contained' >{lang.add}</Button>
+                <UploadFile setAmount={setAmount} />
             </C.Container>
 
         </C.Form>
