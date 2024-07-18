@@ -13,11 +13,11 @@ function UploadFile() {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', file.name);
-    console.log(...formData)
+    // console.log(Object.fromEntries(formData.entries()))
     const res = await fetch(`/api/financial-control/uploadFile`,
     {
         method:'POST',
-        headers: { 'Content-Type': 'multipart/form-data' },
+        // headers: { 'Content-Type': 'multipart/form-data' },
         credentials: 'include',
         body: formData
     })
