@@ -30,9 +30,8 @@ function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
       let uploadData = {
         text: res.text,
         fields: res.fields,
-        date: `${res.date.slice(-4)}-${res.date.slice(3,5)}-${res.date.slice(0,2)}`,
+        date: res.date,
         desc: file.name.slice(-4,-3) === "." ? file.name.slice(0,-4) : file.name,
-        // amount: Number(res.amount.replace('.','').replace(/,/g, '.')),
         amount: res.amount,
         provider: res.destiny
       }
