@@ -1,38 +1,52 @@
 import './styles.css'
 import { useEffect } from 'react';
 
-function UploadFile({ setDesc, setAmount, setProvider, acceptedFiles }) {
+function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
 
   useEffect(() => {
-    return () => {
-        handleSubmit(acceptedFiles[0])
-    };
-  }, [acceptedFiles]);
+      handleSubmit(acceptedFiles)
+  }, [acceptedFiles]); // eslint-disable-line
   
-  async function handleSubmit(file) {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileName', file.name);
-    // console.log(Object.fromEntries(formData.entries()))
-    const res = await fetch(`/api/financial-control/uploadFile`,
-    {
-        method:'POST',
-        // headers: { 'Content-Type': 'multipart/form-data' },
-        credentials: 'include',
-        body: formData
-    })
-    .then(response => response.json())
-    .catch(error => {
-        // return (alert("Erro"));
-    })
-    if (res.amount) {
-        // setDate(`${res.date.slice(-4)}-${res.date.slice(3,5)}-${res.date.slice(0,2)}`)
-        setDesc(file.name.slice(-4,-3) === "." ? file.name.slice(0,-4) : file.name)
-        setAmount(Number(res.amount.replace('.','').replace(/,/g, '.')))
-        setProvider(res.destiny)
+  async function handleSubmit(acceptedFiles) {
+    let file = acceptedFiles[0]
+    // console.log(file.name)
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('fileName', file.name);
+      // console.log(Object.fromEntries(formData.entries()))
+      const res = await fetch(`/api/financial-control/uploadFile`,
+      {
+          method:'POST',
+          // headers: { 'Content-Type': 'multipart/form-data' },
+          credentials: 'include',
+          body: formData
+      })
+      .then(response => response.json())
+      .catch(error => {
+          // return (alert("Erro"));
+      })
+  
+      let uploadData = {
+        text: res.text,
+        fields: res.fields,
+        date: `${res.date.slice(-4)}-${res.date.slice(3,5)}-${res.date.slice(0,2)}`,
+        desc: file.name.slice(-4,-3) === "." ? file.name.slice(0,-4) : file.name,
+        // amount: Number(res.amount.replace('.','').replace(/,/g, '.')),
+        amount: res.amount,
+        provider: res.destiny
+      }
+  
+      setUploadedData(uploadData)
     }
-    return
+    // return
   }
+
+  return (
+    <div className="UploadFile" style={{display: isDragActive ? 'flex' : 'none'}}>
+        <p>Drop the files here ...</p>
+    </div>
+    )
 }
 
-export default UploadFile ;
+export default UploadFile;

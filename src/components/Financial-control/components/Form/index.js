@@ -1,13 +1,12 @@
 import './index.css'
 import * as C from './styles';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
-import UploadFile from '../UploadFile'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem, acceptedFiles }) => {
+const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem, uploadedData }) => {
     const params = useParams();
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -84,6 +83,14 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
         setSubCategory('');
         setOperationType('add')
     };
+
+    useEffect(() => {
+        uploadedData && setDate(uploadedData.date)
+        uploadedData && setDesc(uploadedData.desc)
+        uploadedData && setAmount(uploadedData.amount)
+        uploadedData && setProvider(uploadedData.provider)
+        console.log(uploadedData)
+    }, [uploadedData]);
 
     return ( 
         <C.Form>
@@ -269,7 +276,6 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                         </label>
                 </C.InputContent>
                 <Button onClick={handleSave} variant='contained' >{lang.add}</Button>
-                <UploadFile setDate={setDate} setDesc={setDesc} setAmount={setAmount} setProvider={setProvider} acceptedFiles={acceptedFiles} />
             </C.Container>
 
         </C.Form>

@@ -14,6 +14,7 @@ import Resume from './components/Resume';
 import Sidebar from './components/Sidebar';
 import Summary from './components/Summary';
 import Snackbar from './components/Snackbar';
+import UploadFile from './components/UploadFile';
 // const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType }) => {
@@ -31,6 +32,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [operationType, setOperationType] = useState();
     const [syncing, setSyncing] = useState(false);
     const [openSidebar, setOpenSidebar] = useState(false);
+    const [uploadedData, setUploadedData] = useState();
     const history = useNavigate();
     const params = useParams();
     const timer = useRef(null);
@@ -277,13 +279,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     
     const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({noClick: true, maxFiles:1})
 
-    const Message = () => {
-        return (
-            <div className="UploadFile">
-                <p>Drop the files here ...</p>
-            </div>
-            )
-        }
+    useEffect(() => {
+        isDragActive && setAdd(true)
+    }, [isDragActive]);
 
     return (<>
             <div ref={sidebar}>
@@ -292,9 +290,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {sheetType === undefined ? <Main setOpenSidebar={setOpenSidebar} /> : 
             <div className='FinancialWorksheet' {...getRootProps()}>
                 <input {...getInputProps()} />
-                    {isDragActive ? <Message /> : void(0)}
+                    <UploadFile isDragActive={isDragActive} acceptedFiles={acceptedFiles} setUploadedData={setUploadedData} />
                     <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} acceptedFiles={acceptedFiles}  />}
+                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} uploadedData={uploadedData} />}
                     {loadingData ? <LinearProgress /> :
                     <>
                         {/* {transactionsList[sheetType]?.length === 0 ? <EmpityFolder /> : */}
