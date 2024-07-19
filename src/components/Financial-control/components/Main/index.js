@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { List, ListSubheader } from '@mui/material';
 import MainNestedList from './MainNestedList';
 import Calendar from '../Calendar';
-import UploadFile from '../UploadFile';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Main = ({ setOpenSidebar }) => {
@@ -68,7 +67,6 @@ const Main = ({ setOpenSidebar }) => {
                     <div className='Header'>
                         <h1>{lang.FinancialWorksheet}</h1>
                     </div>
-                    <UploadFile/>
                     <List
                         subheader={
                             <ListSubheader>

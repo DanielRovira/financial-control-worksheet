@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Drawer, LinearProgress } from '@mui/material';
 import { useClickAway } from 'react-use';
+import {useDropzone} from 'react-dropzone'
 import BottomNavigation from './components/BottomNav';
 import Calendar from './components/Calendar';
 import EmpityFolder from './components/EmpityFolder';
@@ -273,15 +274,27 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             }))
          ))
     }, [transactionsList]); // eslint-disable-line react-hooks/exhaustive-deps
+    
+    const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({noClick: true, maxFiles:1})
+
+    const Message = () => {
+        return (
+            <div className="UploadFile">
+                <p>Drop the files here ...</p>
+            </div>
+            )
+        }
 
     return (<>
             <div ref={sidebar}>
                 <Sidebar  sections={sections} style={{ overflow: 'hidden' }} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
             </div>
             {sheetType === undefined ? <Main setOpenSidebar={setOpenSidebar} /> : 
-            <div className='FinancialWorksheet'>
+            <div className='FinancialWorksheet' {...getRootProps()}>
+                <input {...getInputProps()} />
+                    {isDragActive ? <Message /> : void(0)}
                     <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} />}
+                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} acceptedFiles={acceptedFiles}  />}
                     {loadingData ? <LinearProgress /> :
                     <>
                         {/* {transactionsList[sheetType]?.length === 0 ? <EmpityFolder /> : */}

@@ -7,7 +7,7 @@ import CurrencyInput from 'react-currency-input-field'
 import UploadFile from '../UploadFile'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem }) => {
+const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem, acceptedFiles }) => {
     const params = useParams();
     const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
@@ -269,7 +269,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                         </label>
                 </C.InputContent>
                 <Button onClick={handleSave} variant='contained' >{lang.add}</Button>
-                <UploadFile setDate={setDate} setDesc={setDesc} setAmount={setAmount} setProvider={setProvider} />
+                <UploadFile setDate={setDate} setDesc={setDesc} setAmount={setAmount} setProvider={setProvider} acceptedFiles={acceptedFiles} />
             </C.Container>
 
         </C.Form>
