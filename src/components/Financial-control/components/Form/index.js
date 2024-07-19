@@ -269,7 +269,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                         </label>
                 </C.InputContent>
                 <Button onClick={handleSave} variant='contained' >{lang.add}</Button>
-                <UploadFile setAmount={setAmount} />
+                <UploadFile setDate={setDate} setDesc={setDesc} setAmount={setAmount} setProvider={setProvider} />
             </C.Container>
 
         </C.Form>
