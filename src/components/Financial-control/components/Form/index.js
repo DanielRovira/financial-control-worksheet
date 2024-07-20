@@ -8,11 +8,18 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem, uploadedData }) => {
     const params = useParams();
-    const toDay = new Date().toISOString().substring(0, 10)
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
     let categories = Array.from(categoriesList || []).filter(item => item.type === 'category').sort((a, b) => a.name.localeCompare(b.name))
     let subCategories = Array.from(categoriesList || []).filter(item => item.type === 'subCategory').sort((a, b) => a.name.localeCompare(b.name))
+
+    function dateToTimezone() {
+        let rawDate = new Date()
+        rawDate.setHours(rawDate.getHours() - 3)
+        return rawDate
+    }
+    
+    const toDay = dateToTimezone().toISOString().substring(0, 10)
 
     // Both
     const [date, setDate]  = useState(toDay);
@@ -85,12 +92,12 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
     };
 
     useEffect(() => {
-        uploadedData && setDate(uploadedData.date)
-        uploadedData && setDesc(uploadedData.desc)
-        uploadedData && setAmount(uploadedData.amount)
-        uploadedData && setProvider(uploadedData.provider)
+        uploadedData &&  setDate(uploadedData.date || toDay)
+        uploadedData &&  setDesc(uploadedData.desc || '')
+        uploadedData && setAmount(uploadedData.amount.replace('.', '').replace(/,/g, '.') || '')
+        uploadedData &&  setProvider(uploadedData.provider || '')
         console.log(uploadedData)
-    }, [uploadedData]);
+    }, [uploadedData, toDay]);
 
     return ( 
         <C.Form>
