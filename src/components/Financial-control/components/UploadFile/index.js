@@ -1,5 +1,7 @@
 import './styles.css'
 import { useEffect } from 'react';
+import uploadImage from './uploadImage.svg' //throwIfNamespace: false
+const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
 
@@ -43,7 +45,10 @@ function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
 
   return (
     <div className="UploadFile" style={{display: isDragActive ? 'flex' : 'none'}}>
-        <p>Drop the files here ...</p>
+      <div className="UploadFileContent">
+        <img src={uploadImage} alt="Upload Image" />
+        <p>{lang.dropFile}</p>
+      </div>
     </div>
     )
 }

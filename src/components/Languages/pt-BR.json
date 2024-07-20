@@ -12,6 +12,7 @@
     "subCategory": "Sub-categoria",
     "date": "Data",
     "description": "Descrição",
+    "dropFile": "Drop the files here ...",
     "expand": "Expandir",
     "details": "Detalhes",
     "download": "Baixar planilha",

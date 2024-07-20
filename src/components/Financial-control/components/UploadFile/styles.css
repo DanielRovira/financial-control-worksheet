@@ -1,5 +1,6 @@
 .UploadFile {
     display: flex;
+    flex-direction: column;
     position: fixed;
     top:0;
     bottom: 0;
@@ -8,8 +9,24 @@
     margin: auto;
     width: 100%;
     height: 100%;
-    background-color: rgba(163, 163, 163, 0.405);
+    background-color: rgba(100, 100, 100, 0.7);
     align-items: center;
     justify-content: center;
     z-index: 999;
+}
+
+.UploadFile .UploadFileContent {
+    position: fixed;
+    top: 10vh;
+    text-align: center;
+    font-size: 1.3em;
+    /* font-weight: bold; */
+    color: white;
+}
+
+.UploadFile .UploadFileContent img {
+    margin-bottom: 20px;
+    height: 150px;
+    /* filter: opacity(90%); */
+    filter: grayscale(40%);
 }
