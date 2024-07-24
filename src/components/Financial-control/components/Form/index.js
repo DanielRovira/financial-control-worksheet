@@ -94,7 +94,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
     useEffect(() => {
         uploadedData &&  setDate(uploadedData.date || toDay)
         uploadedData &&  setDesc(uploadedData.desc || '')
-        uploadedData && setAmount(uploadedData.amount.replace('.', '').replace(/,/g, '.') || '')
+        uploadedData && setAmount(uploadedData.amount?.replace('.', '').replace(/,/g, '.') || '')
         uploadedData &&  setProvider(uploadedData.provider || '')
         console.log(uploadedData)
     }, [uploadedData, toDay]);
