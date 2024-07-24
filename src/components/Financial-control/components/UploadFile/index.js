@@ -17,7 +17,7 @@ function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
       formData.append('file', file);
       formData.append('fileName', file.name);
       // console.log(Object.fromEntries(formData.entries()))
-      const res = await fetch(`/api/financial-control/uploadFile`,
+      const res = await fetch(`/api/${process.env.REACT_APP_DB}/uploadFile`,
       {
           method:'POST',
           // headers: { 'Content-Type': 'multipart/form-data' },
