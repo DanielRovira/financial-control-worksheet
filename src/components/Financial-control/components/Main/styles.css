@@ -112,6 +112,13 @@
   padding: 1em 0.5em;
 }
 
+.FinancialWorksheetMainContainer .react-calendar__tile--now,
+.FinancialWorksheetMainContainer .react-calendar__tile--now:enabled:hover,
+.FinancialWorksheetMainContainer .react-calendar__tile--now:enabled:focus,
+.FinancialWorksheetMainContainer .react-calendar__tile:enabled:hover {
+    background: none;
+}
+
 @media (max-height: 600px) {
     .FinancialWorksheetMainContainer {
         margin-top: 0;
