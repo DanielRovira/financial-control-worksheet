@@ -46,7 +46,7 @@ function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
   return (
     <div className="UploadFile" style={{display: isDragActive ? 'flex' : 'none'}}>
       <div className="UploadFileContent">
-        <img src={uploadImage} alt="Upload Image" />
+        <img src={uploadImage} alt="Upload" />
         <p>{lang.dropFile}</p>
       </div>
     </div>

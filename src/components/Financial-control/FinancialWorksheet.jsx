@@ -56,20 +56,20 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     setIsLoggedIn(false); history('/');
                 })
 
-            const res2 = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
-                .then(response => response.json())
-                .catch(error => {
-                    setIsLoggedIn(false); history('/');
-                })
+            // const res2 = await
+            // fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
+            //     .then(response => response.json())
+            //     .catch(error => {
+            //         setIsLoggedIn(false); history('/');
+            //     })
 
-            if (res.status === 200 && res2.status === 200) {
+            if (res.status === 200) {
                 setLoadingData(false)
 
                 setTransactionsList({
-                    financialControl: res.post  || [],
-                    todoPayments: res2.post || [],
-                    summary: res.post || []
+                    financialControl: res.post?.filter(item => item.status === "finished" || item.status === undefined)  || [],
+                    todoPayments: res.post?.filter(item => !item.status === "payment") || [],
+                    summary: res.post?.filter(item => item.status === "finished" || item.status === undefined) || []
                 } || [])
             }
             else {setIsLoggedIn(false); history('/')} 
