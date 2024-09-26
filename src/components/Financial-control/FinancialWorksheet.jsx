@@ -50,7 +50,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         if (sheetType !== undefined ){
         if (sectionExists) {
             const res = await
-            fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
+            fetch(`/api/finances/list/${params.taskTitle}-${sheetType}`, { method:'GET', credentials: 'include' })
                 .then(response => response.json())
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
@@ -67,9 +67,9 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 setLoadingData(false)
 
                 setTransactionsList({
-                    financialControl: res.post?.filter(item => item.status === "finished" || item.status === undefined)  || [],
-                    todoPayments: res.post?.filter(item => !item.status === "payment") || [],
-                    summary: res.post?.filter(item => item.status === "finished" || item.status === undefined) || []
+                    financialControl: res.post?.filter(item => item.status === "financialControl" || item.status === undefined)  || [],
+                    todoPayments: res.post?.filter(item => !item.status === "todoPayments") || [],
+                    summary: res.post?.filter(item => item.status === "financialControl" || item.status === undefined) || []
                 } || [])
             }
             else {setIsLoggedIn(false); history('/')} 
@@ -200,7 +200,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     async function insertDocument(transaction, path, alsoDelete, last) {
         setSyncing(true);
         try {
-            const res = await fetch(`/api/${process.env.REACT_APP_DB}/add/${path? path : params.taskTitle}-${sheetType}`,
+            const res = await fetch(`/api/finances/add/${path? path : params.taskTitle}`,
                 {
                     method:'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -221,7 +221,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     function updateDocument(item, update, time, last) {
         setSyncing(true);
-        fetch(`/api/${process.env.REACT_APP_DB}/update/${params.taskTitle}-${sheetType}`,
+        fetch(`/api/finances/update/${params.taskTitle}`,
         {
             method:'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -236,7 +236,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
 
     function deleteDocument(item, path, last) {
         // setSyncing(true);
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/${path? path : params.taskTitle}-${sheetType}`,
+        fetch(`/api/finances/delete/${path? path : params.taskTitle}`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },

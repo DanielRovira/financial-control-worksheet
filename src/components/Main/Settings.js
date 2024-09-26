@@ -24,7 +24,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
         CategoriesListItem === 'sections'
         ? setSections((prev) => [...prev, transaction['sections']])
         : setCategories((prev) => [...prev, transaction['categories']]);
-        fetch(`/api/${process.env.REACT_APP_DB}/add/${type}`,
+        fetch(`/api/finances/add/${type}`,
         {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
         let type = (CategoriesListItem === 'sections' ? 'sections' : 'categories')
         setCategories((prev) => [...prev.filter((items) => items !== item)])
         setSections((prev) => [...prev.filter((items) => items !== item)])
-        fetch(`/api/${process.env.REACT_APP_DB}/delete/${type}`,
+        fetch(`/api/finances/delete/${type}`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },
