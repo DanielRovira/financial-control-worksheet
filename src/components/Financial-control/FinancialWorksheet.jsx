@@ -50,26 +50,26 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         if (sheetType !== undefined ){
         if (sectionExists) {
             const res = await
-            fetch(`/api/finances/list/${params.taskTitle}-${sheetType}`, { method:'GET', credentials: 'include' })
+            fetch(`/api/finances/list/${params.taskTitle}-financialControl`, { method:'GET', credentials: 'include' })
                 .then(response => response.json())
                 .catch(error => {
                     setIsLoggedIn(false); history('/');
                 })
 
-            // const res2 = await
-            // fetch(`/api/${process.env.REACT_APP_DB}/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
-            //     .then(response => response.json())
-            //     .catch(error => {
-            //         setIsLoggedIn(false); history('/');
-            //     })
+            const res2 = await
+            fetch(`/api/finances/list/${params.taskTitle}-todoPayments`, { method:'GET', credentials: 'include' })
+                .then(response => response.json())
+                .catch(error => {
+                    setIsLoggedIn(false); history('/');
+                })
 
             if (res.status === 200) {
                 setLoadingData(false)
 
                 setTransactionsList({
-                    financialControl: res.post?.filter(item => item.status === "financialControl" || item.status === undefined)  || [],
-                    todoPayments: res.post?.filter(item => !item.status === "todoPayments") || [],
-                    summary: res.post?.filter(item => item.status === "financialControl" || item.status === undefined) || []
+                    financialControl: res.post?.filter(item => item.status === "financialControl")  || [],
+                    todoPayments: res2.post?.filter(item => item.status === "todoPayments") || [],
+                    summary: res.post?.filter(item => item.status === "financialControl") || []
                 } || [])
             }
             else {setIsLoggedIn(false); history('/')} 

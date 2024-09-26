@@ -60,6 +60,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                 desc: desc,
                 amount: Number(amount.replace(/,/g, '.')),
                 costCenter: params.taskTitle,
+                status: "financialControl"
             },
             todoPayments: {
                 date: date,
@@ -70,6 +71,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                 desc: desc,
                 amount: Number(amount.replace(/,/g, '.')),
                 costCenter: params.taskTitle,
+                status: "todoPayments"
             }
         }
 

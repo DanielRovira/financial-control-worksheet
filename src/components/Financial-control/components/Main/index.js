@@ -13,7 +13,7 @@ const Main = ({ setOpenSidebar }) => {
 
     const getData = async (section) => {
         const res = await
-        fetch(`/api/${process.env.REACT_APP_DB}/list/${section}-financialControl`, { method:'GET', credentials: 'include' })
+        fetch(`/api/finances/list/${section}-financialControl`, { method:'GET', credentials: 'include' })
             .then(response => response.json())
             .catch(error => {
                 // setIsLoggedIn(false); history('/');
