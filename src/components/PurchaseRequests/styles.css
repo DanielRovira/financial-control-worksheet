@@ -1,0 +1,13 @@
+.PurchaseRequests {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5px 0 50px;
+    width: inherit;
+}
+
+.PurchaseRequestsSub {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+

@@ -224,8 +224,14 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             type !== 'undo' && setUndoItem((prev) => [ ...prev, item])
             let newItem = JSON.parse(JSON.stringify(item))
             setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+
+            if (sheetType === 'financialControl') {
+            newItem.status = 'todoPayments'
+            setTransactionsList((prev) =>  ({...prev, 'todoPayments': [...prev['todoPayments'], newItem]}) )}
+
+            if (sheetType === 'todoPayments') {
             newItem.status = 'financialControl'
-            setTransactionsList((prev) =>  ({...prev, 'financialControl': [...prev['financialControl'], newItem]}) )
+            setTransactionsList((prev) =>  ({...prev, 'financialControl': [...prev['financialControl'], newItem]}) )}
 
             index === list.length - 1
             ? updateDocument(newItem, null, null, true)

@@ -1,13 +1,12 @@
 import * as C from './styles';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
+import { Button, Divider, IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
 import { AddCircle as AddCircleIcon,
          Archive as ArchiveIcon,
          ArchiveOutlined as ArchiveOutlinedIcon,
          CalendarMonth as CalendarMonthIcon,
          CreditScore as CreditScoreIcon,
-         Check as CheckIcon,
          Delete as DeleteIcon,
          DeleteForever as DeleteForeverIcon,
          Difference as DifferenceIcon,
@@ -121,15 +120,6 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     <DifferenceIcon/>
                     <p>{lang.duplicate}</p>
                 </IconButton>
-                <IconButton onClick={!syncing ? handleArchiveButton : undefined}
-                            disabled={disabled}
-                            >
-                    {archived
-                    ? <UnarchiveOutlinedIcon />
-                    : <ArchiveOutlinedIcon />
-                    }
-                    <p>{lang[!archived ? 'archive' : 'unAarchive']}</p>
-                </IconButton>
                 <IconButton 
                     onClick={(event) => handleClick(event, "move-menu")}
                     disabled={disabled}
@@ -137,14 +127,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     <DriveFileMoveIcon/>
                     <p>{lang.move}</p>
                 </IconButton>
-                {sheetType === 'todoPayments' &&
+                {/* {sheetType === 'todoPayments' &&
                 <IconButton 
                     onClick={(event) => handleClick(event, "situation-menu")}
                     disabled={disabled}
                 >
                     <CreditScoreIcon/>
                     <p>{lang.markAsPayd}</p>
-                </IconButton>}
+                </IconButton>} */}
             </>}
                 {params.taskTitle === 'TRASH' && <>
                     <IconButton onClick={() => !syncing ? handleDeleteSelected('trash', 1) : undefined}
@@ -236,8 +226,29 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                             {section.name}
                         </MenuItem>
                     ))}
+                    <Divider />
+                    <MenuItem onClick={() => {!syncing && handleArchiveButton(); handleClose()}}
+                                // disabled={disabled}
+                    >
+                        <ListItemIcon>
+                            {archived
+                            ? <UnarchiveOutlinedIcon />
+                            : <ArchiveOutlinedIcon />
+                            }
+                        </ListItemIcon>
+                        <p>{lang[!archived ? 'archive' : 'unAarchive']}</p>
+                    </MenuItem>
+                    <MenuItem onClick={() => {handleMarkAsPaydButton(section); handleClose()}}>
+                        <ListItemIcon>
+                            {sheetType === 'todoPayments'
+                            ? <CreditScoreIcon />
+                            : <CalendarMonthIcon />
+                            }
+                        </ListItemIcon>
+                        {sheetType === 'todoPayments' ? lang.financialControl : lang.todoPayments}
+                    </MenuItem>
                 </Menu>
-                <Menu
+                {/* <Menu
                     id="situation-menu"
                     anchorEl={anchorEl}
                     open={open === "situation-menu"}
@@ -252,7 +263,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         </ListItemIcon>
                         {lang.confirm}
                     </MenuItem>
-                </Menu>
+                </Menu> */}
             </C.Buttons>
             }
         </C.Container>}
