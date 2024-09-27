@@ -98,7 +98,6 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
         uploadedData &&  setDesc(uploadedData.desc || '')
         uploadedData && setAmount(uploadedData.amount?.replace('.', '').replace(/,/g, '.') || '')
         uploadedData &&  setProvider(uploadedData.provider || '')
-        console.log(uploadedData)
     }, [uploadedData, toDay]);
 
     return ( 

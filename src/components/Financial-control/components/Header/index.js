@@ -6,21 +6,24 @@ import { AddCircle as AddCircleIcon,
          Archive as ArchiveIcon,
          ArchiveOutlined as ArchiveOutlinedIcon,
          CalendarMonth as CalendarMonthIcon,
+         CreditScore as CreditScoreIcon,
+         Check as CheckIcon,
          Delete as DeleteIcon,
          DeleteForever as DeleteForeverIcon,
          Difference as DifferenceIcon,
-        //  FmdBadOutlined as FmdBadOutlinedIcon,
+         Download as DownloadIcon,
+         DriveFileMove as DriveFileMoveIcon,
+         Folder as FolderIcon,
          InfoOutlined as InfoOutlinedIcon,
          MoreVert as MoreVertIcon,
          Menu as MenuIcon,
          RemoveCircle as RemoveCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
-         Download as DownloadIcon,
          Unarchive as UnarchiveIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, handleMoveSection, handleMarkAsPayd, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
     const params = useParams();
 
 
@@ -32,12 +35,15 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
     //MENU
     const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+    const [open, setOpen] = useState(null);
+    // const open = Boolean(anchorEl);
+    const handleClick = (event, id) => {
       setAnchorEl(event.currentTarget);
+      setOpen(id)
     };
     const handleClose = () => {
       setAnchorEl(null);
+      setOpen(null)
     };
 
     const handleFilterButton = () => {
@@ -58,6 +64,20 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
         handleSetArchived();
         setOperationType('archive');
         // setChecked([]);
+        handleOpenSnackbar();
+    }
+
+    const handleMoveButton = (section) => {
+        setUndoItem([]);
+        handleMoveSection(section.title)
+        setOperationType('update');
+        handleOpenSnackbar();
+    }
+
+    const handleMarkAsPaydButton = (section) => {
+        setUndoItem([]);
+        handleMarkAsPayd(section.title)
+        setOperationType('update');
         handleOpenSnackbar();
     }
 
@@ -110,6 +130,21 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     }
                     <p>{lang[!archived ? 'archive' : 'unAarchive']}</p>
                 </IconButton>
+                <IconButton 
+                    onClick={(event) => handleClick(event, "move-menu")}
+                    disabled={disabled}
+                >
+                    <DriveFileMoveIcon/>
+                    <p>{lang.move}</p>
+                </IconButton>
+                {sheetType === 'todoPayments' &&
+                <IconButton 
+                    onClick={(event) => handleClick(event, "situation-menu")}
+                    disabled={disabled}
+                >
+                    <CreditScoreIcon/>
+                    <p>{lang.markAsPayd}</p>
+                </IconButton>}
             </>}
                 {params.taskTitle === 'TRASH' && <>
                     <IconButton onClick={() => !syncing ? handleDeleteSelected('trash', 1) : undefined}
@@ -146,14 +181,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     </IconButton>
                 </>}
                 <Tooltip title={<h3>{lang.more}</h3>} disableInteractive PopperProps={poppersConfig} enterDelay={enterDelay} enterNextDelay={enterDelay}>
-                    <IconButton onClick={handleClick} style={{border:'0'}}>
+                    <IconButton onClick={(event) => handleClick(event, "more-menu")} style={{border:'0'}}>
                         <MoreVertIcon />
                     </IconButton>
                 </Tooltip>
                 <Menu
-                    id="basic-menu"
+                    id="more-menu"
                     anchorEl={anchorEl}
-                    open={open}
+                    open={open === "more-menu"}
                     onClose={handleClose}
                     MenuListProps={{
                       'aria-labelledby': 'basic-button',
@@ -182,6 +217,40 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                                 lang.notArchived :
                                 lang.archived
                             }
+                    </MenuItem>
+                </Menu>
+                <Menu
+                    id="move-menu"
+                    anchorEl={anchorEl}
+                    open={open === "move-menu"}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    {Array.from(sections).filter((section) => section.title !== 'TRASH' && section.title !== params.taskTitle ).map((section, index) => (
+                        <MenuItem key={index} onClick={() => {handleMoveButton(section); handleClose()}}>
+                            <ListItemIcon>
+                                <FolderIcon />
+                            </ListItemIcon>
+                            {section.name}
+                        </MenuItem>
+                    ))}
+                </Menu>
+                <Menu
+                    id="situation-menu"
+                    anchorEl={anchorEl}
+                    open={open === "situation-menu"}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      'aria-labelledby': 'basic-button',
+                    }}
+                >
+                    <MenuItem onClick={() => {handleMarkAsPaydButton(section); handleClose()}}>
+                        <ListItemIcon>
+                            <CheckIcon />
+                        </ListItemIcon>
+                        {lang.confirm}
                     </MenuItem>
                 </Menu>
             </C.Buttons>

@@ -197,6 +197,43 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
         setOperationType()
     }
 
+    const handleMoveSection = (section, type) => {
+        let checkedList = JSON.parse(JSON.stringify(checked));
+        let list = checkedList
+        setChecked([]);
+
+        list.forEach((item, index) => {
+            type !== 'undo' && setUndoItem((prev) => [ ...prev, item])
+            let newItem = JSON.parse(JSON.stringify(item))
+            setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+            newItem.costCenter = section
+
+            index === list.length - 1
+            ? updateDocument(newItem, null, null, true)
+            : updateDocument(newItem)
+        })
+        setOperationType()
+    }
+
+    const handleMarkAsPayd = (section, type) => {
+        let checkedList = JSON.parse(JSON.stringify(checked));
+        let list = checkedList
+        setChecked([]);
+
+        list.forEach((item, index) => {
+            type !== 'undo' && setUndoItem((prev) => [ ...prev, item])
+            let newItem = JSON.parse(JSON.stringify(item))
+            setTransactionsList((prev) => ({...prev, [sheetType]: prev[sheetType].filter(it => it._id !== item._id)}))
+            newItem.status = 'financialControl'
+            setTransactionsList((prev) =>  ({...prev, 'financialControl': [...prev['financialControl'], newItem]}) )
+
+            index === list.length - 1
+            ? updateDocument(newItem, null, null, true)
+            : updateDocument(newItem)
+        })
+        setOperationType()
+    }
+
     async function insertDocument(transaction, path, alsoDelete, last) {
         setSyncing(true);
         try {
@@ -291,7 +328,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             <div className='FinancialWorksheet' {...getRootProps()}>
                 <input {...getInputProps()} />
                     <UploadFile isDragActive={isDragActive} acceptedFiles={acceptedFiles} setUploadedData={setUploadedData} />
-                    <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
+                    <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleDeleteSelected={handleDeleteSelected} handleSetArchived={handleSetArchived} handleDuplicateSelected={handleDuplicateSelected} handleMoveSection={handleMoveSection} handleMarkAsPayd={handleMarkAsPayd} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} setOperationType={setOperationType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} uploadedData={uploadedData} />}
                     {loadingData ? <LinearProgress /> :
                     <>
