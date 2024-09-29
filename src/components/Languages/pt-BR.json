@@ -4,6 +4,7 @@
     "alert01": "Informe Data, Descrição e Valor!",
     "alert02": "O valor tem que ser positivo",
     "alert03": "Não foi possível fazer o login",
+    "alert04": "Informe Descrição e Centro de custo!",
     "bank": "Dados bancários",
     "category": "Categoria",
     "calendar": "Calendário",

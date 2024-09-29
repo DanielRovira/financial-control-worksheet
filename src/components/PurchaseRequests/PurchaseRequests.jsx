@@ -35,7 +35,7 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
     async function insertDocument(transaction) {
         // setSyncing(true);
         try {
-            const res = await fetch(`/api/purchases/add`,
+            await fetch(`/api/purchases/add`,
                 {
                     method:'POST',
                     headers: { 'Content-Type': 'application/json' },

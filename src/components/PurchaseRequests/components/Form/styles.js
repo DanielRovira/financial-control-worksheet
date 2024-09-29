@@ -11,7 +11,7 @@ export const Form = styled.div`
     transform: translate(-50%);
     /* margin: auto; */
     z-index: 15;
-    /* animation: scaleAnimationIn .1s; */
+    animation: formAnim .1s;
     /* width: calc(100vw - var(--closeSidebarWidth) - 10px); */
     max-height: calc(100vh - 100px);
     min-width: 60%0px;
@@ -33,6 +33,15 @@ export const Form = styled.div`
     }
     @media (max-width: 600px) {
         top: 100px;
+    }
+
+    @keyframes formAnim {
+        0% {
+            transform: translate(-50%, -50%);
+        }
+        100% {
+            transform: translate(-50%, 0);
+        }
     }
 `
 
@@ -117,6 +126,12 @@ export const Button = styled(ButtonMui)`
 `;
 
 export const Th = styled.div`
-    width: 36.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+        min-width: 30px;
+    }
 `;
 

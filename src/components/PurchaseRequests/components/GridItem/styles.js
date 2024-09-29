@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CurrencyInput from 'react-currency-input-field'
+// import CurrencyInput from 'react-currency-input-field'
 
 export const Tr = styled.tr`
     height: 32px;

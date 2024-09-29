@@ -2,7 +2,7 @@ import './styles.js'
 import * as C from './styles';
 // import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Divider, TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import { Divider, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Add as AddIcon,
     RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
@@ -16,7 +16,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
         return rawDate
     }
     
-    const [date, setDate]  = useState(editItem ? editItem.date : toDay);
+    const [date]  = useState(editItem ? editItem.date : toDay);
     const [costCenter, setCostCenter]  = useState(editItem ? editItem.costCenter : '');
     const [desc, setDesc]  = useState(editItem ? editItem.desc : '');
 
@@ -32,7 +32,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
 
     const handleSave = () => {
         if (!desc || !costCenter) {
-            alert(lang.alert01);
+            alert(lang.alert04);
             return;
         }
 
@@ -170,7 +170,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                             <th width={"50%"}>Item</th>
                             <th>{window.innerWidth > 500 ? lang.unit : lang.unitAbrv}</th>
                             <th>{window.innerWidth > 500 ? lang.quantity : lang.quantityAbrv}</th>
-                            <C.Th><C.Button sx={{minWidth:'100%', padding:'3px 0', marginLeft:'2px'}} onClick={handleAdd} variant='contained' ><AddIcon/></C.Button></C.Th>
+                            <C.Th><C.Button sx={{minWidth:'100%', padding:'3px 0'}} onClick={handleAdd} variant='contained' ><AddIcon/></C.Button></C.Th>
                         </tr>
                     </thead>
                     <tbody>

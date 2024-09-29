@@ -2,7 +2,7 @@ import * as H from '../../../Financial-control/components/Header/styles';
 import { Button, IconButton } from '@mui/material';
 import { AddCircle as AddCircleIcon,
     Delete as DeleteIcon,
-    DriveFileMove as DriveFileMoveIcon,
+    // DriveFileMove as DriveFileMoveIcon,
     RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
@@ -26,13 +26,13 @@ const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected }) => {
                         <DeleteIcon/>
                         <p>{lang.remove}</p>
                     </IconButton>
-                    <IconButton 
+                    {/* <IconButton 
                         // onClick={(event) => handleClick(event, "move-menu")}
                         // disabled={disabled}
                     >
                         <DriveFileMoveIcon/>
                         <p>{lang.move}</p>
-                    </IconButton>
+                    </IconButton> */}
                 </H.Buttons>
             </H.Container>
         </>)
