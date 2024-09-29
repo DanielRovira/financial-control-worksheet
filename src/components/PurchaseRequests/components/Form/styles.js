@@ -13,11 +13,13 @@ export const Form = styled.div`
     z-index: 15;
     /* animation: scaleAnimationIn .1s; */
     /* width: calc(100vw - var(--closeSidebarWidth) - 10px); */
+    max-height: calc(100vh - 100px);
     min-width: 60%0px;
     width:  60%;
     box-shadow: 0 24px 54px rgba(0,0,0,.15), 0 4.5px 13.5px rgba(0,0,0,.08);
     border-radius: 5px;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow: auto;
     background-color: #fff;
 
     @media (max-width: 1100px) {
@@ -25,8 +27,12 @@ export const Form = styled.div`
         width:  650px;
     }
     @media (max-width: 650px) {
-        min-width: 100%;
-        width:  100%;
+        min-width: calc(100vw - 10px);
+        width: calc(100vw - 10px);
+        /* margin: 2px; */
+    }
+    @media (max-width: 600px) {
+        top: 100px;
     }
 `
 
@@ -63,6 +69,11 @@ export const Title = styled.h2`
     /* text-align: center; */
     color: var(--font-color);
     font-size: 1.5rem;
+
+    @media (max-width: 600px) {
+        width:100%;
+        text-align: center;
+    }
 `;
 
 export const InputContent = styled.div`
@@ -70,6 +81,10 @@ export const InputContent = styled.div`
     flex-direction: column;
     width: ${(props) => (props.width ? props.width : 'auto')};
     min-width: 200px;
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
     
 `;
 
@@ -103,7 +118,5 @@ export const Button = styled(ButtonMui)`
 
 export const Th = styled.div`
     width: 36.5px;
-    max-width: 36.5px;
-    min-width: 36.5px;
 `;
 

@@ -127,7 +127,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     <C.Button onClick={handleSave} variant='contained' >{lang.save}</C.Button>
                 </C.Container>
             </C.UpperContainer>
-            <C.Container>
+            <C.UpperContainer>
                 {/* <C.InputContent>
                     <TextField
                         value={date}
@@ -160,7 +160,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                         </Select>
                     </FormControl>
                 </C.InputContent>
-            </C.Container>
+            </C.UpperContainer>
             <Divider />
             <C.Container>
                 <table style={{width: "100%"}}>
