@@ -1,0 +1,97 @@
+.PurchaseRequestsSub .input-contain{
+    position: relative;
+}
+.PurchaseRequestsSub .input{
+    height: 27px;
+    width: 127px;
+    border: 1px solid #C4C4C4;
+    border-radius: 4px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+}
+.PurchaseRequestsSub .input:hover{
+    outline: none;
+    border-color: black;
+}
+.PurchaseRequestsSub .input:focus{
+    outline: none;
+    height: 25px;
+    width: 126px;
+    border: 2px solid #1976D2;
+    padding: 0 0 0 4px;
+}
+.PurchaseRequestsSub .input:focus + .PurchaseRequestsSub .placeholder-text .text, :not(.PurchaseRequestsSub .input[value=""]) + .PurchaseRequestsSub .placeholder-text .text{
+    background-color: white;
+    font-size: 10px;
+    color: #666666;
+    transform: translate(0, -140%);
+}
+.PurchaseRequestsSub .input:focus + .PurchaseRequestsSub .placeholder-text .text{
+    /* border-color: #1976D2; */
+    color: #1976D2;
+}
+.PurchaseRequestsSub .placeholder-text{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 3px solid transparent;
+    background-color: transparent;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+.PurchaseRequestsSub.text{
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    /* font-size: 1rem; */
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    padding: 0;
+    background-color: transparent;
+    transform: translate(0);
+    color: rgba(0, 0, 0, 0.6);
+    transition: transform 0.15s ease-out, font-size 0.15s ease-out, background-color 0.2s ease-out, color 0.15s ease-out;
+}
+.PurchaseRequestsSub .input, .PurchaseRequestsSub .placeholder-text{
+    font-size: 1rem;
+    padding: 0 0 0 5px;
+}
+
+/* @media (max-width: 40rem) {
+    .PurchaseRequestsSub .input{
+        width: 70vw;
+    }
+} */
+
+.PurchaseRequestsSub .not-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+
+  @media (max-width: 1400px) {
+    .PurchaseRequestsSub .input-contain {
+    width: 17vw;
+    }
+    /* .PurchaseRequestsSub .input {
+    width: auto;
+    }
+
+    .PurchaseRequestsSub .input:focus{
+    width: auto;
+    } */
+}
+@media (max-width: 850px) {
+    .PurchaseRequestsSub .input-contain {
+    width: 27vw;
+    }
+}
+@media (max-width: 500px) {
+    .PurchaseRequestsSub .input-contain {
+    width: 80vw;
+    }
+}

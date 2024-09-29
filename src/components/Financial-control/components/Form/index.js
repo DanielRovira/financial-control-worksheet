@@ -275,6 +275,7 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                         onValueChange={(e) => setAmount(e)}
                         onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         label={lang.value}
+                        groupSeparator={"."}
                         // placeholder={lang.valuePlaceholder}
                         />
                         <label className="placeholder-text">

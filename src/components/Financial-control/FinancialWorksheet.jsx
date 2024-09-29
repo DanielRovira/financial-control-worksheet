@@ -243,7 +243,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     async function insertDocument(transaction, path, alsoDelete, last) {
         setSyncing(true);
         try {
-            const res = await fetch(`/api/purchases/add`,
+            const res = await fetch(`/api/finances/add/${path? path : params.taskTitle}`,
                 {
                     method:'POST',
                     headers: { 'Content-Type': 'application/json' },

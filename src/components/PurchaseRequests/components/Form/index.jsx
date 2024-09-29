@@ -1,6 +1,7 @@
-import './styles.js'
+import './input.css'
 import * as C from './styles';
 // import { useParams } from 'react-router-dom';
+import CurrencyInput from 'react-currency-input-field'
 import { useState, useEffect } from 'react';
 import { Divider, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Add as AddIcon,
@@ -100,13 +101,27 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     />
             </td>
             <td>
-                <TextField
+                {/* <TextField
                     className='small'
                     sx={{width: "100%"}}
                     value={itemQuantity}
                     onChange={(e) => setItemQuantity(e.target.value)}
                     onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                     size="small"
+                    /> */}
+                    <CurrencyInput
+                        className='input'
+                        value={itemQuantity}
+                        // prefix={lang.valuePrefix}
+                        allowDecimals
+                        disableAbbreviations
+                        suffix={` ${itemUnit}`}
+                        groupSeparator={"."}
+                        // decimalScale='2'
+                        onValueChange={(e) => setItemQuantity(e)}
+                        // onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
+                        // label={lang.value}
+                        // placeholder={lang.valuePlaceholder}
                     />
             </td>
             <div>
