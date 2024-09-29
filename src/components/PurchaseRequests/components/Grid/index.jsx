@@ -1,33 +1,35 @@
-import * as H from '../../../Financial-control/components/Header/styles';
 import * as G from '../../../Financial-control/components/Grid/styles';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Button, Divider, IconButton, Tooltip, ListItemIcon, Menu, MenuItem  } from '@mui/material';
-import { AddCircle as AddCircleIcon,
-    Archive as ArchiveIcon,
-    ArchiveOutlined as ArchiveOutlinedIcon,
-    CalendarMonth as CalendarMonthIcon,
-    CreditScore as CreditScoreIcon,
-    Delete as DeleteIcon,
-    DeleteForever as DeleteForeverIcon,
-    Difference as DifferenceIcon,
-    Download as DownloadIcon,
-    DriveFileMove as DriveFileMoveIcon,
-    Folder as FolderIcon,
-    InfoOutlined as InfoOutlinedIcon,
-    MoreVert as MoreVertIcon,
-    Menu as MenuIcon,
-    RemoveCircle as RemoveCircleIcon,
-    RestoreFromTrash  as RestoreFromTrashIcon,
-    Unarchive as UnarchiveIcon,
-    UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+// import { useState } from 'react';
+// import { useParams } from 'react-router-dom';
+import { Button, Checkbox  } from '@mui/material';
+// const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ mainSheetType }) => {
-    const params = useParams();
-    const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
+const Header = ({ purchasesData, checked, setChecked, handleEdit }) => {
+    // const params = useParams();
+    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    // let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
 
+    const GridItem = ({ item, index }) => {
+        let tempId = item._id ? item._id : Date.now()
+        
+        const handleSelect = (event) => {
+            checked.includes(item)
+            ? item._id && setChecked(checked.filter(it => it !== item))
+            : item._id && setChecked((prev) => [ ...prev, item]);
+        };
+
+        return (
+            <tr>
+                <td><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === tempId} onChange={handleSelect} /></td>
+                <td>{item.date}</td>
+                <td>{item.costCenter}</td>
+                <td>{item.desc}</td>
+                <td>{item.creator}</td>
+                <td>{item.status}</td>
+                <td><Button onClick={() => handleEdit(item)} variant='text' >Editar</Button></td>
+            </tr>
+        )
+    }
 
     return (
         <>
@@ -35,16 +37,19 @@ const Header = ({ mainSheetType }) => {
                 <G.Table>
                     <G.Thead>
                         <G.Tr>
+                            <G.Th></G.Th>
                             <G.Th>Data</G.Th>
-                            <G.Th>Nome</G.Th>
-                            <G.Th>Obra</G.Th>
+                            <G.Th>Centro de Custo</G.Th>
+                            <G.Th>Descrição</G.Th>
                             <G.Th>Solicitante</G.Th>
+                            <G.Th>Status</G.Th>
+                            <G.Th></G.Th>
                         </G.Tr>
                     </G.Thead>
                     <G.Tbody>
-                        {/* {Array.from(itens)?.map((item, index) => (
-                            <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} handleOpenSnackbar={handleOpenSnackbar} />
-                        ))} */}
+                        {Array.from(purchasesData)?.map((item, index) => (
+                            <GridItem key={item._id || index} item={item} index={index}/>
+                        ))}
                     </G.Tbody>
                 </G.Table>
             </G.TableContent>

@@ -129,7 +129,7 @@ const App = () => {
                     <Route path="/FinancialWorksheet/*" element={<FinancialWorksheet refreshToken={refreshToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setMainSheetType={setMainSheetType} />} />
                     <Route path="/TaskList/*" element={<TaskList setMainSheetType={setMainSheetType} />} />
                     <Route path="/Contacts/*" element={<Contacts setMainSheetType={setMainSheetType} />} />
-                    <Route path="/PurchaseRequests/*" element={<PurchaseRequests mainSheetType={mainSheetType} setMainSheetType={setMainSheetType} />} />
+                    <Route path="/PurchaseRequests/*" element={<PurchaseRequests mainSheetType={mainSheetType} setMainSheetType={setMainSheetType} setIsLoggedIn={setIsLoggedIn} refreshToken={refreshToken} isLoggedIn={isLoggedIn} />} />
                 </Routes> 
             <GlobalStyle />
         </div>

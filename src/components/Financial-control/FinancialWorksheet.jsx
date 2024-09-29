@@ -63,7 +63,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     setIsLoggedIn(false); history('/');
                 })
 
-            if (res.status === 200) {
+            if (res.status === 200 && res2.status === 200 ) {
                 setLoadingData(false)
 
                 setTransactionsList({
@@ -243,7 +243,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     async function insertDocument(transaction, path, alsoDelete, last) {
         setSyncing(true);
         try {
-            const res = await fetch(`/api/finances/add/${path? path : params.taskTitle}`,
+            const res = await fetch(`/api/purchases/add`,
                 {
                     method:'POST',
                     headers: { 'Content-Type': 'application/json' },
