@@ -1,6 +1,4 @@
 import * as H from '../../../Financial-control/components/Header/styles';
-// import { useState } from 'react';
-// import { useParams } from 'react-router-dom';
 import { Button, IconButton } from '@mui/material';
 import { AddCircle as AddCircleIcon,
     Delete as DeleteIcon,
@@ -9,10 +7,6 @@ import { AddCircle as AddCircleIcon,
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected }) => {
-    // const params = useParams();
-    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    // let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
-
 
     return (
         <>

@@ -105,7 +105,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     />
             </td>
             <td>
-                <Button onClick={() => handleRemove(index)} variant='text' >-</Button>
+                <C.Button onClick={() => handleRemove(index)} variant='text' >-</C.Button>
             </td>
         </tr>
         )
@@ -114,29 +114,34 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
     return ( 
         <C.Form>
             <C.Container>
-                <C.Title>Nova solicitação de compra</C.Title>
-                <Button onClick={() => {setAdd(false); setEditItem()}} variant='outlined' >Cancelar</Button>
-                <Button onClick={handleSave} variant='contained' >{lang.save}</Button>
+                <C.Container>
+                    <C.Title>Nova solicitação de compra</C.Title>
+                </C.Container>
+                <C.Container>
+                    <C.Button onClick={() => {setAdd(false); setEditItem()}} variant='outlined' >Cancelar</C.Button>
+                    <C.Button onClick={handleSave} variant='contained' >{lang.save}</C.Button>
+                </C.Container>
             </C.Container>
             <C.Container>
-                <C.InputContent>
+                {/* <C.InputContent>
                     <TextField
                         value={date}
                         type='date'
                         onChange={(e) => setDate(e.target.value)}
                         size="small"
                         label={lang.date}
-                        disabled
+                        // disabled
                         />
-                </C.InputContent>
-                <C.InputContent width={"45%"}>
+                </C.InputContent> */}
+                <C.InputContent width={"70%"}>
                     <TextField
                         value={desc}
                         label={`${lang.description}`}
                         onChange={(e) => {setItems(data); setDesc(e.target.value)}}
                         size="small"
                         />
-                </C.InputContent>                <C.InputContent width={"25%"}>
+                </C.InputContent>
+                <C.InputContent width={"30%"}>
                     <FormControl>
                         <InputLabel size="small" >{lang.section}</InputLabel>
                         <Select
@@ -157,7 +162,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     <thead>
                         <tr>
                             <th>N°</th>
-                            <th  width={"50%"}>Item</th>
+                            <th width={"50%"}>Item</th>
                             <th>Unidade</th>
                             <th>Quantidade</th>
                             <th><Button onClick={handleAdd} variant='contained' >+</Button></th>

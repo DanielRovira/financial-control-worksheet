@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import CurrencyInput from 'react-currency-input-field'
 import InputMui from '@mui/material/Input';
+import ButtonMui from '@mui/material/Button';
 // import MuiTextField from '@mui/material/TextField';
 
 export const Form = styled.div`
@@ -12,7 +13,8 @@ export const Form = styled.div`
     z-index: 15;
     /* animation: scaleAnimationIn .1s; */
     /* width: calc(100vw - var(--closeSidebarWidth) - 10px); */
-    min-width: 50%;
+    min-width: 650px;
+    width:  650px;
     box-shadow: 0 24px 54px rgba(0,0,0,.15), 0 4.5px 13.5px rgba(0,0,0,.08);
     border-radius: 5px;
     overflow: hidden;
@@ -27,7 +29,7 @@ export const Container = styled.div`
     gap: 10px;
 
     & .MuiInputBase-root {
-        min-width: 140px;
+        min-width: 50px;
     }
 
     th, td {
@@ -45,6 +47,7 @@ export const InputContent = styled.div`
     display: flex;
     flex-direction: column;
     width: ${(props) => (props.width ? props.width : 'auto')};
+    min-width: 200px;
 `;
 
 export const Inputs = css`
@@ -63,12 +66,15 @@ export const Input = styled(InputMui)`${Inputs}`
 export const Select = styled.select`${Inputs}`
 export const Currency = styled(CurrencyInput)`${Inputs}`
 
-export const Button = styled.button`
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    background-color: teal;
+// export const Button = styled.button`
+//     padding: 5px 10px;
+//     border: none;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     color: white;
+//     background-color: teal;
+// `;
+export const Button = styled(ButtonMui)`
+    max-height: 36.5px;
 `;
 

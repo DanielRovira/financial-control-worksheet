@@ -1,11 +1,12 @@
 .PurchaseRequests {
     display: flex;
     flex-direction: column;
-    margin: 0 5px 0 50px;
+    margin: 0 0 0 var(--closeSidebarWidth);
     width: inherit;
 }
 
 .PurchaseRequestsSub {
+    padding: 5px;
     display: flex;
     flex-direction: column;
     gap: 5px;
