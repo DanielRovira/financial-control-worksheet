@@ -44,11 +44,7 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
                 })
             // const data = await res.json()
             .then(response => response.json())
-
-            if (res.status === 200) {
-                getData()
-            }
-
+            .then(() => getData())
         } catch (error) {
         console.log(error);
       }

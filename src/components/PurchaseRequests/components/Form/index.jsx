@@ -3,12 +3,13 @@ import * as C from './styles';
 // import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Divider, TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import { Add as AddIcon,
+    RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateDocument }) => {
     // const params = useParams();
     const toDay = dateToTimezone().toISOString().substring(0, 10)
-
     function dateToTimezone() {
         let rawDate = new Date()
         rawDate.setHours(rawDate.getHours() - 3)
@@ -36,7 +37,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
         }
 
         const transaction = {
-            _id: editItem._id || null,
+            _id: editItem?._id || null,
             date: date,
             costCenter: costCenter,
             desc: desc,
@@ -79,6 +80,8 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
             <td>{index+1}</td>
             <td>
                 <TextField
+                    multiline
+                    className='small'
                     sx={{width: "100%"}}
                     value={itemDesc}
                     onChange={(e) => {setItemDesc(e.target.value)}}
@@ -88,6 +91,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
             </td>
             <td>
                 <TextField
+                    className='small'
                     sx={{width: "100%"}}
                     value={itemUnit}
                     onChange={(e) => setItemUnit(e.target.value)}
@@ -97,6 +101,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
             </td>
             <td>
                 <TextField
+                    className='small'
                     sx={{width: "100%"}}
                     value={itemQuantity}
                     onChange={(e) => setItemQuantity(e.target.value)}
@@ -104,16 +109,16 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     size="small"
                     />
             </td>
-            <td>
-                <C.Button onClick={() => handleRemove(index)} variant='text' >-</C.Button>
-            </td>
+            <div>
+                <C.Button sx={{minWidth:'100%'}} onClick={() => handleRemove(index)} variant='text' ><RemoveCircleIcon/></C.Button>
+            </div>
         </tr>
         )
     }
 
     return ( 
         <C.Form>
-            <C.Container>
+            <C.UpperContainer>
                 <C.Container>
                     <C.Title>Nova solicitação de compra</C.Title>
                 </C.Container>
@@ -121,7 +126,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     <C.Button onClick={() => {setAdd(false); setEditItem()}} variant='outlined' >Cancelar</C.Button>
                     <C.Button onClick={handleSave} variant='contained' >{lang.save}</C.Button>
                 </C.Container>
-            </C.Container>
+            </C.UpperContainer>
             <C.Container>
                 {/* <C.InputContent>
                     <TextField
@@ -163,9 +168,9 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                         <tr>
                             <th>N°</th>
                             <th width={"50%"}>Item</th>
-                            <th>Unidade</th>
-                            <th>Quantidade</th>
-                            <th><Button onClick={handleAdd} variant='contained' >+</Button></th>
+                            <th>{window.innerWidth > 500 ? lang.unit : lang.unitAbrv}</th>
+                            <th>{window.innerWidth > 500 ? lang.quantity : lang.quantityAbrv}</th>
+                            <C.Th><C.Button sx={{minWidth:'100%', padding:'3px 0', marginLeft:'2px'}} onClick={handleAdd} variant='contained' ><AddIcon/></C.Button></C.Th>
                         </tr>
                     </thead>
                     <tbody>

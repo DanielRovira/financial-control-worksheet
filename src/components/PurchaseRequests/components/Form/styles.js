@@ -13,12 +13,21 @@ export const Form = styled.div`
     z-index: 15;
     /* animation: scaleAnimationIn .1s; */
     /* width: calc(100vw - var(--closeSidebarWidth) - 10px); */
-    min-width: 650px;
-    width:  650px;
+    min-width: 60%0px;
+    width:  60%;
     box-shadow: 0 24px 54px rgba(0,0,0,.15), 0 4.5px 13.5px rgba(0,0,0,.08);
     border-radius: 5px;
     overflow: hidden;
     background-color: #fff;
+
+    @media (max-width: 1100px) {
+        min-width: 650px;
+        width:  650px;
+    }
+    @media (max-width: 650px) {
+        min-width: 100%;
+        width:  100%;
+    }
 `
 
 export const Container = styled.div`
@@ -32,10 +41,23 @@ export const Container = styled.div`
         min-width: 50px;
     }
 
+    & .small div {
+        padding: 0;
+    }
+    & .small input, & .small textarea {
+        padding: 3px 5px;
+    }
+/* 
     th, td {
         padding: 0 5px;
-    }
+    } */
 `;
+
+export const UpperContainer = styled(Container)`
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+`
 
 export const Title = styled.h2`
     /* text-align: center; */
@@ -48,6 +70,7 @@ export const InputContent = styled.div`
     flex-direction: column;
     width: ${(props) => (props.width ? props.width : 'auto')};
     min-width: 200px;
+    
 `;
 
 export const Inputs = css`
@@ -76,5 +99,11 @@ export const Currency = styled(CurrencyInput)`${Inputs}`
 // `;
 export const Button = styled(ButtonMui)`
     max-height: 36.5px;
+`;
+
+export const Th = styled.div`
+    width: 36.5px;
+    max-width: 36.5px;
+    min-width: 36.5px;
 `;
 
