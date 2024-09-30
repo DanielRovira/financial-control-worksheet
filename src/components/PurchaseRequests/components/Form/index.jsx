@@ -124,9 +124,9 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                         // placeholder={lang.valuePlaceholder}
                     />
             </td>
-            <div>
+            <td>
                 <C.Button sx={{minWidth:'100%'}} onClick={() => handleRemove(index)} variant='text' ><RemoveCircleIcon/></C.Button>
-            </div>
+            </td>
         </tr>
         )
     }
