@@ -29,5 +29,5 @@
 }
 
 .Sidebar .ItensContainer .MuiButtonBase-root .MuiListItemText-root span {
-    transform: translateY(2px);
+    transform: translate(2px,2px);
 }

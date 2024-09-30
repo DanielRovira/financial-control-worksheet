@@ -40,7 +40,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={lang.FinancialWorksheet} />
+                    <ListItemText primary={lang.finances} />
                 </ListItemButton>
                 <ListItemButton onClick={() => {handleClick(); setMainSheetType('TaskList'); history('/TaskList')}} title={lang.todos}>
                     <ListItemIcon style={mainSheetType === 'TaskList' ? selectedStyle : null} >
@@ -48,17 +48,17 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.todos} />
                 </ListItemButton>
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Contacts'); history('/Contacts')}} title={lang.contacts}>
+                {/* <ListItemButton onClick={() => {handleClick(); setMainSheetType('Contacts'); history('/Contacts')}} title={lang.contacts}>
                     <ListItemIcon style={mainSheetType === 'Contacts' ? selectedStyle : null} >
                         <ContactsIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />
-                </ListItemButton>
+                </ListItemButton> */}
                 <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests}>
                     <ListItemIcon style={mainSheetType === 'PurchaseRequests' ? selectedStyle : null} >
                         <ShoppingCartIcon/>
                     </ListItemIcon>
-                    <ListItemText primary={lang.PurchaseRequests} />
+                    <ListItemText primary={lang.purchases} />
                 </ListItemButton>
             </div>
             <div style={{ position: 'absolute', bottom: '10px', left: '40px' }}>

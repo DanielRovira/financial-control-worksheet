@@ -11,13 +11,13 @@ const Header = ({ purchasesData, checked, setChecked, handleEdit }) => {
                     <G.Thead>
                         <G.Tr>
                             <G.Th width={25}></G.Th>
-                            <G.Th width={25}>N°</G.Th>
-                            <G.Th width={120}>Data</G.Th>
+                            <G.Th width={25} alignCenter>N°</G.Th>
+                            <G.Th width={120} alignCenter>Data</G.Th>
                             <G.Th width={145}>Centro de Custo</G.Th>
                             <G.Th width={100}>Solicitante</G.Th>
                             <G.Th width={250}>Descrição</G.Th>
                             <G.Th width={50}>Status</G.Th>
-                            <G.Th width={50}>Editar</G.Th>
+                            <G.Th width={50} alignCenter>Editar</G.Th>
                         </G.Tr>
                     </G.Thead>
                     <G.Tbody>
