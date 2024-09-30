@@ -115,7 +115,9 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                     >
                       {lang.login}
                     </Button>
+                    {loadingButton && <CircularProgress size={null} />}
                 </Box>
+                {process.env.REACT_APP_GOOGLE_LOGIN && <>
                 <Divider flexItem variant="middle" />
                 <Box className='buttonBox'>
                     <Button
@@ -126,8 +128,8 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="google login" />
                       <p>Google</p>
                     </Button>
-                    {loadingButton && <CircularProgress size={null} />}
                 </Box>
+                </>}
             </Box>
         </form>
     </div>
