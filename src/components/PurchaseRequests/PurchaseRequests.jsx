@@ -17,7 +17,6 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
     const [editItem, setEditItem] = useState();
     const [checked, setChecked] = useState([]);
 
-
     const getData = async () => {
         const res = await
         fetch(`/api/purchases/list`, { method:'GET', credentials: 'include' })

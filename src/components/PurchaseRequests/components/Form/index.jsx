@@ -115,9 +115,9 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                         // prefix={lang.valuePrefix}
                         allowDecimals
                         disableAbbreviations
-                        suffix={` ${itemUnit}`}
+                        // suffix={` ${itemUnit}`}
                         groupSeparator={"."}
-                        // decimalScale='2'
+                        decimalScale='2'
                         onValueChange={(e) => setItemQuantity(e)}
                         // onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
                         // label={lang.value}

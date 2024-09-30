@@ -3,7 +3,8 @@
 }
 .PurchaseRequestsSub .input{
     height: 27px;
-    width: 127px;
+    /* width: 127px; */
+    width: 95%;
     border: 1px solid #C4C4C4;
     border-radius: 4px;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
@@ -15,7 +16,8 @@
 .PurchaseRequestsSub .input:focus{
     outline: none;
     height: 25px;
-    width: 126px;
+    /* width: 126px; */
+    width: 95%;
     border: 2px solid #1976D2;
     padding: 0 0 0 4px;
 }
@@ -57,12 +59,6 @@
     padding: 0 0 0 5px;
 }
 
-/* @media (max-width: 40rem) {
-    .PurchaseRequestsSub .input{
-        width: 70vw;
-    }
-} */
-
 .PurchaseRequestsSub .not-selectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -71,27 +67,3 @@
     -ms-user-select: none;
     user-select: none;
   }
-
-
-  @media (max-width: 1400px) {
-    .PurchaseRequestsSub .input-contain {
-    width: 17vw;
-    }
-    /* .PurchaseRequestsSub .input {
-    width: auto;
-    }
-
-    .PurchaseRequestsSub .input:focus{
-    width: auto;
-    } */
-}
-@media (max-width: 850px) {
-    .PurchaseRequestsSub .input-contain {
-    width: 27vw;
-    }
-}
-@media (max-width: 500px) {
-    .PurchaseRequestsSub .input-contain {
-    width: 80vw;
-    }
-}
