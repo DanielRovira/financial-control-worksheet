@@ -1,0 +1,38 @@
+.SettingsContainer .UsersContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.SettingsContainer .usersList {
+    background-color: rgb(241, 241, 241);
+    height: 500px;
+    /* width: 500px; */
+}
+
+.SettingsContainer .userPage .userInfoPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SettingsContainer .userPage {
+    background-color: rgb(255, 255, 255);
+    height: 500px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SettingsContainer .userPage .authorizationsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SettingsContainer .userPage .authorizationsSubContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}

@@ -78,7 +78,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
 
         return (
         <tr>
-            <td>{index+1}</td>
+            <td style={{padding:'5px'}}>{index+1}</td>
             <td>
                 <TextField
                     multiline
@@ -182,7 +182,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     <thead>
                         <tr>
                             <th>N°</th>
-                            <th width={"50%"}>Item</th>
+                            <th width={"50%"}>{lang.item}</th>
                             <th>{window.innerWidth > 500 ? lang.unit : lang.unitAbrv}</th>
                             <th>{window.innerWidth > 500 ? lang.quantity : lang.quantityAbrv}</th>
                             <C.Th><C.Button sx={{minWidth:'100%', padding:'3px 0'}} onClick={handleAdd} variant='contained' ><AddIcon/></C.Button></C.Th>

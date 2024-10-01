@@ -1,11 +1,12 @@
 import React from 'react';
-import './styles/Settings.css'
-import Signup from './Signup';
+import './index.css'
+import Signup from '../Signup';
+import Users from '../Users';
 // import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField, Tabs, Tab } from '@mui/material';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+const lang = require(`../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Settings = ({ categories, setCategories, sections, setSections, setMainSheetType, refreshToken }) => {
     // const history = useNavigate();
@@ -158,6 +159,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                     <Tab label={lang.sections} />
                     <Tab label={lang.category} />
                     <Tab label={lang.signup} />
+                    <Tab label={lang.signup} />
             </Tabs>
             <div className='SettingsSubContainer'>
                 {tabValue === 0 && (
@@ -171,6 +173,11 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                 {tabValue === 2 && (
                     <div className='SettingsCardContainer'>
                         <Signup/>
+                    </div>  
+                )}
+                {tabValue === 3 && (
+                    <div className='SettingsCardContainer'>
+                        <Users/>
                     </div>  
                 )}
             </div>
