@@ -50,7 +50,7 @@ const App = () => {
             sendLogoutReq();
         })
 
-        if (res.user) {
+        if (res?.user) {
             getSections();
             getCategories();
             localStorage.setItem('isLoggedIn', JSON.stringify(true));

@@ -159,7 +159,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                     <Tab label={lang.sections} />
                     <Tab label={lang.category} />
                     <Tab label={lang.signup} />
-                    <Tab label={lang.signup} />
+                    {/* <Tab label={lang.signup} /> */}
             </Tabs>
             <div className='SettingsSubContainer'>
                 {tabValue === 0 && (
@@ -170,12 +170,12 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                     <div className='SettingsCardContainer' key={`${index}${item}`}>
                         <CategoriesList CategoriesListItem={item}/>
                     </div>))} 
-                {tabValue === 2 && (
+                {/* {tabValue === 2 && (
                     <div className='SettingsCardContainer'>
                         <Signup/>
                     </div>  
-                )}
-                {tabValue === 3 && (
+                )} */}
+                {tabValue === 2 && (
                     <div className='SettingsCardContainer'>
                         <Users/>
                     </div>  

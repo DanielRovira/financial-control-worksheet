@@ -1,5 +1,5 @@
 import './index.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -19,7 +19,9 @@ const lang = require(`../../Languages/${process.env.REACT_APP_LANG}.json`);
 const Users = () => {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     const user = JSON.parse(localStorage.getItem("user")) || [];
+    const [usersList, setUsersList] = useState([])
     const [selectedCostCentre, setSelectedCostCentre] = useState()
+    const [selectedUser, setSelectedUser] = useState()
     const dataexemple = {
         "BREJO": {
                  purchases: "edit",
@@ -33,7 +35,15 @@ const Users = () => {
                 }
         
     }
-    const [userPermissions, setUserPermissions] = useState(dataexemple)
+    const [userPermissions, setUserPermissions] = useState({})
+    const permissions = selectedUser?.permissions || {}
+    const getSections = async () => {
+        await fetch(`/api/getUsersList`, { method: 'GET', credentials: 'include' })
+        .then(response => response.json())
+        // .then(response => localStorage.setItem('sections', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
+        // .then(() => setSections(JSON.parse(localStorage.getItem("sections")) || []))
+        .then(response => setUsersList(response.users))
+    }
 
     const options = [
         <MenuItem key={'None'} value={false}>None</MenuItem>,
@@ -43,14 +53,19 @@ const Users = () => {
 
     const handleChange = (event) => {
         setUserPermissions((prev) => ({...prev, [selectedCostCentre]: {...prev[selectedCostCentre], [event.target.name]: event.target.value}}))
+       
     };
 
     const bgColor = (section) => {
-        if (!userPermissions[section.title]?.todoPayments && !userPermissions[section.title]?.financialControl && !userPermissions[section.title]?.purchases)  
+        if (!permissions[section.title]?.todoPayments && !permissions[section.title]?.financialControl && !permissions[section.title]?.purchases)  
             return "unset"
-        else if (userPermissions[section.title]?.todoPayments === 'edit' || userPermissions[section.title]?.financialControl === 'edit' || userPermissions[section.title]?.purchases === 'edit' )
+        else if (permissions[section.title]?.todoPayments === 'edit' || permissions[section.title]?.financialControl === 'edit' || permissions[section.title]?.purchases === 'edit' )
             return "blue"
     }
+
+    useEffect(() => {
+        getSections()
+    }, []);
 
     return (
         <>
@@ -59,77 +74,75 @@ const Users = () => {
                     <div>
                         <h2>Lista de Usuários</h2>
                         <List>
-                            <ListItemButton
-                                // secondaryAction={
-                                //     <IconButton edge="end" aria-label="delete">
-                                //         <DeleteIcon />
-                                //     </IconButton>
-                                // }
-                            >   
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <FolderIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={user.name}
-                                    // secondary={secondary ? 'Secondary text' : null}
-                                />
-                            </ListItemButton>
+                            {Array.from(usersList).filter(item => item.email !== user.email).map((item, index) => 
+                                <ListItemButton key={index} onClick={() => setSelectedUser(item)}>   
+                                    <ListItemAvatar>
+                                        <Avatar>
+                                            <FolderIcon />
+                                        </Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={item.name}
+                                    />
+                                </ListItemButton>
+                            )
+                            }
                         </List>
                     </div>
                 </div>
                 <div className='userPage' >
-                    <h2>Informações do Usuários</h2>
-                    <div className='userInfoPage' >
-                        <TextField defaultValue={user.name} label={lang.name} variant="standard" />
-                        <TextField defaultValue={user.email} label={lang.email} variant="standard" disabled InputProps={{ disableUnderline: true }}/>
-                        {/* <TextField  label={lang.address} variant="standard" /> */}
-                        {/* <TextField  label={lang.phone} variant="standard" /> */}
-                    </div>
-                    <div  className='authorizationsContainer' >
-                        <h2>Autorizações do Usuários</h2>
-                        <div className='authorizationsSubContainer' >
-                            <div>
-                                <h2>Centros de custo</h2>
-                                <List>
-                                {Array.from(sections).map((section, index) => 
-                                    <ListItemButton
+                    {selectedUser &&
+                    <div className='userSubPage' >
+                        <h2>Informações do Usuários</h2>
+                        <div className='userInfoPage' >
+                            <TextField value={selectedUser?.name} label={lang.name} variant="standard" />
+                            <TextField value={selectedUser?.email} label={lang.email} variant="standard" disabled InputProps={{ disableUnderline: true }}/>
+                        </div>
+                        <div  className='authorizationsContainer' >
+                            <h2>Autorizações do Usuários</h2>
+                            <div className='authorizationsSubContainer' >
+                                <div>
+                                    <h2>Centros de custo</h2>
+                                    <List>
+                                    {Array.from(sections).map((section, index) => 
+                                        <ListItemButton
                                         key={index}
-                                        onClick={() => setSelectedCostCentre(section.title)}
-                                        selected={section.title===selectedCostCentre}
-                                    >   
-                                        <ListItemAvatar>
-                                            <Avatar sx={{bgcolor: bgColor(section)}}>
-                                                <FolderIcon />
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText primary={section.name}/>
-                                    </ListItemButton>
-                                )}
-                                </List>
-                            </div>
-                            <div>
-                                <h2>Permissões</h2>
-                                {selectedCostCentre &&
-                                    <div>
-                                    <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                                        <h3>Fluxo de Caixa</h3>
-                                        <Select onChange={handleChange} name="financialControl" value={userPermissions[selectedCostCentre]?.financialControl || false} children={options} />
-                                    </div>
-                                    <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                                        <h3>Pagamentos a Fazer</h3>
-                                        <Select onChange={handleChange} name="todoPayments" value={userPermissions[selectedCostCentre]?.todoPayments || false} children={options} />
-                                    </div>
-                                    <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                                        <h3>Compras</h3>
-                                        <Select onChange={handleChange} name="purchases" value={userPermissions[selectedCostCentre]?.purchases || false} children={options} />
-                                    </div>
+                                            onClick={() => setSelectedCostCentre(section.title)}
+                                            selected={section.title===selectedCostCentre}
+                                            >   
+                                            <ListItemAvatar>
+                                                <Avatar sx={{bgcolor: bgColor(section)}}>
+                                                    <FolderIcon />
+                                                </Avatar>
+                                            </ListItemAvatar>
+                                            <ListItemText primary={section.name}/>
+                                        </ListItemButton>
+                                    )}
+                                    </List>
                                 </div>
-                                }
+                                <div>
+                                    <h2>Permissões</h2>
+                                    {selectedCostCentre &&
+                                        <div>
+                                        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                            <h3>Fluxo de Caixa</h3>
+                                            <Select onChange={handleChange} name="financialControl" value={permissions[selectedCostCentre]?.financialControl || false} children={options} />
+                                        </div>
+                                        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                            <h3>Pagamentos a Fazer</h3>
+                                            <Select onChange={handleChange} name="todoPayments" value={permissions[selectedCostCentre]?.todoPayments || false} children={options} />
+                                        </div>
+                                        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                                            <h3>Compras</h3>
+                                            <Select onChange={handleChange} name="purchases" value={permissions[selectedCostCentre]?.purchases || false} children={options} />
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
+                    }
                 </div>
             </div>
         
