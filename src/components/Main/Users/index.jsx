@@ -18,8 +18,8 @@ const lang = require(`../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 const Users = () => {
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const user = JSON.parse(localStorage.getItem("user")) || [];
     const [selectedCostCentre, setSelectedCostCentre] = useState()
-
     const dataexemple = {
         "BREJO": {
                  purchases: "edit",
@@ -72,7 +72,7 @@ const Users = () => {
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
-                                    primary="Single-line item"
+                                    primary={user.name}
                                     // secondary={secondary ? 'Secondary text' : null}
                                 />
                             </ListItemButton>
@@ -82,8 +82,8 @@ const Users = () => {
                 <div className='userPage' >
                     <h2>Informações do Usuários</h2>
                     <div className='userInfoPage' >
-                        <TextField  label={lang.name} variant="standard" />
-                        <TextField  label={lang.email} variant="standard" />
+                        <TextField defaultValue={user.name} label={lang.name} variant="standard" />
+                        <TextField defaultValue={user.email} label={lang.email} variant="standard" disabled InputProps={{ disableUnderline: true }}/>
                         {/* <TextField  label={lang.address} variant="standard" /> */}
                         {/* <TextField  label={lang.phone} variant="standard" /> */}
                     </div>
