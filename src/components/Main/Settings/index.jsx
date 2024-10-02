@@ -13,6 +13,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
     // const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     // const CategoriesListItem = new Set((Array.from(categories)?.map((item) => item.type)));
+    const user = JSON.parse(localStorage.getItem("user")) || [];
     const CategoriesListItem = ["source",  "category", "subCategory"];
     const [showAdd, setShowAdd] = useState(false);
     const [showRemove, setShowRemove] = useState(false);
@@ -158,7 +159,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                 allowScrollButtonsMobile>
                     <Tab label={lang.sections} />
                     <Tab label={lang.category} />
-                    <Tab label={lang.signup} />
+                    {user.type === "admin" &&<Tab label={lang.signup} />}
                     {/* <Tab label={lang.signup} /> */}
             </Tabs>
             <div className='SettingsSubContainer'>

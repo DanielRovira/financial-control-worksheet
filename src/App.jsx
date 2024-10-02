@@ -54,7 +54,7 @@ const App = () => {
             getSections();
             getCategories();
             localStorage.setItem('isLoggedIn', JSON.stringify(true));
-            localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+            localStorage.setItem('user', JSON.stringify(res.user));
             setIsLoggedIn(true);
             setLoading(false);
             return ;

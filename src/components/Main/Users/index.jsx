@@ -24,14 +24,14 @@ const Users = () => {
     const [selectedUserIndex, setSelectedUserIndex] = useState()
     const [selectedUserId, setSelectedUserId] = useState()
     const [selectedCostCentre, setSelectedCostCentre] = useState()
-    const permissionsArray = usersList[selectedUserIndex]?.permissions || {}
+    const permissionsArray = usersList?.[selectedUserIndex]?.permissions || {}
     const selectedPermissionsArray = permissionsArray[selectedCostCentre] || {}
 
     // const permissions = usersList[usersList.indexOf(selectedUser)]?.permissions || {}
     const getUsersList = async () => {
         await fetch(`/api/users/get`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => setUsersList(response.users.sort((a, b) => a.name.localeCompare(b.name))))
+        .then(response => setUsersList(response.users?.sort((a, b) => a.name.localeCompare(b.name))))
     }
 
     function updateDocument(item, userID) {
@@ -54,7 +54,7 @@ const Users = () => {
         <MenuItem key={'View'} value={"view"}>View</MenuItem>,
         <MenuItem key={'Edit'} value={"edit"}>Edit</MenuItem>
     ]
-console.log(selectedUserId)
+
     const handleChange = (event) => {
         // setUserPermissions((prev) => ({...prev, [selectedCostCentre]: {...prev[selectedCostCentre], [event.target.name]: event.target.value}}))
         
@@ -75,7 +75,7 @@ console.log(selectedUserId)
 
         updateDocument({_id: selectedUserId, permissions: {...permissionsArray, [selectedCostCentre]: {...selectedPermissionsArray, [event.target.name]: event.target.value } }}, selectedUserId)
     };
-console.log(selectedPermissionsArray)
+
     const bgColor = (section) => {
         if (!permissionsArray[section.title]?.todoPayments && !permissionsArray[section.title]?.financialControl && !permissionsArray[section.title]?.purchases)  
             return "unset"
@@ -94,7 +94,7 @@ console.log(selectedPermissionsArray)
                     <div>
                         <h2>Lista de Usuários</h2>
                         <List>
-                            {Array.from(usersList).map((item, index) => 
+                            {Array.from(usersList || []).map((item, index) => 
                                 <ListItemButton key={index} onClick={() => {setSelectedUser(item); setSelectedUserIndex(index); setSelectedUserId(item._id)}} selected={index===selectedUserIndex}>   
                                     <ListItemAvatar>
                                         <Avatar>
