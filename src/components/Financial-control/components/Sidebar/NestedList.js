@@ -35,7 +35,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
                             className='outterButton'
                 >
                 <ListItemIcon>
-                    {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title.slice(0, 3)}
+                    {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title?.slice(0, 3)}
                 </ListItemIcon>
                 <ListItemText primary={section.name} />
                 {arrow && (openSection ? <ExpandLess /> : <ExpandMore />)}

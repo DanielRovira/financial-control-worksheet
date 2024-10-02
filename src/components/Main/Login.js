@@ -66,7 +66,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
 
     document.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
-            document.getElementById("submitButton").click();
+            document.getElementById("submitButton")?.click();
         }
     });
 

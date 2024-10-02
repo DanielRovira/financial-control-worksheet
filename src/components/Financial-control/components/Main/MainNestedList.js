@@ -27,7 +27,7 @@ const MainNestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType, 
                             style={{backgroundColor: section.title === params.taskTitle ? 'var(--selected-sidebar)' :  'unset'}}
                 >
                 <ListItemIcon>
-                    {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title.slice(0, 3)}
+                    {section.title === 'TRASH' ? <DeleteOutlineIcon style={{paddingLeft:'5px'}} /> : section.title?.slice(0, 3)}
                 </ListItemIcon>
                 <ListItemText primary={section.name} />
                 <ListItemText primary={Number((result || 0).toString().replace(/,/g, '.')).toLocaleString('pt-BR', { style: 'currency', currency: process.env.REACT_APP_CURRENCY })}

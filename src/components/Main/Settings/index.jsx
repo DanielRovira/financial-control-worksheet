@@ -120,10 +120,10 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                 }
             >
                 {CategoriesListItem === 'sections'
-                ? Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
+                ? Array.from(sections || []).filter((section) => section.title !== 'TRASH').map((section, index) => (
                     <CustomListItem section={section} index={index} key={index} CategoriesListItem={CategoriesListItem} />
                 ))
-                : Array.from(categories).filter((item) => item.type === CategoriesListItem).map((section, index) => (
+                : Array.from(categories || []).filter((item) => item.type === CategoriesListItem).map((section, index) => (
                     <CustomListItem section={section} index={index} key={index} CategoriesListItem={CategoriesListItem} />
                 ))
                 }
@@ -157,20 +157,20 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                 variant="scrollable"
                 scrollButtons
                 allowScrollButtonsMobile>
-                    <Tab label={lang.sections} />
                     <Tab label={lang.category} />
-                    {user.type === "admin" &&<Tab label={lang.signup} />}
+                    {user.type === "admin" && <Tab label={lang.sections} />}
+                    {user.type === "admin" && <Tab label={lang.signup} />}
                     {/* <Tab label={lang.signup} /> */}
             </Tabs>
             <div className='SettingsSubContainer'>
-                {tabValue === 0 && (
-                    <div className='SettingsCardContainer'>
-                        <CategoriesList CategoriesListItem={'sections'}/>
-                    </div>)}
-                {tabValue === 1 && Array.from(CategoriesListItem).map((item, index) => (
+                {tabValue === 0 && Array.from(CategoriesListItem).map((item, index) => (
                     <div className='SettingsCardContainer' key={`${index}${item}`}>
                         <CategoriesList CategoriesListItem={item}/>
                     </div>))} 
+                {tabValue === 1 && (
+                    <div className='SettingsCardContainer'>
+                        <CategoriesList CategoriesListItem={'sections'}/>
+                    </div>)}
                 {/* {tabValue === 2 && (
                     <div className='SettingsCardContainer'>
                         <Signup/>

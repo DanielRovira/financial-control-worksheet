@@ -1,5 +1,5 @@
 import './index.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import List from '@mui/material/List';
 // import ListItem from '@mui/material/ListItem';
@@ -26,6 +26,7 @@ const Users = () => {
     const [selectedCostCentre, setSelectedCostCentre] = useState()
     const permissionsArray = usersList?.[selectedUserIndex]?.permissions || {}
     const selectedPermissionsArray = permissionsArray[selectedCostCentre] || {}
+    const timer = useRef(null);
 
     // const permissions = usersList[usersList.indexOf(selectedUser)]?.permissions || {}
     const getUsersList = async () => {
@@ -58,6 +59,7 @@ const Users = () => {
     const handleChange = (event) => {
         // setUserPermissions((prev) => ({...prev, [selectedCostCentre]: {...prev[selectedCostCentre], [event.target.name]: event.target.value}}))
         
+
         setUsersList((prev) => (
             [...prev.filter((item, index) => index !== selectedUserIndex),
                  {
@@ -73,8 +75,28 @@ const Users = () => {
             ]
         ).sort((a, b) => a.name.localeCompare(b.name)))
 
-        updateDocument({_id: selectedUserId, permissions: {...permissionsArray, [selectedCostCentre]: {...selectedPermissionsArray, [event.target.name]: event.target.value } }}, selectedUserId)
+        // updateDocument({_id: selectedUserId, permissions: {...permissionsArray, [selectedCostCentre]: {...selectedPermissionsArray, [event.target.name]: event.target.value } }}, selectedUserId)
+        let newData = {_id: selectedUserId, permissions: {...permissionsArray, [selectedCostCentre]: {...selectedPermissionsArray, [event.target.name]: event.target.value } }}
+        
+        function removeEmpty(obj) {
+            return Object.fromEntries(
+              Object.entries(obj)
+                .filter(([_, v]) => v !== false && Object.entries(v).length !== 0)
+                .map(([k, v]) => [k, v === Object(v) ? removeEmpty(v) : v])
+            );
+        }
+
+        updateDocument(removeEmpty(removeEmpty(newData)), selectedUserId)
+
+        getDataTimeout()
     };
+
+    const getDataTimeout = () => {
+        clearTimeout(timer.current)
+        timer.current = setTimeout(() => {
+            getUsersList()
+        }, 200);
+    }
 
     const bgColor = (section) => {
         if (!permissionsArray[section.title]?.todoPayments && !permissionsArray[section.title]?.financialControl && !permissionsArray[section.title]?.purchases)  

@@ -65,7 +65,7 @@ const App = () => {
     const getSections = async () => {
         await fetch(`/api/finances/sections`, { method: 'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => localStorage.setItem('sections', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
+        .then(response => localStorage.setItem('sections', JSON.stringify(response?.sort((a, b) => a.name?.localeCompare(b.name)))))
         .then(() => setSections(JSON.parse(localStorage.getItem("sections")) || []))
         .then(() => setLoading(false))
     }
@@ -73,7 +73,7 @@ const App = () => {
     const getCategories = async () => {
         await fetch(`/api/finances/categories`, { method:'GET', credentials: 'include' })
         .then(response => response.json())
-        .then(response => localStorage.setItem('categories', JSON.stringify(response.sort((a, b) => a.name.localeCompare(b.name)))))
+        .then(response => localStorage.setItem('categories', JSON.stringify(response?.sort((a, b) => a.name?.localeCompare(b.name)))))
     }
 
     const sendLogoutReq = async () => {
