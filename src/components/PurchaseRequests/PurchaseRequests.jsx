@@ -25,7 +25,7 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
                 setIsLoggedIn(false);
             })
 
-        if (res.status === 200) {
+        if (res?.status === 200) {
             setLoadingData(false)
             setPurchasesData(res.post)
         }

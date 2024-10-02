@@ -35,7 +35,7 @@ const Main = ({ setOpenSidebar }) => {
             return {total}
         }
 
-        if (res.status === 200) {
+        if (res?.status === 200) {
             // setLoadingData(false)
             setResults((prev) => ({ ...prev,
                 [section]: calc((res.post).filter(item => !item.archived) || [])

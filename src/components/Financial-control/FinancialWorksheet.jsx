@@ -63,7 +63,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     setIsLoggedIn(false); history('/');
                 })
 
-            if (res.status === 200 && res2.status === 200 ) {
+            if (res?.status === 200 && res2?.status === 200 ) {
                 setLoadingData(false)
 
                 setTransactionsList({
@@ -251,7 +251,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                     body: JSON.stringify(transaction)
                 });
             const data = await res.json()
-            if (res.status === 200) {
+            if (res?.status === 200) {
                 last && setSyncing(false)
                 alsoDelete && deleteDocument(alsoDelete)
                 path === 'TRASH' && setUndoTrash((prev) => [ ...prev, data])
