@@ -30,7 +30,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         })
         if (res?.user) {
           localStorage.setItem('isLoggedIn', JSON.stringify(true));
-          localStorage.setItem('user', JSON.stringify({name: res.user.name, email: res.user.email}));
+          localStorage.setItem('user', JSON.stringify(res.user));
           setIsLoggedIn(true);
           setLoading(true);
           return

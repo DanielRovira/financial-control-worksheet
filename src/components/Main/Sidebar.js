@@ -12,6 +12,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
  const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
     const history = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user")) || [];
 
     const handleClick = () => {
         setOpenSidebar && setOpenSidebar(false);
@@ -36,12 +37,13 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}>
+                {Object.entries(user['permissions']).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
+                    <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}>
                     <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.finances} />
-                </ListItemButton>
+                </ListItemButton>}
                 <ListItemButton onClick={() => {handleClick(); setMainSheetType('TaskList'); history('/TaskList')}} title={lang.todos}>
                     <ListItemIcon style={mainSheetType === 'TaskList' ? selectedStyle : null} >
                         <FormatListBulletedIcon/>
@@ -54,12 +56,13 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />
                 </ListItemButton> */}
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests}>
+                {Object.entries(user['permissions']).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'purchases'))).includes(true) &&
+                    <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests}>
                     <ListItemIcon style={mainSheetType === 'PurchaseRequests' ? selectedStyle : null} >
                         <ShoppingCartIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.purchases} />
-                </ListItemButton>
+                </ListItemButton>}
             </div>
             <div style={{ position: 'absolute', bottom: '10px', left: '40px' }}>
                 <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" style={{ maxWidth: '150px'}} />

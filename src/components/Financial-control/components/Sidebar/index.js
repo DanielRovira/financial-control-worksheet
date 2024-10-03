@@ -6,6 +6,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
  const Sidebar = ({ sections, openSidebar, setOpenSidebar, sheetType }) => {
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
+    const user = JSON.parse(localStorage.getItem("user")) || [];
 
     return (
       <div className='InsideSidebar' variant="permanent" open={openSidebar} >
@@ -20,7 +21,7 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
                 <span className='InsideSidebarTitle'>{lang.sections}</span>
 
-                {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
+                {Array.from(sections).filter((section) => section.title !== 'TRASH' && Object.getOwnPropertyNames(user.permissions[section.title]).toString() !== 'purchases').map((section, index) => (
                     <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
                 <div style={{padding:'10px 5px'}}>

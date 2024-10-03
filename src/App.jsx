@@ -85,6 +85,9 @@ const App = () => {
             credentials: 'include'
         })
         .then(response => response.json())
+        .catch(error => {
+            console.log(error);
+        })
     };
 
     const clearLogin = () => {

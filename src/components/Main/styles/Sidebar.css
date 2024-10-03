@@ -21,6 +21,7 @@
 .Sidebar .ItensContainer .MuiButtonBase-root {
     padding-left: 5px;
     gap: 10px;
+    height: 60px;
 }
 
 .Sidebar .ItensContainer .MuiButtonBase-root .MuiListItemIcon-root {

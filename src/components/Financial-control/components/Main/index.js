@@ -10,6 +10,7 @@ const Main = ({ setOpenSidebar }) => {
     const [data, setData] = useState(JSON.parse(localStorage.getItem("data")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const user = JSON.parse(localStorage.getItem("user")) || [];
 
     const getData = async (section) => {
         const res = await
@@ -38,9 +39,9 @@ const Main = ({ setOpenSidebar }) => {
         if (res?.status === 200) {
             // setLoadingData(false)
             setResults((prev) => ({ ...prev,
-                [section]: calc((res.post).filter(item => !item.archived) || [])
+                [section]: calc((res.post)?.filter(item => !item.archived) || [])
             }));
-            (res.post).filter(item => !item.archived).map((x) => setData((prev) =>( {...prev, [x._id]: x})));
+            (res.post)?.filter(item => !item.archived).map((x) => setData((prev) =>( {...prev, [x._id]: x})));
         }
     }
 
@@ -74,7 +75,7 @@ const Main = ({ setOpenSidebar }) => {
                             </ListSubheader>
                           }
                         >
-                        {Array.from(sections).filter((section) => section.title !== 'TRASH').map((section, index) => (
+                        {Array.from(sections).filter((section) => section.title !== 'TRASH' && Object.getOwnPropertyNames(user.permissions[section.title]).toString() !== 'purchases').map((section, index) => (
                             <MainNestedList key={index} section={section} hideTitle={true} arrow={true} result={results[section.title]?.total} />
                         ))}
                     </List>

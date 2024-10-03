@@ -17,8 +17,8 @@ const Summary = ({ rawData, setAdd }) => {
     const toDayYear = new Date().toISOString().substring(0, 4)
     const [byMonth, setByMonth] = useState([]);
     const [years, setYears] = useState([]);
-    const [year, setYear] = useState(Number(toDayYear));
     const itens = Array.from(rawData)
+    const [year, setYear] = useState(Number(itens[itens.length-1]?.date.slice(0,4)));
     const months = Array.from({length: 12}, (v, k) => k+1);
     itens.sort(function(a, b) {
         var c = new Date(a.date);

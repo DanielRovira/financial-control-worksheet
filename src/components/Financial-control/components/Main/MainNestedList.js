@@ -6,8 +6,10 @@ const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const MainNestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType, result }) => {
     const history = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user")) || [];
     const [openSection, setOpenSection] = useState(false);
-    const types = ['summary','todoPayments','financialControl']
+    const types = Object.getOwnPropertyNames((user?.permissions?.[section.title] || [])).filter(item => item !== 'purchases')
+    types.includes('financialControl') && types.push('summary')
     const params = useParams();
 
     const handleClick = () => {
