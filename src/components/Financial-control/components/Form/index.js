@@ -6,7 +6,7 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@m
 import CurrencyInput from 'react-currency-input-field'
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
-const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, setTransactionsList, setUndoItem, uploadedData }) => {
+const Form = ({ insertDocument, sheetType, getDataTimeout, setTransactionsList, setUndoItem, uploadedData }) => {
     const params = useParams();
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
@@ -60,7 +60,8 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                 desc: desc,
                 amount: Number(amount.replace(/,/g, '.')),
                 costCenter: params.taskTitle,
-                status: "financialControl"
+                status: "financialControl",
+                deleted: false
             },
             todoPayments: {
                 date: date,
@@ -71,11 +72,12 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
                 desc: desc,
                 amount: Number(amount.replace(/,/g, '.')),
                 costCenter: params.taskTitle,
-                status: "todoPayments"
+                status: "todoPayments",
+                deleted: false
             }
         }
 
-        insertDocument(transaction[sheetType], null, null, true);
+        insertDocument(transaction[sheetType], true);
         setUndoItem(transaction[sheetType])
         setTransactionsList((prev) =>  ({...prev, [sheetType]: [...prev[sheetType], transaction[sheetType]]}) )
         getDataTimeout(2000)
@@ -90,7 +92,6 @@ const Form = ({ insertDocument, sheetType, setOperationType, getDataTimeout, set
         setOtherSubCategory('');
         setCategory('');
         setSubCategory('');
-        setOperationType('add')
     };
 
     useEffect(() => {

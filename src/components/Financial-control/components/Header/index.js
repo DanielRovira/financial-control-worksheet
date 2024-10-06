@@ -22,7 +22,7 @@ import { AddCircle as AddCircleIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleDeleteSelected, handleSetArchived, handleDuplicateSelected, handleMoveSection, handleMarkAsPayd, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
+const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleEditSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
     const params = useParams();
 
 
@@ -30,7 +30,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]};
     const enterDelay = 500;
-    const disabled = checked.length > 5 ? true : checked.length > 0 ? false : true;
+    // const disabled = checked.length > 5 ? true : checked.length > 0 ? false : true;
+    const disabled = checked.length > 0 ? false : true;
 
     //MENU
     const [anchorEl, setAnchorEl] = useState(null);
@@ -40,6 +41,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
       setAnchorEl(event.currentTarget);
       setOpen(id)
     };
+    
     const handleClose = () => {
       setAnchorEl(null);
       setOpen(null)
@@ -52,7 +54,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
     const handleDeleteButton = () => {
         setUndoItem([]);
-        handleDeleteSelected('del');
+        handleEditSelected('del');
         setOperationType('remove');
         // setChecked([]);
         handleOpenSnackbar();
@@ -60,7 +62,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
     const handleArchiveButton = () => {
         setUndoItem([]);
-        handleSetArchived();
+        handleEditSelected('archive');
         setOperationType('archive');
         // setChecked([]);
         handleOpenSnackbar();
@@ -68,14 +70,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
 
     const handleMoveButton = (section) => {
         setUndoItem([]);
-        handleMoveSection(section.title)
+        handleEditSelected('move', section.title)
         setOperationType('update');
         handleOpenSnackbar();
     }
 
     const handleMarkAsPaydButton = (section) => {
         setUndoItem([]);
-        handleMarkAsPayd(section.title)
+        handleEditSelected('markAsPayd', section.title)
         setOperationType('update');
         handleOpenSnackbar();
     }
@@ -114,7 +116,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                     <DeleteIcon/>
                     <p>{lang.remove}</p>
                 </IconButton>
-                <IconButton onClick={!syncing ? handleDuplicateSelected : undefined} 
+                <IconButton onClick={() => !syncing ? handleEditSelected('duplicate') : undefined} 
                             disabled={disabled}
                             >
                     <DifferenceIcon/>
@@ -137,13 +139,13 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                 </IconButton>} */}
             </>}
                 {params.taskTitle === 'TRASH' && <>
-                    <IconButton onClick={() => !syncing ? handleDeleteSelected('trash', 1) : undefined}
+                    <IconButton onClick={() => !syncing ? handleEditSelected('trash') : undefined}
                                 disabled={disabled}
                             >
                         <DeleteForeverIcon/>
                         <p>{lang.empityTrash}</p>
                     </IconButton>
-                    <IconButton onClick={() => !syncing ? handleDeleteSelected('restore') : undefined}
+                    <IconButton onClick={() => !syncing ? handleEditSelected('del') : undefined}
                                 disabled={disabled}
                             >
                         <RestoreFromTrashIcon/>
@@ -227,6 +229,15 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         </MenuItem>
                     ))}
                     <Divider />
+                    <MenuItem onClick={() => {handleMarkAsPaydButton(section); handleClose()}}>
+                        <ListItemIcon>
+                            {sheetType === 'todoPayments'
+                            ? <CreditScoreIcon />
+                            : <CalendarMonthIcon />
+                            }
+                        </ListItemIcon>
+                        {sheetType === 'todoPayments' ? lang.financialControl : lang.todoPayments}
+                    </MenuItem>
                     <MenuItem onClick={() => {!syncing && handleArchiveButton(); handleClose()}}
                                 // disabled={disabled}
                     >
@@ -238,15 +249,14 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                         </ListItemIcon>
                         <p>{lang[!archived ? 'archive' : 'unAarchive']}</p>
                     </MenuItem>
-                    <MenuItem onClick={() => {handleMarkAsPaydButton(section); handleClose()}}>
-                        <ListItemIcon>
-                            {sheetType === 'todoPayments'
-                            ? <CreditScoreIcon />
-                            : <CalendarMonthIcon />
-                            }
-                        </ListItemIcon>
-                        {sheetType === 'todoPayments' ? lang.financialControl : lang.todoPayments}
-                    </MenuItem>
+                    {Array.from(sections).filter((section) => section.title === 'TRASH' && section.title !== params.taskTitle ).map((section, index) => (
+                        <MenuItem key={index} onClick={() => {handleDeleteButton(); handleClose()}}>
+                            <ListItemIcon>
+                                <DeleteIcon />
+                            </ListItemIcon>
+                            {section.name}
+                        </MenuItem>
+                    ))}
                 </Menu>
                 {/* <Menu
                     id="situation-menu"

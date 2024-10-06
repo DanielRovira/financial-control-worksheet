@@ -24,7 +24,7 @@ const Main = ({ refreshToken, isLoggedIn, setMainSheetType, setLoading }) => {
     return (
         <div className='MainContainer'>
             <div className='MainSubContainer'>
-                {sections.length > 0 && Object.entries(user['permissions']).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
+                {sections.length > 0 && Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
                 <FinancialWorksheetMain />}
                 <TaskList setMainSheetType={undefined} />
             </div>

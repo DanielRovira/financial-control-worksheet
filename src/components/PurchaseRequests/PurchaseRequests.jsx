@@ -49,10 +49,10 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
       }
     }
 
-    function updateDocument(item) {
+    async function updateDocument(item) {
         console.log(item)
         // setSyncing(true);
-        fetch(`/api/purchases/update`,
+        await fetch(`/api/purchases/update`,
         {
             method:'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -64,9 +64,9 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
         .catch(console.error)
     }
 
-    function deleteDocument(item) {
+    async function deleteDocument(item) {
         // setSyncing(true);
-        fetch(`/api/purchases/delete`,
+        await fetch(`/api/purchases/delete`,
         {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' },

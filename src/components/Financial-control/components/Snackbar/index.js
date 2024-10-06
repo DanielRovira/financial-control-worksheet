@@ -6,29 +6,20 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
-export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleDeleteSelected, operationType, setOperationType, handleSetArchived, getDataTimeout }) {
+export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleEditSelected, operationType, setOperationType, getDataTimeout }) {
     const history = useNavigate();
-
+    const timeOut = 7000
     const [message, setMessage] = useState();
 
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  const handleClose = () => {
     setOpenSnackbar(false);
     setUndoItem([]);
     setOperationType()
   };
 
-  const handleUndo = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
+  const handleUndo = () => {
     setTimeout(() => {
-        operationType === 'update' && updateDocument(undoItem[0], true, 1, true)
-        operationType === 'archive' && handleSetArchived('undo', 1)
-        operationType === 'remove' && handleDeleteSelected('undo', 1)
+        handleEditSelected('undo')
         setOpenSnackbar(false);
         setOperationType()
         // setUndoItem([])
@@ -51,9 +42,6 @@ export default function SimpleSnackbar({ timeOut, openSnackbar, setOpenSnackbar,
             break;
         case 'archive':
             setMessage('Item arquivado')
-            break;
-        case 'add':
-            setMessage('Item adicionado')
             break;
     
         default:

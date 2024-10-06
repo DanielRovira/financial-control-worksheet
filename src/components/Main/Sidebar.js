@@ -37,7 +37,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                {Object.entries(user['permissions']).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
+                {Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
                     <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}>
                     <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
@@ -56,7 +56,7 @@ const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />
                 </ListItemButton> */}
-                {Object.entries(user['permissions']).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'purchases'))).includes(true) &&
+                {Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'purchases'))).includes(true) &&
                     <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests}>
                     <ListItemIcon style={mainSheetType === 'PurchaseRequests' ? selectedStyle : null} >
                         <ShoppingCartIcon/>

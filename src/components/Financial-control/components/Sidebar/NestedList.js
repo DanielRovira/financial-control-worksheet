@@ -44,7 +44,7 @@ const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) =>
         </ClickAwayListener>
         <Collapse in={openSection} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-                {(section.title === 'TRASH' ? types.slice(1) : types).map((type) => (
+                {(section.title === 'TRASH' ? types.slice(0,2) : types).map((type) => (
                     <ListItemButton
                         className='innerButton'
                         style={section.title === params.taskTitle && type === sheetType ? selectedStyle :  null}
