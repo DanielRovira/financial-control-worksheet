@@ -3,7 +3,7 @@
 // import NestedList from '../Sidebar/NestedList';
 import { useEffect } from 'react';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Contacts = ({ setMainSheetType }) => {
     const language = useAtomValue(languageAtom);

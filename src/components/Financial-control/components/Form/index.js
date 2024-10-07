@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Form = ({ insertDocument, sheetType, getDataTimeout, setTransactionsList, setUndoItem, uploadedData }) => {
     const language = useAtomValue(languageAtom);

@@ -25,11 +25,27 @@
     z-index: -1;
 }
 
-.AppBar .MuiToolbar-root img {
-    position: absolute;
-    left: 50px;
-    border-radius: 5px;
-    cursor: pointer;
+.AppBar .MuiToolbar-root .MuiSelect-select {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 5px;
+}
+
+.AppBar .MuiToolbar-root .MuiSelect-select:focus {
+    background-color: initial;
+}
+.AppBar .MuiToolbar-root .MuiInputBase-root .MuiSvgIcon-root {
+    color: white;
+}
+
+.AppBar .MuiToolbar-root .MuiSelect-select img {
+    width: 20px;
+    height: 15px;
+}
+
+.MuiPaper-root .MuiList-root .MuiMenuItem-root {
+    justify-content: center;
 }
 
 .AppBar .InnerSettingsButton {

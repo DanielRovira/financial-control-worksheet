@@ -4,7 +4,7 @@ import { Box, Button, TextField, Typography, CircularProgress, Divider } from '@
 import { useNavigate } from 'react-router-dom';
 import { useSetAtom } from 'jotai'
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
   const language = useAtomValue(languageAtom)

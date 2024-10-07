@@ -3,7 +3,7 @@ import { IconButton, List, Divider } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import NestedList from './NestedList';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Sidebar = ({ sections, openSidebar, setOpenSidebar, sheetType }) => {
      const language = useAtomValue(languageAtom);

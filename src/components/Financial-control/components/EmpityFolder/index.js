@@ -4,7 +4,7 @@ import './index.css'
 import { useParams } from 'react-router-dom';
 import empityFolderImage from './empityFolderImage.svg' //throwIfNamespace: false
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 export default function EmpityFolder() {
     const language = useAtomValue(languageAtom);

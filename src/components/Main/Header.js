@@ -4,7 +4,7 @@ import { SettingsOutlined as SettingsOutlinedIcon, Apps as AppsIcon } from '@mui
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai'
-import { languageAtom } from 'components/atom'
+import { languageAtom } from 'components/global'
 
 const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
     const history = useNavigate();
@@ -83,7 +83,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                             label="Language"
                             onChange={handleChangeLanguage}
                         >
-                            {Array.from(languages || []).map((language, index) => <MenuItem key={index} value={language}>{language}</MenuItem>)}
+                            {Array.from(languages || []).map((language, index) => <MenuItem key={index} value={language}><img src={`https://flagicons.lipis.dev/flags/4x3/${language.slice(3,5).toLocaleLowerCase()}.svg`} style={{width: '25px'}} /></MenuItem>)}
                         </Select>
                         <Tooltip
                             disableInteractive

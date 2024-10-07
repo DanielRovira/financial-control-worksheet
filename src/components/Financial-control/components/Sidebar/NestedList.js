@@ -3,7 +3,7 @@ import { ClickAwayListener, Collapse, List, ListItemButton, ListItemIcon, ListIt
 import { useNavigate, useParams } from 'react-router-dom';
 import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon, DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) => {
     const language = useAtomValue(languageAtom);

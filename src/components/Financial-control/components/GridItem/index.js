@@ -6,7 +6,7 @@ import {CloudDownload as CloudDownloadIcon, UnfoldMore as UnfoldMoreIcon, Unfold
 import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
     const language = useAtomValue(languageAtom);

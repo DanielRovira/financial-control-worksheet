@@ -4,7 +4,7 @@ import { List, ListSubheader } from '@mui/material';
 import MainNestedList from './MainNestedList';
 import Calendar from '../Calendar';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Main = ({ setOpenSidebar }) => {
     const language = useAtomValue(languageAtom);
@@ -109,7 +109,7 @@ const Main = ({ setOpenSidebar }) => {
                 </div>
                 <div>
                     <div className='CalendarHeader' >
-                        <h1>Calendario</h1>
+                        <h1>{lang.calendar}</h1>
                     </div>
                     <Calendar rawData={Object.entries(data).map(item => item[1])} defaultView={'year'}  maxDetail={'year'} />
                 </div>

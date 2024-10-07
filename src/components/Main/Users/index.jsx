@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Avatar, List, ListItemButton, ListItemAvatar, ListItemText, MenuItem, Select, TextField } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Users = () => {
     const language = useAtomValue(languageAtom);

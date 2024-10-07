@@ -6,7 +6,7 @@ import AddTask from './components/AddTask';
 import TaskDetails from './components/TaskDetails';
 import './components/css/App.css'
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const TaskList = ({ setMainSheetType }) => {
     const language = useAtomValue(languageAtom);

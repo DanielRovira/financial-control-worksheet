@@ -1,5 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
+import { atom } from 'jotai';
 
+export const languageAtom = atom(process.env.REACT_APP_LANG);
+// const language = useAtomValue(languageAtom);
+// const setLanguage = useSetAtom(languageAtom);
+// const [language, setLanguage] = useAtom(languageAtom);
 const GlobalStyle = createGlobalStyle`
 
     * {
@@ -121,4 +126,4 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-export default  GlobalStyle;
+export default GlobalStyle;

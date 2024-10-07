@@ -3,7 +3,7 @@ import ResumeItem from '../ResumeItem';
 import { ClickAwayListener } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaDollarSign } from 'react-icons/fa';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Resume = ({ result, sheetType, setDrawer }) => {
     const language = useAtomValue(languageAtom);

@@ -11,7 +11,7 @@ import { FmdBadOutlined as FmdBadOutlinedIcon,
          South as SouthIcon,
          Sort as SortIcon } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 
 document.documentElement.style.setProperty('--tableWidth', 'calc((var(--vw, 1vw) * 100) - (var(--closeSidebarWidth) * 2) - 22px)');

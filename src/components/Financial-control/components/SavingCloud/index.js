@@ -6,7 +6,7 @@ import { IconButton  } from '@mui/material';
 import { Sync as SyncIcon,
          CloudDoneOutlined as CloudDoneOutlinedIcon } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const SavingCloud = ({ syncing }) => {
     const language = useAtomValue(languageAtom);

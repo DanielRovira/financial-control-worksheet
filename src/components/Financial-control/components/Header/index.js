@@ -21,7 +21,7 @@ import { AddCircle as AddCircleIcon,
          Unarchive as UnarchiveIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleEditSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {

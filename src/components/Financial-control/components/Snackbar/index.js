@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleEditSelected, operationType, setOperationType, getDataTimeout }) {
   const language = useAtomValue(languageAtom)

@@ -5,7 +5,7 @@ import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Filter = ({ type, filter, setFilter, setFilterType, filterType }) => {
     const language = useAtomValue(languageAtom);

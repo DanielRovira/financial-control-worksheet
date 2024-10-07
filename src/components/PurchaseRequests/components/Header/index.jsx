@@ -5,7 +5,7 @@ import { AddCircle as AddCircleIcon,
     // DriveFileMove as DriveFileMoveIcon,
     RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected }) => {
     const language = useAtomValue(languageAtom);

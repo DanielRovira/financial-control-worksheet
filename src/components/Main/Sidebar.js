@@ -8,7 +8,7 @@ import ContactsIcon from '@mui/icons-material/Contacts';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 
 const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType }) => {

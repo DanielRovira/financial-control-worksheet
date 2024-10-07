@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField, Tabs, Tab } from '@mui/material';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 const Settings = ({ categories, setCategories, sections, setSections, setMainSheetType, refreshToken }) => {
     const language = useAtomValue(languageAtom);

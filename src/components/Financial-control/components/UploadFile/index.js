@@ -2,7 +2,7 @@ import './styles.css'
 import { useEffect } from 'react';
 import uploadImage from './uploadImage.svg' //throwIfNamespace: false
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/atom';
+import { languageAtom } from 'components/global';
 
 function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
   const language = useAtomValue(languageAtom)
