@@ -25,7 +25,7 @@ const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType 
     const selectedStyle = {
         borderLeft: '3px solid var(--navbar-color)',
         paddingLeft: '2px',
-        color: 'var(--navbar-color)'
+        color: 'var(--navbar-color)',
     }
 
     return (
@@ -35,33 +35,33 @@ const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType 
                 aria-labelledby="nested-list-subheader"
         >
             <div className='ItensContainer'>
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Main'); history('/main')}} title={lang.home}>
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('Main'); history('/main')}} title={lang.home} style={{backgroundColor: mainSheetType === 'Main'  ? 'var(--selected-sidebar)' :  'unset'}} >
                     <ListItemIcon style={mainSheetType === 'Main' ? selectedStyle : null} >
                         <HomeIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
                 {Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
-                    <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet}>
+                    <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet} style={{backgroundColor: mainSheetType === 'FinancialWorksheet'  ? 'var(--selected-sidebar)' :  'unset'}}>
                     <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.finances} />
                 </ListItemButton>}
-                <ListItemButton onClick={() => {handleClick(); setMainSheetType('TaskList'); history('/TaskList')}} title={lang.todos}>
+                <ListItemButton onClick={() => {handleClick(); setMainSheetType('TaskList'); history('/TaskList')}} title={lang.todos} style={{backgroundColor: mainSheetType === 'TaskList'  ? 'var(--selected-sidebar)' :  'unset'}}>
                     <ListItemIcon style={mainSheetType === 'TaskList' ? selectedStyle : null} >
                         <FormatListBulletedIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.todos} />
                 </ListItemButton>
-                {/* <ListItemButton onClick={() => {handleClick(); setMainSheetType('Contacts'); history('/Contacts')}} title={lang.contacts}>
+                {/* <ListItemButton onClick={() => {handleClick(); setMainSheetType('Contacts'); history('/Contacts')}} title={lang.contacts} style={{backgroundColor: mainSheetType === 'Contacts'  ? 'var(--selected-sidebar)' :  'unset'}}>
                     <ListItemIcon style={mainSheetType === 'Contacts' ? selectedStyle : null} >
                         <ContactsIcon/>
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />
                 </ListItemButton> */}
                 {Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'purchases'))).includes(true) &&
-                    <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests}>
+                    <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests} style={{backgroundColor: mainSheetType === 'PurchaseRequests'  ? 'var(--selected-sidebar)' :  'unset'}}>
                     <ListItemIcon style={mainSheetType === 'PurchaseRequests' ? selectedStyle : null} >
                         <ShoppingCartIcon/>
                     </ListItemIcon>
