@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import { ClickAwayListener, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CalendarMonth as CalendarMonthIcon, BarChart as BarChartIcon, ExpandLess, ExpandMore, ListAlt as ListAltIcon, DeleteOutline as DeleteOutlineIcon } from '@mui/icons-material';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const NestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const history = useNavigate();
     const params = useParams();
     const user = JSON.parse(localStorage.getItem("user")) || [];

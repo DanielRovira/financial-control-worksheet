@@ -2,9 +2,12 @@ import './index.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { BarChart as BarChartIcon, CalendarMonth as CalendarMonthIcon, ListAlt as ListAltIcon } from '@mui/icons-material'
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 export default function BottomNav({ section, sheetType }) {
+  const language = useAtomValue(languageAtom)
+  const lang = require(`components/Languages/${language}.json`);
   const history = useNavigate();
   const params = useParams();
 

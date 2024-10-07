@@ -7,9 +7,13 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
- const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType }) => {
+
+const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType }) => {
+     const language = useAtomValue(languageAtom);
+     const lang = require(`components/Languages/${language}.json`);
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
     const history = useNavigate();
     const user = JSON.parse(localStorage.getItem("user")) || [];

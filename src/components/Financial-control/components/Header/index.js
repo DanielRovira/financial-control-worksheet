@@ -20,12 +20,14 @@ import { AddCircle as AddCircleIcon,
          RestoreFromTrash  as RestoreFromTrashIcon,
          Unarchive as UnarchiveIcon,
          UnarchiveOutlined as UnarchiveOutlinedIcon } from '@mui/icons-material';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
+
 
 const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalendar, checked, setChecked, handleEditSelected, setOperationType, setUndoItem, handleOpenSnackbar, archived, setArchived, syncing, openSidebar, setOpenSidebar }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const params = useParams();
-
-
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]};

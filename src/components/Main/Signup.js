@@ -1,9 +1,12 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Signup = () => {
+  const language = useAtomValue(languageAtom)
+  const lang = require(`components/Languages/${language}.json`);
   const history = useNavigate();
   const [inputs, setInputs] = useState({
     name: "",

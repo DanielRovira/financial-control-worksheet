@@ -1,9 +1,12 @@
 import './styles.css'
 import { useEffect } from 'react';
 import uploadImage from './uploadImage.svg' //throwIfNamespace: false
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 function UploadFile({ isDragActive, acceptedFiles, setUploadedData }) {
+  const language = useAtomValue(languageAtom)
+  const lang = require(`components/Languages/${language}.json`);
 
   useEffect(() => {
       handleSubmit(acceptedFiles)

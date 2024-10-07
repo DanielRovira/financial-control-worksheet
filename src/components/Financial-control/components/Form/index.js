@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import CurrencyInput from 'react-currency-input-field'
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Form = ({ insertDocument, sheetType, getDataTimeout, setTransactionsList, setUndoItem, uploadedData }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const params = useParams();
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))

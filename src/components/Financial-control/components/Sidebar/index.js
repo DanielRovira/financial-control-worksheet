@@ -2,9 +2,12 @@ import './styles.css'
 import { IconButton, List, Divider } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import NestedList from './NestedList';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
- const Sidebar = ({ sections, openSidebar, setOpenSidebar, sheetType }) => {
+const Sidebar = ({ sections, openSidebar, setOpenSidebar, sheetType }) => {
+     const language = useAtomValue(languageAtom);
+     const lang = require(`components/Languages/${language}.json`);
     document.documentElement.style.setProperty('--closeSidebarScrollWidth', openSidebar ? '10px' : '0');
     const user = JSON.parse(localStorage.getItem("user")) || [];
 

@@ -1,22 +1,13 @@
 import './index.css'
 import { useEffect, useState, useRef } from 'react';
-
-import List from '@mui/material/List';
-// import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
-// import IconButton from '@mui/material/IconButton';
+import { Avatar, List, ListItemButton, ListItemAvatar, ListItemText, MenuItem, Select, TextField } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
-// import DeleteIcon from '@mui/icons-material/Delete';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-
-const lang = require(`../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Users = () => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
     // const user = JSON.parse(localStorage.getItem("user")) || [];
     const [usersList, setUsersList] = useState([])

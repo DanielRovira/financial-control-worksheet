@@ -3,9 +3,12 @@ import { useState, useEffect } from 'react';
 import { List, ListSubheader } from '@mui/material';
 import MainNestedList from './MainNestedList';
 import Calendar from '../Calendar';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Main = ({ setOpenSidebar }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const [results, setResults] = useState(JSON.parse(localStorage.getItem("results")) || []);
     const [data, setData] = useState(JSON.parse(localStorage.getItem("data")) || []);
     // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);

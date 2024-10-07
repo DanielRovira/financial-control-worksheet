@@ -5,11 +5,12 @@ import { useState, useEffect, useRef } from 'react';
 import { IconButton  } from '@mui/material';
 import { Sync as SyncIcon,
          CloudDoneOutlined as CloudDoneOutlinedIcon } from '@mui/icons-material';
-
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
-
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const SavingCloud = ({ syncing }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const [cloudText, setCloudText] = useState('none');
     const timer = useRef(null);
 

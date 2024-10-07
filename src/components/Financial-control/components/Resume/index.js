@@ -2,9 +2,12 @@ import * as C from './styles';
 import ResumeItem from '../ResumeItem';
 import { ClickAwayListener } from '@mui/material';
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaDollarSign } from 'react-icons/fa';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Resume = ({ result, sheetType, setDrawer }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
     let sources = Array.from(categoriesList || []).filter(item => item.type === 'source').sort((a, b) => a.name.localeCompare(b.name))
 

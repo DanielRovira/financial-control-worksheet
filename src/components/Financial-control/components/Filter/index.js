@@ -4,9 +4,12 @@ import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Filter = ({ type, filter, setFilter, setFilterType, filterType }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     // const id = open ? 'simple-popover' : undefined;

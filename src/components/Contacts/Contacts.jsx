@@ -2,12 +2,13 @@
 // import { List, ListSubheader } from '@mui/material';
 // import NestedList from '../Sidebar/NestedList';
 import { useEffect } from 'react';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Contacts = ({ setMainSheetType }) => {
-    // const sections = JSON.parse(localStorage.getItem("sections")) || [];
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
 
-    
     useEffect(() => {
         setMainSheetType('Contacts');
     }, [setMainSheetType]);

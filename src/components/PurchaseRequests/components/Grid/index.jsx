@@ -1,6 +1,5 @@
 import * as G from './styles';
 import GridItem from '../GridItem'
-// const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const Header = ({ purchasesData, checked, setChecked, handleEdit }) => {
 

@@ -10,8 +10,9 @@ import { FmdBadOutlined as FmdBadOutlinedIcon,
          North as NorthIcon,
          South as SouthIcon,
          Sort as SortIcon } from '@mui/icons-material';
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 document.documentElement.style.setProperty('--tableWidth', 'calc((var(--vw, 1vw) * 100) - (var(--closeSidebarWidth) * 2) - 22px)');
 // window.addEventListener("resize", function () {
@@ -20,6 +21,8 @@ document.documentElement.style.setProperty('--tableWidth', 'calc((var(--vw, 1vw)
 // });
 
 const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChecked, archived, setOperationType, handleOpenSnackbar, setAdd, section, syncing }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const [sortState, setSortState] = useState(sheetType === 'financialControl' ? true : false);

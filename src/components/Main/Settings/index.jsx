@@ -6,13 +6,12 @@ import Users from '../Users';
 import { useState, useEffect } from 'react';
 import { IconButton, List, ListItem, ListItemText, ListSubheader, TextField, Tabs, Tab } from '@mui/material';
 import { AddCircle as AddCircleIcon, RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
-const lang = require(`../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Settings = ({ categories, setCategories, sections, setSections, setMainSheetType, refreshToken }) => {
-    // const history = useNavigate();
-    // const [categories, setCategories] = useState(JSON.parse(localStorage.getItem("categories")) || []);
-    // const [sections, setSections] = useState(JSON.parse(localStorage.getItem("sections")) || []);
-    // const CategoriesListItem = new Set((Array.from(categories)?.map((item) => item.type)));
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const CategoriesListItem = ["source",  "category", "subCategory"];
     const [showAdd, setShowAdd] = useState(false);

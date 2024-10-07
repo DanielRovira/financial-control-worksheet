@@ -4,9 +4,12 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 export default function SimpleSnackbar({ openSnackbar, setOpenSnackbar, undoItem, setUndoItem, updateDocument, handleEditSelected, operationType, setOperationType, getDataTimeout }) {
+  const language = useAtomValue(languageAtom)
+  const lang = require(`components/Languages/${language}.json`);
     const history = useNavigate();
     const timeOut = 7000
     const [message, setMessage] = useState();

@@ -4,9 +4,12 @@ import { AddCircle as AddCircleIcon,
     Delete as DeleteIcon,
     // DriveFileMove as DriveFileMoveIcon,
     RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`)
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
 
     return (
         <>

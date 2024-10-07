@@ -5,9 +5,12 @@ import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
 import TaskDetails from './components/TaskDetails';
 import './components/css/App.css'
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const TaskList = ({ setMainSheetType }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const data = localStorage.getItem("tasks");
     const [tasks, setTasks] = useState(data ? JSON.parse(data) : externalData);
     const [taskDetail, setTasksDetail] = useState(null);

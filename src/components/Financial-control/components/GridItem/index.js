@@ -5,9 +5,12 @@ import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaRegEdit, FaCheck } fr
 import {CloudDownload as CloudDownloadIcon, UnfoldMore as UnfoldMoreIcon, UnfoldLess as UnfoldLessIcon } from '@mui/icons-material';
 import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const params = useParams();
     const [isActive, setActive] = useState(false);
     const [expandRow, setExpandRow] = useState(false);

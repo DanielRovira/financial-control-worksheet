@@ -2,11 +2,16 @@ import './styles/Login.css'
 import { useEffect, useState, useRef } from 'react';
 import { Box, Button, TextField, Typography, CircularProgress, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useSetAtom } from 'jotai'
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
+  const language = useAtomValue(languageAtom)
+  const lang = require(`components/Languages/${language}.json`);
     const history = useNavigate();
     const timer = useRef();
+    const setLanguage = useSetAtom(languageAtom)
     const [loadingButton, setLoadingButton] = useState(false);
     const [inputs, setInputs] = useState({
         email: process.env.REACT_APP_DEFAULT_USER,
@@ -31,6 +36,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         if (res?.user) {
           localStorage.setItem('isLoggedIn', JSON.stringify(true));
           localStorage.setItem('user', JSON.stringify(res.user));
+          setLanguage(res.user.language);
           setIsLoggedIn(true);
           setLoading(true);
           return

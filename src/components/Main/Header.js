@@ -1,9 +1,10 @@
 import './styles/Header.css'
-import { Avatar, AppBar, Box, Button, Card, ClickAwayListener, Divider, IconButton, Toolbar, Tooltip } from '@mui/material';
+import { Avatar, AppBar, Box, Button, Card, ClickAwayListener, Divider, IconButton, MenuItem, Select, Toolbar, Tooltip } from '@mui/material';
 import { SettingsOutlined as SettingsOutlinedIcon, Apps as AppsIcon } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtom } from 'jotai'
+import { languageAtom } from 'components/atom'
 
 const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
     const history = useNavigate();
@@ -11,8 +12,10 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
     const [openPanel, setOpenPanel] = useState(false);
     const [showTooltip, setShowTooltip] = useState(false)
     const [hovered, setHovered] = useState(false);
+    const [language, setLanguage] = useAtom(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
-
+    const languages = ['pt-BR', 'en-US', 'es-ES', 'fr-FR', 'it-IT']
     document.documentElement.style.setProperty('--avatarColor', stringToColor(user.name || ''));
 
     const handleLogout = () => {
@@ -50,6 +53,11 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
         return color;
       }
 
+      const handleChangeLanguage = (event) => {
+        localStorage.setItem('language', JSON.stringify(event.target.value));
+        setLanguage(event.target.value)
+      }
+
     const TooltipTitle = (
         <>
             <h2>{`${lang.account} ${process.env.REACT_APP_NAME}`}</h2>
@@ -69,6 +77,14 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                         {/* <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" onClick={() => history(`/main`)} style={{ maxHeight: '40px', marginLeft:'10px'}} /> */}
                         <h1>{process.env.REACT_APP_NAME}</h1>
                     <Box>
+                        <Select
+                            variant="standard"
+                            value={language}
+                            label="Language"
+                            onChange={handleChangeLanguage}
+                        >
+                            {Array.from(languages || []).map((language, index) => <MenuItem key={index} value={language}>{language}</MenuItem>)}
+                        </Select>
                         <Tooltip
                             disableInteractive
                             title={<h3>{lang.settings}</h3>}

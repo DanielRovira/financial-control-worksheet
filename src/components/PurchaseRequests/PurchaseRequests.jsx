@@ -6,7 +6,6 @@ import Form from './components/Form';
 import Grid from './components/Grid';
 import Header from './components/Header';
 import EmpityFolder from '../Financial-control/components/EmpityFolder'
-// const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refreshToken, isLoggedIn }) => {
     const history = useNavigate();

@@ -15,7 +15,6 @@ import Sidebar from './components/Sidebar';
 import Summary from './components/Summary';
 import Snackbar from './components/Snackbar';
 import UploadFile from './components/UploadFile';
-// const lang = require(`../Languages/${process.env.REACT_APP_LANG}.json`)
 
 const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType }) => {
     const [transactionsList, setTransactionsList] = useState([]);

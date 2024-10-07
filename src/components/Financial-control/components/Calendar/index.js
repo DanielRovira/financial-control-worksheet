@@ -2,7 +2,6 @@ import './Calendar.css';
 import './index.css'
 import { Box, ClickAwayListener } from '@mui/material';
 import Calendar from 'react-calendar'
-// const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
 
 export default function FloatingCalendar({ rawData, setShowCalendar, defaultView, maxDetail }) {
     const itens = Array.from(rawData || []);

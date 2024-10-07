@@ -6,9 +6,12 @@ import { useState, useEffect } from 'react';
 import { Divider, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Add as AddIcon,
     RemoveCircle as RemoveCircleIcon } from '@mui/icons-material';
-const lang = require(`../../../Languages/${process.env.REACT_APP_LANG}.json`);
+import { useAtomValue } from 'jotai';
+import { languageAtom } from 'components/atom';
 
 const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateDocument }) => {
+    const language = useAtomValue(languageAtom);
+    const lang = require(`components/Languages/${language}.json`);
     // const params = useParams();
     const toDay = dateToTimezone().toISOString().substring(0, 10)
     function dateToTimezone() {
