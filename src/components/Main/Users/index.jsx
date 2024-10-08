@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Avatar, List, ListItemButton, ListItemAvatar, ListItemText, MenuItem, Select, TextField } from '@mui/material';
 import FolderIcon from '@mui/icons-material/Folder';
 import { useAtomValue } from 'jotai';
-import { languageAtom } from 'components/global';
+import { languageAtom, stringToColor } from 'components/global';
 
 const Users = () => {
     const language = useAtomValue(languageAtom);
@@ -110,9 +110,7 @@ const Users = () => {
                             {Array.from(usersList || []).map((item, index) => 
                                 <ListItemButton key={index} onClick={() => {setSelectedUser(item); setSelectedUserIndex(index); setSelectedUserId(item._id)}} selected={index===selectedUserIndex}>   
                                     <ListItemAvatar>
-                                        <Avatar>
-                                            <FolderIcon />
-                                        </Avatar>
+                                        <Avatar children={item.name[0]} sx={{backgroundColor: stringToColor(item.name)}} />
                                     </ListItemAvatar>
                                     <ListItemText
                                         primary={item.name}

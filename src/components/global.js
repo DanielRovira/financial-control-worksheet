@@ -5,6 +5,25 @@ export const languageAtom = atom(process.env.REACT_APP_LANG);
 // const language = useAtomValue(languageAtom);
 // const setLanguage = useSetAtom(languageAtom);
 // const [language, setLanguage] = useAtom(languageAtom);
+
+export function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `AA${value.toString(16)}`.slice(-2);
+    }
+  
+    return color;
+  }
+
 const GlobalStyle = createGlobalStyle`
 
     * {

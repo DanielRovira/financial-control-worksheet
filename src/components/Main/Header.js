@@ -4,7 +4,7 @@ import { SettingsOutlined as SettingsOutlinedIcon, Apps as AppsIcon } from '@mui
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAtom } from 'jotai'
-import { languageAtom } from 'components/global'
+import { languageAtom, stringToColor } from 'components/global'
 
 const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
     const history = useNavigate();
@@ -16,7 +16,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
     const lang = require(`components/Languages/${language}.json`);
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]}
     const languages = ['pt-BR', 'en-US', 'es-ES', 'fr-FR', 'it-IT']
-    document.documentElement.style.setProperty('--avatarColor', stringToColor(user.name || ''));
+    // document.documentElement.style.setProperty('--avatarColor', stringToColor(user.name || ''));
 
     const handleLogout = () => {
         sendLogoutReq();
@@ -34,24 +34,6 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
           setShowTooltip(false)
         };
       }, [hovered, openPanel]);
-
-      function stringToColor(string) {
-        let hash = 0;
-        let i;
-      
-        for (i = 0; i < string.length; i += 1) {
-          hash = string.charCodeAt(i) + ((hash << 5) - hash);
-        }
-      
-        let color = '#';
-      
-        for (i = 0; i < 3; i += 1) {
-          const value = (hash >> (i * 8)) & 0xff;
-          color += `AA${value.toString(16)}`.slice(-2);
-        }
-      
-        return color;
-      }
 
       const handleChangeLanguage = (event) => {
         localStorage.setItem('language', JSON.stringify(event.target.value));
@@ -109,7 +91,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                             PopperProps={poppersConfig}
                         >
                             <IconButton onClick={() => (setOpenPanel(!openPanel))} >
-                                <Avatar children={user.name[0]} />
+                                <Avatar children={user?.name?.[0] || ''} sx={{backgroundColor: stringToColor(user.name || '')}} />
                             </IconButton>
                         </Tooltip>
                     </Box>
@@ -132,7 +114,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                                     <SettingsOutlinedIcon />
                                 </IconButton>
                             </Tooltip>
-                            <Avatar children={user.name[0]} />
+                            <Avatar children={user?.name?.[0] || ''} sx={{backgroundColor: stringToColor(user.name || '')}} />
                             <h2>{user.name}</h2>
                             <p>{user.email}</p>
                         </div>

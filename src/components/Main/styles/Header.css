@@ -97,9 +97,9 @@
     border-radius: 0;
 }
 
-.AppBar .MuiBox-root .MuiAvatar-root, .Panel.MuiCard-root .userContainer .MuiAvatar-root {
+/* .AppBar .MuiBox-root .MuiAvatar-root, .Panel.MuiCard-root .userContainer .MuiAvatar-root {
     background-color: var(--avatarColor);
-}
+} */
 
 .AppBar.MuiPaper-root.MuiAppBar-root.MuiAppBar-colorPrimary {
     background-color: var(--navbar-color);
