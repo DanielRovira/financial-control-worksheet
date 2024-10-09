@@ -44,9 +44,9 @@
     height: 15px;
 }
 
-.MuiPaper-root .MuiList-root .MuiMenuItem-root {
+/* .MuiPaper-root .MuiList-root .MuiMenuItem-root {
     justify-content: center;
-}
+} */
 
 .AppBar .InnerSettingsButton {
     display: none;

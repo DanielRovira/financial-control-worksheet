@@ -24,7 +24,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
     const [showCalendar, setShowCalendar] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [undoItem, setUndoItem] = useState([]);
-    const [undoTrash, setUndoTrash] = useState([]);
+    // const [undoTrash, setUndoTrash] = useState([]);
     const [checked, setChecked] = useState([]);
     const [archived, setArchived] = useState(false);
     const [loadingData, setLoadingData] = useState();
@@ -247,7 +247,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
             {sheetType === undefined ? <Main setOpenSidebar={setOpenSidebar} /> : 
             <div className='FinancialWorksheet' {...getRootProps()}>
                 <input {...getInputProps()} />
-                    <UploadFile isDragActive={isDragActive} acceptedFiles={acceptedFiles} setUploadedData={setUploadedData} />
+                    <UploadFile isDragActive={isDragActive} acceptedFiles={acceptedFiles} setUploadedData={setUploadedData} insertDocument={insertDocument} taskTitle={params.taskTitle} />
                     <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleEditSelected={handleEditSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
                     {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && <Form insertDocument={insertDocument} sheetType={sheetType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} uploadedData={uploadedData} />}
                     {loadingData ? <LinearProgress /> :

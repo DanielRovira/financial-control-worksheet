@@ -52,7 +52,7 @@ const Users = () => {
         
 
         setUsersList((prev) => (
-            [...prev.filter((item, index) => index !== selectedUserIndex),
+            [...prev?.filter((item, index) => index !== selectedUserIndex),
                  {
                     ...prev[selectedUserIndex],
                     "permissions": {

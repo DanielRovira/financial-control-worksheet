@@ -89,7 +89,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
 
     let itensToCSV = itens.map((item) => ({
             ...item,
-            amount: item.amount.toString().replace('.', ',')
+            amount: item?.amount?.toString().replace('.', ',')
         })
     )
 
@@ -121,7 +121,13 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 <p>{lang.archived}</p>
             </C.ArchivedTitle>
         }
-            <CSVLink id='exportCSV' data={itensToCSV} separator={";"} headers={CSVheaders[sheetType]} filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}/>
+            <CSVLink 
+                id='exportCSV'
+                data={itensToCSV}
+                separator={";"}
+                headers={CSVheaders[sheetType]}
+                filename={`${params.taskTitle} - ${lang[sheetType]}.csv`}
+            />
             <C.Table>
                 <C.Thead>
                     <C.Tr>

@@ -36,7 +36,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
         if (res?.user) {
           localStorage.setItem('isLoggedIn', JSON.stringify(true));
           localStorage.setItem('user', JSON.stringify(res.user));
-          setLanguage(res.user.language);
+          res?.user?.language && setLanguage(res.user.language);
           setIsLoggedIn(true);
           setLoading(true);
           return

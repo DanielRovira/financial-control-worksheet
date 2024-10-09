@@ -78,7 +78,7 @@ const Main = ({ setOpenSidebar }) => {
                             </ListSubheader>
                           }
                         >
-                        {Array.from(sections).filter((section) => section.title !== 'TRASH' && Object.getOwnPropertyNames(user.permissions[section.title]).toString() !== 'purchases').map((section, index) => (
+                        {Array.from(sections || []).filter((section) => section.title !== 'TRASH' && Object.getOwnPropertyNames(user?.permissions[section.title] || []).toString() !== 'purchases').map((section, index) => (
                             <MainNestedList key={index} section={section} hideTitle={true} arrow={true} result={results[section.title]?.total} />
                         ))}
                     </List>

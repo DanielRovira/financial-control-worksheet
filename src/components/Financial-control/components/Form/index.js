@@ -31,7 +31,7 @@ const Form = ({ insertDocument, sheetType, getDataTimeout, setTransactionsList, 
     const [provider, setProvider]  = useState('');
 
     // Paid payments
-    const [source, setSource]  = useState(sources[0]?.name);
+    const [source, setSource]  = useState(sources[0]?.name || '');
     const [isExpense, setExpense] = useState(null);
     const [category, setCategory]  = useState('');
     const [subCategory, setSubCategory]  = useState('');
