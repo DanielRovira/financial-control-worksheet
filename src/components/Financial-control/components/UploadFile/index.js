@@ -1,5 +1,5 @@
 import './styles.css'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import uploadImage from './uploadImage.svg' //throwIfNamespace: false
 import { useAtomValue } from 'jotai';
 import { languageAtom } from 'components/global';

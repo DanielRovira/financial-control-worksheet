@@ -65,7 +65,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                             label="Language"
                             onChange={handleChangeLanguage}
                         >
-                            {Array.from(languages || []).map((language, index) => <MenuItem key={index} value={language}><img src={`https://flagicons.lipis.dev/flags/4x3/${language.slice(3,5).toLocaleLowerCase()}.svg`} style={{width: '25px', margin: 'auto'}} /></MenuItem>)}
+                            {Array.from(languages || []).map((language, index) => <MenuItem key={index} value={language}><img src={`https://flagicons.lipis.dev/flags/4x3/${language.slice(3,5).toLocaleLowerCase()}.svg`} style={{width: '25px', margin: 'auto'}} alt='Country flag' /></MenuItem>)}
                         </Select>
                         <Tooltip
                             disableInteractive
