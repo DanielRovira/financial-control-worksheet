@@ -24,7 +24,7 @@ const Sidebar = ({ sections, openSidebar, setOpenSidebar, sheetType }) => {
 
                 <span className='InsideSidebarTitle'>{lang.sections}</span>
 
-                {Array.from(sections).filter((section) => section.title !== 'TRASH' && Object.getOwnPropertyNames(user.permissions[section.title]).toString() !== 'purchases').map((section, index) => (
+                {Array.from(sections).filter((section) => section.title !== 'TRASH' && Object.getOwnPropertyNames(user?.permissions[section.title] || []).toString() !== 'purchases').map((section, index) => (
                     <NestedList key={index} section={section} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} sheetType={sheetType} />
                 ))}
                 <div style={{padding:'10px 5px'}}>
