@@ -26,6 +26,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filter, setFilter] = useState('');
     const [filterType, setFilterType] = useState();
     const [sortState, setSortState] = useState(sheetType === 'financialControl' ? true : false);
+    const [checkedIndex, setCheckedIndex] = useState([]);
     const params = useParams();
 
     const CSVheaders = {
@@ -84,7 +85,24 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
         checked.length === itens.length
         ? setChecked([])
         : setChecked(itens);
+        setCheckedIndex([])
         setOperationType()
+    }
+
+    const handleSelectMultiple = (event) => {
+        let firstItem = Math.min(...checkedIndex)
+        setChecked([])
+        if (firstItem < event) {
+            for (let i = firstItem; i <= event; i++) {
+                setChecked(prev => [...prev, itens[i]])
+            }  
+        }
+        if (firstItem > event) {
+            for (let i = firstItem; i >= event; i--) {
+                setChecked(prev => [...prev, itens[i]])
+            }  
+        }
+
     }
 
     let itensToCSV = itens.map((item) => ({
@@ -159,7 +177,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 </C.Thead>
                 <C.Tbody>
                     {Array.from(itens)?.map((item, index) => (
-                        <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} handleOpenSnackbar={handleOpenSnackbar} />
+                        <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} handleOpenSnackbar={handleOpenSnackbar} handleSelectMultiple={handleSelectMultiple} setCheckedIndex={setCheckedIndex} />
                     ))}
                 </C.Tbody>
             </C.Table>

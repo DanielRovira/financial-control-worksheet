@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
 import { languageAtom } from 'components/global';
 
-const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar }) => {
+const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar, handleSelectMultiple, setCheckedIndex }) => {
     const language = useAtomValue(languageAtom);
     const lang = require(`components/Languages/${language}.json`);
     const params = useParams();
@@ -42,9 +42,21 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     };
 
     const handleSelect = (event) => {
-        checked.includes(item)
-        ? item._id && setChecked(checked.filter(it => it !== item))
-        : item._id && setChecked((prev) => [ ...prev, item]);
+        if (event.nativeEvent.shiftKey) {
+            handleSelectMultiple(index)
+            return
+        }
+        
+        if (checked.includes(item)) {
+            item._id && setChecked(checked.filter(it => it !== item));
+            item._id && setCheckedIndex((prev) => prev.filter(it => it !== index));
+        }
+        
+        else {
+            item._id && setChecked((prev) => [...prev, item]);
+            item._id && setCheckedIndex((prev) => [...prev, index] );
+        }
+
       };
 
     const openInNewTab = (url) => {

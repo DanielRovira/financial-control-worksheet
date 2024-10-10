@@ -107,7 +107,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             <C.Buttons className='leftButtons'>
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
-                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation disabled={disabled} >
+                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation disabled={user.permissions[params.taskTitle][sheetType] !== 'edit'} >
                         {!add ? <AddCircleIcon/>
                              : <RemoveCircleIcon/>}
                     <p>{lang.add}</p>
