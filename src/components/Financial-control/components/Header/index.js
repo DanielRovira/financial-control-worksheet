@@ -29,11 +29,12 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     const lang = require(`components/Languages/${language}.json`);
     const params = useParams();
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
-    let section = sections.filter((sec) => sec.title === params.taskTitle)[0];
+    const section = sections.filter((sec) => sec.title === params.taskTitle)[0];
+    const user = JSON.parse(localStorage.getItem("user")) || [];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]};
     const enterDelay = 500;
     // const disabled = checked.length > 5 ? true : checked.length > 0 ? false : true;
-    const disabled = checked.length > 0 ? false : true;
+    const disabled =  user.permissions[params.taskTitle][sheetType] === 'edit' && checked.length > 0 ? false : true
 
     //MENU
     const [anchorEl, setAnchorEl] = useState(null);
@@ -106,7 +107,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             <C.Buttons className='leftButtons'>
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
-                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation>
+                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation disabled={disabled} >
                         {!add ? <AddCircleIcon/>
                              : <RemoveCircleIcon/>}
                     <p>{lang.add}</p>
