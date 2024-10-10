@@ -90,7 +90,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     }
 
     const handleSelectMultiple = (event) => {
-        let firstItem = Math.min(...checkedIndex)
+        let firstItem = Math.min(...checkedIndex) === Infinity ? null : Math.min(...checkedIndex)
         setChecked([])
         if (firstItem < event) {
             for (let i = firstItem; i <= event; i++) {
