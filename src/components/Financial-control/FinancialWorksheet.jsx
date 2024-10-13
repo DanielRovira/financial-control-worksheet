@@ -250,7 +250,7 @@ const FinancialWorksheet = ({ refreshToken, isLoggedIn, setIsLoggedIn, sheetType
                 <input {...getInputProps()} />
                     <UploadFile isDragActive={isDragActive} acceptedFiles={acceptedFiles} setUploadedData={setUploadedData} insertDocument={insertDocument} taskTitle={params.taskTitle} />
                     <Header add={add} setAdd={setAdd} setDrawer={setDrawer} sheetType={sheetType} showCalendar={showCalendar} setShowCalendar={setShowCalendar} checked={checked} setChecked={setChecked} handleEditSelected={handleEditSelected} setOperationType={setOperationType} setUndoItem={setUndoItem} handleOpenSnackbar={handleOpenSnackbar} archived={archived} setArchived={setArchived} syncing={syncing} setSyncing={setSyncing} openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && user.permissions[params.taskTitle][sheetType] === 'edit' && <Form insertDocument={insertDocument} sheetType={sheetType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} uploadedData={uploadedData} />}
+                    {add && params.taskTitle !== 'TRASH' && archived === false && sheetType !== 'summary' && (user.type === 'admin' ? true : user.permissions[params.taskTitle][sheetType] === 'edit') && <Form insertDocument={insertDocument} sheetType={sheetType} getDataTimeout={getDataTimeout} setTransactionsList={setTransactionsList} setUndoItem={setUndoItem} uploadedData={uploadedData} />}
                     {loadingData ? <LinearProgress /> :
                     <>
                         {/* {transactionsList[sheetType]?.length === 0 ? <EmpityFolder /> : */}

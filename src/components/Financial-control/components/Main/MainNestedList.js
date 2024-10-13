@@ -9,11 +9,11 @@ const MainNestedList = ({ section, setOpenSidebar, hideTitle, arrow, sheetType, 
     const language = useAtomValue(languageAtom);
     const lang = require(`components/Languages/${language}.json`);
     const history = useNavigate();
+    const params = useParams(); 
     const user = JSON.parse(localStorage.getItem("user")) || [];
-    const [openSection, setOpenSection] = useState(false);
-    const types = Object.getOwnPropertyNames((user?.permissions?.[section.title] || [])).filter(item => item !== 'purchases')
+    const types = user.type === 'admin' ? ['financialControl','todoPayments'] : Object.getOwnPropertyNames(user?.permissions?.[section.title] || []).filter(item => item !== 'purchases')
     types.includes('financialControl') && types.push('summary')
-    const params = useParams();
+    const [openSection, setOpenSection] = useState(false);
 
     const handleClick = () => {
         setOpenSidebar && setOpenSidebar(true);

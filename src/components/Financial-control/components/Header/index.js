@@ -33,8 +33,10 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const poppersConfig = {modifiers: [{name: "offset", options: {offset: [0, -10]}}]};
     const enterDelay = 500;
-    // const disabled = checked.length > 5 ? true : checked.length > 0 ? false : true;
-    const disabled =  user.permissions[params.taskTitle][sheetType] === 'edit' && checked.length > 0 ? false : true
+    let disabled =  true
+    if (checked.length > 0) {
+        disabled = user.type === 'admin' ? false : user.permissions[params.taskTitle][sheetType] !== 'edit'
+    }
 
     //MENU
     const [anchorEl, setAnchorEl] = useState(null);
@@ -107,7 +109,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
             <C.Buttons className='leftButtons'>
             {params.taskTitle !== 'TRASH' && sheetType !== 'summary' && <>
                 {archived === false && <>
-                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation disabled={user.permissions[params.taskTitle][sheetType] !== 'edit'} >
+                    <Button  onClick={() => setAdd(!add)} variant="contained" size="small" disableElevation disabled={(user.type === 'admin' ? false : user.permissions[params.taskTitle][sheetType] !== 'edit')} >
                         {!add ? <AddCircleIcon/>
                              : <RemoveCircleIcon/>}
                     <p>{lang.add}</p>
@@ -231,7 +233,8 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                             {section.name}
                         </MenuItem>
                     ))}
-                    <Divider />
+                    {Array.from(sections).filter((section) => section.title !== 'TRASH' && section.title !== params.taskTitle ).length > 0 && <Divider />}
+                    {(user.type === 'admin' || user.permissions[params.taskTitle][sheetType === 'todoPayments' ? 'financialControl': 'todoPayments'] === 'edit') &&
                     <MenuItem onClick={() => {handleMarkAsPaydButton(section); handleClose()}}>
                         <ListItemIcon>
                             {sheetType === 'todoPayments'
@@ -240,7 +243,7 @@ const Header = ({ add, setAdd, setDrawer, sheetType, showCalendar, setShowCalend
                             }
                         </ListItemIcon>
                         {sheetType === 'todoPayments' ? lang.financialControl : lang.todoPayments}
-                    </MenuItem>
+                    </MenuItem>}
                     <MenuItem onClick={() => {!syncing && handleArchiveButton(); handleClose()}}
                                 // disabled={disabled}
                     >

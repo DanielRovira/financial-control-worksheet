@@ -82,7 +82,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
     }, [localStorage.getItem("categories")])  // eslint-disable-line react-hooks/exhaustive-deps
     
     useEffect(() => {
-        setSections(JSON.parse(localStorage.getItem("sections")))
+        setSections(JSON.parse(localStorage.getItem("sections")) || [])
     }, [localStorage.getItem("sections")])  // eslint-disable-line react-hooks/exhaustive-deps
 
     const CustomListItem = ({ section, index, CategoriesListItem }) => {

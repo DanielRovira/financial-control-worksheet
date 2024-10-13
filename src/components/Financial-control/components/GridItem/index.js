@@ -152,7 +152,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     useClickAway(ref, toggleEdit)
 
     if (deleteDelay) {return (<></>)}
-    if (isActive && params.taskTitle !== 'TRASH' && !filter && user.permissions[params.taskTitle][sheetType] === 'edit') {
+    if (isActive && params.taskTitle !== 'TRASH' && !filter && (user.type === 'admin' ? true : user.permissions[params.taskTitle][sheetType] === 'edit')) {
         return (
             <C.Tr ref={ref} style={{backgroundColor: 'var(--color1)'}}>
                 <C.Td alignCenter><Checkbox checked={checked.includes(item._id)} disabled /></C.Td>

@@ -1,6 +1,7 @@
 import * as G from './styles';
 import { Button, Checkbox  } from '@mui/material';
-import EditNoteIcon from '@mui/icons-material/EditNote';
+// import EditNoteIcon from '@mui/icons-material/EditNote';
+import { FaRegEdit } from 'react-icons/fa';
 
 const GridItem = ({ item, index, checked, setChecked, handleEdit }) => {
     let tempId = item._id ? item._id : Date.now()
@@ -20,7 +21,7 @@ const GridItem = ({ item, index, checked, setChecked, handleEdit }) => {
             <G.Td><G.TdCont>{item.creator}</G.TdCont></G.Td>
             <G.Td><G.TdCont>{item.desc}</G.TdCont></G.Td>
             <G.Td><G.TdCont>{item.status}</G.TdCont></G.Td>
-            <G.Td alignCenter className='nohover editButton'><Button onClick={() => handleEdit(item)} variant='text' ><EditNoteIcon /></Button></G.Td>
+            <G.Td alignCenter className='nohover editButton'><Button onClick={() => handleEdit(item)} variant='text' ><FaRegEdit /></Button></G.Td>
         </G.Tr>
     )
 }
