@@ -1,13 +1,31 @@
 import * as G from './styles';
 import { Checkbox } from '@mui/material';
 import GridItem from '../GridItem'
+import { useState } from 'react';
 
 const Grid = ({ purchasesData, checked, setChecked, handleEdit }) => {
+    const [checkedIndex, setCheckedIndex] = useState([]);
 
     const handleSelect = (event) => {
         checked.length === purchasesData.length
         ? setChecked([])
         : setChecked(purchasesData);
+        setCheckedIndex([])
+    }
+
+    const handleSelectMultiple = (event) => {
+        let firstItem = Math.min(...checkedIndex)
+        setChecked([])
+        if (firstItem < event) {
+            for (let i = firstItem; i <= event; i++) {
+                setChecked(prev => [...prev, purchasesData[i]])
+            }  
+        }
+        if (firstItem > event) {
+            for (let i = firstItem; i >= event; i--) {
+                setChecked(prev => [...prev, purchasesData[i]])
+            }  
+        }
     }
 
     return (
@@ -28,7 +46,7 @@ const Grid = ({ purchasesData, checked, setChecked, handleEdit }) => {
                     </G.Thead>
                     <G.Tbody>
                         {Array.from(purchasesData)?.map((item, index) => (
-                            <GridItem key={item._id || index} item={item} index={index} checked={checked} setChecked={setChecked} handleEdit={handleEdit} />
+                            <GridItem key={item._id || index} item={item} index={index} checked={checked} setChecked={setChecked} handleEdit={handleEdit} handleSelectMultiple={handleSelectMultiple} setCheckedIndex={setCheckedIndex} />
                         ))}
                     </G.Tbody>
                 </G.Table>

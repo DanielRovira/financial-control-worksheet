@@ -7,7 +7,7 @@ import { AddCircle as AddCircleIcon,
 import { useAtomValue } from 'jotai';
 import { languageAtom } from 'components/global';
 
-const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected }) => {
+const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected, checked }) => {
     const language = useAtomValue(languageAtom);
     const lang = require(`components/Languages/${language}.json`);
 
@@ -25,7 +25,7 @@ const Header = ({ mainSheetType, add, setAdd, handleDeleteSelected }) => {
                               : <RemoveCircleIcon/>}
                         <p>{lang.add}</p>
                     </Button>
-                    <IconButton onClick={handleDeleteSelected}>
+                    <IconButton onClick={handleDeleteSelected} disabled={checked.length > 0 ? false : true}>
                         <DeleteIcon/>
                         <p>{lang.remove}</p>
                     </IconButton>

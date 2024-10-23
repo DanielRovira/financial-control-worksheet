@@ -3,13 +3,24 @@ import { Button, Checkbox  } from '@mui/material';
 // import EditNoteIcon from '@mui/icons-material/EditNote';
 import { FaRegEdit } from 'react-icons/fa';
 
-const GridItem = ({ item, index, checked, setChecked, handleEdit }) => {
+const GridItem = ({ item, index, checked, setChecked, handleEdit, handleSelectMultiple, setCheckedIndex }) => {
     let tempId = item._id ? item._id : Date.now()
     
-    const handleSelect = () => {
-        checked.includes(item)
-        ? item._id && setChecked(checked.filter(it => it !== item))
-        : item._id && setChecked((prev) => [ ...prev, item]);
+    const handleSelect = (event) => {
+        if (event.nativeEvent.shiftKey) {
+            handleSelectMultiple(index)
+            return
+        }
+        
+        if (checked.includes(item)) {
+            item._id && setChecked(checked.filter(it => it !== item));
+            item._id && setCheckedIndex((prev) => prev.filter(it => it !== index));
+        }
+        
+        else {
+            item._id && setChecked((prev) => [...prev, item]);
+            item._id && setCheckedIndex((prev) => [...prev, index] );
+        }
     };
 
     return (

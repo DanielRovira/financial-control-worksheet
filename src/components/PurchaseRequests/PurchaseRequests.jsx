@@ -108,7 +108,7 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
     return (
         <div className='PurchaseRequests'>
             <div className='PurchaseRequestsSub'>
-                <Header mainSheetType={mainSheetType} add={add} setAdd={setAdd} handleDeleteSelected={handleDeleteSelected} />
+                <Header mainSheetType={mainSheetType} add={add} setAdd={setAdd} handleDeleteSelected={handleDeleteSelected} checked={checked} />
                 {add && <Form editItem={editItem} setEditItem={setEditItem} setAdd={setAdd} sections={sections} insertDocument={insertDocument} updateDocument={updateDocument} />}
                 {loadingData ? <LinearProgress /> :
                     <>
