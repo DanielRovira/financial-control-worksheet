@@ -8,13 +8,13 @@
     width: 100%;
 }
 
-.LoginContainer form > img {
+.LoginContainer img {
     margin-bottom: 20px;
     max-width: 250px;
     /* box-shadow: 1px 2px 3px rgba(0, 0, 0, .3); */
 }
 
-.LoginContainer form {
+.LoginContainer .LoginSubContainer {
     display: flex;
     flex-direction: column;
     align-items: center;

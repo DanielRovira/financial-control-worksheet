@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { useClickAway } from 'react-use';
 import GlobalStyle from './components/global';
@@ -9,6 +9,7 @@ import PurchaseRequests from './components/PurchaseRequests/PurchaseRequests';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
+import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
 import manifestDetails from './components/manifestDetails.js';
@@ -33,6 +34,7 @@ document.getElementById('manifest-placeholder').setAttribute('href', manifestURL
 
 const App = () => {
     const history = useNavigate();
+    const location = useLocation();
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
     const [openSidebar, setOpenSidebar] = useState(false);
     const [mainSheetType, setMainSheetType] = useState();
@@ -98,8 +100,10 @@ const App = () => {
     }
 
     useEffect(() => {
-        setLoading(true);
-        refreshToken();
+        if (location.pathname !== '/signup') {
+            setLoading(true);
+            refreshToken();
+        }
     },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // useEffect(() => {
