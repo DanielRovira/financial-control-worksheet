@@ -60,6 +60,7 @@ const Signup = () => {
                   variant="outlined"
                   label="Name"
                   margin="normal"
+                  required
                 />
                 <TextField
                   name="new-email"
@@ -70,6 +71,7 @@ const Signup = () => {
                   label="Email"
                   margin="normal"
                   autoComplete="new-password"
+                  required
                 />
                 <TextField
                   name="new-password"
@@ -80,6 +82,7 @@ const Signup = () => {
                   label="Password"
                   margin="normal"
                   autoComplete="new-password"
+                  required
                 />
                 <Box className='buttonBox'>
                   <Button variant="contained" type="submit">

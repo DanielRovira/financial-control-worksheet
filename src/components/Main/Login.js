@@ -10,15 +10,15 @@ import Signup from './Signup'
 const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
     const language = useAtomValue(languageAtom)
     const lang = require(`components/Languages/${language}.json`);
-        const history = useNavigate();
-        const location = useLocation()
-        const timer = useRef();
-        const setLanguage = useSetAtom(languageAtom)
-        const [loadingButton, setLoadingButton] = useState(false);
-        const [inputs, setInputs] = useState({
-            email: process.env.REACT_APP_DEFAULT_USER,
-            password: process.env.REACT_APP_DEFAULT_PASS,
-        });
+    const history = useNavigate();
+    const location = useLocation()
+    const timer = useRef();
+    const setLanguage = useSetAtom(languageAtom)
+    const [loadingButton, setLoadingButton] = useState(false);
+    const [inputs, setInputs] = useState({
+        email: process.env.REACT_APP_DEFAULT_USER,
+        password: process.env.REACT_APP_DEFAULT_PASS,
+    });
 
     const sendRequest = async () => {
         const res = await fetch(`/api/login`,
@@ -79,7 +79,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
     });
 
   return (
-      <div className='LoginContainer' >
+      <div className='LoginContainer' id='Login' >
           <div className='LoginSubContainer' >
               <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="logo" />
               {process.env.REACT_APP_ALLOW_SIGNUP && location.pathname === '/signup'
@@ -128,9 +128,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                           </Button>
                           {loadingButton && <CircularProgress size={null} />}
                       </Box>
-                      {process.env.REACT_APP_GOOGLE_LOGIN && <>
-                      <Divider flexItem variant="middle" />
-                      <Box className='buttonBox'>
+                  </Box>
+              </form>}
+              {process.env.REACT_APP_GOOGLE_LOGIN && <>
+                    <Divider flexItem variant="middle" />
+                    <Box className='buttonBox'>
                           <Button
                               className='thirdPartyLogin'
                               variant='outlined'
@@ -139,13 +141,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg" alt="google login" />
                               <p>Google</p>
                           </Button>
-                      </Box>
-                      </>}
-                  </Box>
-              </form>}
+                    </Box>
+                    </>}
               {location.pathname === '/signup'
-              ?  <div>Já tem uma conta? <a href='/login' style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Faça login!</a></div>
-              :  <div>Não tem uma conta? <a href='/signup' style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Crie uma!</a></div>
+              ?  <div>Já tem uma conta? <a href='#Login' onClick={() => history('/login')} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Faça login!</a></div>
+              :  <div>Não tem uma conta? <a href='#Login' onClick={() => history('/signup')} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Crie uma!</a></div>
               }
           </div>
       </div>
