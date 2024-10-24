@@ -143,10 +143,11 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                           </Button>
                     </Box>
                     </>}
-              {location.pathname === '/signup'
-              ?  <div>Já tem uma conta? <a href='#Login' onClick={() => history('/login')} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Faça login!</a></div>
-              :  <div>Não tem uma conta? <a href='#Login' onClick={() => history('/signup')} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Crie uma!</a></div>
-              }
+              {process.env.REACT_APP_ALLOW_SIGNUP && (
+              location.pathname !== '/signup'
+              ?  <div>Não tem uma conta? <a href='/signup' onClick={(event) => {event.preventDefault(); history('/signup')}} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Crie uma!</a></div>
+              :  <div>Já tem uma conta? <a href='/login' onClick={(event) => {event.preventDefault(); history('/login')}} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Faça login!</a></div>
+              )}
           </div>
       </div>
   );
