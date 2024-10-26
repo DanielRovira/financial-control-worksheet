@@ -41,7 +41,7 @@ const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType 
                     </ListItemIcon>
                     <ListItemText primary={lang.home} />
                 </ListItemButton>
-                {Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'todoPayments' || 'financialControl'))).includes(true) &&
+                {(user.type === 'admin' || Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => Object.hasOwn(each, 'todoPayments') || Object.hasOwn(each, 'financialControl')).includes(true)) &&
                     <ListItemButton onClick={() => {handleClick(); setMainSheetType('FinancialWorksheet'); history('/FinancialWorksheet')}} title={lang.FinancialWorksheet} style={{backgroundColor: mainSheetType === 'FinancialWorksheet'  ? 'var(--selected-sidebar)' :  'unset'}}>
                     <ListItemIcon style={mainSheetType === 'FinancialWorksheet' ? selectedStyle : null} >
                         <MonetizationOnIcon/>
@@ -60,7 +60,7 @@ const Sidebar = ({ openSidebar, setOpenSidebar, mainSheetType, setMainSheetType 
                     </ListItemIcon>
                     <ListItemText primary={lang.contacts} />
                 </ListItemButton> */}
-                {Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'purchases'))).includes(true) &&
+                {(user.type === 'admin' || Object.entries(user['permissions'] || []).map(perm => (perm[1])).map(each => (Object.hasOwn(each, 'purchases'))).includes(true)) &&
                     <ListItemButton onClick={() => {handleClick(); setMainSheetType('PurchaseRequests'); history('/PurchaseRequests')}} title={lang.PurchaseRequests} style={{backgroundColor: mainSheetType === 'PurchaseRequests'  ? 'var(--selected-sidebar)' :  'unset'}}>
                     <ListItemIcon style={mainSheetType === 'PurchaseRequests' ? selectedStyle : null} >
                         <ShoppingCartIcon/>
