@@ -9,7 +9,6 @@ import PurchaseRequests from './components/PurchaseRequests/PurchaseRequests';
 import Sidebar from './components/Main/Sidebar';
 import Header from './components/Main/Header';
 import Login from './components/Main/Login';
-import Signup from './components/Main/Signup';
 import Main from './components/Main/Main';
 import Settings from './components/Main/Settings';
 import manifestDetails from './components/manifestDetails.js';

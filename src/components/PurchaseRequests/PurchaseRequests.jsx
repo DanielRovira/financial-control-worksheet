@@ -31,7 +31,6 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
     }
 
     async function insertDocument(transaction) {
-        // setSyncing(true);
         try {
             await fetch(`/api/purchases/add`,
                 {
@@ -40,17 +39,14 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
                     credentials: 'include',
                     body: JSON.stringify(transaction)
                 })
-            // const data = await res.json()
             .then(response => response.json())
             .then(() => getData())
         } catch (error) {
         console.log(error);
-      }
+        }
     }
 
     async function updateDocument(item) {
-        console.log(item)
-        // setSyncing(true);
         await fetch(`/api/purchases/update`,
         {
             method:'PATCH',
@@ -58,13 +54,11 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
             credentials: 'include',
             body: JSON.stringify(item)
         })
-        // .then(response => response.json())
         .then(() => getData())
         .catch(console.error)
     }
 
     async function deleteDocument(item) {
-        // setSyncing(true);
         await fetch(`/api/purchases/delete`,
         {
             method:'DELETE',
@@ -73,7 +67,6 @@ const PurchaseRequests = ({ mainSheetType, setMainSheetType, setIsLoggedIn, refr
             body: JSON.stringify(item)
         })
         .then(response => response.json())
-        // .then(response => last && response.status === 204 && setSyncing(false))
         .catch(console.error)
     }
 

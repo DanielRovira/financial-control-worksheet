@@ -1,6 +1,5 @@
 import React from 'react';
 import './index.css'
-import Signup from '../Signup';
 import Users from '../Users';
 // import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -170,11 +169,6 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                     <div className='SettingsCardContainer'>
                         <CategoriesList CategoriesListItem={'sections'}/>
                     </div>)}
-                {/* {tabValue === 2 && (
-                    <div className='SettingsCardContainer'>
-                        <Signup/>
-                    </div>  
-                )} */}
                 {tabValue === 2 && (
                     <div className='SettingsCardContainer'>
                         <Users/>

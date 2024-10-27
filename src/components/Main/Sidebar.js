@@ -4,7 +4,7 @@ import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import ContactsIcon from '@mui/icons-material/Contacts';
+// import ContactsIcon from '@mui/icons-material/Contacts';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
 import { useAtomValue } from 'jotai';

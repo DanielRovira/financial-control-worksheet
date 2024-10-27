@@ -11,6 +11,7 @@
 
 .task-title {
     cursor: pointer;
+    text-transform: capitalize;
 }
 
 .buttons-container {

@@ -1,17 +1,12 @@
 import React from 'react';
 import { CgInfo } from 'react-icons/cg'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-// import { useNavigate } from 'react-router-dom'
-
 import "./css/Task.css"
 
 const Task = ({ task, handleTaskClick, handleTaskDeletion, setTasksDetail }) => {
-    // const history = useNavigate();
-
+    
     const handleTaskDetailsClick = () => {
-        // window.description = task.description;
-        // history(`/${task.title}`);
-        setTasksDetail(task.id)
+        setTasksDetail(task)
     }
 
     return (
@@ -19,7 +14,7 @@ const Task = ({ task, handleTaskClick, handleTaskDeletion, setTasksDetail }) => 
             className="task-container"
             style={task.completed ? {borderLeft: '7px solid #1976d2', padding: '5px 20px 5px 13px'} : {}}
         >
-            <div className='task-title' onClick={() => handleTaskClick(task.id)}>
+            <div className='task-title' onClick={() => handleTaskClick(task)}>
                 {task.title}
             </div>
             
@@ -32,7 +27,7 @@ const Task = ({ task, handleTaskClick, handleTaskDeletion, setTasksDetail }) => 
                 </button>
                 <button 
                     className='remove-task-button' 
-                    onClick={() => handleTaskDeletion(task.id)}
+                    onClick={() => handleTaskDeletion(task)}
                     >
                     <DeleteForeverIcon/>
                 </button>

@@ -14,7 +14,7 @@ document.documentElement.style.setProperty('--graphWidth', 'calc((var(--vw, 1vw)
 // });
 
 const Summary = ({ rawData, setAdd }) => {
-    const toDayYear = new Date().toISOString().substring(0, 4)
+    // const toDayYear = new Date().toISOString().substring(0, 4)
     const [byMonth, setByMonth] = useState([]);
     const [years, setYears] = useState([]);
     const itens = Array.from(rawData)
