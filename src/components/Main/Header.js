@@ -59,6 +59,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                         {/* <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="Logo" onClick={() => history(`/main`)} style={{ maxHeight: '40px', marginLeft:'10px'}} /> */}
                         <h1>{process.env.REACT_APP_NAME}</h1>
                     <Box>
+                        {process.env.REACT_APP_MULTI_LANGUAGE === "true" &&
                         <Select
                             variant="standard"
                             value={language}
@@ -66,7 +67,7 @@ const Header = ({ sendLogoutReq, isLoggedIn, openSidebar, setOpenSidebar }) => {
                             onChange={handleChangeLanguage}
                         >
                             {Array.from(languages || []).map((language, index) => <MenuItem key={index} value={language}><img src={`https://flagicons.lipis.dev/flags/4x3/${language.slice(3,5).toLocaleLowerCase()}.svg`} style={{width: '25px', margin: 'auto'}} alt='Country flag' /></MenuItem>)}
-                        </Select>
+                        </Select>}
                         <Tooltip
                             disableInteractive
                             title={<h3>{lang.settings}</h3>}

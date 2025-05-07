@@ -82,7 +82,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
       <div className='LoginContainer' id='Login' >
           <div className='LoginSubContainer' >
               <img src={`${process.env.REACT_APP_LOGO}.jpg`} alt="logo" />
-              {process.env.REACT_APP_ALLOW_SIGNUP && location.pathname === '/signup'
+              {process.env.REACT_APP_ALLOW_SIGNUP === "true" && location.pathname === '/signup'
               ? <Signup />
               : <form onSubmit={handleSubmit}>
                   <Box
@@ -130,7 +130,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                       </Box>
                   </Box>
               </form>}
-              {process.env.REACT_APP_GOOGLE_LOGIN && <>
+              {process.env.REACT_APP_GOOGLE_LOGIN === "true" && <>
                     <Divider flexItem variant="middle" />
                     <Box className='buttonBox'>
                           <Button
@@ -143,7 +143,7 @@ const Login = ({ isLoggedIn, setIsLoggedIn, setLoading }) => {
                           </Button>
                     </Box>
                     </>}
-              {process.env.REACT_APP_ALLOW_SIGNUP && (
+              {process.env.REACT_APP_ALLOW_SIGNUP === "true" && (
               location.pathname !== '/signup'
               ?  <div>Não tem uma conta? <a href='/signup' onClick={(event) => {event.preventDefault(); history('/signup')}} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Crie uma!</a></div>
               :  <div>Já tem uma conta? <a href='/login' onClick={(event) => {event.preventDefault(); history('/login')}} style={{color:'rgb(0, 103, 184)', textDecoration:'none'}} >Faça login!</a></div>

@@ -157,7 +157,7 @@ const Settings = ({ categories, setCategories, sections, setSections, setMainShe
                 allowScrollButtonsMobile>
                     <Tab label={lang.category} />
                     {user.type === "admin" && <Tab label={lang.sections} />}
-                    {process.env.REACT_APP_MULTI_TENANT && user.type === "admin" && <Tab label={lang.signup} />}
+                    {process.env.REACT_APP_MULTI_TENANT === "false" && user.type === "admin" && <Tab label={lang.signup} />}
                     {/* <Tab label={lang.signup} /> */}
             </Tabs>
             <div className='SettingsSubContainer'>
