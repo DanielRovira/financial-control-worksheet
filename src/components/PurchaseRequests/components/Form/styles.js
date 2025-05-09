@@ -125,7 +125,7 @@ export const Button = styled(ButtonMui)`
     max-height: 36.5px;
 `;
 
-export const Th = styled.div`
+export const Th = styled.th`
     display: flex;
     align-items: center;
     justify-content: center;

@@ -22,6 +22,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
     
     const [date]  = useState(editItem ? editItem.date : toDay);
     const [costCenter, setCostCenter]  = useState(editItem ? editItem.costCenter : '');
+    const [requestStatus, setRequestStatus]  = useState(editItem ? editItem.status : 'Nova solicitação');
     const [desc, setDesc]  = useState(editItem ? editItem.desc : '');
 
     const data = [
@@ -31,6 +32,11 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
             quantity: "",
         },
     ];
+
+    const requestStatusList = [
+        "Nova solicitação",
+        "Pendente"
+    ]
 
     const [items, setItems]  = useState(editItem ? editItem.data : data)
 
@@ -44,6 +50,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
             _id: editItem?._id || null,
             date: date,
             costCenter: costCenter,
+            status: requestStatus,
             desc: desc,
             data: data,
         }
@@ -63,7 +70,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
         }
     }
 
-    const TableRow = ({ index, key, item }) => {
+    const TableRow = ({ index, item }) => {
         const [itemDesc, setItemDesc]  = useState(item.description);
         const [itemUnit, setItemUnit]  = useState(item.unit);
         const [itemQuantity, setItemQuantity]  = useState(item.quantity);
@@ -104,28 +111,16 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                     />
             </td>
             <td>
-                {/* <TextField
-                    className='small'
-                    sx={{width: "100%"}}
+                <CurrencyInput
+                    className='input'
                     value={itemQuantity}
-                    onChange={(e) => setItemQuantity(e.target.value)}
-                    onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                    size="small"
-                    /> */}
-                    <CurrencyInput
-                        className='input'
-                        value={itemQuantity}
-                        // prefix={lang.valuePrefix}
-                        allowDecimals
-                        disableAbbreviations
-                        // suffix={` ${itemUnit}`}
-                        groupSeparator={"."}
-                        decimalScale='2'
-                        onValueChange={(e) => setItemQuantity(e)}
-                        // onKeyDown={event => { if (event.key === 'Enter') {handleSave()}}}
-                        // label={lang.value}
-                        // placeholder={lang.valuePlaceholder}
-                    />
+                    allowDecimals
+                    disableAbbreviations
+                    groupSeparator={"."}
+                    decimalScale='2'
+                    onValueChange={(e) => setItemQuantity(e)}
+                    onKeyDown={event => { if (event.key === 'Enter') {handleAdd()}}}
+                />
             </td>
             <td>
                 <C.Button sx={{minWidth:'100%'}} onClick={() => handleRemove(index)} variant='text' ><RemoveCircleIcon/></C.Button>
@@ -146,17 +141,7 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                 </C.Container>
             </C.UpperContainer>
             <C.UpperContainer>
-                {/* <C.InputContent>
-                    <TextField
-                        value={date}
-                        type='date'
-                        onChange={(e) => setDate(e.target.value)}
-                        size="small"
-                        label={lang.date}
-                        // disabled
-                        />
-                </C.InputContent> */}
-                <C.InputContent width={"70%"}>
+                <C.InputContent width={"50%"}>
                     <TextField
                         value={desc}
                         label={`${lang.description}`}
@@ -175,6 +160,20 @@ const Form = ({ editItem, setEditItem, setAdd, sections, insertDocument, updateD
                             MenuProps={{disableScrollLock: true,}}
                         >
                             {Array.from(sections).filter((section) => section.title !== 'TRASH').map(element => <MenuItem key={element.title} value={element.title}>{element.name}</MenuItem>)}
+                        </Select>
+                    </FormControl>
+                </C.InputContent>
+                <C.InputContent width={"20%"}>
+                    <FormControl>
+                        <InputLabel size="small" >Status</InputLabel>
+                        <Select
+                            value={requestStatus}
+                            onChange={(e) => {setItems(data); setRequestStatus(e.target.value)}}
+                            size="small"
+                            label={"Status"}
+                            MenuProps={{disableScrollLock: true,}}
+                        >
+                            {Array.from(requestStatusList).map(element => <MenuItem key={element} value={element}>{element}</MenuItem>)}
                         </Select>
                     </FormControl>
                 </C.InputContent>
