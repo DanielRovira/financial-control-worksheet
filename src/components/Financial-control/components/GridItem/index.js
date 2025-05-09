@@ -7,8 +7,9 @@ import {useClickAway} from 'react-use';
 import { useParams } from 'react-router-dom';
 import { useAtomValue } from 'jotai';
 import { languageAtom } from 'components/global';
+import { useInView } from "react-intersection-observer";
 
-const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar, handleSelectMultiple, setCheckedIndex }) => {
+const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem, checked, setChecked, setOperationType, filter, handleOpenSnackbar, handleSelectMultiple, setCheckedIndex, indexShown, setIndexShown }) => {
     const language = useAtomValue(languageAtom);
     const lang = require(`components/Languages/${language}.json`);
     const params = useParams();
@@ -26,6 +27,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     const [descTemp, setDescTemp] = useState(item.desc)
     const [amountTemp, setAmountTemp] = useState(item.amount)
     const [deleteDelay, setDeleteDelay] = useState(false)
+    const [viewRef, inView] = useInView();
     const user = JSON.parse(localStorage.getItem("user")) || [];
     const ref = useRef(null);
     const sections = JSON.parse(localStorage.getItem("sections")) || [];
@@ -150,6 +152,12 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     }, [rawData]) // eslint-disable-line react-hooks/exhaustive-deps
 
     useClickAway(ref, toggleEdit)
+
+    useEffect(() => {
+        if (inView === true) {
+            setIndexShown(index)
+        }
+    }, [inView])
 
     if (deleteDelay) {return (<></>)}
     if (isActive && params.taskTitle !== 'TRASH' && !filter && (user.type === 'admin' ? true : user.permissions[params.taskTitle][sheetType] === 'edit')) {
@@ -294,7 +302,8 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
     )}
     else {
         return (
-            <C.Tr>
+            <C.Tr ref={viewRef} >
+                {index < indexShown+20 && index > indexShown-30 && <>
                 <C.Td className='nohover' alignCenter><Checkbox checked={checked?.filter((it) => it._id === item._id)[0]?._id === tempId} onChange={handleSelect} /></C.Td>
                 <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont style={{ letterSpacing: '.6px' }}>{dateTemp.slice(-2)}/{dateTemp.slice(5,-3)}/{dateTemp.slice(0,-6)}</C.TdCont></C.Td>
                 {sheetType === 'financialControl' && <>
@@ -323,6 +332,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
                 </C.Td>
                 </>}
                 {params.taskTitle === 'TRASH' && <C.Td onDoubleClick={toggleEdit} alignCenter><C.TdCont>{Array.from(sections).filter((section) => section.title === item.costCenter)[0]?.name}</C.TdCont></C.Td>}
+                </>}
             </C.Tr>
         )}
 };

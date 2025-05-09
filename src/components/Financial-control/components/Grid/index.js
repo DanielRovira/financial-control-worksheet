@@ -27,6 +27,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
     const [filterType, setFilterType] = useState();
     const [sortState, setSortState] = useState(sheetType === 'financialControl' ? true : false);
     const [checkedIndex, setCheckedIndex] = useState([]);
+    const [indexShown, setIndexShown] = useState(0)
     const params = useParams();
 
     const CSVheaders = {
@@ -182,7 +183,7 @@ const Grid = ({ rawData, updateDocument, sheetType, setUndoItem, checked, setChe
                 </C.Thead>
                 <C.Tbody>
                     {Array.from(itens)?.map((item, index) => (
-                        <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} handleOpenSnackbar={handleOpenSnackbar} handleSelectMultiple={handleSelectMultiple} setCheckedIndex={setCheckedIndex} />
+                        <GridItem key={item._id || index} item={item} index={index} updateDocument={updateDocument} sheetType={sheetType} rawData={rawData} setUndoItem={setUndoItem} checked={checked} setChecked={setChecked} setOperationType={setOperationType} filter={filter} handleOpenSnackbar={handleOpenSnackbar} handleSelectMultiple={handleSelectMultiple} setCheckedIndex={setCheckedIndex} indexShown={indexShown} setIndexShown={setIndexShown} />
                     ))}
                 </C.Tbody>
             </C.Table>
