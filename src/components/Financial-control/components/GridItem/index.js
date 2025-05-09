@@ -157,7 +157,7 @@ const GridItem = ({ item, index, updateDocument, sheetType, rawData, setUndoItem
         if (inView === true) {
             setIndexShown(index)
         }
-    }, [inView])
+    }, [inView, setIndexShown, index])
 
     if (deleteDelay) {return (<></>)}
     if (isActive && params.taskTitle !== 'TRASH' && !filter && (user.type === 'admin' ? true : user.permissions[params.taskTitle][sheetType] === 'edit')) {
